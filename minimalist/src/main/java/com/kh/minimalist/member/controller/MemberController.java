@@ -3,6 +3,7 @@ package com.kh.minimalist.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
 
@@ -155,7 +157,15 @@ public class MemberController {
 //	}
 	
 	@RequestMapping("mypage.do")
-	public String myPageView() {
+	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
+		try {
+			List<String> list = new CookieUtils().getValueList(((Member)session.getAttribute("member")).getMember_id(), request);
+			model.addAttribute("cookieList", list);
+			System.out.println(list);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "mypage/customer-orders";
 	}
 	

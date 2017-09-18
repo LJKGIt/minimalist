@@ -1,6 +1,11 @@
 package com.kh.minimalist.product.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.minimalist.cookie.CookieUtils;
+import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
 
@@ -18,10 +25,19 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
-	public String productDetail(Product product, Model model){
+	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session){
 		String result = null;
 		
 		Product product_return = productService.productDetail(product);
+		
+//		UPDATE COOKIE 
+		try {
+			new CookieUtils().setCookie(((Member)session.getAttribute("member")).getMember_id(), String.valueOf(product.getProduct_code()), 365, request, response);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if(product_return != null){
 			model.addAttribute("product", product_return);
 			result = "product/product_detail";

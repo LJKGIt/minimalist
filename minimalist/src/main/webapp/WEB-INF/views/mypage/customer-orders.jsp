@@ -15,30 +15,9 @@
 <body style="min-width: 360px;">
 
 <!-- COOKIE TEST -->
-<table width="200">
-    <tr height="25">
-        <td width="100">상품명</td>
-        <td width="100">단가</td>
-    </tr>
-    <tr height="25">
-        <td width="100"><a href="bag.do">뺶</a></td>
-        <td width="100">100</td>
-    </tr>
-    <tr height="25">
-        <td width="100"><a href="shirt.do">셔츠</a></td>
-        <td width="100">200</td>
-    </tr>
-    <tr height="25">
-        <td width="100"><a href="pants.do">바지</a></td>
-        <td width="100">200</td>
-    </tr>
-</table>
-
-<BR />
-오늘본 상품 목록
-<br />
-
-
+<c:forEach var="au" items="${cookieList}">
+	${ au }
+</c:forEach>
 <!-- COOKIE TEST END -->
 
     <c:import url="../main/header.jsp" />
