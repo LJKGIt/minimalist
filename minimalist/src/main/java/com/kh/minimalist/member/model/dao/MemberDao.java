@@ -26,4 +26,8 @@ public class MemberDao {
 		return sqlSession.insert("Member.mInsert", m);
 	}
 	
+	public Member searchMember(String member_id){
+		
+		return sqlSession.selectOne("Member.searchMember", member_id);
+	}
 }

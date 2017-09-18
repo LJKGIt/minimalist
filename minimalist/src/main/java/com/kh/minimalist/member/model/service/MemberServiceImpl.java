@@ -25,5 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	public int memberIdChk(String member_id) {
 		return memberDao.selectId(member_id);
 	}
+
+	@Override
+	public Member searchMember(String member_id) {
+		
+		return memberDao.searchMember(member_id);
+	}
 	
 }

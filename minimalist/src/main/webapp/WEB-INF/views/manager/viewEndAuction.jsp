@@ -125,7 +125,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="">회원관리</a>
+                                    <a href="member.memberSearchView.do">회원관리</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -171,7 +171,7 @@ position: absolute;
 			</c:if>
 			<td>
 			<c:if test="${au.payment_yn eq 'n' }">
-			<button type="button" class="check" value="y,${au.auction_code}">결제완료버튼</button>
+			<button type="button" class="check" value="y,${au.auction_code}">결제확인</button>
 			</c:if>
 			<c:if test="${au.payment_yn eq 'y' }">
 			<button type="button" class="check" value="n,${au.auction_code}">되돌리기</button>

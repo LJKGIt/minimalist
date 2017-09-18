@@ -8,4 +8,6 @@ public interface MemberService {
 	int minsert(Member m);
 	
 	int memberIdChk (String member_id);
+	
+	Member searchMember(String member_id);
 }

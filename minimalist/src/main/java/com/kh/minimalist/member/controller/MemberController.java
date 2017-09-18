@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -168,4 +169,31 @@ public class MemberController {
 		return "mypage/customer-account";
 	}
 	
+	
+	//회원 검색 페이지로 이동.
+	@RequestMapping("member.memberSearchView.do")
+	public String searchMemberView(){
+		
+		return "manager/memberSearch";
+	}
+	
+	
+	//회원 검색
+	@RequestMapping(value="member.memberSearch.do", method={RequestMethod.POST, RequestMethod.GET})
+	public String searchMemer(HttpServletRequest request, Model model){
+		
+		String member_id=request.getParameter("member_id");
+		
+		
+		Member member=memberService.searchMember(member_id);
+		
+		
+		if(member!=null){
+			model.addAttribute("member", member);
+		}else {
+			
+		}
+		
+		return "manager/memberSearch";
+	}
 }

@@ -38,4 +38,8 @@
 	DELETE FROM MEMBER WHERE ID = #{userid}
   </delete> -->
 
+    <select id="searchMember" parameterType="string" resultType="Member">
+    select * from member where member_id=#{member_id}
+    </select>
+
 </mapper>

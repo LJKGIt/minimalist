@@ -161,7 +161,7 @@ input {
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="">회원관리</a>
+                                    <a href="member.memberSearchView.do">회원관리</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
