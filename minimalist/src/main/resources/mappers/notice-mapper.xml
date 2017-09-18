@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Notice">
+
+	<resultMap id="resultNotice" type="Notice">
+	
+	</resultMap>
+	
+	<select id="countRow" resultType="_int">
+		select count(*)	from notice
+	</select>
+	
+	<select id="selectList" parameterType="_int" resultType="Notice" resultMap="resultNotice">
+		select * from (
+select rownum rnum, notice_no, notice_title, notice_content, notice_date from 
+ (select * from notice order by notice_no desc) where rownum&lt;=${endRow}) 
+ where rnum&gt;=${startRow}
+	</select>
+	
+	<select id="selectOne" parameterType="_int" resultType="Notice" resultMap="resultNotice">
+		select * from notice where notice_no=#{notice_no}
+	</select>
+    <!-- 공지사항 등록 -->
+	<insert id="insertNotice" parameterType="Notice">
+	insert into notice values(
+	(select max(notice_no) from notice)+1, #{notice_title}, #{notice_content}, sysdate)
+	</insert>
+	
+	
+	<delete id="deleteNotice" parameterType="_int">
+	delete from notice where notice_no=#{notice_no}
+	</delete>
+	
+	<update id="updateNotice" parameterType="Notice">
+	  update notice 
+		 set notice_title=#{notice_title},
+		 notice_content=#{notice_content} 
+		 where notice_no=#{notice_no}
+	</update>
+
+</mapper>

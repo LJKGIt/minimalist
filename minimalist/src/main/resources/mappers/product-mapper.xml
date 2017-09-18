@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Product">
+
+	<resultMap id="resultProduct" type="Product">
+		<id property="product_code" column="PRODUCT_CODE" />
+  		<result property="product_name" column="PRODUCT_NAME"/>
+  		<result property="product_category" column="PRODUCT_CATEGORY"/>
+  		<result property="product_brand" column="PRODUCT_BRAND"/>
+  		<result property="product_descript" column="PRODUCT_DESCRIPT"/>
+  		<result property="rent_price" column="RENT_PRICE"/>
+  		<result property="product_quantity" column="PRODUCT_QUANTITY"/>
+  		<result property="rent_count" column="RENT_COUNT"/>
+  		<result property="product_size" column="PRODUCT_SIZE"/>
+  		<result property="product_color" column="PRODUCT_COLOR"/>
+  		<result property="receive_date" column="RECEIVE_DATE"/>
+	</resultMap>
+
+	<select id="productDetail" parameterType="Product" resultType="Product" resultMap="resultProduct">
+		SELECT * FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}
+	</select>
+
+	<select id="productList" resultType="Product" resultMap="resultProduct">
+		SELECT * FROM PRODUCT WHERE PRODUCT_CATEGORY = #{product_category}
+	</select>
+
+
+</mapper>

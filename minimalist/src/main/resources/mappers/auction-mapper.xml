@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Auction">
+
+	<resultMap id="resultAuction" type="Auction">
+	</resultMap>
+	
+	<!-- 경매물품 전체 행 갯수 파악 -->
+	<select id="countRow" resultType="_int">
+		select count(*) from auction where end_date&gt;=sysdate
+	</select>
+	<!--  경매물품 전체 리스트 -->
+	<select id="selectList" parameterType="_int" resultType="Auction">
+				select *
+			from (select rownum rnum, auction_code, product_name, product_category,
+			product_brand, product_descript, member_id, bid_price, start_date, end_date,
+			product_size, product_color, image_path from (
+			select * from auction 
+			where end_date&gt;=sysdate
+			order by end_date desc)
+			where rownum&lt;=${endRow})
+			where rnum&gt;=${startRow}
+	</select>
+	<!--  경매물품 selectOne -->
+	<select id="selectOne" parameterType="_int" resultType="Auction" resultMap="resultAuction">
+		select * from auction where auction_code=#{auction_code}
+	</select>
+	<!-- 입찰시 -->
+	<update id="bid" parameterType="Auction">
+	 	update auction set bid_price=#{bid_price}, member_id=#{member_id} where auction_code=#{auction_code}
+	 	
+	</update>
+	<!-- 가격 다시 보여주기 -->
+	<select id="reloadPrice" parameterType="_int" resultType="int">
+		select bid_price from auction where auction_code=#{auction_code}
+	</select>   
+	
+	<!-- 카테고리 검색의 경우 -->
+	<!-- 경매물품 전체 행 갯수 파악 -->
+	<select id="countRowCategory" parameterType="string" resultType="_int">
+		select count(*) from auction where product_category=#{category} and end_date&gt;=sysdate
+	</select>
+	<!--  경매물품 전체 리스트 -->
+	<select id="selectListCategory" parameterType="hashmap" resultType="Auction">
+				select *
+			from (select rownum rnum, auction_code, product_name, product_category,
+			product_brand, product_descript, member_id, bid_price, start_date, end_date,
+			product_size, product_color, image_path, payment_yn from (
+			select * from auction 
+			where product_category=#{category} and
+			end_date&gt;=sysdate
+			order by end_date desc)
+			where rownum&lt;=#{endRow})
+			where rnum&gt;=#{startRow}
+	</select>
+	
+	<!-- 경매 물품 등록 -->
+	<insert id="insertAuction" parameterType="Auction">
+	insert into auction values
+	((select max(auction_code) from auction)+1,
+	#{product_name}, #{product_category}, #{product_brand}, #{product_descript}, null,
+	#{bid_price}, #{start_date}, #{end_date}, #{product_size}, #{product_color}, #{image_path})
+	
+	</insert>
+	
+	<!-- 경매 물품 삭제 -->
+	<delete id="deleteAuction" parameterType="_int">
+	delete from auction 
+	where auction_code=#{auction_code}
+	</delete>
+	
+	<!-- 경매 물품 업데이트 -->
+	<update id="updateAuction" parameterType="Auction">
+	
+		update auction
+		set product_name=#{product_name},
+		<if test="image_path!=null">
+		image_path=#{image_path},
+		</if>
+		product_category=#{product_category},
+		product_brand=#{product_brand},
+		product_descript=#{product_descript},
+		bid_price=#{bid_price},
+		start_date=#{start_date},
+		end_date=#{end_date},
+		product_size=#{product_size},
+		product_color=#{product_color}
+		 where auction_code=#{auction_code}
+	
+	</update>
+	
+	
+	<!-- 종료된 경매 갯수 파악 -->
+	<select id="countRowEndAuction" resultType="_int">
+	select count(*)
+	from auction
+	where end_date&lt;sysdate
+	
+	</select>
+	
+	<!--  종료된 경매 확인 (관리자 페이지) -->
+	<select id="selectListEnd" resultType="Auction" parameterType="_int">
+	select *
+			from (select rownum rnum, auction_code, product_name, product_category,
+			product_brand, product_descript, member_id, bid_price, start_date, end_date,
+			product_size, product_color, image_path, payment_yn from (
+			select * from auction 
+			where end_date&lt;sysdate
+			order by end_date desc)
+			where rownum&lt;=#{endRow})
+			where rnum&gt;=#{startRow}
+	
+	</select>
+	
+	<!-- 종료된 경매 결제 확인 -->
+	 <update id="checkPayment" parameterType="hashmap">
+	 update auction
+	 set payment_yn=#{message}
+	 where auction_code=#{auction_code}
+	 </update>
+</mapper>
