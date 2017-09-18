@@ -267,11 +267,13 @@ insert into auction values(
 1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171025', 'yymmdd'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', default);
 
 insert into auction values(
-2, '토드백', '가방', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171028', 'yymmdd'), '25x11x19', 'brown', 'dress1.jpg,dress2.jpg,dress3.jpg', default);
+2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171028', 'yymmdd'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', default);
 insert into auction values(
 3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171030', 'yymmdd'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', default);
 insert into auction values(
 4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20170909', 'yymmdd'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', default);
+insert into auction values(
+5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20171021', 'yymmdd'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', default);
 
 
 
