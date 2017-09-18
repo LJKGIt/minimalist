@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
+<script type="text/javascript">
+
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -116,6 +121,8 @@ input {
  
 }
  
+
+ 
 </style>
 
 <head>
@@ -155,13 +162,13 @@ input {
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                	<a href="">공지사항 등록</a>
+                                	<a href="notice.viewWriteForm.do">공지사항 등록</a>
                                 </li>
                                 <li>
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">쪽지보내기</a>
+                                    <a href="">쪽지보내기</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -169,7 +176,7 @@ input {
                                 <li>
                                     <a href="auction.viewRegister.do">경매상품 등록</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
                                 </li>
 								
@@ -189,9 +196,10 @@ input {
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">공지사항 등록</h1>
+                      <h1 align="center">쪽지 보내기</h1>
 
-               <form action="notice.writeNotice.do" method="post">
+              	
+             <form action="notice.writeNotice.do" method="post">
                       <table class="board-write-1s mgT40">
                      
 			<colgroup>
@@ -200,7 +208,7 @@ input {
 			</colgroup>
 			<tbody>
                      
-                     
+                      <tr><td><strong>수신인</strong></td><td><input type="text" name="id" style="width:98%;"></td></tr>
                     <tr><td><strong>제목</strong></td><td><input type="text" name="title" style="width:98%;"></td></tr>
                       <tr><td><strong>내용</strong></td><td><textarea name="content" cols="30" rows="7" placeholder="내용을 입력하세요." style="width:98%;height:280px;"></textarea>
                      
@@ -217,9 +225,6 @@ input {
                       </div>
                      
                       </form>
-               
-                       
-                       
     <thead>
    	 
     </thead>

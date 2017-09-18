@@ -174,26 +174,31 @@ public class MemberController {
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView(){
 		
-		return "manager/memberSearch";
+		return "manager/sendMessage";
 	}
 	
 	
 	//회원 검색
 	@RequestMapping(value="member.memberSearch.do", method={RequestMethod.POST, RequestMethod.GET})
-	public String searchMemer(HttpServletRequest request, Model model){
+	public void searchMemer(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
 		
 		String member_id=request.getParameter("member_id");
-		
+		System.out.println(member_id);
 		
 		Member member=memberService.searchMember(member_id);
 		
 		
+		PrintWriter writer=response.getWriter();
 		if(member!=null){
+			String id=member.getMember_id();
 			model.addAttribute("member", member);
+			writer.append(id);
+			writer.flush();
 		}else {
-			
+			writer.append("no");
+			writer.flush();
 		}
+		writer.close();
 		
-		return "manager/memberSearch";
 	}
 }

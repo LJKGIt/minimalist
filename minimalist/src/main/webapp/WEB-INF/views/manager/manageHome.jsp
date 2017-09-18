@@ -100,7 +100,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
+                                    <a href="member.memberSearchView.do">쪽지보내기</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
