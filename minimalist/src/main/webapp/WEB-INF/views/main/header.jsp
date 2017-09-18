@@ -123,8 +123,9 @@
 										Logout</span> <i class="fa fa-sign-out"> Logout</i>
 								</a>
 								<!-- 마이페이지 연결 -->
-								<a href="#" class="btn btn-default"> <span class="sr-only">Toggle
-										Join</span> <i class="fa fa-user"> MyPage</i>
+								<a href="mypage.do" class="btn btn-default"> <span
+									class="sr-only">My Page</span> <i class="fa fa-user">
+										MyPage</i>
 								</a>
 							</c:if>
 						</div>
@@ -316,10 +317,8 @@
 
 
 
-						<a href="resources/basket.html" class="btn btn-primary navbar-btn"><i
-							class="fa fa-shopping-cart"></i><span class="hidden-sm"> <!-- 3
-							items in cart -->
-						</span></a>
+						<a href="mypage.do" class="btn btn-primary navbar-btn"><i
+							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
 						<button type="message" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
 							Message</button>

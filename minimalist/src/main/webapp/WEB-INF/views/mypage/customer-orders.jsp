@@ -74,7 +74,10 @@
                                     <a href="#"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out"></i> 내 상품문의</a>
+                                    <a href="qna.selectList.do"><i class="fa fa-sign-out"></i> 내 상품문의(다른 곳으로 이동)</a>
+                                </li>
+                                <li>
+                                    <a href="auction.selectMemberAuction.do"><i class="fa fa-sign-out"></i> 내 경매</a>
                                 </li>
                             </ul>
                         </div>

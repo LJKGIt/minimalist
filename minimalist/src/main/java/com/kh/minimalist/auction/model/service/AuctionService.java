@@ -34,4 +34,6 @@ public interface AuctionService {
 	ArrayList<Auction> selectListEnd(HashMap map);
 	
 	int checkPayment(HashMap map);
+
+	ArrayList<Auction> selectMemberAuction(String member_id);
 }

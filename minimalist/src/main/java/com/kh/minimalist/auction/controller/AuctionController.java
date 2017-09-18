@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.member.model.vo.Member;
 
 @Controller
 public class AuctionController {
@@ -520,14 +521,16 @@ public class AuctionController {
 			}else {
 				writer.append("no");
 			}
-			
 			writer.flush();
 			writer.close();
-			
-			
-			
 		}
 		
+		@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
+		public String selectMemberAuction(HttpSession session, Model model) throws UnsupportedEncodingException{
+			String member_id = ((Member)session.getAttribute("member")).getMember_id();
+			ArrayList<Auction> list = auctionService.selectMemberAuction(member_id);
+			model.addAttribute("list", list);
+			return "mypage/customer-auction";
+		}
 		
-	
 }

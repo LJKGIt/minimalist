@@ -119,4 +119,10 @@ public class AuctionDao {
 		
 		return sqlSession.update("Auction.checkPayment", map);
 	}
+
+	// MEMBER 별 AUCTION LIST 조회
+	public ArrayList<Auction> selectMemberAuction(String member_id) {
+		List list = sqlSession.selectList("Auction.selectMemberAuction", member_id);
+		return (ArrayList<Auction>)list;
+	}
 }

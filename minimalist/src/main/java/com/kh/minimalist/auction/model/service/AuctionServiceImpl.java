@@ -94,7 +94,10 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.checkPayment(map);
 	}
 
-	
+	@Override
+	public ArrayList<Auction> selectMemberAuction(String member_id){
+		return auctionDao.selectMemberAuction(member_id);
+	}
 	
 	
 }
