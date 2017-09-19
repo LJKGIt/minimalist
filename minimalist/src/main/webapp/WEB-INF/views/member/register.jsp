@@ -59,7 +59,7 @@
 								</div>
 								<div class="form-group">
 									<label for="pwd">Password</label> <input type="password"
-										class="form-control" id="member_pwd1" name="member_pwd1">
+										class="form-control" id="member_pwd" name="member_pwd">
 								</div>
 								<div class="form-group">
 									<label for="pwd2">Password Check</label> <input type="password"
@@ -68,7 +68,7 @@
 								</div>
 								<div class="form-group">
 									<label for="name">Name</label> <input type="text"
-										class="form-control" id="member_name" style="width: 50%;">
+										class="form-control" id="member_name" name="member_name" style="width: 50%;">
 								</div>
 								<div class="form-group">
 									<label for="birth">Birth</label> <input type="date"
@@ -206,8 +206,8 @@
 		}
 	});
  	// PASSWORD CHECK
-		$('#member_pwd1').focusout(function(){
-			var password1 = $('#member_pwd1').val();
+		$('#member_pwd').focusout(function(){
+			var password1 = $('#member_pwd').val();
 			var password2 = $('#member_pwd2').val();
 			var regex = /^[A-Za-z0-9+]{6,16}$/;
 			
@@ -226,7 +226,7 @@
 		
 		$('#member_pwd2').focusout(function(){
 			
-			var password1 = $('#member_pwd1').val();
+			var password1 = $('#member_pwd').val();
 			var password2 = $('#member_pwd2').val();
 			var regex = /^[A-Za-z0-9+]{6,16}$/;
 			

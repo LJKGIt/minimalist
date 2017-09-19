@@ -3,6 +3,8 @@ package com.kh.minimalist.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.product.model.service.ProductService;
+import com.kh.minimalist.product.model.service.ProductServiceImpl;
+import com.kh.minimalist.product.model.vo.Product;
 
 @Controller
 public class MemberController {
@@ -30,6 +35,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ProductService productService;
 
 	// 관리자 페이지 이동용 메서드
 	@RequestMapping(value = "manage.do", method = { RequestMethod.POST, RequestMethod.GET })
@@ -157,15 +165,22 @@ public class MemberController {
 	// // TODO: handle exception
 	// }
 	// }
+	
 
 	@RequestMapping("mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
 		String result = null;
+		
+//		RECENT VIEW (COOKIE) 
 		if (((Member) session.getAttribute("member")) != null) {
 			try {
 				List<String> list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
-				model.addAttribute("cookieList", list);
-				System.out.println(list);
+				ArrayList<Product> cookieList = new ArrayList<Product>();
+				
+				for(String product_code : list)
+					cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
+				
+				model.addAttribute("cookieList", cookieList);
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
