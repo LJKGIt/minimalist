@@ -180,7 +180,7 @@ $(function(){
                         <div class="col-sm-6">
                             <div class="box">
                             	<span id="code" style="display:none">${auction.auction_code}</span>
-                                <h1 class="text-center">${auction.product_brand} - ${auction.product_name}</h1>
+                                <h1 class="text-center">${auction.product_brand} <br> ${auction.product_name}</h1>
                              
                                 <p class="price"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bid_price}</span> 원</font></p>
 								<p><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
