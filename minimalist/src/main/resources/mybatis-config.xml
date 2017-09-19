@@ -15,6 +15,7 @@
 			<typeAlias type="com.kh.minimalist.notice.model.vo.Notice" alias="Notice" />
 			<typeAlias type="com.kh.minimalist.qna.model.vo.Qna" alias="Qna" />
 			<typeAlias type="com.kh.minimalist.message.model.vo.Message" alias="Message" />
+			<typeAlias type="com.kh.minimalist.income.model.vo.Income" alias="Income" />
 		</typeAliases>
 	
 <!-- 	<environments default="development">
@@ -36,5 +37,6 @@
 		<mapper resource="mappers/notice-mapper.xml" />
 	    <mapper resource="mappers/qna-mapper.xml" />
 	    <mapper resource="mappers/message-mapper.xml" />
+	    <mapper resource="mappers/income-mapper.xml" />
 	</mappers>
 </configuration>

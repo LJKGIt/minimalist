@@ -179,6 +179,9 @@ input {
                                 <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
                                 </li>
+                                 <li>
+                                    <a href="income.selectList.do">매출 확인</a>
+                                </li>
 								
 								
                             </ul>

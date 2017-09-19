@@ -3,31 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-<script type="text/javascript">
-$(function(){
-	$('.check').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "auction.checkPayment.do",
-			type : "post",
-			data : {message : arr[0], auction_code : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					location.reload();
-				}else if(value=='no'){
-					alert("실패");
-				}
-			}
-		});
-		
-	});
-});
-
-
-</script>
-
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -92,8 +67,10 @@ position: absolute;
 </head>
 
 <body>
-	<c:import url="../main/header.jsp" /> 
-<div id="all">
+	<c:import url="../main/header.jsp" />
+
+
+    <div id="all">
 
         <div id="content">
             <div class="container">
@@ -102,7 +79,7 @@ position: absolute;
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>관리자페이지</li>
+                        <li>문의하기</li>
                     </ul>
 
                 </div>
@@ -113,10 +90,10 @@ position: absolute;
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Management</h3>
+                            <h3 class="panel-title">Pages</h3>
                         </div>
 
-                        <div class="panel-body">
+                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
                                 	<a href="notice.viewWriteForm.do">공지사항 등록</a>
@@ -149,77 +126,87 @@ position: absolute;
                     <!-- *** PAGES MENU END *** -->
 
 
-                    
+                    <div class="banner">
+                        <a href="#">
+                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
+                        </a>
+                    </div>
                 </div>
 
                 <div class="col-md-9">
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">종료된 경매 확인.</h1>
+                       <h1>매출 현황</h1>
 
-			
-
-              <table class="type07">
+           
+                        <hr>
+                        
+                        <table class="type07">
+                       
     <thead>
-   	 
-			<tr><th style="width:120px">경매번호</th><th style="width:150px">경매종료일</th>
-			<th style="width:150px">
-			낙찰금액</th><th style="width:150px">ID</th><th style="width:150px">결제여부</th>
-			<th style="width:150px">결제체크</th><th style="width:150px">쪽지보내기</th></tr>
-    </thead>
-    <tbody>
-    	<c:forEach var="au" items="${list}">
-			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
-			<td>${au.bid_price}</td><td>${au.member_id}</td>
-			<td>
-			<c:if test="${au.payment_yn eq 'n' }">
-			미완료
-			</c:if>
-			<c:if test="${au.payment_yn eq 'y' }">
-			결제완료
-			</c:if>
-			<td>
-			<c:if test="${au.payment_yn eq 'n' }">
-			<button type="button" class="check" value="y,${au.auction_code}">결제확인</button>
-			</c:if>
-			<c:if test="${au.payment_yn eq 'y' }">
-			<button type="button" class="check" value="n,${au.auction_code}">되돌리기</button>
-			</c:if>
-			
-			</td>
-			
-			<td><button type="button">전송</button></td>
-			</tr>
-			</c:forEach>
-   			
+    <tr>
+        <th style="width:150px">매출구분</th>
+        <th style="width:200px">매출일자</th>
+        <th style="width:200px">대여/경매코드</th>
+        <th style="width:200px">매출액</th>
+   </tr>
+   <tbody>
+   		<!--  forEach -->
+   		<c:forEach var="inc" items="${list}">
+   		<tr>
+   		<td>
+   		<c:if test="${empty inc.product_code}">
+   		경매
+   		</c:if>
+   		<c:if test="${empty inc.auction_code}">
+   		대여
+   		</c:if>
+   		</td>
+   		<td>
+   		${inc.income_date}
+   		</td>
+   		<td>
+   		<c:if test="${empty inc.product_code}">
+   		${inc.auction_code}
+   		</c:if>
+   		<c:if test="${empty inc.auction_code}">
+   		${inc.product_code}
+   		</c:if>
+   		</td>
+   		<td>
+   		${inc.income}
+   		</td>
+   		</tr>
+   		</c:forEach>
+   		
     </tbody>
-
 </table>
-				 <!-- 페이징 처리 --> 
-			 <div class="pages">
-				<ul class="pagination">
-					<c:if test="${currentPage ne 1}">
-                 		 <li><a href="auction.viewAuctionEnd.do?page=${currentPage-1}&category=${category}">&laquo;</a></li>
-                    </c:if>
-					<c:forEach var="page" begin="${startPage}" end="${endPage}">
-					<c:if test="${page eq currentPage}">
-						<li class="active"><a href="#">${page}</a>
-					</c:if>
-					<c:if test="${page ne currentPage}">
-						<li><a href="auction.viewAuctionEnd.do?page=${page}">${page}</a></li>
-					</c:if>
-					</c:forEach>
-					<c:if test="${currentPage ne maxPage}">
-                        <li><a href="auction.viewAuctionEnd.do?page=${currentPage+1}&category=${category}">&raquo;</a></li>
-                     </c:if>
-				</ul>
-			 </div>
-					
 
+<div class="pages">
+
+                       
+
+                        <ul class="pagination">
+                        	<c:if test="${currentPage ne 1}">
+                        		<li><a href="income.selectList.do?page=${currentPage-1}">&laquo;</a></li>
+                        	</c:if>
+                        	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
+                        		<c:if test="${page eq currentPage}">                        	
+                        			<li class="active"><a href="#">${page}</a>
+                        		</c:if>
+                        		<c:if test="${page ne currentPage}">
+                        			<li><a href="income.selectList.do?page=${page}">${page}</a></li>
+                        		</c:if>
+                        	</c:forEach>
+                        	<c:if test="${currentPage ne maxPage}">
+                        		<li><a href="income.selectList.do?page=${currentPage+1}">&raquo;</a></li>
+                        	</c:if>
+                        </ul>
                     </div>
-                    
-			
+
+					 
+
 
                 </div>
                 <!-- /.col-md-9 -->
@@ -234,13 +221,11 @@ position: absolute;
     </div>
     <!-- /#all -->
 
+
+
+
     
 
 
-
-
-    
-
-	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>
