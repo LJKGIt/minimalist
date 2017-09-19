@@ -12,6 +12,7 @@ drop table faq cascade constraints;
 drop table review cascade constraints;
 drop table qna cascade constraints;
 drop table product_image cascade constraints;
+drop table income cascade constraints;
 
 
 ------------------------------------------------생성
@@ -158,6 +159,16 @@ create table product_image(
 product_code number,
 img_path varchar2(100),
 constraint img_fk foreign key (product_code) references product (product_code));
+
+--수입
+create table income (
+product_code number,
+auction_code number,
+income number,
+income_date date,
+constraint inco_fk1 foreign key (product_code) references product (product_code),
+constraint inco_fk2 foreign key (auction_code) references auction (auction_code));
+
 
 
 ------------------------------- 샘플데이터 ------------------------------------
@@ -309,6 +320,9 @@ insert into review values(
 insert into qna values(
 1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',
 sysdate, null);
+
+insert into income values (
+null, 4, 10000, to_date('20170909', 'yymmdd'));
 
 
 commit;
