@@ -20,46 +20,49 @@ import com.kh.minimalist.product.model.vo.Product;
 
 @Controller
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productService;
-	
+
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
-	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session){
+	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 		String result = null;
-		
+
 		Product product_return = productService.productDetail(product);
-		
-//		UPDATE COOKIE 
-		try {
-			new CookieUtils().setCookie(((Member)session.getAttribute("member")).getMember_id(), String.valueOf(product.getProduct_code()), 365, request, response);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		// UPDATE COOKIE
+		if((Member) session.getAttribute("member") != null){
+			try {
+				new CookieUtils().setCookie(((Member) session.getAttribute("member")).getMember_id(),
+						String.valueOf(product.getProduct_code()), 365, request, response);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		if(product_return != null){
+		if (product_return != null) {
 			model.addAttribute("product", product_return);
 			result = "product/product_detail";
 		} else {
 			result = "main/404";
 		}
-		
+
 		return result;
 	}
 
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Product product, Model model){
+	public String productList(Product product, Model model) {
 		String result = null;
 
 		ArrayList<Product> productList = productService.productList(product);
-		if(productList != null && productList.size() != 0){
+		if (productList != null && productList.size() != 0) {
 			model.addAttribute("productList", productList);
 			result = "product/product_list";
 		} else {
 			result = "main/404";
 		}
-		
+
 		return result;
 	}
 
