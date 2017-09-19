@@ -29,4 +29,21 @@ public class IncomeDao {
 		
 		return (ArrayList<Income>)list;
 	}
+	
+	public int insertIncome(Income income){
+		//결제 조건 넣어야 함 상품코드 + 매출일자가 unique 제약조건임.
+		
+		int result=0;
+		
+		if(income.getAuction_code()!=0){
+			int tmp=sqlSession.selectOne("Income.unique", income);
+			
+			if(tmp==0){
+				result=sqlSession.insert("Income.insertIncome", income);
+			}
+		}
+		
+		return result;
+		
+	}
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -156,23 +157,28 @@ position: absolute;
    		<c:forEach var="inc" items="${list}">
    		<tr>
    		<td>
-   		<c:if test="${empty inc.product_code}">
+   		<c:choose>
+   		<c:when test="${!empty inc.auction_code}">
    		경매
-   		</c:if>
-   		<c:if test="${empty inc.auction_code}">
+   		</c:when>
+   		<c:when test="${!empty inc.product_code}">
    		대여
-   		</c:if>
+   		</c:when>
+   		</c:choose>
+   		
    		</td>
    		<td>
    		${inc.income_date}
    		</td>
    		<td>
-   		<c:if test="${empty inc.product_code}">
-   		${inc.auction_code}
-   		</c:if>
-   		<c:if test="${empty inc.auction_code}">
+   		<c:choose>
+   		<c:when test="${!empty inc.auction_code}">
+   		<a href="auction.selectOne.do?auction_code=${inc.auction_code}">${inc.auction_code}</a>
+   		</c:when>
+   		<c:when test="${!empty inc.product_code}">
    		${inc.product_code}
-   		</c:if>
+   		</c:when>
+   		</c:choose>
    		</td>
    		<td>
    		${inc.income}

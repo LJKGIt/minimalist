@@ -26,4 +26,10 @@ public class IncomeServiceImpl implements IncomeService {
 		
 		return incomeDao.selectList(map);
 	}
+
+	@Override
+	public int insertIncome(Income income) {
+		
+		return incomeDao.insertIncome(income);
+	}
 }

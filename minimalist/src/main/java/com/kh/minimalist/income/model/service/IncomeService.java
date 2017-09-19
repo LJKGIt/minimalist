@@ -12,4 +12,6 @@ public interface IncomeService {
 	
 	ArrayList<Income> selectList(HashMap map);
 	
+	int insertIncome(Income income);
+	
 }
