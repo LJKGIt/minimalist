@@ -164,12 +164,12 @@ constraint image_fk foreign key (product_code) references product (product_code)
 --수입
 create table income (
 product_code number,
-auction_code number,
+auction_code number unique,
 income number,
 income_date date,
 constraint inco_fk1 foreign key (product_code) references product (product_code),
-constraint inco_fk2 foreign key (auction_code) references auction (auction_code));
-
+constraint inco_fk2 foreign key (auction_code) references auction (auction_code),
+constraint inco_uni unique (product_code, income_date));
 
 
 ------------------------------- 샘플데이터 ------------------------------------
@@ -269,7 +269,7 @@ insert into notice values(
 1, '공지사항', '상품 대여 및 구매시 적립금을 드려요.', sysdate);
 
 
-
+   
 insert into review values(
 1, 1, 'admin', '좋네요', '은 뻥', null, null, sysdate);
 
@@ -277,8 +277,7 @@ insert into qna values(
 1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',
 sysdate, null);
 
-insert into income values (
-null, 4, 10000, to_date('20170909', 'yymmdd'));
+
 
 
 commit;

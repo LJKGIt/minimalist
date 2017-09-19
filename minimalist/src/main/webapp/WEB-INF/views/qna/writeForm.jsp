@@ -159,13 +159,10 @@ input {
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="">공지사항</a>
+                                    <a href="qna.selectFaq.do">자주하는 질문</a>
                                 </li>
                                 <li>
-                                    <a href="">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="">문의하기</a>
+                                    <a href="qna.selectList.do">1:1문의</a>
                                 </li>
 
                             </ul>

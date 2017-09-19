@@ -6,6 +6,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
 <script type="text/javascript">
 $(function(){
+	//확인 버튼.
 	$('.check').click(function(){
 		var arr=($(this).val()).split(',');
 		$.ajax({
@@ -22,6 +23,26 @@ $(function(){
 			}
 		});
 		
+	});
+	
+	
+	//매출 추가
+	$('#incomeBtn').click(function(){
+		var arr=($(this).val()).split(',');
+		$.ajax({
+			url : "income.insertIncome.do",
+			type : "post",
+			data : {auction_code : arr[0], income : arr[1]},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					alert("매출에 집계되었습니다.");
+				}else if(value=='no'){
+					alert("이미 집계된 항목입니다.");
+				}
+			}
+			
+		});
 	});
 });
 
@@ -166,7 +187,9 @@ position: absolute;
 			<tr><th style="width:120px">경매번호</th><th style="width:150px">경매종료일</th>
 			<th style="width:150px">
 			낙찰금액</th><th style="width:150px">ID</th><th style="width:150px">결제여부</th>
-			<th style="width:150px">결제체크</th><th style="width:150px">쪽지보내기</th></tr>
+			<th style="width:150px">체크</th><th style="width:150px">쪽지보내기</th>
+			<th style="width:150px">매출집계</th>
+			</tr>
     </thead>
     <tbody>
     	<c:forEach var="au" items="${list}">
@@ -181,15 +204,15 @@ position: absolute;
 			</c:if>
 			<td>
 			<c:if test="${au.payment_yn eq 'n' }">
-			<button type="button" class="check" value="y,${au.auction_code}">결제확인</button>
+			<button type="button" class="check" value="y,${au.auction_code}">확인</button>
 			</c:if>
 			<c:if test="${au.payment_yn eq 'y' }">
-			<button type="button" class="check" value="n,${au.auction_code}">되돌리기</button>
+			<button type="button" class="check" value="n,${au.auction_code}">취소</button>
 			</c:if>
-			
 			</td>
 			
 			<td><button type="button">전송</button></td>
+			<td><button type="button" id="incomeBtn" value="${au.auction_code},${au.bid_price}">집계</button></td>
 			</tr>
 			</c:forEach>
    			
@@ -228,7 +251,7 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		<c:import url="../main/footer.jsp" />
+	
 
 
     </div>

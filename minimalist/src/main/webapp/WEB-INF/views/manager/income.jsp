@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -79,7 +80,7 @@ position: absolute;
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>문의하기</li>
+                        <li>관리자페이지</li>
                     </ul>
 
                 </div>
@@ -138,10 +139,14 @@ position: absolute;
 
                     <div class="box" id="contact">
                        <h1>매출 현황</h1>
-
-           
+           <form action="income.selectListByDate.do" method="post"> 
+                        기간 : <input type="date" name="startDate" id="startDate">
+                        <input type="date" name="endDate" id="endDate">
+                       <!--  <button type="button" id=check>설정</button> -->
+                         <input type="submit" value="설정">
+                        </form> 
                         <hr>
-                        
+                       
                         <table class="type07">
                        
     <thead>
@@ -152,35 +157,56 @@ position: absolute;
         <th style="width:200px">매출액</th>
    </tr>
    <tbody>
+  		<c:if test="${empty list}">
+  		<tr>
+  		<th></th>
+  		<th></th>
+  		<th>매출이 없습니다.</th>
+  		<th></th>
+  		</tr>
+  		</c:if>
+  		<c:if test="${!empty list}">
    		<!--  forEach -->
    		<c:forEach var="inc" items="${list}">
    		<tr>
    		<td>
-   		<c:if test="${empty inc.product_code}">
+   		<c:choose>
+   		<c:when test="${!empty inc.auction_code}">
    		경매
-   		</c:if>
-   		<c:if test="${empty inc.auction_code}">
+   		</c:when>
+   		<c:when test="${!empty inc.product_code}">
    		대여
-   		</c:if>
+   		</c:when>
+   		</c:choose>
+   		
    		</td>
    		<td>
    		${inc.income_date}
+   		
    		</td>
    		<td>
-   		<c:if test="${empty inc.product_code}">
-   		${inc.auction_code}
-   		</c:if>
-   		<c:if test="${empty inc.auction_code}">
+   		<c:choose>
+   		<c:when test="${!empty inc.auction_code}">
+   		<a href="auction.selectOne.do?auction_code=${inc.auction_code}">${inc.auction_code}</a>
+   		</c:when>
+   		<c:when test="${!empty inc.product_code}">
    		${inc.product_code}
-   		</c:if>
+   		</c:when>
+   		</c:choose>
    		</td>
    		<td>
    		${inc.income}
+   		
    		</td>
    		</tr>
    		</c:forEach>
-   		
+   		</c:if>
     </tbody>
+   <tbody>
+   <tr><th>
+    	총 매출 : ${totalIncome} 원 
+   </th></tr> 
+   </tbody>
 </table>
 
 <div class="pages">
@@ -189,18 +215,18 @@ position: absolute;
 
                         <ul class="pagination">
                         	<c:if test="${currentPage ne 1}">
-                        		<li><a href="income.selectList.do?page=${currentPage-1}">&laquo;</a></li>
+                        		<li><a href="income.selectListByDate.do?page=${currentPage-1}&startDate=${startDate}&endDate=${endDate}">&laquo;</a></li>
                         	</c:if>
                         	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
                         		<c:if test="${page eq currentPage}">                        	
                         			<li class="active"><a href="#">${page}</a>
                         		</c:if>
                         		<c:if test="${page ne currentPage}">
-                        			<li><a href="income.selectList.do?page=${page}">${page}</a></li>
+                        			<li><a href="income.selectListByDate.do?page=${page}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
                         		</c:if>
                         	</c:forEach>
                         	<c:if test="${currentPage ne maxPage}">
-                        		<li><a href="income.selectList.do?page=${currentPage+1}">&raquo;</a></li>
+                        		<li><a href="income.selectListByDate.do?page=${currentPage+1}&startDate=${startDate}&endDate=${endDate}">&raquo;</a></li>
                         	</c:if>
                         </ul>
                     </div>
