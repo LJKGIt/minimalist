@@ -269,7 +269,7 @@ insert into notice values(
 1, '공지사항', '상품 대여 및 구매시 적립금을 드려요.', sysdate);
 
 
-
+   
 insert into review values(
 1, 1, 'admin', '좋네요', '은 뻥', null, null, sysdate);
 
