@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.message.model.service.MessageService;
 
 @Controller
 public class MemberController {
@@ -28,6 +29,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	
 	
@@ -39,13 +43,19 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member m, HttpSession session) {
-
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String result = "main/index";
 		Member member = memberService.loginMember(m);
 		if (member != null) {
 			session.setAttribute("member", member);
+			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+				result = "redirect:"+request.getHeader("referer");
+			}
+			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
 		}
-		return "main/index";
+		return result;
+		
+		
 	}
 
 	@RequestMapping("logout.do")
