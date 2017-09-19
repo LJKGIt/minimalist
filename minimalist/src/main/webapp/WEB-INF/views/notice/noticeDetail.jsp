@@ -10,6 +10,7 @@
     width: 100%;
     border-top: 2px solid #888;
     border-bottom: 2px solid #888;
+        margin-bottom: 20px;
 }
 
 .contEditor {
@@ -19,7 +20,7 @@
     
 }
 .mgT40 {
-   margin-top: 40px !important; 
+   margin-top: 10px !important; 
 }
 
 
@@ -48,7 +49,11 @@ table {
     border-bottom: 2px solid #888;
     
 }
+.c{
+border-top: 1px none #888;!important; 
+    border-bottom: 2px none #888;!important; 
 
+}
 
 .board-view-1s>tbody>tr>td {
   padding: 20px 10px; 
@@ -150,35 +155,31 @@ table {
 
 
                     <div class="box" id="contact">
-                       <table class="board-view-1s mgT40">
+         <table class="board-view-1s mgT40">
                    
 		<tbody>
 		
 				
-		<tr><td style=" border-bottom-style: dashed; text-align:left;">
+		<tr><td colspan="2" style=" border-bottom-style: dashed; text-align:left;">
 		<span class="tit" ><strong>${notice.notice_title}</strong></span>
 		</td><td class="data" style="border-bottom-style: dashed; text-align:right;" >${notice.notice_date}</td></tr>
 		
-		<tr><td id="a" colspan="1" >${notice.notice_content}</td></tr>
+		<tr><td id="a" colspan="3" style="border-bottom: 2px solid #cccccc;" ><span>${notice.notice_content}</span></td></tr>
 		
 		</tbody>
-		<tr><td colspan="2"></td></tr>
-		<tr><td colspan="2">
-				
-				<a href="notice.selectList.do">목록보기</a>
-				<c:if test="${sessionScope.member.member_id eq 'admin'}">
-       		<a href="notice.viewUpdateForm.do?notice_no=${notice.notice_no}"><buttion type="button" id="update">수정</buttion></a> 
-       		<a href="notice.deleteNotice.do?notice_no=${notice.notice_no}"><buttion type="button" id="delete">삭제</buttion></a>
-       			</c:if>
-				
-			</td></tr>
-			
+		
 	</table>
-       
-    </tbody>
-</table>
-
 					 
+             <div class="c"><!-- <tr><td colspan="2"> -->
+			<center>
+                       <a href="notice.selectList.do"><button type="button" id="list" class="btn btn-default">목록</button></a>
+				 <c:if test="${sessionScope.member.member_id eq 'admin'}">
+                &nbsp;&nbsp;<a href="notice.viewUpdateForm.do?notice_no=${notice.notice_no}"><button type="button" class="btn btn-default">수정</button></a>
+               &nbsp;&nbsp;<a href="notice.deleteNotice.do?notice_no=${notice.notice_no}"><button type="button" class="btn btn-default">삭제</button></a>
+                  </c:if>
+                  </center>
+      <!--  </td> </tr> -->
+                   </div>
 
                     </div>
 
