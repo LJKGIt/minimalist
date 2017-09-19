@@ -46,4 +46,19 @@ public class IncomeDao {
 		return result;
 		
 	}
+	
+	public int countRowByDate(HashMap map){
+		
+		return sqlSession.selectOne("Income.countRowByDate", map);
+		
+	}
+	
+	public ArrayList<Income> selectListByDate(HashMap map){
+		
+		List list=null;
+		
+		list=sqlSession.selectList("Income.selectListByDate", map);
+		
+		return (ArrayList<Income>)list;
+	}
 }
