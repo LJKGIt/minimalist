@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('#searching').click(function(){
+		var keyword=$('#idid').val(); 
+		 if(keyword==null){
+			alert('아이디를 입력하세요.');
+		} 
+		
+	});
+});
+
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -77,7 +92,7 @@ position: absolute;
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                       <li>관리자페이지</li>
+                        <li>관리자페이지</li>
                     </ul>
 
                 </div>
@@ -100,7 +115,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
+                                    <a href="">회원관리</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -108,10 +123,11 @@ position: absolute;
                                 <li>
                                     <a href="auction.viewRegister.do">경매상품 등록</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
                                 </li>
-
+								
+								
                             </ul>
 
                         </div>
@@ -127,31 +143,13 @@ position: absolute;
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">경매등록</h1>
+                      <h1 align="center">회원 검색</h1>
 
-               <form action="auction.insertAuction.do"  method="post" enctype="multipart/form-data">
-<table>
-<tr><th>상품명 : </th><td><input type="text" name="product_name"></td></tr>
-<tr><th>상품 카테고리 : </th><td><select name="category" value="카테고리">
-                      <option value="의류">의류</option>
-                      <option value="잡화">잡화</option>
-                      <option value="악세사리">악세사리</option>
-                      </select></td></tr>
-<tr><th>상품 브랜드 : </th><td><input type="text" name="product_brand"></td></tr>
-<tr><th>물품 사이즈 : </th><td><input type="text" name="product_size"></td></tr>
-<tr><th>물품 색상 : </th><td><input type="text" name="product_color"></td></tr>
-<tr><th>상품 설명 : </th><td><textarea name="product_descript"></textarea></td></tr>
-<tr><th>경매시작가격 : </th><td><input type="number" name="bid_price"></td></tr>
-<tr><th>경매시작일 : </th><td><input type="date" name="start_date"></td></tr>
-<tr><th>경매종료일 : </th><td><input type="date" name="end_date"></td></tr>
-<tr><th>파일첨부1 : </th><td><input type="file" name="img1"></td></tr>
-<tr><th>파일첨부2 : </th><td><input type="file" name="img2"></td></tr>
-<tr><th>파일첨부3 : </th><td><input type="file" name="img3"></td></tr>
-<tr><th><input type="submit" value="등록하기"></th></tr>
-</table>
-</form>
-                       
-                       
+              	
+             <p align="center">	<input type="text" placeholder="아이디로 검색" id="idid"><button type="button" id="searching">검색</button>
+              	</p>
+             
+             <div id="result"></div> 
     <thead>
    	 
     </thead>
