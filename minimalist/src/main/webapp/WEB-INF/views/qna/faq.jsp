@@ -49,14 +49,12 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="text.html">Text page</a>
+                                    <a href="#">자주하는 질문</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html">Contact page</a>
+                                    <a href="qna.selectList.do">1:1문의</a>
                                 </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
+                               
 
                             </ul>
 

@@ -32,4 +32,16 @@ public class IncomeServiceImpl implements IncomeService {
 		
 		return incomeDao.insertIncome(income);
 	}
+
+	@Override
+	public int countRowByDate(HashMap map) {
+		
+		return incomeDao.countRowByDate(map);
+	}
+
+	@Override
+	public ArrayList<Income> selectListByDate(HashMap map) {
+		
+		return incomeDao.selectListByDate(map);
+	}
 }

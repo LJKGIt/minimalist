@@ -241,7 +241,7 @@ input {
         </div>
         <!-- /#content -->
 
-		<c:import url="../main/footer.jsp" />
+		
 
 
     </div>

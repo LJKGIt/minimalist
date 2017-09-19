@@ -14,4 +14,8 @@ public interface IncomeService {
 	
 	int insertIncome(Income income);
 	
+	int countRowByDate(HashMap map);
+	
+	ArrayList<Income> selectListByDate(HashMap map);
+	
 }
