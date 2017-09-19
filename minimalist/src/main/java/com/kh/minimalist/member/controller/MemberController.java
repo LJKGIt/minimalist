@@ -35,17 +35,33 @@ public class MemberController {
 	@RequestMapping(value = "manage.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String management() {
 
+	
+	@Autowired
+	private MessageService messageService;
+	
+	
+	
+	//관리자 페이지 이동용 메서드
+	@RequestMapping(value = "manage.do", method ={RequestMethod.POST, RequestMethod.GET})
+	public String management(){
+		
 		return "manager/manageHome";
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member m, HttpSession session) {
-
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String result = "main/index";
 		Member member = memberService.loginMember(m);
 		if (member != null) {
 			session.setAttribute("member", member);
+			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+				result = "redirect:"+request.getHeader("referer");
+			}
+			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
 		}
-		return "main/index";
+		return result;
+		
+		
 	}
 
 	@RequestMapping("logout.do")
@@ -203,11 +219,13 @@ public class MemberController {
 		Member member = memberService.searchMember(member_id);
 
 		if (member != null) {
+			String id=member.getMember_id();
 			model.addAttribute("member", member);
-		} else {
-
+		}else {
+			writer.append("no");
+			writer.flush();
 		}
-
-		return "manager/memberSearch";
+		writer.close();
+		
 	}
 }

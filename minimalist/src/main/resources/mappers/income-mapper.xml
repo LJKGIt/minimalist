@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Income">
+
+	<resultMap id="resultIncome" type="Income">
+	</resultMap>
+	
+	
+	<select id="countRow" resultType="_int">
+	select count(*) from income
+	</select>
+	
+	<select id="selectList" resultType="Income" parameterType="_int" resultMap="resultIncome">
+	select *
+	from (select rownum rnum, product_code, auction_code, income, income_date
+	from (select * from income order by income_date desc)
+	where rownum&lt;=#{endRow})
+	where rnum&gt;=#{startRow}
+	</select>
+	
+</mapper>

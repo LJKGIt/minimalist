@@ -125,7 +125,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
+                                    <a href="member.memberSearchView.do">쪽지보내기</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -135,6 +135,9 @@ position: absolute;
                                 </li>
                                 <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
+                                </li>
+                                 <li>
+                                    <a href="income.selectList.do">매출 확인</a>
                                 </li>
 								
 								
@@ -155,11 +158,18 @@ position: absolute;
                     <div class="box" id="contact">
                       <h1 align="center">종료된 경매 확인.</h1>
 
-			<table border="1" align="center" width="600">
-			<tr><th>경매번호</th><th>경매종료일</th><th>
-			낙찰금액</th><th>낙찰된 회원ID</th><th>결제여부</th><th>결제체크</th><th>쪽지보내기</th></tr>
 			
-			<c:forEach var="au" items="${list}">
+
+              <table class="type07">
+    <thead>
+   	 
+			<tr><th style="width:120px">경매번호</th><th style="width:150px">경매종료일</th>
+			<th style="width:150px">
+			낙찰금액</th><th style="width:150px">ID</th><th style="width:150px">결제여부</th>
+			<th style="width:150px">결제체크</th><th style="width:150px">쪽지보내기</th></tr>
+    </thead>
+    <tbody>
+    	<c:forEach var="au" items="${list}">
 			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
 			<td>${au.bid_price}</td><td>${au.member_id}</td>
 			<td>
@@ -182,8 +192,11 @@ position: absolute;
 			<td><button type="button">전송</button></td>
 			</tr>
 			</c:forEach>
-			</table>
-			 <!-- 페이징 처리 --> 
+   			
+    </tbody>
+
+</table>
+				 <!-- 페이징 처리 --> 
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
@@ -202,21 +215,11 @@ position: absolute;
                      </c:if>
 				</ul>
 			 </div>
-
-              
-    <thead>
-   	 
-    </thead>
-    <tbody>
-    	
-   			
-    </tbody>
-
-
 					
 
                     </div>
-
+                    
+			
 
                 </div>
                 <!-- /.col-md-9 -->

@@ -12,6 +12,8 @@ drop table faq cascade constraints;
 drop table review cascade constraints;
 drop table qna cascade constraints;
 drop table product_image cascade constraints;
+drop table income cascade constraints;
+
 
 
 ------------------------------------------------생성
@@ -36,18 +38,21 @@ email varchar2(100));
 
 
 --대여 아이템(상품)
-create table product(
-product_code number primary key,
-product_name varchar2(100),
-product_category varchar2(20),
-product_brand varchar2(50),
-product_descript varchar2(1000),
-rent_price number,
-product_quantity number,
-rent_count number,
-product_size varchar2(20),
-product_color varchar2(15),
-receive_date date
+CREATE TABLE PRODUCT(
+PRODUCT_CODE NUMBER PRIMARY KEY, /*제품 코드*/
+PRODUCT_NAME VARCHAR2(100), /*제품 이름*/
+PRODUCT_CATEGORY VARCHAR2(20), /*제품 카테고리*/
+PRODUCT_BRAND VARCHAR2(50), /*제품 브랜드*/
+PRODUCT_DESCRIPT VARCHAR2(1000), /*제품 설명*/
+PRODUCT_ORIGINAL_PRICE NUMBER, /*제품 본래 가격*/
+RENT_PRICE NUMBER, /*제품 대여 비용*/
+PRODUCT_SIZE33 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE33 CHECK (PRODUCT_SIZE33 IN('0', '1')), /*사이즈 유무*/
+PRODUCT_SIZE44 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE44 CHECK (PRODUCT_SIZE44 IN('0', '1')),
+PRODUCT_SIZE55 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE55 CHECK (PRODUCT_SIZE55 IN('0', '1')),
+PRODUCT_SIZE66 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE66 CHECK (PRODUCT_SIZE66 IN('0', '1')),
+PRODUCT_SIZE77 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE77 CHECK (PRODUCT_SIZE77 IN('0', '1')),
+PRODUCT_COLOR VARCHAR2(50), /*색상*/
+RECEIVE_DATE DATE /*올린 날짜*/
 );
 
 --대여기록
@@ -156,6 +161,16 @@ product_code number,
 img_path varchar2(100),
 constraint img_fk foreign key (product_code) references product (product_code));
 
+--수입
+create table income (
+product_code number,
+auction_code number,
+income number,
+income_date date,
+constraint inco_fk1 foreign key (product_code) references product (product_code),
+constraint inco_fk2 foreign key (auction_code) references auction (auction_code));
+
+
 
 ------------------------------- 샘플데이터 ------------------------------------
 
@@ -174,81 +189,50 @@ insert into product values(
 3, '용준모자', '기타', '일리네어', '용준이가 즐겨입는 그 모자', '10000' ,1, 1, 'M',
 'black', sysdate);
 
-
 CREATE TABLE PRODUCT_IMAGE(
-    IMAGE_CODE VARCHAR2(100),
+    IMAGE_CODE VARCHAR2(200),
     PRODUCT_CODE NUMBER,
     CONSTRAINT FK_PRODUCT_CODE FOREIGN KEY(PRODUCT_CODE) references PRODUCT(PRODUCT_CODE)
 );
 
 
-
 /* OUTER 61 */
-INSERT INTO PRODUCT VALUES(6100000001, '제이디퀄딩점퍼', '', '', '', 1, 1, 1, '', '', TO_DATE('170901', 'RRMMDD'));
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-INSERT INTO PRODUCT_IMAGE VALUES('6100000001_1.jpg', '6100000001');
-
-INSERT INTO PRODUCT VALUES(6100000002, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170902', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000003, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170903', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000004, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170904', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000005, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170905', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000006, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170906', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000007, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170907', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000008, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170908', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000009, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170909', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6100000010, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170910', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000001, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000002, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170902', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000003, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170903', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000004, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170904', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000005, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170905', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000006, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170906', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000007, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170907', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000008, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'));
 
 /* DRESS 62 */
-INSERT INTO PRODUCT VALUES(6200000001, '사바나 타이 프론트 드레스', 'dress', 'TIBI', '임시설명', 10000, 1, 1, '임시사이즈', '임시색상', TO_DATE('170901', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000002, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170902', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000003, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170903', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000004, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170904', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000005, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170905', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000006, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170906', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000007, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170907', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000008, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170908', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000009, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170909', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6200000010, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170910', 'RRMMDD'));
-
 /* TOP */
-INSERT INTO PRODUCT VALUES(6300000001, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170901', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000002, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170902', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000003, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170903', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000004, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170904', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000005, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170905', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000006, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170906', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000007, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170907', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000008, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170908', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000009, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170909', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6300000010, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170910', 'RRMMDD'));
+INSERT INTO PRODUCT_IMAGE VALUES(1500000001, '1500000001_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000001, '1500000001_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000001, '1500000001_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000002, '1500000002_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000002, '1500000002_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000002, '1500000002_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000003, '1500000003_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000003, '1500000003_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000003, '1500000003_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000004, '1500000004_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000004, '1500000004_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000004, '1500000004_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000005, '1500000005_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000005, '1500000005_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000005, '1500000005_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000006, '1500000006_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000006, '1500000006_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000006, '1500000006_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000007, '1500000007_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000007, '1500000007_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000007, '1500000007_3.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000008, '1500000008_1.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000008, '1500000008_2.jpg');
+INSERT INTO PRODUCT_IMAGE VALUES(1500000008, '1500000008_3.jpg');
 
-INSERT INTO PRODUCT VALUES(6400000001, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170901', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000002, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170902', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000003, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170903', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000004, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170904', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000005, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170905', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000006, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170906', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000007, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170907', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000008, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170908', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000009, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170909', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6400000010, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170910', 'RRMMDD'));
-
-INSERT INTO PRODUCT VALUES(6500000001, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170901', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000002, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170902', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000003, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170903', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000004, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170904', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000005, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170905', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000006, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170906', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000007, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170907', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000008, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170908', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000009, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170909', 'RRMMDD'));
-INSERT INTO PRODUCT VALUES(6500000010, '', '', '', '', 1, 1, 1, '', '', TO_DATE('170910', 'RRMMDD'));
 
 
 insert into rent_list values(
@@ -264,17 +248,17 @@ insert into message values(
 1, 'admin', '안녕', '나는 관리자야', sysdate, 'n');
 
 insert into auction values(
-1, '좋아핸드백', '잡화', '구찌', '좋아요', 'admin', '10000', to_date('20180909', 'yymmdd'), to_date('20181010', 'yymmdd'), '100x100', 'red', 'sample1.jpg,sample1-1.jpg,sample1-2.jpg', default);
-insert into auction values(
-2, '좋아원피스', '의류', '보세', '좋아요', 'admin', '10000', to_date('20180909', 'yymmdd'), to_date('20181010', 'yymmdd'), '100x100', 'navy', 'onepiece1.jpg,onepiece2.jpg,onepiece3.jpg', default);
+1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171025', 'yymmdd'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', default);
 
 insert into auction values(
-3, '절대반지', '악세사리', '사우론', '좋아요', 'admin', '10000', to_date('20180909', 'yymmdd'), to_date('20181010', 'yymmdd'), '100x100', 'navy', 'ring1.jpg,ring2.jpg,ring3.jpg', default);
+2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171028', 'yymmdd'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', default);
+insert into auction values(
+3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171030', 'yymmdd'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', default);
+insert into auction values(
+4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20170909', 'yymmdd'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', default);
+insert into auction values(
+5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20171021', 'yymmdd'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', default);
 
-insert into auction values(
-4, '절대반지(끝1)', '악세사리', '사우론', '좋아요', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20170909', 'yymmdd'), '100x100', 'navy', 'ring1.jpg,ring2.jpg,ring3.jpg', default);
-insert into auction values(
-5, '절대반지(끝2)', '악세사리', '사우론', '좋아요', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20170909', 'yymmdd'), '100x100', 'navy', 'ring1.jpg,ring2.jpg,ring3.jpg', default);
 
 
 insert into alert values(
@@ -292,6 +276,9 @@ insert into review values(
 insert into qna values(
 1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',
 sysdate, null);
+
+insert into income values (
+null, 4, 10000, to_date('20170909', 'yymmdd'));
 
 
 commit;
