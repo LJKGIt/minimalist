@@ -1,9 +1,13 @@
 package com.kh.minimalist.income.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,5 +89,53 @@ public class IncomeController {
 		}
 		
 		return tmp;
+	}
+	
+	//매출 포함 - 경매
+	@RequestMapping(value="income.insertIncome.do", method={RequestMethod.POST, RequestMethod.GET})
+	public void insertIncome(HttpServletRequest request,
+			HttpServletResponse response) throws IOException{
+		
+		int product_code;
+		int auction_code;
+		
+		Income inc=new Income();
+		
+		//대여인 경우
+		if(request.getParameter("product_code")!=null){
+			product_code=Integer.parseInt(request.getParameter("product_code"));
+			inc.setProduct_code(product_code);
+			Date income_date=Date.valueOf(request.getParameter("income_date"));
+			inc.setIncome_date(income_date);
+		}
+		//경매인 경우
+		else if(request.getParameter("auction_code")!=null){
+			auction_code=Integer.parseInt(request.getParameter("auction_code"));
+			inc.setAuction_code(auction_code);
+			//경매인 경우에는 집계 버튼을 눌렀을때 집계하므로. sysdate로 집계.
+		}
+		
+		int income=Integer.parseInt(request.getParameter("income"));
+		
+		inc.setIncome(income);
+		
+		
+		
+		int result=incomeService.insertIncome(inc);
+		
+		PrintWriter writer=response.getWriter();
+		
+		if(result>0){
+			writer.append("yes");
+		} else {
+			writer.append("no");
+		}
+		
+		writer.flush();
+		writer.close();
+		
+		
+		
+		
 	}
 }
