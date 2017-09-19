@@ -20,4 +20,19 @@
 	where rnum&gt;=#{startRow}
 	</select>
 	
+	<!-- 판매시 insert -->
+	<insert id="insertIncome" parameterType="Income">
+	<choose>
+	<when test="product_code!=0">
+	insert into income values(#{product_code}, null, #{income}, #{income_date})
+	</when>
+	<when test="auction_code!=0">
+	insert into income values(null, #{auction_code}, #{income}, sysdate)
+	</when>
+	</choose>
+	</insert>
+	<select id="unique" resultType="_int" parameterType="Income">
+	select count(*) from Income where auction_code=#{auction_code}
+	</select>
+	
 </mapper>
