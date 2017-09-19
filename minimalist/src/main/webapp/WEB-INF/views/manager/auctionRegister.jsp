@@ -176,19 +176,17 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		<c:import url="../main/footer.jsp" />
+		
 
 
     </div>
     <!-- /#all -->
 
     
-
+<c:import url="../main/footer.jsp" />
 
 
 
     
-
-	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>
