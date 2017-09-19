@@ -158,8 +158,8 @@ constraint qna_fk foreign key (member_id) references member (member_id));
 
 create table product_image(
 product_code number,
-img_path varchar2(100),
-constraint img_fk foreign key (product_code) references product (product_code));
+product_image_path varchar2(100),
+constraint image_fk foreign key (product_code) references product (product_code));
 
 --수입
 create table income (
