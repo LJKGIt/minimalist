@@ -77,7 +77,7 @@
 				<a class="navbar-brand home" href="index.do"
 					data-animate-hover="bounce"> <img src="resources/img/logo23.png"
 					alt="Obaju logo" class="hidden-xs"> <img
-					src="resources/img/logo-small.png" alt="Obaju logo"
+					src="resources/img/logo23-2.png" alt="Obaju logo"
 					class="visible-xs"><span class="sr-only">Minimalist home </span>
 				</a>
 				<div class="navbar-buttons">
