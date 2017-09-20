@@ -20,26 +20,24 @@
   		<result property="product_color" column="PRODUCT_COLOR"/>
   		<result property="receive_date" column="RECEIVE_DATE"/>
 
-		<collection javaType="ProductImage" property="ProductImage">
-			<id column="product_image_path" property="PRODUCT_IMAGE_PATH"/>
-			<result column="product_code" property="PRODUCT_CODE"/>
+		<collection property="productImageList" ofType="ProductImage">
+			<result property="product_image_path" column="PRODUCT_IMAGE_PATH"/>
+			<result property="product_code" column="PRODUCT_CODE" />
 		</collection>
 	</resultMap>
 
 	<select id="productDetail" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT A.PRODUCT_CODE, A.PRODUCT_NAME, A.PRODUCT_CATEGORY, A.PRODUCT_BRAND, A.PRODUCT_DESCRIPT, A.PRODUCT_ORIGINAL_PRICE, A.RENT_PRICE, A.PRODUCT_SIZE33, A.PRODUCT_SIZE44, A.PRODUCT_SIZE55, A.PRODUCT_SIZE66, A.PRODUCT_SIZE77, A.PRODUCT_COLOR, A.RECEIVE_DATE, 
-				B.PRODUCT_IMAGE_PATH
-		FROM PRODUCT A, PRODUCT_IMAGE B
-		WHERE A.PRODUCT_CODE = B.PRODUCT_CODE
-		AND A.PRODUCT_CODE = #{product_code}
+		SELECT *
+		FROM PRODUCT A
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
+		WHERE PRODUCT_CODE = #{product_code}
 	</select>
 
 	<select id="productList" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT A.PRODUCT_CODE, A.PRODUCT_NAME, A.PRODUCT_CATEGORY, A.PRODUCT_BRAND, A.PRODUCT_DESCRIPT, A.PRODUCT_ORIGINAL_PRICE, A.RENT_PRICE, A.PRODUCT_SIZE33, A.PRODUCT_SIZE44, A.PRODUCT_SIZE55, A.PRODUCT_SIZE66, A.PRODUCT_SIZE77, A.PRODUCT_COLOR, A.RECEIVE_DATE, 
-				B.PRODUCT_IMAGE_PATH
-		FROM PRODUCT A, PRODUCT_IMAGE B
-		WHERE A.PRODUCT_CODE = B.PRODUCT_CODE
-		AND PRODUCT_CATEGORY = #{product_category}
+		SELECT *
+		FROM PRODUCT A
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
+		WHERE PRODUCT_CATEGORY = #{product_category}
 	</select>
 
 

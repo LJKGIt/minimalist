@@ -24,11 +24,7 @@ public class ProductDao {
 
 	public ArrayList<Product> productList(Product product) {
 		// TODO [lintogi] mapper에서 ORDER BY 주가하기.
-		//TODO
-		System.out.println(product);
 		List<Product> productList = sqlSession.selectList("Product.productList", product);
-		//TODO
-		System.out.println("■");
 		return (ArrayList<Product>)productList;
 	}
 	

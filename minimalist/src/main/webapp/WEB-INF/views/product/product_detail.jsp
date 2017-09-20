@@ -189,7 +189,7 @@
                         <div class="col-sm-6">
                             <div id="mainImage">
                             	<% //TODO [lintogi] img.jpg 파일을 EL 태그로 만들기. %>
-                                <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
+                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                             </div>
 
                             <div class="ribbon sale">
@@ -198,7 +198,7 @@
                             </div>
                             <!-- /.ribbon -->
 
-                            <div class="ribbon new">
+                           <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
                                 <div class="ribbon-background"></div>
                             </div>
@@ -222,18 +222,18 @@
 
                             <div class="row" id="thumbs">
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[2].product_image_path }" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[2].product_image_path }" alt="" class="img-responsive">
                                     </a>
                                 </div>
                             </div>
@@ -287,18 +287,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product2.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>
@@ -314,18 +314,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product1.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product1_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product1_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product1.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>
@@ -342,18 +342,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product3.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product3_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product3_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product3.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>
@@ -380,18 +380,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product2.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>
@@ -407,18 +407,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product1.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product1_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product1_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product1.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>
@@ -435,18 +435,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="img/product3.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="img/product3_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img/product3_2.jpg" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img src="img/product3.jpg" alt="" class="img-responsive">
+                                    <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
                                     <h3>Fur coat</h3>

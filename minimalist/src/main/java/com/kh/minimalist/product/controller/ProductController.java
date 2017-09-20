@@ -35,12 +35,8 @@ public class ProductController {
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, Model model){
 		String result = null;
-		//TODO
-		System.out.println("1");
 		ArrayList<Product> productList = productService.productList(product);
-		System.out.println("2");
 		if(productList != null && productList.size() != 0){
-			System.out.println("3");
 			model.addAttribute("productList", productList);
 			result = "product/product_list";
 		} else {
