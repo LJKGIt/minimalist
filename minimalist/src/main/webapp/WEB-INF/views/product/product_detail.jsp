@@ -271,9 +271,10 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div>
-<<<<<<< HEAD
+                    <% //TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
+					<a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
                     </div>
-
+					
                     <div class="row same-height-row">
                         <div class="col-md-3 col-sm-6">
                             <div class="box same-height">
@@ -363,15 +364,10 @@
                             </div>
                             <!-- /.product -->
                         </div>
-=======
-                            
-                     <a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
->>>>>>> refs/remotes/origin/master
 
                     </div>
 
                     <div class="row same-height-row">
-<<<<<<< HEAD
                         <div class="col-md-3 col-sm-6">
                             <div class="box same-height">
                                 <h3>Products viewed recently</h3>
@@ -461,14 +457,11 @@
                             </div>
                             <!-- /.product -->
                         </div>
-=======
-                    
-                      
->>>>>>> refs/remotes/origin/master
 
                     </div>
 
-                  
+                </div>
+                <!-- /.col-md-9 -->
             </div>
             <!-- /.container -->
         </div>
