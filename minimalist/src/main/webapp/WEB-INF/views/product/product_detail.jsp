@@ -188,7 +188,6 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                            	<% //TODO [lintogi] img.jpg 파일을 EL 태그로 만들기. %>
                                 <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                             </div>
 

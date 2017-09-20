@@ -223,21 +223,18 @@
 	                                    <div class="flipper">
 	                                        <div class="front">
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
-	                                            	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(1) %>
 	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
 	                                        </div>
 	                                        <div class="back">
 	                                            <%-- <a href="productDetail.do?product_code=${ product.product_code }"> --%>
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
-	                                            	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(2) %>
 	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                                <a href="productDetail.do?product_code=${ product.product_code }" class="invisible">
-	                                	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(3) %>
 	                                    <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                </a>
 	                                <div class="text">

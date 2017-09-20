@@ -27,17 +27,19 @@
 	</resultMap>
 
 	<select id="productDetail" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT *
-		FROM PRODUCT A
-		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
-		WHERE PRODUCT_CODE = #{product_code}
+		SELECT * 
+		FROM PRODUCT A 
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
+		WHERE PRODUCT_CODE = #{product_code} 
+		ORDER BY RECEIVE_DATE ASC
 	</select>
 
 	<select id="productList" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT *
-		FROM PRODUCT A
-		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
-		WHERE PRODUCT_CATEGORY = #{product_category}
+		SELECT * 
+		FROM PRODUCT A 
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
+		WHERE PRODUCT_CATEGORY = #{product_category} 
+		ORDER BY RECEIVE_DATE ASC
 	</select>
 
 
