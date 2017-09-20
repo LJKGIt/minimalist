@@ -8,6 +8,48 @@
     <title>
         Obaju : e-commerce template
     </title>
+    
+    
+    <style type="text/css">
+.navbar-expand-lg .navbar-collapse {
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+    .navbar > .container {
+    position: relative;
+}
+
+
+.navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.navbar>.container, .navbar>.container-fluid {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+
+.container {
+    max-width: 1140px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+}
+    
+    </style>
 </head>
 <body> 
 	<c:import url="header.jsp" />
@@ -19,16 +61,16 @@
                 <div class="col-md-12">
                     <div id="main-slider">
                         <div class="item">
-                            <img src="resources/img/main-slider1.jpg" alt="" class="img-responsive">
+                            <img src="resources/img/main11.jpg" alt="" class="img-responsive">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main-slider2.jpg" alt="">
+                            <img class="img-responsive" src="resources/img/main13.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main-slider3.jpg" alt="">
+                            <img class="img-responsive" src="resources/img/main20.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main-slider4.jpg" alt="">
+                            <img class="img-responsive" src="resources/img/main19.png" alt="">
                         </div>
                     </div>
                     <!-- /#main-slider -->
@@ -88,7 +130,7 @@
                 <div class="box">
                     <div class="container">
                         <div class="col-md-12">
-                            <h2>Hot this week</h2>
+                            <h2>New Item</h2>
                         </div>
                     </div>
                 </div>
