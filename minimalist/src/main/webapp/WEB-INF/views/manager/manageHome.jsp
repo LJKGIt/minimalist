@@ -134,7 +134,7 @@ position: absolute;
                       <h1 align="center">관리자 페이지</h1>
 
                <h1>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h1>
-                       
+                       <a href="productDetail.do?product_code=1500000001">1번 대여상품에 대한 리뷰 보기</a>
                        
     <thead>
    	 

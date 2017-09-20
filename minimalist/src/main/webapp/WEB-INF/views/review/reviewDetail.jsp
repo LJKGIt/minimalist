@@ -1,7 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style type="text/css">
+.table {
+   
+    margin-bottom: 20px;
+}
 
+
+
+table {
+    border-collapse: collapse;
+    
+}
+table {
+    display: table;
+    table-layout: auto;
+   
+    }
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+   
+    
+}
+
+.col-md-10{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+    tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.form-inline .form-group {
+    display:table-row-group;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.form-inline .form-control {
+    display: inline-block;
+}
+
+textarea.form-control, #btn {
+    height: 94px;
+   resize:none;
+}
+
+.form-control {
+    display: block;
+   height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+   color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+ 
+}
+.col-md-10 #qna_no{
+overflow:hidden;
+ display: none;
+}
+.table table-condensed>.detail_table{
+border-bottom: 2px solid #cccccc;
+ margin-bottom: 20px;
+ 
+
+}
+.table{
+    width: 750px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.table table-condensed_b>.answer{
+border-top: 2px solid #ddd;
+
+}
+.form-control col-lg-12> #btn{
+ height: 94px;
+}
+
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +121,7 @@
                         </li>
                         <li><a href="#">Dress</a><% //TODO [lintogi] 카테고리 순서 처리하기. %>
                         </li>
-                        <li>${ product.product_name }</li>
+                        <li></li>
                     </ul>
 
                 </div>
@@ -185,95 +276,51 @@
 
                 <div class="col-md-9">
 
-                    <div class="row" id="productMain">
-                        <div class="col-sm-6">
-                            <div id="mainImage">
-                            	<% //TODO [lintogi] img.jpg 파일을 EL 태그로 만들기. %>
-                                <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
-                            </div>
-
-                            <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon -->
-
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon -->
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="box">
-                                <h1 class="text-center">${ product.product_name }</h1>
-                                <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &#38; care and sizing</a>
-                                </p>
-                                <p class="price">${ product.rent_price }</p>
-
-                                <p class="text-center buttons">
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-                                    <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
-                                </p>
-
-
-                            </div>
-
-                            <div class="row" id="thumbs">
-                                <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    
 
 
                     <div class="box" id="details">
-                        <p>
-                            <h4>Product details</h4>
-                            <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
-                            <h4>Material &#38; care</h4>
-                            <ul>
-                                <li>Polyester</li>
-                                <li>Machine wash</li>
-                            </ul>
-                            <h4>Size &#38; Fit</h4>
-                            <ul>
-                                <li>Regular fit</li>
-                                <li>The model (height 5'8" and chest 33") is wearing a size S</li>
-                            </ul>
-
-                            <blockquote>
-                                <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
-                                </p>
-                            </blockquote>
-
-                            <hr>
-                            <div class="social">
-                                <h4>Show it to your friends</h4>
-                                <p>
-                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                                </p>
-                            </div>
+                      
+                              <!--  리뷰 디테일 -->
+                               <table class="table table-condensed">
+                        <thead>
+                            <tr align="center">
+                           
+                           <th colspan="1"> &nbsp;<strong>${review.review_title}</strong></th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody class="detail_table">
+                            <tr>
+                            <td colspan="1">별점&nbsp;&nbsp; 
+                            <c:forEach var="starOn" begin="1" end="${review.review_rating}">
+							<img src='/minimalist/resources/img_review/star-on.png'>
+							</c:forEach>
+							<c:forEach var="starOff" begin="${review.review_rating+1}" end="5">
+							<img src='/minimalist/resources/img_review/star-off.png'>
+							</c:forEach>
                             
-                     <a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
+                            </td>
+                                <td colspan="1">작성일&nbsp;&nbsp; ${review.review_date}
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="1">글쓴이 &nbsp;&nbsp;<span>${review.member_id}</span>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border-bottom: 2px solid #cccccc;">
+                                    <p>${review.review_content}</p>
+                       		<img src="/minimalist/resources/img_review/${review.rename_img_name}">
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                            <td><a href="javascript:history.back()">뒤로가기</a></td>
+                            </tr>
+                        </tbody></table>
 
                     </div>
 

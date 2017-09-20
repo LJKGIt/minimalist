@@ -137,8 +137,9 @@ product_code number,
 member_id varchar2(20),
 review_title varchar2(50),
 review_content varchar2(1000),
-original_img_path varchar2(1000),
-rename_img_path varchar2(100),
+review_rating number,
+original_img_name varchar2(1000),
+rename_img_name varchar2(100),
 review_date date,
 constraint review_fk1 foreign key (member_id) references member (member_id),
 constraint review_fk2 foreign key (product_code) references product (product_code) on delete cascade);
@@ -180,7 +181,7 @@ insert into member values(
 
 
 insert into product values(
-1, '란희s 백', '가방', '루이비똥', '최고급 가죽, 정란희가 들어서 핫해진 바로 그 가방', '10000',1, 1, '300x300x100',
+1, '란희s 백', '가방', '루이비똥', '최고급 가죽, 정란희가 들어서 핫해진 바로 그 가방', 10000000, '10000',1, 1, 1,1,1,
 'red', sysdate);
 insert into product values(
 2, '재영바지', '의류', '구찌', '유재영이 즐겨입는 그 바지', '10000',1, 1, 'M',
@@ -271,7 +272,10 @@ insert into notice values(
 
    
 insert into review values(
-1, 1, 'admin', '좋네요', '은 뻥', null, null, sysdate);
+1, 1, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
+insert into review values(
+2, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
+
 
 insert into qna values(
 1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',

@@ -1,7 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style type="text/css">
+table.type07 {
 
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    margin: 20px 10px;
+     border-top-style: none;
+    border-right-style: none;
+	border-left-style: none;
+}
+table.type07 thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+   font-color:black;
+    border-right-style: none;
+	border-left-style: none;
+}
+table.type07 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+  border-bottom: 1px solid #ccc; 
+}
+
+
+table.type07 tbody th {
+    /* width: 130px; */
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  
+}
+table.type07 td {
+ /*    width: 400px; */
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+div.write2{
+
+position: absolute;
+    right: 80px;
+   bottom: 100px;
+
+
+}
+ 
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -272,9 +322,72 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div>
-                            
-                     <a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
+                              <h2 align="center">상품후기</h2>
+                      <table class="type07">
+                      <thead>
+<tr>
+	<th style="width:150px">별점</th>
+    <th style="width:200px">제목</th>
+    <th style="width:170px">작성자</th>
+    <th style="width:170px">작성일</th>
+</tr>
+</thead>
+<tbody>
+<c:choose>
+<c:when test="${empty list}">
+<h3 align="center">등록된 상품후기가 없습니다.</h3>
+</c:when>
+<c:when test="${!empty list}">
+<c:forEach var="re" items="${list}">
+<tr>
+<!--  별 출력 -->
+<td>
+<c:forEach var="starOn" begin="1" end="${re.review_rating}">
+<img src='/minimalist/resources/img_review/star-on.png'>
+</c:forEach>
+<c:forEach var="starOff" begin="${re.review_rating+1}" end="5">
+<img src='/minimalist/resources/img_review/star-off.png'>
+</c:forEach>
+</td>
+<td>
+<a href="review.selectOne.do?product_code=${product.product_code}&review_no=${re.review_no}">
+${re.review_title }
+</a>
+</td>
+<td>
+${re.member_id}
+</td>
+<td>
+${re.review_date}
+</td>
+</tr>
+</c:forEach>
+</c:when>
+</c:choose>
 
+</tbody>
+</table>
+<div class="pages">
+
+                       
+
+                        <ul class="pagination">
+                        	<c:if test="${currentPage ne 1}">
+                        		<li><a href="productDetail.do?product_code=${product.product_code}&page=${currentPage-1}">&laquo;</a></li>
+                        	</c:if>
+                        	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
+                        		<c:if test="${page eq currentPage}">                        	
+                        			<li class="active"><a href="#">${page}</a>
+                        		</c:if>
+                        		<c:if test="${page ne currentPage}">
+                        			<li><a href="productDetail.do?product_code=${product.product_code}&page=${page}">${page}</a></li>
+                        		</c:if>
+                        	</c:forEach>
+                        	<c:if test="${currentPage ne maxPage}">
+                        		<li><a href="productDetail.do?product_code=${product.product_code}&page=${currentPage+1}">&raquo;</a></li>
+                        	</c:if>
+                        </ul>
+                    </div>
                     </div>
 
                     <div class="row same-height-row">
