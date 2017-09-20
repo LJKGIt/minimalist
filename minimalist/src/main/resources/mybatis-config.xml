@@ -17,6 +17,7 @@
 			<typeAlias type="com.kh.minimalist.qna.model.vo.Qna" alias="Qna" />
 			<typeAlias type="com.kh.minimalist.message.model.vo.Message" alias="Message" />
 			<typeAlias type="com.kh.minimalist.income.model.vo.Income" alias="Income" />
+				<typeAlias type="com.kh.minimalist.review.model.vo.Review" alias="Review" />
 		</typeAliases>
 	
 <!-- 	<environments default="development">
@@ -39,5 +40,6 @@
 	    <mapper resource="mappers/qna-mapper.xml" />
 	    <mapper resource="mappers/message-mapper.xml" />
 	    <mapper resource="mappers/income-mapper.xml" />
+	    <mapper resource="mappers/review-mapper.xml" />
 	</mappers>
 </configuration>

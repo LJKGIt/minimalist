@@ -1,7 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style type="text/css">
+table.type07 {
 
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    margin: 20px 10px;
+     border-top-style: none;
+    border-right-style: none;
+	border-left-style: none;
+}
+table.type07 thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+   font-color:black;
+    border-right-style: none;
+	border-left-style: none;
+}
+table.type07 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+  border-bottom: 1px solid #ccc; 
+}
+
+
+table.type07 tbody th {
+    /* width: 130px; */
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  
+}
+table.type07 td {
+ /*    width: 400px; */
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+div.write2{
+
+position: absolute;
+    right: 80px;
+   bottom: 100px;
+
+
+}
+ 
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +238,8 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
+                            	<% //TODO [lintogi] img.jpg 파일을 EL 태그로 만들기. %>
+                                <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
                             </div>
 
                             <div class="ribbon sale">
@@ -197,7 +248,7 @@
                             </div>
                             <!-- /.ribbon -->
 
-                           <div class="ribbon new">
+                            <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
                                 <div class="ribbon-background"></div>
                             </div>
@@ -221,18 +272,18 @@
 
                             <div class="row" id="thumbs">
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_01.jpg" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_02.jpg" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[2].product_image_path }" class="thumb">
-                                        <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[2].product_image_path }" alt="" class="img-responsive">
+                                    <a href="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" class="thumb">
+                                        <img src="${ pageContext.request.contextPath }/resources/img/product/1900000001_03.jpg" alt="" class="img-responsive">
                                     </a>
                                 </div>
                             </div>
@@ -271,200 +322,77 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div>
-<<<<<<< HEAD
+                              <h2 align="center">상품후기</h2>
+                      <table class="type07">
+                      <thead>
+<tr>
+	<th style="width:150px">별점</th>
+    <th style="width:200px">제목</th>
+    <th style="width:170px">작성자</th>
+    <th style="width:170px">작성일</th>
+</tr>
+</thead>
+<tbody>
+<c:choose>
+<c:when test="${empty list}">
+<h3 align="center">등록된 상품후기가 없습니다.</h3>
+</c:when>
+<c:when test="${!empty list}">
+<c:forEach var="re" items="${list}">
+<tr>
+<!--  별 출력 -->
+<td>
+<c:forEach var="starOn" begin="1" end="${re.review_rating}">
+<img src='/minimalist/resources/img_review/star-on.png'>
+</c:forEach>
+<c:forEach var="starOff" begin="${re.review_rating+1}" end="5">
+<img src='/minimalist/resources/img_review/star-off.png'>
+</c:forEach>
+</td>
+<td>
+<a href="review.selectOne.do?product_code=${product.product_code}&review_no=${re.review_no}">
+${re.review_title }
+</a>
+</td>
+<td>
+${re.member_id}
+</td>
+<td>
+${re.review_date}
+</td>
+</tr>
+</c:forEach>
+</c:when>
+</c:choose>
+
+</tbody>
+</table>
+<div class="pages">
+
+                       
+
+                        <ul class="pagination">
+                        	<c:if test="${currentPage ne 1}">
+                        		<li><a href="productDetail.do?product_code=${product.product_code}&page=${currentPage-1}">&laquo;</a></li>
+                        	</c:if>
+                        	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
+                        		<c:if test="${page eq currentPage}">                        	
+                        			<li class="active"><a href="#">${page}</a>
+                        		</c:if>
+                        		<c:if test="${page ne currentPage}">
+                        			<li><a href="productDetail.do?product_code=${product.product_code}&page=${page}">${page}</a></li>
+                        		</c:if>
+                        	</c:forEach>
+                        	<c:if test="${currentPage ne maxPage}">
+                        		<li><a href="productDetail.do?product_code=${product.product_code}&page=${currentPage+1}">&raquo;</a></li>
+                        	</c:if>
+                        </ul>
+                    </div>
                     </div>
 
                     <div class="row same-height-row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="box same-height">
-                                <h3>You may also like these products</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product1_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product3_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-=======
-                            
-                     <a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
->>>>>>> refs/remotes/origin/master
-
-                    </div>
-
-                    <div class="row same-height-row">
-<<<<<<< HEAD
-                        <div class="col-md-3 col-sm-6">
-                            <div class="box same-height">
-                                <h3>Products viewed recently</h3>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product1_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product3_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.html" class="invisible">
-                                    <img src="${ pageContext.request.contextPath }/resources/img/product3.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-=======
                     
                       
->>>>>>> refs/remotes/origin/master
 
                     </div>
 

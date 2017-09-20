@@ -1,6 +1,9 @@
 package com.kh.minimalist.product.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
+import com.kh.minimalist.review.model.service.ReviewService;
+import com.kh.minimalist.review.model.vo.Review;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
-	public String productDetail(Product product, Model model){
+	public String productDetail(Product product, Model model, HttpServletRequest request){
 		String result = null;
 		
 		Product product_return = productService.productDetail(product);
@@ -29,7 +36,9 @@ public class ProductController {
 			result = "main/404";
 		}
 		
+		
 		return result;
+	
 	}
 
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
