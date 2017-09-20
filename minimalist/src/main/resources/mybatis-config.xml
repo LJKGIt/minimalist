@@ -11,6 +11,7 @@
 		<typeAliases>
 			<typeAlias type="com.kh.minimalist.member.model.vo.Member" alias="Member" />
 			<typeAlias type="com.kh.minimalist.product.model.vo.Product" alias="Product" />
+			<typeAlias type="com.kh.minimalist.product.model.vo.ProductImage" alias="ProductImage" />
 			<typeAlias type="com.kh.minimalist.auction.model.vo.Auction" alias="Auction" />
 			<typeAlias type="com.kh.minimalist.notice.model.vo.Notice" alias="Notice" />
 			<typeAlias type="com.kh.minimalist.qna.model.vo.Qna" alias="Qna" />

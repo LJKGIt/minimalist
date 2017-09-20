@@ -10,6 +10,9 @@ public class ProductImage implements Serializable {
 	private int product_code;
 	private String product_image_path;
 
+	public ProductImage(){
+	}
+	
 	public ProductImage(int product_code, String product_image_path) {
 		this.product_code = product_code;
 		this.product_image_path = product_image_path;
