@@ -36,4 +36,19 @@ public class ReviewDao {
 		
 		return sqlSession.selectOne("Review.selectOne", review_no);
 	}
+	
+	public int insertReview(Review review){
+		
+		return sqlSession.insert("Review.insertReview", review);
+	}
+	
+	public int updateReview(Review review){
+		
+		return sqlSession.update("Review.updateReview", review);
+	}
+	
+	public int deleteReview(int review_no){
+		
+		return sqlSession.delete("Review.deleteReview", review_no);
+	}
 }

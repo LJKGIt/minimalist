@@ -1,98 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style type="text/css">
-.table {
-   
-    margin-bottom: 20px;
+<!-- <style type="text/css">
+element.style {
+    display: none;
 }
+.board-write-1s {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    border-top: 2px solid #888;
+  }
 
-
+/* .mgT40 {
+    margin-top: 40px !important;
+} */
 
 table {
-    border-collapse: collapse;
-    
+    border-spacing: 0;
+    border: 0;
 }
-table {
-    display: table;
-    table-layout: auto;
-   
-    }
+label, input.button, input.submit, input.image, button {
+    cursor: pointer;
 
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-   
-    
 }
-
-.col-md-10{
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-    tbody {
+tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
 }
-tr {
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
 }
-
-.form-inline .form-group {
-    display:table-row-group;
-    margin-bottom: 0;
-    vertical-align: middle;
+colgroup {
+    display: table-column-group;
 }
-.form-inline .form-control {
-    display: inline-block;
-}
-
-textarea.form-control, #btn {
-    height: 94px;
-   resize:none;
-}
-
-.form-control {
+form {
     display: block;
-   height: 34px;
-    padding: 6px 12px;
+  
+}
+.board-write-1s tbody tr th {
+    padding: 20px 0 10px 15px;
+    vertical-align: top;
+}
+.board-write-1s tbody tr.textarea td {
+    padding: 20px 0;
+}
+.board-write-1s tbody tr th, .board-write-1s tbody tr td{
+    border-bottom: 1px solid #e6e6e6;
+    color: #333;
     font-size: 14px;
-   color: #555555;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
+    text-align: left;
+    line-height: 18px;
+   padding: 3px 0 5px 15px;
+}
+
+
+textarea {
+    border: 1px solid #ccc;
+    padding: 10px 8px;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'AppleGothic', 'Roboto', 'montserrat', 'noto', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    box-shadow: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
  
 }
-.col-md-10 #qna_no{
-overflow:hidden;
- display: none;
+input {
+    width: 100%;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #d0d0d0;
+    color: #888;
+    background: none;
+  -webkit-border-radius: 5px;
+  box-shadow: none;
+ -webkit-appearance: none;
+   letter-spacing: 0.5px;
+    vertical-align: top;
 }
-.table table-condensed>.detail_table{
-border-bottom: 2px solid #cccccc;
- margin-bottom: 20px;
+.board-write-1s tbody tr.textarea td span.file {
  
+    padding: 20px 0 0 10px;
+    color: #333;
+    font-size: 10px;
+    line-height: 18px;
+}
+.board-write-1s tbody tr.textarea td {
+    padding: 20px 0;
+	padding-top: 20px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+}
+.area1sButton {
+    padding: 10px 0 0;
+    text-align: center;
+   align:center;
+ 
+}
 
-}
-.table{
-    width: 750px;
-    max-width: 100%;
-    margin-bottom: 20px;
-}
-.table table-condensed_b>.answer{
-border-top: 2px solid #ddd;
 
-}
-.form-control col-lg-12> #btn{
- height: 94px;
-}
-
-</style>
+</style> -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -281,71 +302,56 @@ border-top: 2px solid #ddd;
 
                     <div class="box" id="details">
                       
-                              <!--  리뷰 디테일 -->
-                               <table class="table table-condensed">
-                        <thead>
-                            <tr align="center">
-                           
-                           <th colspan="1"> &nbsp;<strong>${review.review_title}</strong></th>
+                              <!--  리뷰 작성 폼 -->
+                              <div class="box" id="contact">
+                               <form action="review.updateReview.do" method="post" enctype="multipart/form-data">
+                      <table class="board-write-1s mgT40">
+                     
+			<colgroup>
+				<col style="width:25%;">
+				<col style="width:75%;">
+			</colgroup>
+			<tbody>
+				<tr><th>후기 번호 </th><td><input type="text" name="review_no" value="${review.review_no}" readonly></td></tr>
+                      <tr><th scope="col"><label for="TypeInquiry"><strong>평가</strong></label></th>
+                     <td>
+                    <c:forEach var="star1" begin="1" end="5">
+                     	<c:forEach var="star2" begin="${star1}" end="5">
+                     	<img src='/minimalist/resources/img_review/star-on.png'>
+                     	</c:forEach>
+                     	<c:if test="${star1 ne 6-review.review_rating}">
+                         <input type="radio" name="review_rating" value="${6-star1}">&nbsp;
+                     	</c:if>
+                     	<c:if test="${star1 eq 6-review.review_rating}">
+                         <input type="radio" name="review_rating" value="${6-star1}"  checked="checked">&nbsp;
+                     	</c:if>
+                     </c:forEach>
+                     </td></tr>
+                       <tr><td><strong>작성자</strong></td><td><input type="text" name="member_id"  style="width:98%;" value="${review.member_id}" readonly></td></tr>
+                    <tr><td><strong>제목</strong></td><td><input type="text" name="review_title" style="width:98%;" value="${review.review_title}"></td></tr>  
+                     
+                     
+                      <tr><td><strong>내용</strong></td><td><textarea name="review_content" cols="30" rows="7" style="width:98%;height:280px;">${review.review_content}</textarea>
+                     
+							<input type="file" id="inputFile" name="cnslFile" class="btnFileAdd" value="첨부파일" title="첨부파일 선택">
+							<input type="hidden" name="fileName" id="cnslFileName" value="">
+							<span id="fileName" class="file" style="display: none;"><span></span><button type="button" id="btnFileDelete" class="ButtonDelete">삭제</button></span>
+							<span class="txt">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
+						    <font color="red">※이미지를 새로 등록하지 않은 경우 기존의 이미지가 사용됩니다.</font>
+						</td>
+					</tr>
+                      
+                      
+                      <!-- <tr><td><input type="submit" value="등록"  class="area1sButton"></td></tr> -->
+                      
+                      </table>
+                      <div>
+                       <input type="submit" value="수정"  class="area1sButton">
+                      </div>
+                     
+                      </form>
                               
-                            </tr>
-                        </thead>
-                        <tbody class="detail_table">
-                            <tr>
-                            <td colspan="1">별점&nbsp;&nbsp; 
-                            <c:forEach var="starOn" begin="1" end="${review.review_rating}">
-							<img src='/minimalist/resources/img_review/star-on.png'>
-							</c:forEach>
-							<c:forEach var="starOff" begin="${review.review_rating+1}" end="5">
-							<img src='/minimalist/resources/img_review/star-off.png'>
-							</c:forEach>
-                            
-                            </td>
-                                <td colspan="2">작성일&nbsp;&nbsp; ${review.review_date}
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan="2">글쓴이 &nbsp;&nbsp;<span>${review.member_id}</span>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="border-bottom: 2px solid #cccccc;">
-                                <img src="/minimalist/resources/img_review/${review.image_path}">
-                                    <p>${review.review_content}</p>
-                       		
-                                </td>
-                                
-                            </tr>
-                            
-                        </tbody></table>
-                        <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <td>
-                              
-                                    <span>
-                                      <center>
-                                       <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
-                                      
-                                      
-                                       <c:if test="${sessionScope.member.member_id eq review.member_id}">
-                                     &nbsp;&nbsp;<a href="review.updateForm.do?review_no=${review.review_no}"><button type="button" class="btn btn-default">수정</button></a>
-                                     &nbsp;&nbsp;<a href="review.deleteReview.do?review_no=${review.review_no}&product_code=${review.product_code}"><button type="button" class="btn btn-default">삭제</button></a>
-                                    </c:if>
-                                     <c:if test="${sessionScope.member.member_id eq 'admin'}">
-                                      &nbsp;&nbsp;<a href="review.deleteReview.do?review_no=${review.review_no}&product_code=${review.product_code}"><button type="button" class="btn btn-default">삭제</button></a>
-                                    </c:if>
-                                    </center>
-                                    
-                                    </span>
-                                    
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
-
+						</div>
                     </div>
 
                     <div class="row same-height-row">

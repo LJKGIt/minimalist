@@ -13,4 +13,10 @@ public interface ReviewService {
 	ArrayList<Review> selectList(HashMap map);
 	
 	Review selectOne(int review_no);
+	
+	int insertReview(Review review);
+	
+	int updateReview(Review review);
+	
+	int deleteReview(int review_no);
 }

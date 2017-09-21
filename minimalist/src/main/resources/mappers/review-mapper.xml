@@ -33,12 +33,25 @@
 	<insert id="insertReview" parameterType="Review">
 	insert into review values(
 	(select max(review_no) from review)+1, #{product_code},
-	#{member_id}, #{review_title}, #{review_content}, #{review_rating}, #{img_path}, #{review_date})
+	#{member_id}, #{review_title}, #{review_content}, #{review_rating}, #{image_path}, sysdate)
 	</insert>
 	
 	<!-- 수정 -->
-	
+	<update id="updateReview" parameterType="Review">
+	update review
+	set 
+	<if test="image_path!=null">
+	 image_path=#{image_path},
+	</if>
+	 review_title=#{review_title},
+	 review_content=#{review_content},
+	 review_rating=#{review_rating}
+	 where review_no=#{review_no}
+	</update>
 	
 	<!-- 삭제 -->
-	
+	<delete id="deleteReview" parameterType="_int">
+	delete from review
+	where review_no=#{review_no}
+	</delete>
 </mapper>

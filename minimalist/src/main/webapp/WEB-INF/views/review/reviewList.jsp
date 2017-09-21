@@ -282,8 +282,11 @@ ${re.review_date}
 </c:forEach>
 </c:when>
 </c:choose>
-
+<c:if test="${!empty sessionScope.member}">
+<div class="write2"><a href="review.viewWriteForm.do?product_code=${product_code}"><button type="button" id="write">후기등록</button></a></div>	
+</c:if>
 </tbody>
+
 </table>
 <div class="pages">
 

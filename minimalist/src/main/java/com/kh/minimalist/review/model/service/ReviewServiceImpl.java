@@ -35,5 +35,23 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return reviewDao.selectOne(review_no);
 	}
+
+	@Override
+	public int insertReview(Review review) {
+		
+		return reviewDao.insertReview(review);
+	}
+
+	@Override
+	public int updateReview(Review review) {
+	
+		return reviewDao.updateReview(review);
+	}
+
+	@Override
+	public int deleteReview(int review_no) {
+	
+		return reviewDao.deleteReview(review_no);
+	}
 	
 }
