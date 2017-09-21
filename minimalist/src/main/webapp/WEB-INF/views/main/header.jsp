@@ -358,7 +358,7 @@
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="manage.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-							class="hidden-sm"> 관리자페이지</span>
+							class="hidden-sm"> admin</span>
 						</a>
 						</c:if>
 
