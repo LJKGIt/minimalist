@@ -33,6 +33,7 @@ $(function(){
 <style type="text/css">
 table.type07 {
 
+
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;

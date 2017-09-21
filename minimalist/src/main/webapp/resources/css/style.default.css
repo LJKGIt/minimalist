@@ -519,6 +519,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  
 }
 #content .product .front {
   z-index: 2;
@@ -549,6 +550,7 @@ h1 {
 @media (max-width: 767px) {
   #content .product .invisible img.img-responsive {
     min-width: 100%;
+    
   }
 }
 #content .product .text {
