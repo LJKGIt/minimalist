@@ -13,15 +13,14 @@ public class Review implements Serializable {
 	private String review_title;
 	private String review_content;
 	private int review_rating;
-	private String original_img_name;
-	private String rename_img_name;
+	private String image_path;
 	private Date review_date;
 	
 	public Review(){}
 
 
 	public Review(int review_no, int product_code, String member_id, String review_title, String review_content,
-			int review_rating, String original_img_name, String rename_img_name, Date review_date) {
+			int review_rating, String image_path, Date review_date) {
 		super();
 		this.review_no = review_no;
 		this.product_code = product_code;
@@ -29,8 +28,7 @@ public class Review implements Serializable {
 		this.review_title = review_title;
 		this.review_content = review_content;
 		this.review_rating = review_rating;
-		this.original_img_name = original_img_name;
-		this.rename_img_name = rename_img_name;
+		this.image_path=image_path;
 		this.review_date=review_date;
 	}
 
@@ -95,25 +93,6 @@ public class Review implements Serializable {
 	}
 
 
-	public String getOriginal_img_name() {
-		return original_img_name;
-	}
-
-
-	public void setOriginal_img_name(String original_img_name) {
-		this.original_img_name = original_img_name;
-	}
-
-
-	public String getRename_img_name() {
-		return rename_img_name;
-	}
-
-
-	public void setRename_img_name(String rename_img_name) {
-		this.rename_img_name = rename_img_name;
-	}
-
 
 	public Date getReview_date() {
 		return review_date;
@@ -122,6 +101,16 @@ public class Review implements Serializable {
 
 	public void setReview_date(Date review_date) {
 		this.review_date = review_date;
+	}
+
+
+	public String getImage_path() {
+		return image_path;
+	}
+
+
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
 	}
 	
 	

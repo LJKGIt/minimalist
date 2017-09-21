@@ -18,8 +18,7 @@
 	select *
 	from (select rownum rnum, review_no,
 	product_code, member_id, review_title,
-	review_content, review_rating, original_img_name,
-	rename_img_name, review_date from (select * from review
+	review_content, review_rating, image_path, review_date from (select * from review
 	where product_code=#{product_code}
 	order by review_no desc)
 	where rownum&lt;=#{endRow})
@@ -30,6 +29,12 @@
 	from review
 	where review_no=#{review_no}
 	</select>
+	<!-- 등록 -->
+	<insert id="insertReview" parameterType="Review">
+	insert into review values(
+	(select max(review_no) from review)+1, #{product_code},
+	#{member_id}, #{review_title}, #{review_content}, #{review_rating}, #{img_path}, #{review_date})
+	</insert>
 	
 	<!-- 수정 -->
 	

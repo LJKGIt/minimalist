@@ -138,8 +138,7 @@ member_id varchar2(20),
 review_title varchar2(50),
 review_content varchar2(1000),
 review_rating number,
-original_img_name varchar2(1000),
-rename_img_name varchar2(100),
+image_path varchar2(1000),
 review_date date,
 constraint review_fk1 foreign key (member_id) references member (member_id),
 constraint review_fk2 foreign key (product_code) references product (product_code) on delete cascade);
@@ -271,10 +270,9 @@ insert into notice values(
 
 
    
+
 insert into review values(
-1, 1, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
-insert into review values(
-2, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
+1, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, sysdate);
 
 
 insert into qna values(
