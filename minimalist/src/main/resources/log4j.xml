@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+
+<!-- "The file cannot be validated as the XML definition "C:\workspace\minimalist\src\main\java\log4j.dtd (지정된 파일을 찾을 수 없습니다)" that is specified as describing the syntax of the 
+ file cannot be located."라는 오류가 발생하여 임의로 5행을 6행으로 수정했습니다. -->
+<!-- <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd"> -->
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->

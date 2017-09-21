@@ -11,9 +11,13 @@
 		<typeAliases>
 			<typeAlias type="com.kh.minimalist.member.model.vo.Member" alias="Member" />
 			<typeAlias type="com.kh.minimalist.product.model.vo.Product" alias="Product" />
-				<typeAlias type="com.kh.minimalist.auction.model.vo.Auction" alias="Auction" />
+			<typeAlias type="com.kh.minimalist.product.model.vo.ProductImage" alias="ProductImage" />
+			<typeAlias type="com.kh.minimalist.auction.model.vo.Auction" alias="Auction" />
 			<typeAlias type="com.kh.minimalist.notice.model.vo.Notice" alias="Notice" />
 			<typeAlias type="com.kh.minimalist.qna.model.vo.Qna" alias="Qna" />
+			<typeAlias type="com.kh.minimalist.message.model.vo.Message" alias="Message" />
+			<typeAlias type="com.kh.minimalist.income.model.vo.Income" alias="Income" />
+				<typeAlias type="com.kh.minimalist.review.model.vo.Review" alias="Review" />
 		</typeAliases>
 	
 <!-- 	<environments default="development">
@@ -34,5 +38,8 @@
 		<mapper resource="mappers/auction-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
 	    <mapper resource="mappers/qna-mapper.xml" />
+	    <mapper resource="mappers/message-mapper.xml" />
+	    <mapper resource="mappers/income-mapper.xml" />
+	    <mapper resource="mappers/review-mapper.xml" />
 	</mappers>
 </configuration>

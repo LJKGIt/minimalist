@@ -23,7 +23,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-
+	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
@@ -47,14 +47,13 @@ public class ProductController {
 		} else {
 			result = "main/404";
 		}
-
 		return result;
+	
 	}
 
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, Model model) {
 		String result = null;
-
 		ArrayList<Product> productList = productService.productList(product);
 		if (productList != null && productList.size() != 0) {
 			model.addAttribute("productList", productList);

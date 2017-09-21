@@ -10,20 +10,36 @@
   		<result property="product_category" column="PRODUCT_CATEGORY"/>
   		<result property="product_brand" column="PRODUCT_BRAND"/>
   		<result property="product_descript" column="PRODUCT_DESCRIPT"/>
+  		<result property="product_original_price" column="PRODUCT_ORIGINAL_PRICE"/>
   		<result property="rent_price" column="RENT_PRICE"/>
-  		<result property="product_quantity" column="PRODUCT_QUANTITY"/>
-  		<result property="rent_count" column="RENT_COUNT"/>
-  		<result property="product_size" column="PRODUCT_SIZE"/>
+  		<result property="product_size33" column="PRODUCT_SIZE33"/>
+  		<result property="product_size44" column="PRODUCT_SIZE44"/>
+  		<result property="product_size55" column="PRODUCT_SIZE55"/>
+  		<result property="product_size66" column="PRODUCT_SIZE66"/>
+  		<result property="product_size77" column="PRODUCT_SIZE77"/>
   		<result property="product_color" column="PRODUCT_COLOR"/>
   		<result property="receive_date" column="RECEIVE_DATE"/>
+
+		<collection property="productImageList" ofType="ProductImage">
+			<result property="product_image_path" column="PRODUCT_IMAGE_PATH"/>
+			<result property="product_code" column="PRODUCT_CODE" />
+		</collection>
 	</resultMap>
 
 	<select id="productDetail" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT * FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}
+		SELECT * 
+		FROM PRODUCT A 
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
+		WHERE PRODUCT_CODE = #{product_code} 
+		ORDER BY RECEIVE_DATE ASC
 	</select>
 
-	<select id="productList" resultType="Product" resultMap="resultProduct">
-		SELECT * FROM PRODUCT WHERE PRODUCT_CATEGORY = #{product_category}
+	<select id="productList" parameterType="Product" resultType="Product" resultMap="resultProduct">
+		SELECT * 
+		FROM PRODUCT A 
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
+		WHERE PRODUCT_CATEGORY = #{product_category} 
+		ORDER BY RECEIVE_DATE ASC
 	</select>
 
 

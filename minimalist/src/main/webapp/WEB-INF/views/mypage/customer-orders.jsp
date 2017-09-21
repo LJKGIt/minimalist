@@ -234,14 +234,9 @@
 						<div class="box"
 							style="padding: 0; text-align: center; margin-bottom: 10px;">
 							최근 본 상품<br>
-							<!-- COOKIE TEST -->
-							<c:forEach var="recent" items="${cookieList}">
-								<a href="productDetail.do?product_code=${ recent.product_code }">
-								<img src="${ pageContext.request.contextPath }/resources/img_product/${ recent.product_code }_1.jpg" alt="" style="width:100px;"><br>
-								${ recent.product_name }
-								</a>
-							</c:forEach>
-							<!-- COOKIE TEST END -->
+							<a href="#">${ cookieList.size() }</a>
+							<br>
+							<c:import url="../main/wingCookie.jsp"></c:import>
 
 						</div>
 						<div class="box goTop"

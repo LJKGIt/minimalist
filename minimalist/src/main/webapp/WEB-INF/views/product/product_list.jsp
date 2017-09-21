@@ -185,7 +185,7 @@
                         <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
                     </div> -->
 
-                    <div class="box info-bar">
+                    <!-- <div class="box info-bar">
                         <div class="row">
                             <div class="col-sm-12 col-md-4 products-showing">
                                 Showing <strong>12</strong> of <strong>25</strong> products
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row products">
  						<c:forEach var="product" items="${ productList }">
@@ -223,22 +223,19 @@
 	                                    <div class="flipper">
 	                                        <div class="front">
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
-	                                            	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(1) %>
-	                                                <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
+	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
 	                                        </div>
 	                                        <div class="back">
 	                                            <%-- <a href="productDetail.do?product_code=${ product.product_code }"> --%>
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
-	                                            	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(2) %>
-	                                                <img src="${ pageContext.request.contextPath }/resources/img/product1_2.jpg" alt="" class="img-responsive">
+	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                                <a href="productDetail.do?product_code=${ product.product_code }" class="invisible">
-	                                	<% // TODO [lintogi] img 경로를 EL태그로 적용하기.(3) %>
-	                                    <img src="${ pageContext.request.contextPath }/resources/img/product1.jpg" alt="" class="img-responsive">
+	                                    <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                </a>
 	                                <div class="text">
 	                                    <h3 style="margin:0px; height:20px; font-weight: normal;"><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_brand }</a></h3>
@@ -460,7 +457,7 @@
                             <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
                         </p>
 
-                        <ul class="pagination">
+                        <!-- <ul class="pagination">
                             <li><a href="#">&laquo;</a>
                             </li>
                             <li class="active"><a href="#">1</a>
@@ -475,7 +472,7 @@
                             </li>
                             <li><a href="#">&raquo;</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
 
 

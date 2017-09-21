@@ -11,7 +11,14 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.minimalist.member.model.vo.Member;
+
+@Controller
 public class CookieUtils {
 
 	private static final String encoding = "UTF-8";
@@ -96,9 +103,14 @@ public class CookieUtils {
 	 * @description 쿠키값들 중 특정 값을 삭제한다.
 	 * @params key: 쿠키 이름, value: 쿠키 이름과 짝을 이루는 값
 	 */
-	public void deleteCookie(String key, String value, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("deleteCookie.do")
+	public void deleteCookie(String key, String value, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws UnsupportedEncodingException {
+		value = request.getParameter("del_cookie");
+		key = ((Member) session.getAttribute("member")).getMember_id();
 		List<String> list = getValueList(key, request);
+		if(list == null)
+			System.out.println("가가");
 		list.remove(value);
 
 		String sumValue = "";
