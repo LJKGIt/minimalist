@@ -28,53 +28,94 @@ table {
 label, input.button, input.submit, input.image, button {
     cursor: pointer;
 
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-    border: 1px solid #ccc;
-    margin: 20px 10px;
-     border-top-style: none;
-    border-right-style: none;
-	border-left-style: none;
 }
-table.type07 thead {
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-   font-color:black;
-    border-right-style: none;
-	border-left-style: none;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-table.type07 thead th {
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-  border-bottom: 1px solid #ccc; 
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
 }
-
-
-table.type07 tbody th {
-    /* width: 130px; */
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+colgroup {
+    display: table-column-group;
+}
+form {
+    display: block;
   
 }
-table.type07 td {
- /*    width: 400px; */
-    padding: 10px;
+.board-write-1s tbody tr th {
+    padding: 20px 0 10px 15px;
     vertical-align: top;
-    border-bottom: 1px solid #ccc;
 }
-div.write2{
-
-position: absolute;
-    right: 80px;
-   bottom: 100px;
-
-
+.board-write-1s tbody tr.textarea td {
+    padding: 20px 0;
 }
+.board-write-1s tbody tr th, .board-write-1s tbody tr td{
+    border-bottom: 1px solid #e6e6e6;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    line-height: 18px;
+   padding: 3px 0 5px 15px;
+}
+
+
+textarea {
+    border: 1px solid #ccc;
+    padding: 10px 8px;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'AppleGothic', 'Roboto', 'montserrat', 'noto', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    box-shadow: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
  
+}
+input {
+    width: 100%;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #d0d0d0;
+    color: #888;
+    background: none;
+  -webkit-border-radius: 5px;
+  box-shadow: none;
+ -webkit-appearance: none;
+   letter-spacing: 0.5px;
+    vertical-align: top;
+}
+.board-write-1s tbody tr.textarea td span.file {
+ 
+    padding: 20px 0 0 10px;
+    color: #333;
+    font-size: 10px;
+    line-height: 18px;
+}
+.board-write-1s tbody tr.textarea td {
+    padding: 20px 0;
+	padding-top: 20px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+}
+.area1sButton {
+    padding: 10px 0 0;
+    text-align: center;
+   align:center;
+ 
+}
 </style>
 
 <head>
@@ -120,7 +161,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">쪽지보내기</a>
+                                    <a href="member.memberSearchView.do">회원관리</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -130,9 +171,6 @@ position: absolute;
                                 </li>
                                  <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
-                                </li>
-                                 <li>
-                                    <a href="income.selectList.do">매출 확인</a>
                                 </li>
 
                             </ul>
@@ -150,39 +188,50 @@ position: absolute;
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">경매등록</h1>
+                      <h1>경매등록</h1>
 
                <form action="auction.insertAuction.do"  method="post" enctype="multipart/form-data">
-<table>
-<tr><th>상품명 : </th><td><input type="text" name="product_name"></td></tr>
-<tr><th>상품 카테고리 : </th><td><select name="category">
-                      <option value="의류">의류</option>
+<table class="board-write-1s mgT40">
+<colgroup>
+				<col style="width:25%;">
+				<col style="width:75%;">
+			</colgroup>
+			<tbody>
+                     
+                     
+                <tr><td><strong>상품명</strong></td><td><input type="text" name="product_name" style="width:98%;"></td></tr>
+                <tr><td><strong>카테고리 </strong></td><td><select name="category" value="카테고리" style="width:98%;">
+                  <option value="의류">의류</option>
                       <option value="잡화">잡화</option>
                       <option value="악세사리">악세사리</option>
                       </select></td></tr>
-<tr><th>상품 브랜드 : </th><td><input type="text" name="product_brand"></td></tr>
-<tr><th>물품 사이즈 : </th><td><input type="text" name="product_size"></td></tr>
-<tr><th>물품 색상 : </th><td><input type="text" name="product_color"></td></tr>
-<tr><th>상품 설명 : </th><td><textarea name="product_descript"></textarea></td></tr>
-<tr><th>경매시작가격 : </th><td><input type="number" name="bid_price"></td></tr>
-<tr><th>경매시작일 : </th><td><input type="date" name="start_date"></td></tr>
-<tr><th>경매종료일 : </th><td><input type="date" name="end_date"></td></tr>
-<tr><th>파일첨부1 : </th><td><input type="file" name="img1"></td></tr>
-<tr><th>파일첨부2 : </th><td><input type="file" name="img2"></td></tr>
-<tr><th>파일첨부3 : </th><td><input type="file" name="img3"></td></tr>
-<tr><th><input type="submit" value="등록하기"></th></tr>
+                      
+                <tr><td><strong>브랜드</strong></td><td><input type="text" name="product_brand" style="width:98%;"></td></tr>
+                <tr><td><strong>사이즈</strong></td><td><input type="text" name="product_size" style="width:98%;"></td></tr>
+                <tr><td><strong>색상</strong></td><td><input type="text"name="product_color" style="width:98%;"></td></tr>
+                <tr><td><strong>설명</strong></td><td>
+                <textarea name="product_descript" cols="30" rows="7" placeholder="내용을 입력하세요." style="width:98%;height:280px;"></textarea></td></tr>
+                <tr><td><strong>경매시작가격</strong></td><td><input type="number" name="bid_price"  style="width:98%;"></td></tr>
+                <tr><td><strong>경매시작일</strong></td><td><input type="date" name="start_date"style="width:98%;"></td></tr>
+                <tr><td><strong>경매종료일</strong></td><td><input type="date" name="end_date" style="width:98%;"></td></tr>
+              <tr><td><strong>파일첨부1</strong></td><td><input type="file" name="img1"></td></tr>
+               <tr><td><strong>파일첨부2</strong></td><td><input type="file" name="img2"></td></tr>
+                <tr><td><strong>파일첨부3</strong></td><td><input type="file" name="img3"></td></tr>
+           
+             
+               
+					
+                      
+                      
+                  
+                      </tbody>
+
+              
 </table>
+ <input type="submit" value="등록하기">
 </form>
                        
-                       
-  <!--   <thead>
-   	 
-    </thead>
-    <tbody>
-    	
-   			
-    </tbody>
- -->
+
 
 					
 
@@ -196,17 +245,19 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		
+		<c:import url="../main/footer.jsp" />
 
 
     </div>
     <!-- /#all -->
 
     
-<c:import url="../main/footer.jsp" />
+
 
 
 
     
+
+	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>
