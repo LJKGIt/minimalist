@@ -12,7 +12,13 @@
     </title>
 <link href="/minimalist/resources/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
+<style type="text/css">
 
+body {
+    font-family: "RobotoDraft", "Roboto", sans-serif;
+}
+
+</style>
 </head>
 
 <body>
@@ -61,24 +67,35 @@
                         </div>
                     </div>
 
-                   
+                   </div>
 
                    
 
-                    <!-- *** MENUS AND FILTERS END *** -->
-
-                    
-                </div>
-
+             
                 <div class="col-md-9">
                     <div class="box">
-                    <h3>Auction</h3>
-                     <p>※로그인한 사용자만 입찰할 수 있습니다.</p>
-                     <p>※입찰종료시 최고 입찰가를 제시한 회원에게 낙찰됩니다.</p>
-                     <p>※낙찰자는 입찰 종료일로부터 3일 이내로 결제 부탁드립니다.</p>
-                        
-                    </div>
+                    <h1>Auction</h1> 
 
+                        <div style="border-bottom: 3px solid #80cbc4;"></div>
+                           
+                      
+                            <%--    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="※로그인한 사용자만 입찰할 수 있습니다.<br>
+                     ※입찰종료시 최고 입찰가를 제시한 회원에게 낙찰됩니다.<br>
+                    ※낙찰자는 입찰 종료일로부터 3일 이내로 결제 부탁드립니다.<br>" id="popover-bottom" data-original-title="" title="" aria-describedby="popover41808">
+                                    도움말
+                                </button> --%>
+
+                               
+                         
+                      
+       
+             
+               
+                    
+                      
+         
+                 
+					<!-- 	<h3 class="ssm_banner_title">전체보기</h3> -->
                  
 					
                     <div class="row products">
@@ -124,6 +141,7 @@
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
+                              
                         </div>
 							</c:forEach>
 							</c:if>
@@ -185,14 +203,14 @@
                     </c:if>
                     
 
-
                 </div>
                 <!-- /.col-md-9 -->
+                
             </div>
             <!-- /.container -->
         </div>
         <!-- /#content -->
-
+ </div>
 
 		<c:import url="../main/footer.jsp" />
 

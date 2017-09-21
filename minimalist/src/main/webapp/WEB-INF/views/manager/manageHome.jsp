@@ -130,7 +130,8 @@ position: absolute;
                     <div class="box" id="contact">
                       <h1 align="center">관리자 페이지</h1>
 
-               <h1>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h1>
+               <h4>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h4>
+               <hr>
                        
                        
     <thead>

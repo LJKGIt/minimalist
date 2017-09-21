@@ -41,6 +41,7 @@ table.type07 {
      border-top-style: none;
     border-right-style: none;
 	border-left-style: none;
+	width: 100%;
 }
 table.type07 thead {
     border-right: 1px solid #ccc;
@@ -79,6 +80,7 @@ position: absolute;
 
 
 }
+
  
 </style>
 
@@ -153,12 +155,21 @@ position: absolute;
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">종료된 경매 확인.</h1>
-
-			<table border="1" align="center" width="600">
-			<tr><th>경매번호</th><th>경매종료일</th><th>
-			낙찰금액</th><th>낙찰된 회원ID</th><th>결제여부</th><th>결제체크</th><th>쪽지보내기</th></tr>
-			
+                      <h1>종료된 경매 확인</h1>
+<hr>
+			<table class="type07">
+			<thead>
+			<tr>
+			<th style="width:10%;">번호</th>
+			<th style="width:15%;">경매종료</th>
+			<th style="width:15%;">금액</th>
+			<th style="width:15%;">낙찰 ID</th>
+			<th style="width:15%;">결제</th>
+			<th style="width:15%;">확인</th>
+			<th style="width:15%;">쪽지</th>
+			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="au" items="${list}">
 			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
 			<td>${au.bid_price}</td><td>${au.member_id}</td>
@@ -171,18 +182,23 @@ position: absolute;
 			</c:if>
 			<td>
 			<c:if test="${au.payment_yn eq 'n' }">
-			<button type="button" class="check" value="y,${au.auction_code}">결제확인</button>
+			<button type="button" class="check" value="y,${au.auction_code}" style="pont-size:10px;">결제확인</button>
 			</c:if>
 			<c:if test="${au.payment_yn eq 'y' }">
-			<button type="button" class="check" value="n,${au.auction_code}">되돌리기</button>
+			<button type="button" class="check" value="n,${au.auction_code}" style="pont-size:10px;">되돌리기</button>
 			</c:if>
 			
 			</td>
 			
-			<td><button type="button">전송</button></td>
+			
+			<td><button type="button" style="pont-size:10px;">전송</button></td>
 			</tr>
+			
 			</c:forEach>
+			</tbody>
 			</table>
+			
+			
 			 <!-- 페이징 처리 --> 
 			 <div class="pages">
 				<ul class="pagination">
@@ -204,16 +220,8 @@ position: absolute;
 			 </div>
 
               
-    <thead>
-   	 
-    </thead>
-    <tbody>
-    	
-   			
-    </tbody>
+  
 
-
-					
 
                     </div>
 

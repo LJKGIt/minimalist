@@ -36,7 +36,7 @@ table.type07 thead th {
     vertical-align: top;
 	text-align:left;
 	 border-bottom: 1px solid #ccc; 
-	  border-top: 2px solid #ccc;
+	
 	}
 
 
@@ -55,7 +55,27 @@ table.type07 td {
     border-bottom: 1px solid #ccc; 
      text-align: left;
 }
- 
+/*  .g-my-80 {
+    margin-top: 5.71429rem !important;
+    margin-bottom: 5.71429rem !important;
+}
+
+.g-brd-pink {
+    border-color: #e81c62 !important;
+}
+
+.u-divider-center {
+    text-align: center;
+}
+
+.u-divider {
+    position: relative;
+    border-top-width: 1px;
+}
+
+.u-divider-solid {
+    border-top-style: solid;
+    } */
  
 </style>
 
@@ -123,13 +143,15 @@ table.type07 td {
                 </div>
 
                 <div class="col-md-9">
-
+    			
 
                     <div class="box" id="contact">
                         <h1>공지사항</h1>
-
-                  <hr>
-                        
+						<div style="border-bottom: 3px solid #80cbc4;"></div>
+                 
+                 <!--        <div class="u-divider u-divider-solid u-divider-center g-brd-pink w-75 mx-auto g-my-80">
+                    <i class="u-divider__icon g-bg-pink g-color-white rounded-circle">공지</i>
+                  </div> -->
                         <table class="type07">
     <thead>
     <tr>

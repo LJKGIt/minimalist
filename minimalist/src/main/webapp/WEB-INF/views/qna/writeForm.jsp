@@ -217,7 +217,7 @@ input {
 							<span class="txt">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
 						</td>
 					</tr>
-                      
+                      </tbody>
                       
                       <!-- <tr><td><input type="submit" value="등록"  class="area1sButton"></td></tr> -->
                       
