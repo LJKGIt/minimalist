@@ -1,203 +1,191 @@
 --삭제
-drop table member cascade constraints;
-drop table product cascade constraints;
-drop table rent_list cascade constraints;
-drop table rental_reserve cascade constraints;
-drop table cart cascade constraints;
-drop table message cascade constraints;
-drop table auction cascade constraints;
-drop table alert cascade constraints;
-drop table notice cascade constraints;
-drop table faq cascade constraints;
-drop table review cascade constraints;
-drop table qna cascade constraints;
-drop table product_image cascade constraints;
-drop table income cascade constraints;
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT CASCADE CONSTRAINTS;
+DROP TABLE RENT_LIST CASCADE CONSTRAINTS;
+DROP TABLE RENTAL_RESERVE CASCADE CONSTRAINTS;
+DROP TABLE CART CASCADE CONSTRAINTS;
+DROP TABLE MESSAGE CASCADE CONSTRAINTS;
+DROP TABLE AUCTION CASCADE CONSTRAINTS;
+DROP TABLE ALERT CASCADE CONSTRAINTS;
+DROP TABLE NOTICE CASCADE CONSTRAINTS;
+DROP TABLE FAQ CASCADE CONSTRAINTS;
+DROP TABLE REVIEW CASCADE CONSTRAINTS;
+DROP TABLE QNA CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT_IMAGE CASCADE CONSTRAINTS;
+DROP TABLE INCOME CASCADE CONSTRAINTS;
 
 
 
 ------------------------------------------------생성
 
 --회원 테이블
-create table member(
-member_id varchar2(50) primary key,
-member_pwd varchar2(50),
-member_name varchar2(12),
-birth date,
-regist_date date default sysdate,
-phone varchar2(20),
-post varchar2(30),
-address1 varchar2(200),
-address2 varchar2(200),
-point number,
-grade number,
-dormant_yn char(1) default 'n' constraint chk_dor check (dormant_yn in('y', 'n')),
-email varchar2(100));
+CREATE TABLE MEMBER(
+MEMBER_ID VARCHAR2(50) PRIMARY KEY,
+MEMBER_PWD VARCHAR2(50),
+MEMBER_NAME VARCHAR2(12),
+BIRTH DATE,
+REGIST_DATE DATE DEFAULT SYSDATE,
+PHONE VARCHAR2(20),
+POST VARCHAR2(30),
+ADDRESS1 VARCHAR2(200),
+ADDRESS2 VARCHAR2(200),
+POINT NUMBER,
+GRADE NUMBER,
+DORMANT_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_DOR CHECK (DORMANT_YN IN('y', 'n')),
+EMAIL VARCHAR2(100));
 
 
 
 
 --대여 아이템(상품)
 CREATE TABLE PRODUCT(
-PRODUCT_CODE NUMBER PRIMARY KEY, /*제품 코드*/
-PRODUCT_NAME VARCHAR2(100), /*제품 이름*/
-PRODUCT_CATEGORY VARCHAR2(20), /*제품 카테고리*/
-PRODUCT_BRAND VARCHAR2(50), /*제품 브랜드*/
-PRODUCT_DESCRIPT VARCHAR2(1000), /*제품 설명*/
-PRODUCT_ORIGINAL_PRICE NUMBER, /*제품 본래 가격*/
-RENT_PRICE NUMBER, /*제품 대여 비용*/
-PRODUCT_SIZE33 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE33 CHECK (PRODUCT_SIZE33 IN('0', '1')), /*사이즈 유무*/
+PRODUCT_CODE NUMBER PRIMARY KEY, /* 제품 코드 */
+PRODUCT_NAME VARCHAR2(100), /* 제품 이름 */
+PRODUCT_CATEGORY VARCHAR2(20), /* 제품 카테고리 */
+PRODUCT_BRAND VARCHAR2(50), /* 제품 브랜드 */
+PRODUCT_DESCRIPT VARCHAR2(1000), /* 제품 설명 */
+PRODUCT_ORIGINAL_PRICE NUMBER, /* 제품 본래 가격 */
+RENT_PRICE NUMBER, /* 제품 대여 비용 */
+PRODUCT_SIZE33 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE33 CHECK (PRODUCT_SIZE33 IN('0', '1')), /* 사이즈 유무 */
 PRODUCT_SIZE44 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE44 CHECK (PRODUCT_SIZE44 IN('0', '1')),
 PRODUCT_SIZE55 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE55 CHECK (PRODUCT_SIZE55 IN('0', '1')),
 PRODUCT_SIZE66 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE66 CHECK (PRODUCT_SIZE66 IN('0', '1')),
 PRODUCT_SIZE77 CHAR(1) DEFAULT '0' CONSTRAINT CHK_PRODUCT_SIZE77 CHECK (PRODUCT_SIZE77 IN('0', '1')),
-PRODUCT_COLOR VARCHAR2(50), /*색상*/
-RECEIVE_DATE DATE /*올린 날짜*/
+PRODUCT_COLOR VARCHAR2(50), /* 색상 */
+RECEIVE_DATE DATE /* 올린 날짜 */
 );
 
 --대여기록
-create table rent_list(
-rent_code number primary key,
-product_code number,
-member_id varchar2(20),
-rent_date date,
-return_date date,
-constraint rent_list_fk1 foreign key (product_code) references product (product_code),
-constraint  rent_list_fk2 foreign key (member_id) references member (member_id) on delete set null);
+CREATE TABLE RENT_LIST(
+RENT_CODE NUMBER PRIMARY KEY,
+PRODUCT_CODE NUMBER,
+MEMBER_ID VARCHAR2(20),
+RENT_DATE DATE,
+RETURN_DATE DATE,
+CONSTRAINT RENT_LIST_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
+CONSTRAINT  RENT_LIST_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE SET NULL);
 
 
 
 --대여예약
-create table rental_reserve(
-product_code number,
-member_id varchar2(20),
-reserve_date date,
-return_date date,
-constraint reserve_rent_fk1 foreign key (product_code) references product (product_code),
-constraint  reserve_rent_fk2 foreign key (member_id) references member (member_id) on delete cascade);
+CREATE TABLE RENTAL_RESERVE(
+PRODUCT_CODE NUMBER,
+MEMBER_ID VARCHAR2(20),
+RESERVE_DATE DATE,
+RETURN_DATE DATE,
+CONSTRAINT RESERVE_RENT_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
+CONSTRAINT  RESERVE_RENT_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
 
 --찜목록
-create table cart(
-member_id varchar2(20),
-product_code number,
-constraint cart_fk1 foreign key (product_code) references product (product_code),
-constraint  cart_fk2 foreign key (member_id) references member (member_id) on delete cascade);
+CREATE TABLE CART(
+MEMBER_ID VARCHAR2(20),
+PRODUCT_CODE NUMBER,
+CONSTRAINT CART_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
+CONSTRAINT  CART_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
 
 --쪽지
-create table message(
-message_number number primary key,
-member_id varchar2(20),
-message_title varchar2(50),
-message_content varchar2(500),
-send_date date,
-check_yn char(1) default 'n' constraint chk_msg check (check_yn in('y', 'n')),
-constraint message_fk foreign key (member_id) references member (member_id) on delete cascade);
+CREATE TABLE MESSAGE(
+MESSAGE_NUMBER NUMBER PRIMARY KEY,
+MEMBER_ID VARCHAR2(20),
+MESSAGE_TITLE VARCHAR2(50),
+MESSAGE_CONTENT VARCHAR2(500),
+SEND_DATE DATE,
+CHECK_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_MSG CHECK (CHECK_YN IN('y', 'n')),
+CONSTRAINT MESSAGE_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
 
 -- 경매
-create table auction(
-auction_code number primary key,
-product_name varchar2(30),
-product_category varchar2(20),
-product_brand varchar2(50),
-product_descript varchar2(1000),
-member_id varchar2(20),
-bid_price number,
-start_date date,
-end_date date,
-product_size varchar2(20),
-product_color varchar2(15),
-image_path varchar2(100),
-payment_yn  char(1) default 'n' constraint chk_pay check (payment_yn in('y', 'n')),
-constraint auction_fk foreign key (member_id) references member (member_id));
+CREATE TABLE AUCTION(
+AUCTION_CODE NUMBER PRIMARY KEY,
+PRODUCT_NAME VARCHAR2(30),
+PRODUCT_CATEGORY VARCHAR2(20),
+PRODUCT_BRAND VARCHAR2(50),
+PRODUCT_DESCRIPT VARCHAR2(1000),
+MEMBER_ID VARCHAR2(20),
+BID_PRICE NUMBER,
+START_DATE DATE,
+END_DATE DATE,
+PRODUCT_SIZE VARCHAR2(20),
+PRODUCT_COLOR VARCHAR2(15),
+IMAGE_PATH VARCHAR2(100),
+PAYMENT_YN  CHAR(1) DEFAULT 'n' CONSTRAINT CHK_PAY CHECK (PAYMENT_YN IN('y', 'n')),
+CONSTRAINT AUCTION_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID));
 
 --경매 알림 예약
-create table alert(
-member_id varchar2(20),
-product_code number,
-alert_date date,
-constraint alert_fk1 foreign key (product_code) references product (product_code),
-constraint  alert_fk2 foreign key (member_id) references member (member_id) on delete cascade);
+CREATE TABLE ALERT(
+MEMBER_ID VARCHAR2(20),
+PRODUCT_CODE NUMBER,
+ALERT_DATE DATE,
+CONSTRAINT ALERT_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
+CONSTRAINT  ALERT_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
 
 --공지사항
-create table notice(
-notice_no number primary key,
-notice_title varchar2(100),
-notice_content varchar2(1000),
-notice_date date);
+CREATE TABLE NOTICE(
+NOTICE_NO NUMBER PRIMARY KEY,
+NOTICE_TITLE VARCHAR2(100),
+NOTICE_CONTENT VARCHAR2(1000),
+NOTICE_DATE DATE);
 
 
 --후기게시판
-create table review(
-review_no number primary key,
-product_code number,
-member_id varchar2(20),
-review_title varchar2(50),
-review_content varchar2(1000),
-review_rating number,
-original_img_name varchar2(1000),
-rename_img_name varchar2(100),
-review_date date,
-constraint review_fk1 foreign key (member_id) references member (member_id),
-constraint review_fk2 foreign key (product_code) references product (product_code) on delete cascade);
+CREATE TABLE REVIEW(
+REVIEW_NO NUMBER PRIMARY KEY,
+PRODUCT_CODE NUMBER,
+MEMBER_ID VARCHAR2(20),
+REVIEW_TITLE VARCHAR2(50),
+REVIEW_CONTENT VARCHAR2(1000),
+REVIEW_RATING NUMBER,
+ORIGINAL_IMG_NAME VARCHAR2(1000),
+RENAME_IMG_NAME VARCHAR2(100),
+REVIEW_DATE DATE,
+CONSTRAINT REVIEW_FK1 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID),
+CONSTRAINT REVIEW_FK2 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE) ON DELETE CASCADE);
 
 
 --문의 게시판
-create table QNA(
-qna_no number primary key,
-member_id varchar2(20),
-qna_title varchar2(50),
-qna_content varchar2(1000),
-qna_category varchar2(30),
-qna_comment varchar2(500),
-qna_date date,
-img_path varchar2(100),
-constraint qna_fk foreign key (member_id) references member (member_id));
+CREATE TABLE QNA(
+QNA_NO NUMBER PRIMARY KEY,
+MEMBER_ID VARCHAR2(20),
+QNA_TITLE VARCHAR2(50),
+QNA_CONTENT VARCHAR2(1000),
+QNA_CATEGORY VARCHAR2(30),
+QNA_COMMENT VARCHAR2(500),
+QNA_DATE DATE,
+IMG_PATH VARCHAR2(100),
+CONSTRAINT QNA_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID));
 
-create table product_image(
-product_code number,
-product_image_path varchar2(100),
-constraint image_fk foreign key (product_code) references product (product_code));
+CREATE TABLE PRODUCT_IMAGE(
+PRODUCT_CODE NUMBER,
+PRODUCT_IMAGE_PATH VARCHAR2(100),
+CONSTRAINT IMAGE_FK FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE));
 
 --수입
-create table income (
-product_code number,
-auction_code number unique,
-income number,
-income_date date,
-constraint inco_fk1 foreign key (product_code) references product (product_code),
-constraint inco_fk2 foreign key (auction_code) references auction (auction_code),
-constraint inco_uni unique (product_code, income_date));
+CREATE TABLE INCOME (
+PRODUCT_CODE NUMBER,
+AUCTION_CODE NUMBER UNIQUE,
+INCOME NUMBER,
+INCOME_DATE DATE,
+CONSTRAINT INCO_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
+CONSTRAINT INCO_FK2 FOREIGN KEY (AUCTION_CODE) REFERENCES AUCTION (AUCTION_CODE),
+CONSTRAINT INCO_UNI UNIQUE (PRODUCT_CODE, INCOME_DATE));
 
 
 ------------------------------- 샘플데이터 ------------------------------------
 
-insert into member values(
-'admin', 'admin', '관리자', to_date('19891002', 'yymmdd'), sysdate,
+INSERT INTO MEMBER VALUES(
+'admin', 'admin', '관리자', TO_DATE('19891002', 'yymmdd'), SYSDATE,
 '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com');
-
-
-insert into product values(
-1, '란희s 백', '가방', '루이비똥', '최고급 가죽, 정란희가 들어서 핫해진 바로 그 가방', 10000000, '10000',1, 1, 1,1,1,
-'red', sysdate);
-insert into product values(
-2, '재영바지', '의류', '구찌', '유재영이 즐겨입는 그 바지', '10000',1, 1, 'M',
-'black', sysdate);
-insert into product values(
-3, '용준모자', '기타', '일리네어', '용준이가 즐겨입는 그 모자', '10000' ,1, 1, 'M',
-'black', sysdate);
 
 CREATE TABLE PRODUCT_IMAGE(
     IMAGE_CODE VARCHAR2(200),
     PRODUCT_CODE NUMBER,
-    CONSTRAINT FK_PRODUCT_CODE FOREIGN KEY(PRODUCT_CODE) references PRODUCT(PRODUCT_CODE)
+    CONSTRAINT FK_PRODUCT_CODE FOREIGN KEY(PRODUCT_CODE) REFERENCES PRODUCT(PRODUCT_CODE)
 );
 
-
-/* OUTER 61 */
+/* OUTER 15 */
 INSERT INTO PRODUCT VALUES(1500000001, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'));
 INSERT INTO PRODUCT VALUES(1500000002, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170902', 'RRMMDD'));
 INSERT INTO PRODUCT VALUES(1500000003, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170903', 'RRMMDD'));
@@ -206,6 +194,25 @@ INSERT INTO PRODUCT VALUES(1500000005, '자카드 패브릭 자켓', 'outer', 'J
 INSERT INTO PRODUCT VALUES(1500000006, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170906', 'RRMMDD'));
 INSERT INTO PRODUCT VALUES(1500000007, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170907', 'RRMMDD'));
 INSERT INTO PRODUCT VALUES(1500000008, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'));
+
+/* OUTER 15  - ■ 임시 데이터이고 나중에 삭제하기*/
+INSERT INTO PRODUCT VALUES(1500000009, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000010, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170902', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000011, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170903', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000012, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170904', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000013, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170905', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000014, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170906', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000015, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170907', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000016, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000017, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000018, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170902', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000019, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170903', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000020, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170904', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000021, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170905', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000022, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170906', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000023, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170907', 'RRMMDD'));
+INSERT INTO PRODUCT VALUES(1500000024`, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'));
+
 
 /* DRESS 62 */
 /* TOP */
@@ -236,52 +243,52 @@ INSERT INTO PRODUCT_IMAGE VALUES(1500000008, '1500000008_3.jpg');
 
 
 
-insert into rent_list values(
-1, 2, 'admin', to_date('20170808', 'yymmdd'), to_date('20170815', 'yymmdd'));
+INSERT INTO RENT_LIST VALUES(
+1, 2, 'admin', TO_DATE('20170808', 'yymmdd'), TO_DATE('20170815', 'yymmdd'));
 
-insert into rental_reserve values(
-2, 'admin', sysdate, sysdate);
+INSERT INTO RENTAL_RESERVE VALUES(
+2, 'admin', SYSDATE, SYSDATE);
 
-insert into cart values(
+INSERT INTO CART VALUES(
 'admin', 1);
 
-insert into message values(
-1, 'admin', '안녕', '나는 관리자야', sysdate, 'n');
+INSERT INTO MESSAGE VALUES(
+1, 'admin', '안녕', '나는 관리자야', SYSDATE, 'n');
 
-insert into auction values(
-1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171025', 'yymmdd'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', default);
+INSERT INTO AUCTION VALUES(
+1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171025', 'yymmdd'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
 
-insert into auction values(
-2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171028', 'yymmdd'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', default);
-insert into auction values(
-3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', to_date('20170909', 'yymmdd'), to_date('20171030', 'yymmdd'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', default);
-insert into auction values(
-4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20170909', 'yymmdd'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', default);
-insert into auction values(
-5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', to_date('20170901', 'yymmdd'), to_date('20171021', 'yymmdd'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', default);
-
-
-
-insert into alert values(
-'admin', 3, to_date('20170901', 'yymmdd'));
+INSERT INTO AUCTION VALUES(
+2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171028', 'yymmdd'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(
+3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171030', 'yymmdd'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(
+4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'yymmdd'), TO_DATE('20170909', 'yymmdd'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(
+5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'yymmdd'), TO_DATE('20171021', 'yymmdd'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
 
 
-insert into notice values(
-1, '공지사항', '상품 대여 및 구매시 적립금을 드려요.', sysdate);
+
+INSERT INTO ALERT VALUES(
+'admin', 3, TO_DATE('20170901', 'yymmdd'));
+
+
+INSERT INTO NOTICE VALUES(
+1, '공지사항', '상품 대여 및 구매시 적립금을 드려요.', SYSDATE);
 
 
    
-insert into review values(
-1, 1, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
-insert into review values(
-2, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, null, sysdate);
+INSERT INTO REVIEW VALUES(
+1, 1, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
+INSERT INTO REVIEW VALUES(
+2, 1500000001, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
 
 
-insert into qna values(
+INSERT INTO QNA VALUES(
 1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',
-sysdate, null);
+SYSDATE, NULL);
 
 
 
 
-commit;
+COMMIT;

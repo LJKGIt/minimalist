@@ -182,7 +182,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="col-md-9">
 
                     <div class="row" id="productMain">
@@ -262,7 +261,7 @@
                             </blockquote>
 
                             <hr>
-                            <div class="social">
+                            <!-- <div class="social">
                                 <h4>Show it to your friends</h4>
                                 <p>
                                     <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
@@ -270,9 +269,9 @@
                                     <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
-                            </div>
+                            </div> -->
                     <% //TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
-					<a href="review.selectList.do?product_code=${product.product_code}">상품후기</a>
+					<a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a>
                     </div>
 					
                     <div class="row same-height-row">
