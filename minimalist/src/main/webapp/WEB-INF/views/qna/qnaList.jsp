@@ -125,7 +125,7 @@ position: absolute;
 
                        
                 <p><font color="gray">회원님의 문의사항에 빠른 답변 드리도록 노력하겠습니다.</font></p>
-<div style="border-bottom: 3px solid #80cbc4;"></div>
+
                      
                         
                         <table class="type07">

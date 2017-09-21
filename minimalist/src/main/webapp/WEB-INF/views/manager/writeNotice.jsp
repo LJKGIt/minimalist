@@ -9,6 +9,7 @@
 element.style {
     display: none;
 }
+
 .board-write-1s {
     table-layout: fixed;
     width: 100%;
