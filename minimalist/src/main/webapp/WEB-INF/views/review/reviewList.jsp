@@ -240,7 +240,12 @@ position: absolute;
 
                     <div class="box" id="details">
                       <!-- 리뷰 리스트 -->
-                        <h2 align="center">상품후기</h2>
+                    <p align="center"> 
+                    </p>
+                        <h2 align="center"><a href="productDetail.do?product_code=${product_code}"><img src="/minimalist/resources/img_product/${ product.productImageList[0].product_image_path}" width="50" height="50">
+                    ${product.product_name}
+                    
+                    </a>상품후기</h2>
                       <table class="type07">
                       <thead>
 <tr>

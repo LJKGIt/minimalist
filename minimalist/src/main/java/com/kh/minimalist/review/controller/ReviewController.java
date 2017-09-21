@@ -100,6 +100,13 @@ public class ReviewController {
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("product_code", product_code);
 		
+		Product p=new Product();
+		p.setProduct_code(product_code);
+		
+		Product product=productService.productDetail(p);
+		
+		model.addAttribute("product", product);
+		
 		return "review/reviewList";
 	}
 	
