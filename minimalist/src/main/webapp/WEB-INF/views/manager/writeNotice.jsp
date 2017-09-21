@@ -188,7 +188,7 @@ input {
                     
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-9"> 
 
 
                     <div class="box" id="contact">
@@ -213,7 +213,7 @@ input {
                       
                       
                       <!-- <tr><td><input type="submit" value="등록"  class="area1sButton"></td></tr> -->
-                      
+                      </tbody>
                       </table>
                       <div>
                        <input type="submit" value="등록"  class="area1sButton">
@@ -222,15 +222,10 @@ input {
                       </form>
                
                        
+
                        
-    <!-- <thead>
-   	 
-    </thead>
-    <tbody>
-    	
-   			
-    </tbody>
- -->
+  
+
 
 					
 

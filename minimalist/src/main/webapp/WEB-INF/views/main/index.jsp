@@ -67,10 +67,10 @@
                             <img class="img-responsive" src="resources/img/main13.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main20.png" alt="">
+                            <img class="img-responsive" src="resources/img/main7.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main19.png" alt="">
+                            <img class="img-responsive" src="resources/img/main18.png" alt="">
                         </div>
                     </div>
                     <!-- /#main-slider -->

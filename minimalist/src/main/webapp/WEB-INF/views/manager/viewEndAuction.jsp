@@ -19,6 +19,7 @@ table.type07 {
      border-top-style: none;
     border-right-style: none;
 	border-left-style: none;
+	width: 100%;
 }
 table.type07 thead {
     border-right: 1px solid #ccc;
@@ -57,6 +58,7 @@ position: absolute;
 
 
 }
+
  
 </style>
 
@@ -179,6 +181,7 @@ $(function(){
 
 
                     <div class="box" id="contact">
+<%-- <<<<<<< HEAD
                       <h1 align="center">종료된 경매 확인.</h1>
 
 			
@@ -195,6 +198,25 @@ $(function(){
     </thead>
     <tbody>
     	<c:forEach var="au" items="${list}">
+======= --%>
+                      <h1>종료된 경매 확인</h1>
+<hr>
+			<table class="type07">
+			<thead>
+			<tr>
+			<th style="width:10%;">번호</th>
+			<th style="width:15%;">경매종료일</th>
+			<th style="width:12%;">금액</th>
+			<th style="width:12%;">낙찰 ID</th>
+			<th style="width:12%;">결제</th>
+			<th style="width:13%;">확인</th>
+			<th style="width:13%;">쪽지</th>
+			<th style="width:13%;">집계</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="au" items="${list}">
+
 			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
 			<td>${au.bid_price}</td><td>${au.member_id}</td>
 			<td>
@@ -206,22 +228,36 @@ $(function(){
 			</c:if>
 			<td>
 			<c:if test="${au.payment_yn eq 'n' }">
+<%-- <<<<<<< HEAD
 			<button type="button" class="check" value="y,${au.auction_code}">확인</button>
+======= --%>
+			<button type="button" class="check" value="y,${au.auction_code}" style="pont-size:10px;">결제확인</button>
+
 			</c:if>
 			<c:if test="${au.payment_yn eq 'y' }">
+<%-- <<<<<<< HEAD
 			<button type="button" class="check" value="n,${au.auction_code}">취소</button>
+======= --%>
+			<button type="button" class="check" value="n,${au.auction_code}" style="pont-size:10px;">되돌리기</button>
+
 			</c:if>
 			</td>
-			
-			<td><button type="button">전송</button></td>
+
+			<td><button type="button" style="pont-size:10px;">전송</button></td>
 			<td><button type="button" id="incomeBtn" value="${au.auction_code},${au.bid_price}">집계</button></td>
+
 			</tr>
+			
 			</c:forEach>
+
    			
     </tbody>
 
 </table>
-				 <!-- 페이징 처리 --> 
+
+			
+			 <!-- 페이징 처리 --> 
+
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
@@ -240,7 +276,7 @@ $(function(){
                      </c:if>
 				</ul>
 			 </div>
-					
+
 
                     </div>
                     

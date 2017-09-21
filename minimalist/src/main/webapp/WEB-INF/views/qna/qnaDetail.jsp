@@ -122,7 +122,66 @@ border-top: 2px solid #ddd;
 .form-control col-lg-12> #btn{
  height: 94px;
 }
+.btn-theme {
+    color: #fff;
+    background-color: #009688;
+    border-color: #00897b;
+}
 
+.btn {
+    border-radius: 4px;
+}
+
+.m-b-1 {
+    margin-bottom: 1rem !important;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+
+button, select {
+    text-transform: none;
+}
+
+button {
+    overflow: visible;
+}
+.u-btn-outline-teal {
+    color: #18ba9b;
+    border-color: #18ba9b;
+    background-color: transparent;
+}
 </style>
 
 
@@ -198,8 +257,9 @@ border-top: 2px solid #ddd;
                  <table class="table table-condensed">
                         <thead>
                             <tr align="center">
+                          
+                           <th style="border-bottom: 3px solid ;" colspan="1"> &nbsp;<strong>${qna.qna_title}</strong></th>
                            
-                           <th colspan="1"> &nbsp;<strong>${qna.qna_title}</strong></th>
                               
                             </tr>
                         </thead>
@@ -215,7 +275,7 @@ border-top: 2px solid #ddd;
                                 
                             </tr>
                             <tr>
-                                <td colspan="2" style="border-bottom: 2px solid #cccccc;">
+                                <td colspan="2" style="border-bottom: 3px solid ;">
                                     <p>${qna.qna_content}</p>
                        		<img src="/minimalist/resources/img_qna/${qna.img_path}">
                                 </td>
@@ -246,20 +306,34 @@ border-top: 2px solid #ddd;
                             <tr>
                                 <td>
                               
-                                    <span>
+                                   
+<%-- <<<<<<< HEAD
                                       
                                        <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
                                      &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">수정</button></a>
                                      &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">삭제</button></a>
+ --%>
 
-                                    </span>
+                                      <p style="text-align:center">
+                                       <span>
+                                       <a href="javascript:history.back()"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list" style="border-style: 1px solid #18ba9b;
+                  "><!-- <i class="fa fa-shopping-cart"></i> --> 목록</button></a>
+                                     &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">수정</button></a>
+                                     &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">삭제</button></a>
+                                  </span>
+                                 </p>
+                               
+                                 
+                                   
+                    
+                                   
                                     
                                 </td>
                             </tr>
                         </thead>
                     </table>
                     
-                   
+               
        
 
                        

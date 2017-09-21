@@ -6,7 +6,26 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-table.type07 {
+element.style {
+    display: none;
+}
+.board-write-1s {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    border-top: 2px solid #888;
+  }
+
+/* .mgT40 {
+    margin-top: 40px !important;
+} */
+
+table {
+    border-spacing: 0;
+    border: 0;
+}
+label, input.button, input.submit, input.image, button {
+    cursor: pointer;
 
     border-collapse: collapse;
     text-align: left;
