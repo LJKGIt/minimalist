@@ -51,6 +51,11 @@ public class Product implements Serializable {
 		this.productImageList = productImageList;
 	}
 
+	public Product(int product_code) {
+		super();
+		this.product_code = product_code;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [product_code=" + product_code + ", product_name=" + product_name + ", product_category="

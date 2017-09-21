@@ -184,9 +184,7 @@ $(function(){
 <%-- <<<<<<< HEAD
                       <h1 align="center">종료된 경매 확인.</h1>
 
-			
-
-              <table class="type07">
+<table class="type07">
     <thead>
    	 
 			<tr><th style="width:120px">경매번호</th><th style="width:150px">경매종료일</th>
@@ -255,9 +253,6 @@ $(function(){
 
 </table>
 
-			
-			 <!-- 페이징 처리 --> 
-
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
@@ -279,8 +274,7 @@ $(function(){
 
 
                     </div>
-                    
-			
+
 
                 </div>
                 <!-- /.col-md-9 -->

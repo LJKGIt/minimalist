@@ -120,7 +120,7 @@ body {
                                         </div>
                                         <div class="back">
                                             <a href="auction.selectOne.do?auction_code=${au.auction_code}">
-                                                <img src="/minimalist/resources/img_auction/${img2}" alt="" class="img-responsive">
+                                                <img src="/minimalist/resources/img_auction/${img1}" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>

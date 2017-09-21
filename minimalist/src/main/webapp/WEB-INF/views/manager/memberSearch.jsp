@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('#searching').click(function(){
+		var keyword=$('#idid').val(); 
+		 if(keyword==null){
+			alert('아이디를 입력하세요.');
+		} 
+		
+	});
+});
+
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -100,7 +115,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
+                                    <a href="">회원관리</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -128,18 +143,20 @@ position: absolute;
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">관리자 페이지</h1>
+                      <h1 align="center">회원 검색</h1>
 
-               <h1>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h1>
-                       <a href="productDetail.do?product_code=1500000001">1번 대여상품에 대한 리뷰 보기</a>
-                       
-   <!--  <thead>
+              	
+             <p align="center">	<input type="text" placeholder="아이디로 검색" id="idid"><button type="button" id="searching">검색</button>
+              	</p>
+             
+             <div id="result"></div> 
+    <thead>
    	 
     </thead>
     <tbody>
     	
    			
-    </tbody> -->
+    </tbody>
 
 
 					
@@ -154,13 +171,19 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		
+		<c:import url="../main/footer.jsp" />
 
 
     </div>
     <!-- /#all -->
 
-    <c:import url="../main/footer.jsp" />
+    
 
+
+
+
+    
+
+	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>
