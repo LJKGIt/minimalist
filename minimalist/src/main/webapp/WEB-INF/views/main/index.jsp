@@ -68,7 +68,7 @@
                             <img class="img-responsive" src="resources/img/main13.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="resources/img/main7.png" alt="">
+                            <img class="img-responsive" src="resources/img/main7.jpg" alt="">
                         </div>
                         <div class="item">
                             <img class="img-responsive" src="resources/img/main18.png" alt="">
