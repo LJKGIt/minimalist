@@ -235,8 +235,6 @@ position: absolute;
 
                 <div class="col-md-9">
 
-                    
-
 
                     <div class="box" id="details">
                       <!-- 리뷰 리스트 -->

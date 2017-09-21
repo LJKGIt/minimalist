@@ -24,6 +24,8 @@ public class ProductController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	// TODO [lintogi] 찜 목록을 만들기.
+	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request){
 		String result = null;

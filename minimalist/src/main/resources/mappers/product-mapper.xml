@@ -31,7 +31,7 @@
 		FROM PRODUCT A 
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
 		WHERE PRODUCT_CODE = #{product_code} 
-		ORDER BY RECEIVE_DATE ASC
+		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
 	<select id="productList" parameterType="Product" resultType="Product" resultMap="resultProduct">
@@ -39,7 +39,7 @@
 		FROM PRODUCT A 
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
 		WHERE PRODUCT_CATEGORY = #{product_category} 
-		ORDER BY RECEIVE_DATE ASC
+		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
 
