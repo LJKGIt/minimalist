@@ -61,6 +61,7 @@ public class CookieUtils {
 					copyList.add(list.get(i));
 				}
 				list = copyList;
+				
 			}
 		}
 		return list;
