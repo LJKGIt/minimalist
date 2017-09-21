@@ -76,7 +76,7 @@ body {
                     <div class="box">
                     <h1>Auction</h1> 
 
-                        <div style="border-bottom: 3px solid #80cbc4;"></div>
+                       
                            
                       
                             <%--    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="※로그인한 사용자만 입찰할 수 있습니다.<br>

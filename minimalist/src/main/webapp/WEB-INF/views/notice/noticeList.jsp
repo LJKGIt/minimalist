@@ -146,7 +146,7 @@ table.type07 td {
 
                     <div class="box" id="contact">
                         <h1>공지사항</h1>
-						<div style="border-bottom: 3px solid #80cbc4;"></div>
+						
                  
                  <!--        <div class="u-divider u-divider-solid u-divider-center g-brd-pink w-75 mx-auto g-my-80">
                     <i class="u-divider__icon g-bg-pink g-color-white rounded-circle">공지</i>
