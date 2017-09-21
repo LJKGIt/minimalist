@@ -177,9 +177,10 @@ public class MemberController {
 				List<String> list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
 				ArrayList<Product> cookieList = new ArrayList<Product>();
 				
-				for(String product_code : list)
-					cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
-				
+				if(list != null){
+					for(String product_code : list)
+						cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
+				}
 				model.addAttribute("cookieList", cookieList);
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block

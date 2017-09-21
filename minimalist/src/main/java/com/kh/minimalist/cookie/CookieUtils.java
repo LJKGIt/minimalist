@@ -1,5 +1,7 @@
 package com.kh.minimalist.cookie;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.minimalist.member.model.vo.Member;
 
@@ -51,8 +54,8 @@ public class CookieUtils {
 		if (cookieValues != null) {
 			list = new ArrayList<String>(Arrays.asList(cookieValues));
 
-			if (list.size() > 3) { // 값이 3개를 초과하면, 최근 것 3개만 담는다.
-				int start = list.size() - 3;
+			if (list.size() > 5) { // 값이 5개를 초과하면, 최근 것 5개만 담는다.
+				int start = list.size() - 5;
 				List<String> copyList = new ArrayList<String>();
 				for (int i = start; i < list.size(); i++) {
 					copyList.add(list.get(i));
@@ -103,9 +106,9 @@ public class CookieUtils {
 	 * @description 쿠키값들 중 특정 값을 삭제한다.
 	 * @params key: 쿠키 이름, value: 쿠키 이름과 짝을 이루는 값
 	 */
-	@RequestMapping("deleteCookie.do")
+	@RequestMapping(value = "deleteCookie.do",  method = RequestMethod.POST)
 	public void deleteCookie(String key, String value, HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws UnsupportedEncodingException {
+			throws IOException {
 		value = request.getParameter("del_cookie");
 		key = ((Member) session.getAttribute("member")).getMember_id();
 		List<String> list = getValueList(key, request);
@@ -133,6 +136,21 @@ public class CookieUtils {
 		cookie.setMaxAge(time);
 		cookie.setPath(path);
 		response.addCookie(cookie);
+		
+		// AJAX로 출력
+		PrintWriter writer;
+		writer = response.getWriter();
+
+		if (value != null) {
+			writer.append("yes");
+			writer.flush();
+		} else {
+			writer.append("no");
+			writer.flush();
+		}
+
+		writer.close();
+
 	}
 
 	/**
@@ -152,8 +170,8 @@ public class CookieUtils {
 	 * @description 쿠키들을 맵으로 반환한다.
 	 * @params
 	 */
-	public HashMap getValueMap(HttpServletRequest request) {
-		HashMap cookieMap = new HashMap();
+	public HashMap<String, Object> getValueMap(HttpServletRequest request) {
+		HashMap<String, Object> cookieMap = new HashMap<String, Object>();
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {

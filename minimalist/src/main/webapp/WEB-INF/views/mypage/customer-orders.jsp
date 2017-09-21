@@ -76,8 +76,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="resources/img/sample.gif"
-									style="margin: 10px; width: 60px; height: 60px; float: left;" />
+									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
+									style="margin: 10px; width: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -100,8 +100,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="resources/img/sample.gif"
-									style="margin: 10px; width: 60px; height: 60px; float: left;" />
+									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
+									style="margin: 10px; width: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -123,8 +123,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="resources/img/sample.gif"
-									style="margin: 10px; width: 60px; height: 60px; float: left;" />
+									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
+									style="margin: 10px; width: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -146,8 +146,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="resources/img/sample.gif"
-									style="margin: 10px; width: 60px; height: 60px; float: left;" />
+									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
+									style="margin: 10px; width: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
