@@ -10,7 +10,7 @@ public interface QnaService {
 	
 	int countRow();
 	
-	ArrayList<Qna> selectList(HashMap map);
+	ArrayList<Qna> selectList(HashMap<String, Object> map);
 	
 	Qna selectOne(int qna_no);
 	

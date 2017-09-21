@@ -10,7 +10,7 @@ public interface ReviewService {
 	
 	int countRow(int product_code);
 	
-	ArrayList<Review> selectList(HashMap map);
+	ArrayList<Review> selectList(HashMap<String, Object> map);
 	
 	Review selectOne(int review_no);
 	

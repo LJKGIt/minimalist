@@ -3,23 +3,15 @@ package com.kh.minimalist.review.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
-import com.kh.minimalist.qna.model.vo.Qna;
 import com.kh.minimalist.review.model.service.ReviewService;
 import com.kh.minimalist.review.model.vo.Review;
 
@@ -86,7 +77,7 @@ public class ReviewController {
 		int endRow=startRow+countList-1;
 		//현재 화면에서 보여줄 글의 마지막 rownum
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("product_code", product_code);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -170,7 +161,7 @@ public class ReviewController {
 	if(fileName.contains("jpg") || fileName.contains("png") || fileName.contains("gif")){
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_review";
 		//파일저장을 위한 경로 설정.
-		File file=new File(savePath);
+		//File file=new File(savePath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String reName=member_id+sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 		String fullPath=savePath+"\\"+reName;
@@ -191,7 +182,7 @@ public class ReviewController {
 			review.setImage_path(reName);
 		
 	} catch (Exception e) {
-		// TODO: handle exception
+		
 	}
 	
 	}//if 끝
@@ -253,7 +244,7 @@ public class ReviewController {
 	
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_qna";
 		//파일저장을 위한 경로 설정.
-		File file=new File(savePath);
+	//	File file=new File(savePath);
 		
 
 		String fileName=uploadFile.getOriginalFilename();
@@ -277,7 +268,7 @@ public class ReviewController {
 				review.setImage_path(reName);
 				//이미지 db에 저장.
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		
 		

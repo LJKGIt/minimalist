@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.minimalist.notice.model.vo.Notice;
 import com.kh.minimalist.qna.model.dao.QnaDao;
 import com.kh.minimalist.qna.model.vo.Qna;
 
@@ -22,7 +21,7 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public ArrayList<Qna> selectList(HashMap map) {
+	public ArrayList<Qna> selectList(HashMap<String, Object> map) {
 		
 		return qnaDao.selectList(map);
 	}

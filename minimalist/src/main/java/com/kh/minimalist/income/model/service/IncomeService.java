@@ -10,12 +10,12 @@ public interface IncomeService {
 	
 	int countRow();
 	
-	ArrayList<Income> selectList(HashMap map);
+	ArrayList<Income> selectList(HashMap<String, Object> map);
 	
 	int insertIncome(Income income);
 	
-	int countRowByDate(HashMap map);
+	int countRowByDate(HashMap<String, Object> map);
 	
-	ArrayList<Income> selectListByDate(HashMap map);
+	ArrayList<Income> selectListByDate(HashMap<String, Object> map);
 	
 }

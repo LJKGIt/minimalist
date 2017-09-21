@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.minimalist.member.model.dao.MemberDao;
 import com.kh.minimalist.message.model.dao.MessageDao;
 import com.kh.minimalist.message.model.vo.Message;
 
@@ -17,7 +16,7 @@ public class MessageServiceImpl implements MessageService{
 	
 	
 	@Override
-	public List selectMessageList(String member_id) {
+	public List<Message> selectMessageList(String member_id) {
 		
 		return messageDao.selectMessageList(member_id);
 	}

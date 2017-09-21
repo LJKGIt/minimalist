@@ -369,7 +369,7 @@
 
 						<a href="mypage.do" class="btn btn-primary navbar-btn"><i
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
-						<button type="message" class="btn navbar-btn btn-primary"
+						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
 							Message</button>
 					</c:if>

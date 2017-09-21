@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html>
+<head>
 <style type="text/css">
 .table {
    
@@ -93,9 +97,6 @@ border-top: 2px solid #ddd;
 }
 
 </style>
-<!DOCTYPE html>
-<html>
-<head>
 
     <title>
         Obaju : e-commerce template
@@ -326,7 +327,7 @@ border-top: 2px solid #ddd;
                                 <td>
                               
                                     <span>
-                                      <center>
+                                 
                                        <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
                                       
                                       
@@ -337,7 +338,7 @@ border-top: 2px solid #ddd;
                                      <c:if test="${sessionScope.member.member_id eq 'admin'}">
                                       &nbsp;&nbsp;<a href="review.deleteReview.do?review_no=${review.review_no}&product_code=${review.product_code}"><button type="button" class="btn btn-default">삭제</button></a>
                                     </c:if>
-                                    </center>
+                              
                                     
                                     </span>
                                     
@@ -363,7 +364,7 @@ border-top: 2px solid #ddd;
 		<c:import url="../main/footer.jsp" />
 
 
-
+</div>
     </div>
     <!-- /#all -->
 

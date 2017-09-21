@@ -9,7 +9,7 @@ public interface NoticeService {
 
 	
 	
-	ArrayList<Notice> selectList(HashMap map);
+	ArrayList<Notice> selectList(HashMap<String, Object> map);
 	
 	Notice selectOne(int notice_no);
 	

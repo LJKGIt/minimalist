@@ -220,7 +220,7 @@ $(function(){
                         <p>
                             <h4>Product details</h4>
                             <p>${auction.product_descript}</p>
-                            <h4>color&size</h4>
+                            <h4>color&#38;size</h4>
                             <ul>
                                 <li>color : ${auction.product_color}</li>
                                 <li>size : ${auction.product_size }</li>
@@ -253,7 +253,9 @@ $(function(){
 		<c:import url="../main/footer.jsp" />
 
 
-
+		</div>
+		</div>
+		</div>
     </div>
     <!-- /#all -->
 

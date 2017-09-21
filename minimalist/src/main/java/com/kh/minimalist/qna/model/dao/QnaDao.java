@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.minimalist.notice.model.vo.Notice;
 import com.kh.minimalist.qna.model.vo.Qna;
 
 @Repository("qnaDao")
@@ -22,9 +21,9 @@ public class QnaDao {
 		return sqlSession.selectOne("Qna.countRow");
 	}
 
-	public ArrayList<Qna> selectList(HashMap map) {
+	public ArrayList<Qna> selectList(HashMap<String, Object> map) {
 		
-		List list=null;
+		List<Qna> list=null;
 		
 		list=sqlSession.selectList("Qna.selectList", map);
 		

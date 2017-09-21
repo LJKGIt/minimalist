@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kh.minimalist.auction.model.dao.AuctionDao;
@@ -23,7 +22,7 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public ArrayList<Auction> selectList(HashMap map) {
+	public ArrayList<Auction> selectList(HashMap<String, Object> map) {
 		
 		return auctionDao.selectList(map);
 	}
@@ -53,7 +52,7 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public ArrayList<Auction> selectListCategory(HashMap map) {
+	public ArrayList<Auction> selectListCategory(HashMap<String, Object> map) {
 		
 		return auctionDao.selectListCategory(map);
 	}
@@ -83,13 +82,13 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public ArrayList<Auction> selectListEnd(HashMap map) {
+	public ArrayList<Auction> selectListEnd(HashMap<String, Object> map) {
 		
 		return auctionDao.selectListEnd(map);
 	}
 
 	@Override
-	public int checkPayment(HashMap map) {
+	public int checkPayment(HashMap<String, Object> map) {
 		
 		return auctionDao.checkPayment(map);
 	}

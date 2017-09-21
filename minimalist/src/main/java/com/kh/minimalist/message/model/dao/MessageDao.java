@@ -15,7 +15,7 @@ public class MessageDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public List selectMessageList(String member_id) {
+	public List<Message> selectMessageList(String member_id) {
 		return sqlSession.selectList("Message.messageList", member_id);
 	}
 

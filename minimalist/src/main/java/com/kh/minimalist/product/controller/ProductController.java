@@ -1,7 +1,6 @@
 package com.kh.minimalist.product.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
-import com.kh.minimalist.review.model.service.ReviewService;
-import com.kh.minimalist.review.model.vo.Review;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private ReviewService reviewService;
+	
 	
 	// TODO [lintogi] 찜 목록을 만들기.
 	

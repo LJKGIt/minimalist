@@ -68,7 +68,7 @@ public class IncomeController {
 		int startRow=(currentPage-1)*countList+1;
 		int endRow=startRow+countList-1;
 		//시작 row 및 끝 row 계산
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -77,7 +77,7 @@ public class IncomeController {
 		
 		System.out.println("리스트 사이즈 : "+list.size());
 		String tmp;
-		if(list!=null){
+		if(list.size()>0){
 			//총 매출 집계.
 			int total=0;
 			for(Income inc : list){
@@ -151,7 +151,7 @@ public class IncomeController {
 		Date startDate=Date.valueOf(request.getParameter("startDate"));
 		Date endDate=Date.valueOf(request.getParameter("endDate"));
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		System.out.println(startDate);
 		System.out.println(endDate);
@@ -206,7 +206,7 @@ public class IncomeController {
 		
 		System.out.println("리스트 사이즈 : "+list.size());
 		String tmp;
-		if(list!=null){
+		if(list.size()>0){
 			//총 매출 집계.
 			int total=0;
 			for(Income inc : list){

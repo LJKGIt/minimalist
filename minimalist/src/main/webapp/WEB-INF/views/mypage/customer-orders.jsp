@@ -15,7 +15,7 @@
 <body style="min-width: 360px;">
 
 <!-- COOKIE TEST -->
-<table width="200">
+<table style="width:200">
     <tr height="25">
         <td width="100">상품명</td>
         <td width="100">단가</td>

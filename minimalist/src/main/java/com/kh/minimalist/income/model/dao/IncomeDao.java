@@ -21,9 +21,9 @@ public class IncomeDao {
 		return sqlSession.selectOne("Income.countRow");
 	}
 	
-	public ArrayList<Income> selectList(HashMap map){
+	public ArrayList<Income> selectList(HashMap<String, Object> map){
 		
-		List list=null;
+		List<Income> list=null;
 		
 		list=sqlSession.selectList("Income.selectList", map);
 		
@@ -47,15 +47,15 @@ public class IncomeDao {
 		
 	}
 	
-	public int countRowByDate(HashMap map){
+	public int countRowByDate(HashMap<String, Object> map){
 		
 		return sqlSession.selectOne("Income.countRowByDate", map);
 		
 	}
 	
-	public ArrayList<Income> selectListByDate(HashMap map){
+	public ArrayList<Income> selectListByDate(HashMap<String, Object> map){
 		
-		List list=null;
+		List<Income> list=null;
 		
 		list=sqlSession.selectList("Income.selectListByDate", map);
 		

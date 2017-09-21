@@ -23,8 +23,8 @@ public class ReviewDao {
 		return sqlSession.selectOne("Review.countRow", product_code);
 	}
 	
-	public ArrayList<Review> selectList(HashMap map){
-		List list=null;
+	public ArrayList<Review> selectList(HashMap<String, Object> map){
+		List<Review> list=null;
 		
 		list=sqlSession.selectList("Review.selectList", map);
 		

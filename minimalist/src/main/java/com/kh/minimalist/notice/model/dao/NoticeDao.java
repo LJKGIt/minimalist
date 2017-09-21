@@ -17,8 +17,8 @@ public class NoticeDao {
 		private SqlSessionTemplate sqlSession;
 	
 	//공지사항 리스트~
-	public ArrayList<Notice> selectList(HashMap map){
-		List list=null;
+	public ArrayList<Notice> selectList(HashMap<String, Object> map){
+		List<Notice> list=null;
 		
 		list=sqlSession.selectList("Notice.selectList", map);
 		

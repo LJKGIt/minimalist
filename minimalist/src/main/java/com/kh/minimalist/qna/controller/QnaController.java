@@ -1,6 +1,5 @@
 package com.kh.minimalist.qna.controller;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -22,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.minimalist.notice.model.vo.Notice;
 import com.kh.minimalist.qna.model.service.QnaServiceImpl;
 import com.kh.minimalist.qna.model.vo.Qna;
 
@@ -77,7 +74,7 @@ public class QnaController {
 		int endRow=startRow+countList-1;
 		//현재 화면에서 보여줄 글의 마지막 rownum
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -169,7 +166,7 @@ public class QnaController {
 	
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_qna";
 		//파일저장을 위한 경로 설정.
-		File file=new File(savePath);
+		//File file=new File(savePath);
 		
 
 		String fileName=uploadFile.getOriginalFilename();
@@ -191,7 +188,7 @@ public class QnaController {
 				stream.close();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+	
 		}
 		
 		
@@ -272,7 +269,7 @@ public class QnaController {
 	
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_qna";
 		//파일저장을 위한 경로 설정.
-		File file=new File(savePath);
+		//File file=new File(savePath);
 		
 
 		String fileName=uploadFile.getOriginalFilename();
@@ -296,7 +293,7 @@ public class QnaController {
 				qna.setImg_path(reName);
 				//이미지 db에 저장.
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		
 		}

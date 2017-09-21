@@ -135,7 +135,7 @@ position: absolute;
                <form action="auction.insertAuction.do"  method="post" enctype="multipart/form-data">
 <table>
 <tr><th>상품명 : </th><td><input type="text" name="product_name"></td></tr>
-<tr><th>상품 카테고리 : </th><td><select name="category" value="카테고리">
+<tr><th>상품 카테고리 : </th><td><select name="category">
                       <option value="의류">의류</option>
                       <option value="잡화">잡화</option>
                       <option value="악세사리">악세사리</option>
@@ -155,14 +155,14 @@ position: absolute;
 </form>
                        
                        
-    <thead>
+  <!--   <thead>
    	 
     </thead>
     <tbody>
     	
    			
     </tbody>
-
+ -->
 
 					
 

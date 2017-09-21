@@ -247,11 +247,11 @@ border-top: 2px solid #ddd;
                                 <td>
                               
                                     <span>
-                                      <center>
+                                      
                                        <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
                                      &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">수정</button></a>
                                      &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">삭제</button></a>
-                                    </center>
+
                                     </span>
                                     
                                 </td>

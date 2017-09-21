@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-<script type="text/javascript">
-
-</script>
 
 
 <!DOCTYPE html>
@@ -228,13 +224,13 @@ input {
                       </div>
                      
                       </form>
-    <thead>
+ <!--    <thead>
    	 
     </thead>
     <tbody>
     	
    			
-    </tbody>
+    </tbody> -->
 
 
 					

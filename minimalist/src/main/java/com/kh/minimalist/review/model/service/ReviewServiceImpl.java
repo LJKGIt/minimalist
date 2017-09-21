@@ -23,7 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public ArrayList<Review> selectList(HashMap map) {
+	public ArrayList<Review> selectList(HashMap<String, Object> map) {
 		
 		return reviewDao.selectList(map);
 		

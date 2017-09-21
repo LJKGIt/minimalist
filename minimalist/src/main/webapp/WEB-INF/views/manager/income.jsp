@@ -244,6 +244,8 @@ position: absolute;
 		<c:import url="../main/footer.jsp" />
 
 
+</div>
+
     </div>
     <!-- /#all -->
 

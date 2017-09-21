@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class AuctionController {
 			@RequestParam("img3") MultipartFile uploadFile3) throws IOException, ParseException{
 		
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		//map에 업로드한 파일을 각각 저장.
 		map.put("img1", uploadFile1);
 		map.put("img2", uploadFile2);
@@ -63,7 +62,7 @@ public class AuctionController {
 		
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_auction";
 		//파일저장을 위한 경로 설정.
-		File file=new File(savePath);
+		//File file=new File(savePath);
 		
 
 		String[] fileName=new String[map.size()];
@@ -94,7 +93,7 @@ public class AuctionController {
 				stream.close();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		//db 저장용 객체 생성.
 		Auction auction=new Auction();
@@ -197,7 +196,7 @@ public class AuctionController {
 		int endRow=startRow+countList-1;
 		//현재 화면에서 보여줄 글의 마지막 rownum
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		if(category!=null){
 			map.put("category", category);
@@ -352,7 +351,7 @@ public class AuctionController {
 			
 			//사진을 새로 등록한 경우에만. 
 			if(temp.contains("jpg") || temp.contains("png") || temp.contains("gif")){
-				HashMap map=new HashMap();
+				HashMap<String, Object> map=new HashMap<String, Object>();
 				//map에 업로드한 파일을 각각 저장.
 				map.put("img1", uploadFile1);
 				map.put("img2", uploadFile2);
@@ -363,7 +362,7 @@ public class AuctionController {
 				
 				String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_auction";
 				//파일저장을 위한 경로 설정.
-				File file=new File(savePath);
+				//File file=new File(savePath);
 				
 
 				String[] fileName=new String[map.size()];
@@ -394,7 +393,7 @@ public class AuctionController {
 						stream.close();
 					
 				} catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 				
 				String img_path="";
@@ -484,7 +483,7 @@ public class AuctionController {
 			int startRow=(currentPage-1)*countList+1;
 			int endRow=startRow+countList-1;
 			//시작 row 및 끝 row 계산
-			HashMap map=new HashMap();
+			HashMap<String, Object> map=new HashMap<String, Object>();
 			
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
@@ -508,7 +507,7 @@ public class AuctionController {
 			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 			String message=request.getParameter("message");
 			
-			HashMap map=new HashMap();
+			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("auction_code", auction_code);
 			map.put("message", message);
 			

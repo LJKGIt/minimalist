@@ -22,7 +22,7 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
-	public ArrayList<Income> selectList(HashMap map) {
+	public ArrayList<Income> selectList(HashMap<String, Object> map) {
 		
 		return incomeDao.selectList(map);
 	}
@@ -34,13 +34,13 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
-	public int countRowByDate(HashMap map) {
+	public int countRowByDate(HashMap<String, Object> map) {
 		
 		return incomeDao.countRowByDate(map);
 	}
 
 	@Override
-	public ArrayList<Income> selectListByDate(HashMap map) {
+	public ArrayList<Income> selectListByDate(HashMap<String, Object> map) {
 		
 		return incomeDao.selectListByDate(map);
 	}

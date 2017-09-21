@@ -3,53 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-<script type="text/javascript">
-$(function(){
-	//확인 버튼.
-	$('.check').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "auction.checkPayment.do",
-			type : "post",
-			data : {message : arr[0], auction_code : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					location.reload();
-				}else if(value=='no'){
-					alert("실패");
-				}
-			}
-		});
-		
-	});
-	
-	
-	//매출 추가
-	$('#incomeBtn').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "income.insertIncome.do",
-			type : "post",
-			data : {auction_code : arr[0], income : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					alert("매출에 집계되었습니다.");
-				}else if(value=='no'){
-					alert("이미 집계된 항목입니다.");
-				}
-			}
-			
-		});
-	});
-});
 
-
-</script>
 
 <!DOCTYPE html>
+
 <html>
 <style type="text/css">
 table.type07 {
@@ -104,6 +61,51 @@ position: absolute;
 </style>
 
 <head>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	//확인 버튼.
+	$('.check').click(function(){
+		var arr=($(this).val()).split(',');
+		$.ajax({
+			url : "auction.checkPayment.do",
+			type : "post",
+			data : {message : arr[0], auction_code : arr[1]},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					location.reload();
+				}else if(value=='no'){
+					alert("실패");
+				}
+			}
+		});
+		
+	});
+	
+	
+	//매출 추가
+	$('#incomeBtn').click(function(){
+		var arr=($(this).val()).split(',');
+		$.ajax({
+			url : "income.insertIncome.do",
+			type : "post",
+			data : {auction_code : arr[0], income : arr[1]},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					alert("매출에 집계되었습니다.");
+				}else if(value=='no'){
+					alert("이미 집계된 항목입니다.");
+				}
+			}
+			
+		});
+	});
+});
+
+
+</script>
 
     <title>
         Obaju : e-commerce template

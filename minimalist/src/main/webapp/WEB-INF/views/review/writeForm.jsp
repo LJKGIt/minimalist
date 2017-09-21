@@ -366,7 +366,7 @@ input {
 		<c:import url="../main/footer.jsp" />
 
 
-
+	</div>
     </div>
     <!-- /#all -->
 
