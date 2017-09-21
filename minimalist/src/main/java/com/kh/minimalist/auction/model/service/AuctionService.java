@@ -3,7 +3,6 @@ package com.kh.minimalist.auction.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.springframework.stereotype.Repository;
 
 import com.kh.minimalist.auction.model.vo.Auction;
 
@@ -11,7 +10,7 @@ public interface AuctionService {
 
 	int countRow();
 	
-	ArrayList<Auction> selectList(HashMap map);
+	ArrayList<Auction> selectList(HashMap<String, Object> map);
 	
 	Auction selectOne(int auctionNo);
 	
@@ -21,7 +20,7 @@ public interface AuctionService {
 	
 	int countRowCategory(String category);
 	
-	ArrayList<Auction> selectListCategory(HashMap map);
+	ArrayList<Auction> selectListCategory(HashMap<String, Object> map);
 	
 	int insertAuction(Auction auction);
 	
@@ -31,7 +30,9 @@ public interface AuctionService {
 	
 	int countRowEnd();
 	
-	ArrayList<Auction> selectListEnd(HashMap map);
+	ArrayList<Auction> selectListEnd(HashMap<String, Object> map);
 	
-	int checkPayment(HashMap map);
+	int checkPayment(HashMap<String, Object> map);
+
+	ArrayList<Auction> selectMemberAuction(String member_id);
 }

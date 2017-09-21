@@ -111,6 +111,9 @@ position: absolute;
                                 <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
                                 </li>
+                                 <li>
+                                    <a href="income.selectList.do">매출 확인</a>
+                                </li>
 								
 								
                             </ul>
@@ -130,17 +133,16 @@ position: absolute;
                     <div class="box" id="contact">
                       <h1 align="center">관리자 페이지</h1>
 
-               <h4>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h4>
-               <hr>
+               <h1>관리자 페이지 구현은 해당 페이지를 복사해서 사용하면 됨.</h1>
+                       <a href="productDetail.do?product_code=1500000001">1번 대여상품에 대한 리뷰 보기</a>
                        
-                       
-    <thead>
+   <!--  <thead>
    	 
     </thead>
     <tbody>
     	
    			
-    </tbody>
+    </tbody> -->
 
 
 					
@@ -155,19 +157,13 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		<c:import url="../main/footer.jsp" />
+		
 
 
     </div>
     <!-- /#all -->
 
-    
+    <c:import url="../main/footer.jsp" />
 
-
-
-
-    
-
-	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.kh.minimalist.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.message.model.service.MessageService;
 
 @Controller
 public class MemberController {
@@ -28,6 +27,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	
 	
@@ -39,13 +41,19 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member m, HttpSession session) {
-
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String result = "main/index";
 		Member member = memberService.loginMember(m);
 		if (member != null) {
 			session.setAttribute("member", member);
+			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+				result = "redirect:"+request.getHeader("referer");
+			}
+			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
 		}
-		return "main/index";
+		return result;
+		
+		
 	}
 
 	@RequestMapping("logout.do")
@@ -150,7 +158,7 @@ public class MemberController {
 //				}
 //			})
 //		} catch (Exception e) {
-//			// TODO: handle exception
+//			
 //		}
 //	}
 	
@@ -174,26 +182,31 @@ public class MemberController {
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView(){
 		
-		return "manager/memberSearch";
+		return "manager/sendMessage";
 	}
 	
 	
 	//회원 검색
 	@RequestMapping(value="member.memberSearch.do", method={RequestMethod.POST, RequestMethod.GET})
-	public String searchMemer(HttpServletRequest request, Model model){
+	public void searchMemer(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
 		
 		String member_id=request.getParameter("member_id");
-		
+		System.out.println(member_id);
 		
 		Member member=memberService.searchMember(member_id);
 		
 		
+		PrintWriter writer=response.getWriter();
 		if(member!=null){
+			String id=member.getMember_id();
 			model.addAttribute("member", member);
+			writer.append(id);
+			writer.flush();
 		}else {
-			
+			writer.append("no");
+			writer.flush();
 		}
+		writer.close();
 		
-		return "manager/memberSearch";
 	}
 }

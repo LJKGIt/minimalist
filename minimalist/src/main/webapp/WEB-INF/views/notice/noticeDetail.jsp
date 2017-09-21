@@ -171,13 +171,13 @@ border-top: 1px none #888;!important;
 	</table>
 					 
              <div class="c"><!-- <tr><td colspan="2"> -->
-			<center>
+		
                        <a href="notice.selectList.do"><button type="button" id="list" class="btn btn-default">목록</button></a>
 				 <c:if test="${sessionScope.member.member_id eq 'admin'}">
                 &nbsp;&nbsp;<a href="notice.viewUpdateForm.do?notice_no=${notice.notice_no}"><button type="button" class="btn btn-default">수정</button></a>
                &nbsp;&nbsp;<a href="notice.deleteNotice.do?notice_no=${notice.notice_no}"><button type="button" class="btn btn-default">삭제</button></a>
                   </c:if>
-                  </center>
+               
       <!--  </td> </tr> -->
                    </div>
 

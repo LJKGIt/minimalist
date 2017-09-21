@@ -16,7 +16,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDao noticeDao;
 	
 	@Override
-	public ArrayList<Notice> selectList(HashMap map) {
+	public ArrayList<Notice> selectList(HashMap<String, Object> map) {
 	
 		return noticeDao.selectList(map);
 	}

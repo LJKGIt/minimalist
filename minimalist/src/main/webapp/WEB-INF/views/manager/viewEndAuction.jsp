@@ -3,32 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-<script type="text/javascript">
-$(function(){
-	$('.check').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "auction.checkPayment.do",
-			type : "post",
-			data : {message : arr[0], auction_code : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					location.reload();
-				}else if(value=='no'){
-					alert("실패");
-				}
-			}
-		});
-		
-	});
-});
 
-
-</script>
 
 <!DOCTYPE html>
+
 <html>
 <style type="text/css">
 table.type07 {
@@ -86,6 +64,51 @@ position: absolute;
 </style>
 
 <head>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	//확인 버튼.
+	$('.check').click(function(){
+		var arr=($(this).val()).split(',');
+		$.ajax({
+			url : "auction.checkPayment.do",
+			type : "post",
+			data : {message : arr[0], auction_code : arr[1]},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					location.reload();
+				}else if(value=='no'){
+					alert("실패");
+				}
+			}
+		});
+		
+	});
+	
+	
+	//매출 추가
+	$('#incomeBtn').click(function(){
+		var arr=($(this).val()).split(',');
+		$.ajax({
+			url : "income.insertIncome.do",
+			type : "post",
+			data : {auction_code : arr[0], income : arr[1]},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					alert("매출에 집계되었습니다.");
+				}else if(value=='no'){
+					alert("이미 집계된 항목입니다.");
+				}
+			}
+			
+		});
+	});
+});
+
+
+</script>
 
     <title>
         Obaju : e-commerce template
@@ -128,7 +151,7 @@ position: absolute;
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
                                 <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
+                                    <a href="member.memberSearchView.do">쪽지보내기</a>
                                 </li>
                                 <li>
                                     <a href="">대여상품 등록</a>
@@ -138,6 +161,9 @@ position: absolute;
                                 </li>
                                 <li>
                                     <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
+                                </li>
+                                 <li>
+                                    <a href="income.selectList.do">매출 확인</a>
                                 </li>
 								
 								
@@ -156,22 +182,42 @@ position: absolute;
 
 
                     <div class="box" id="contact">
+<%-- <<<<<<< HEAD
+                      <h1 align="center">종료된 경매 확인.</h1>
+
+			
+
+              <table class="type07">
+    <thead>
+   	 
+			<tr><th style="width:120px">경매번호</th><th style="width:150px">경매종료일</th>
+			<th style="width:150px">
+			낙찰금액</th><th style="width:150px">ID</th><th style="width:150px">결제여부</th>
+			<th style="width:150px">체크</th><th style="width:150px">쪽지보내기</th>
+			<th style="width:150px">매출집계</th>
+			</tr>
+    </thead>
+    <tbody>
+    	<c:forEach var="au" items="${list}">
+======= --%>
                       <h1>종료된 경매 확인</h1>
 <hr>
 			<table class="type07">
 			<thead>
 			<tr>
 			<th style="width:10%;">번호</th>
-			<th style="width:15%;">경매종료</th>
-			<th style="width:15%;">금액</th>
-			<th style="width:15%;">낙찰 ID</th>
-			<th style="width:15%;">결제</th>
-			<th style="width:15%;">확인</th>
-			<th style="width:15%;">쪽지</th>
+			<th style="width:15%;">경매종료일</th>
+			<th style="width:12%;">금액</th>
+			<th style="width:12%;">낙찰 ID</th>
+			<th style="width:12%;">결제</th>
+			<th style="width:13%;">확인</th>
+			<th style="width:13%;">쪽지</th>
+			<th style="width:13%;">집계</th>
 			</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="au" items="${list}">
+
 			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
 			<td>${au.bid_price}</td><td>${au.member_id}</td>
 			<td>
@@ -183,24 +229,36 @@ position: absolute;
 			</c:if>
 			<td>
 			<c:if test="${au.payment_yn eq 'n' }">
+<%-- <<<<<<< HEAD
+			<button type="button" class="check" value="y,${au.auction_code}">확인</button>
+======= --%>
 			<button type="button" class="check" value="y,${au.auction_code}" style="pont-size:10px;">결제확인</button>
+
 			</c:if>
 			<c:if test="${au.payment_yn eq 'y' }">
+<%-- <<<<<<< HEAD
+			<button type="button" class="check" value="n,${au.auction_code}">취소</button>
+======= --%>
 			<button type="button" class="check" value="n,${au.auction_code}" style="pont-size:10px;">되돌리기</button>
+
 			</c:if>
-			
 			</td>
-			
-			
+
 			<td><button type="button" style="pont-size:10px;">전송</button></td>
+			<td><button type="button" id="incomeBtn" value="${au.auction_code},${au.bid_price}">집계</button></td>
+
 			</tr>
 			
 			</c:forEach>
-			</tbody>
-			</table>
-			
+
+   			
+    </tbody>
+
+</table>
+
 			
 			 <!-- 페이징 처리 --> 
+
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
@@ -220,12 +278,10 @@ position: absolute;
 				</ul>
 			 </div>
 
-              
-  
-
 
                     </div>
-
+                    
+			
 
                 </div>
                 <!-- /.col-md-9 -->
@@ -234,7 +290,7 @@ position: absolute;
         </div>
         <!-- /#content -->
 
-		<c:import url="../main/footer.jsp" />
+	
 
 
     </div>

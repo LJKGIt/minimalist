@@ -158,12 +158,13 @@ position: absolute;
 <tr><th>경매시작가격 : </th><td><input type="number" name="bid_price"  value="${auction.bid_price}"></td></tr>
 <tr><th>경매시작일 : </th><td><input type="date" name="start_date"  value="${auction.start_date}"></td></tr>
 <tr><th>경매종료일 : </th><td><input type="date" name="end_date" value="${auction.end_date}"></td></tr>
-<h5>이미지 1</h5>
+<tr><th><h5>이미지 1</h5>
 <img src="${img01}">
 <h5>이미지 2</h5>
 <img src="${img02}">
 <h5>이미지 3</h5>
 <img src="${img03}">
+</th></tr>
 <tr><th></th><td><font color="red">※사진을 새로 등록하지 않으면 기존 사진이 사용됩니다.</font></td></tr>
 <tr><th>파일첨부1 : </th><td><input type="file" name="img1"></td></tr>
 <tr><th>파일첨부2 : </th><td><input type="file" name="img2"></td></tr>
@@ -173,14 +174,14 @@ position: absolute;
 </form>
                        
                        
-    <thead>
+ <!--    <thead>
    	 
     </thead>
     <tbody>
     	
    			
     </tbody>
-
+ -->
 
 					
 

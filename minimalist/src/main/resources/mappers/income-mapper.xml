@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Income">
+
+	<resultMap id="resultIncome" type="Income">
+	</resultMap>
+	
+	
+	<select id="countRow" resultType="_int">
+	select count(*) from income
+	</select>
+	
+	<select id="selectList" resultType="Income" parameterType="_int" resultMap="resultIncome">
+	select *
+	from (select rownum rnum, product_code, auction_code, income, income_date
+	from (select * from income order by income_date desc)
+	where rownum&lt;=#{endRow})
+	where rnum&gt;=#{startRow}
+	</select>
+	
+	<!-- 판매시 insert -->
+	<insert id="insertIncome" parameterType="Income">
+	<choose>
+	<when test="product_code!=0">
+	insert into income values(#{product_code}, null, #{income}, #{income_date})
+	</when>
+	<when test="auction_code!=0">
+	insert into income values(null, #{auction_code}, #{income}, sysdate)
+	</when>
+	</choose>
+	</insert>
+	<select id="unique" resultType="_int" parameterType="Income">
+	select count(*) from Income where auction_code=#{auction_code}
+	</select>
+	
+	<select id="countRowByDate" resultType="_int" parameterType="hashmap">
+	select count(*) from income
+	where income_date&gt;=#{startDate}
+	and income_date&lt;=#{endDate}
+	</select>
+	
+	<select id="selectListByDate" resultType="Income" parameterType="hashmap" resultMap="resultIncome">
+	select *
+	from (select rownum rnum, product_code, auction_code, income, income_date
+	from (select * from income
+	where income_date&gt;=#{startDate}
+	and income_date&lt;=#{endDate}
+	 order by income_date desc)
+	where rownum&lt;=#{endRow})
+	where rnum&gt;=#{startRow}
+	</select>
+	
+</mapper>

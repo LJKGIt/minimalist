@@ -189,18 +189,7 @@
         </div>
         <!-- /#content -->
 		<c:import url="../main/footer.jsp" />
-
-
-
     </div>
     <!-- /#all -->
-
-
-    
-
-   
-
-
-
 </body>
 </html>

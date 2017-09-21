@@ -226,13 +226,10 @@ button {
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="">공지사항</a>
+                                    <a href="qna.selectFaq.do">자주하는 질문</a>
                                 </li>
                                 <li>
-                                    <a href="">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="">문의하기</a>
+                                    <a href="qna.selectList.do">1:1문의</a>
                                 </li>
 
                             </ul>
@@ -309,19 +306,27 @@ button {
                             <tr>
                                 <td>
                               
-                                    <span>
-                                      <center>
+                                   
+<%-- <<<<<<< HEAD
+                                      
+                                       <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
+                                     &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">수정</button></a>
+                                     &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">삭제</button></a>
+ --%>
+
+                                      <p style="text-align:center">
+                                       <span>
                                        <a href="javascript:history.back()"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list" style="border-style: 1px solid #18ba9b;
                   "><!-- <i class="fa fa-shopping-cart"></i> --> 목록</button></a>
                                      &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">수정</button></a>
                                      &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">삭제</button></a>
-                                 
-                                 
+                                  </span>
+                                 </p>
                                
                                  
                                    
-                      </center>
-                                    </span>
+                    
+                                   
                                     
                                 </td>
                             </tr>

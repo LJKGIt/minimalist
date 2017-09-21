@@ -26,8 +26,8 @@ public class AuctionDao {
 	}
 	
 	//경매 물품 리스트 selectList (전체보기)
-	public ArrayList<Auction> selectList(HashMap map){
-		List list=null;
+	public ArrayList<Auction> selectList(HashMap<String, Object> map){
+		List<Auction> list=null;
 		
 		list=sqlSession.selectList("Auction.selectList", map);
 		
@@ -42,8 +42,8 @@ public class AuctionDao {
 	}
 	
 	//카테고리 리스트
-	public ArrayList<Auction> selectListCategory(HashMap map){
-		List list=null;
+	public ArrayList<Auction> selectListCategory(HashMap<String, Object> map){
+		List<Auction> list=null;
 		
 		list=sqlSession.selectList("Auction.selectListCategory", map);
 		
@@ -105,8 +105,8 @@ public class AuctionDao {
 	}
 	
 	//종료된 옥션 리스트
-	public ArrayList<Auction> selectListEnd(HashMap map){
-		List list=null;
+	public ArrayList<Auction> selectListEnd(HashMap<String, Object> map){
+		List<Auction> list=null;
 		
 		list=sqlSession.selectList("Auction.selectListEnd", map);
 		
@@ -115,8 +115,14 @@ public class AuctionDao {
 	
 	
 	//종료된 옥션 - 결제 확인
-	public int checkPayment(HashMap map){
+	public int checkPayment(HashMap<String, Object> map){
 		
 		return sqlSession.update("Auction.checkPayment", map);
+	}
+
+	// MEMBER 별 AUCTION LIST 조회
+	public ArrayList<Auction> selectMemberAuction(String member_id) {
+		List<Auction> list = sqlSession.selectList("Auction.selectMemberAuction", member_id);
+		return (ArrayList<Auction>)list;
 	}
 }

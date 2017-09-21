@@ -2,51 +2,64 @@ package com.kh.minimalist.product.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Product implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2222222222222222222L;
+	private static final long serialVersionUID = 2222122122222222222L;
 	private int product_code;
 	private String product_name;
 	private String product_category;
 	private String product_brand;
 	private String product_descript;
+	private int product_original_price;
 	private int rent_price;
-	private int product_quantity;
-	private int rent_count;
-	private String product_size;
+	private String product_size33;
+	private String product_size44;
+	private String product_size55;
+	private String product_size66;
+	private String product_size77;
 	private String product_color;
 	private Date receive_date;
+
+	private ArrayList<ProductImage> productImageList;
 
 	public Product() {
 	}
 
 	public Product(int product_code, String product_name, String product_category, String product_brand,
-			String product_descript, int rent_price, int product_quantity, int rent_count, String product_size,
-			String product_color, Date receive_date) {
+			String product_descript, int product_original_price, int rent_price, String product_size33,
+			String product_size44, String product_size55, String product_size66, String product_size77,
+			String product_color, Date receive_date, ArrayList<ProductImage> productImageList) {
 		super();
 		this.product_code = product_code;
 		this.product_name = product_name;
 		this.product_category = product_category;
 		this.product_brand = product_brand;
 		this.product_descript = product_descript;
+		this.product_original_price = product_original_price;
 		this.rent_price = rent_price;
-		this.product_quantity = product_quantity;
-		this.rent_count = rent_count;
-		this.product_size = product_size;
+		this.product_size33 = product_size33;
+		this.product_size44 = product_size44;
+		this.product_size55 = product_size55;
+		this.product_size66 = product_size66;
+		this.product_size77 = product_size77;
 		this.product_color = product_color;
 		this.receive_date = receive_date;
+		this.productImageList = productImageList;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [product_code=" + product_code + ", product_name=" + product_name + ", product_category="
 				+ product_category + ", product_brand=" + product_brand + ", product_descript=" + product_descript
-				+ ", rent_price=" + rent_price + ", product_quantity=" + product_quantity + ", rent_count=" + rent_count
-				+ ", product_size=" + product_size + ", product_color=" + product_color + ", receive_date="
-				+ receive_date + "]";
+				+ ", product_original_price=" + product_original_price + ", rent_price=" + rent_price
+				+ ", product_size33=" + product_size33 + ", product_size44=" + product_size44 + ", product_size55="
+				+ product_size55 + ", product_size66=" + product_size66 + ", product_size77=" + product_size77
+				+ ", product_color=" + product_color + ", receive_date=" + receive_date + ", productImageList="
+				+ productImageList + "]";
 	}
 
 	public int getProduct_code() {
@@ -89,6 +102,14 @@ public class Product implements Serializable {
 		this.product_descript = product_descript;
 	}
 
+	public int getProduct_original_price() {
+		return product_original_price;
+	}
+
+	public void setProduct_original_price(int product_original_price) {
+		this.product_original_price = product_original_price;
+	}
+
 	public int getRent_price() {
 		return rent_price;
 	}
@@ -97,28 +118,44 @@ public class Product implements Serializable {
 		this.rent_price = rent_price;
 	}
 
-	public int getProduct_quantity() {
-		return product_quantity;
+	public String getProduct_size33() {
+		return product_size33;
 	}
 
-	public void setProduct_quantity(int product_quantity) {
-		this.product_quantity = product_quantity;
+	public void setProduct_size33(String product_size33) {
+		this.product_size33 = product_size33;
 	}
 
-	public int getRent_count() {
-		return rent_count;
+	public String getProduct_size44() {
+		return product_size44;
 	}
 
-	public void setRent_count(int rent_count) {
-		this.rent_count = rent_count;
+	public void setProduct_size44(String product_size44) {
+		this.product_size44 = product_size44;
 	}
 
-	public String getProduct_size() {
-		return product_size;
+	public String getProduct_size55() {
+		return product_size55;
 	}
 
-	public void setProduct_size(String product_size) {
-		this.product_size = product_size;
+	public void setProduct_size55(String product_size55) {
+		this.product_size55 = product_size55;
+	}
+
+	public String getProduct_size66() {
+		return product_size66;
+	}
+
+	public void setProduct_size66(String product_size66) {
+		this.product_size66 = product_size66;
+	}
+
+	public String getProduct_size77() {
+		return product_size77;
+	}
+
+	public void setProduct_size77(String product_size77) {
+		this.product_size77 = product_size77;
 	}
 
 	public String getProduct_color() {
@@ -135,6 +172,14 @@ public class Product implements Serializable {
 
 	public void setReceive_date(Date receive_date) {
 		this.receive_date = receive_date;
+	}
+
+	public ArrayList<ProductImage> getProductImageList() {
+		return productImageList;
+	}
+
+	public void setProductImageList(ArrayList<ProductImage> productImageList) {
+		this.productImageList = productImageList;
 	}
 
 }

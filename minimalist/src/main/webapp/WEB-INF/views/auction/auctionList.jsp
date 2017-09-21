@@ -120,7 +120,7 @@ body {
                                         </div>
                                         <div class="back">
                                             <a href="auction.selectOne.do?auction_code=${au.auction_code}">
-                                                <img src="/minimalist/resources/img_auction/${img1}" alt="" class="img-responsive">
+                                                <img src="/minimalist/resources/img_auction/${img2}" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
@@ -130,9 +130,9 @@ body {
                                     
                                 </a>
                                 <div class="text">
-                                    <h3><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.product_brand} - ${au.product_name }</a></h3>
+                                    <h3><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.product_brand} <br> ${au.product_name }</a></h3>
                                     <p class="price"><font size=3px>현재 입찰가 : <fmt:formatNumber value="${au.bid_price}" type="currency"/></font> </p>
-                                    <p><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매 종료 :<fmt:formatDate value="${au.end_date}" type="date" pattern="MM월dd일"/></font> </p>
+                                    <p align="center"><font color="red">경매 종료 :<fmt:formatDate value="${au.end_date}" type="date" pattern="MM월dd일"/></font> </p>
                                     <p class="buttons">
                                         <a href="auction.selectOne.do?auction_code=${au.auction_code}" class="btn btn-default">View detail</a>
                                      

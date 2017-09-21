@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
+
 
 
 <!DOCTYPE html>
@@ -159,13 +159,10 @@ input {
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="">공지사항</a>
+                                    <a href="qna.selectFaq.do">자주하는 질문</a>
                                 </li>
                                 <li>
-                                    <a href="">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="">문의하기</a>
+                                    <a href="qna.selectList.do">1:1문의</a>
                                 </li>
 
                             </ul>

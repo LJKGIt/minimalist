@@ -94,7 +94,7 @@ public class NoticeController {
 		int endRow=startRow+countList-1;
 		//현재 화면에서 보여줄 글의 마지막 rownum
 		
-		HashMap map=new HashMap();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);

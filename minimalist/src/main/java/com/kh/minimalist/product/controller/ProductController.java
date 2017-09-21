@@ -2,6 +2,8 @@ package com.kh.minimalist.product.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	
+	// TODO [lintogi] 찜 목록을 만들기.
+	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
-	public String productDetail(Product product, Model model){
+	public String productDetail(Product product, Model model, HttpServletRequest request){
 		String result = null;
 		
 		Product product_return = productService.productDetail(product);
@@ -29,13 +34,14 @@ public class ProductController {
 			result = "main/404";
 		}
 		
+		
 		return result;
+	
 	}
 
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, Model model){
 		String result = null;
-
 		ArrayList<Product> productList = productService.productList(product);
 		if(productList != null && productList.size() != 0){
 			model.addAttribute("productList", productList);

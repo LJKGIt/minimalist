@@ -180,7 +180,7 @@ $(function(){
                         <div class="col-sm-6">
                             <div class="box">
                             	<span id="code" style="display:none">${auction.auction_code}</span>
-                                <h1 class="text-center">${auction.product_brand} - ${auction.product_name}</h1>
+                                <h1 class="text-center">${auction.product_brand} <br> ${auction.product_name}</h1>
                              
                                 <p class="price"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bid_price}</span> 원</font></p>
 								<p><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -220,7 +220,7 @@ $(function(){
                         <p>
                             <h4>Product details</h4>
                             <p>${auction.product_descript}</p>
-                            <h4>color&size</h4>
+                            <h4>color&#38;size</h4>
                             <ul>
                                 <li>color : ${auction.product_color}</li>
                                 <li>size : ${auction.product_size }</li>
@@ -253,7 +253,9 @@ $(function(){
 		<c:import url="../main/footer.jsp" />
 
 
-
+		</div>
+		</div>
+		</div>
     </div>
     <!-- /#all -->
 
