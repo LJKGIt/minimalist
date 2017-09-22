@@ -25,6 +25,11 @@ public class ProductController {
 	private ProductService productService;
 
 	
+	// TODO [lintogi] 찜 목록을 만들기.
+	// TODO [lintogi] list.jsp의 바탕을 하얗게 만들기.
+	
+
+	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
@@ -48,6 +53,7 @@ public class ProductController {
 		} else {
 			result = "main/404";
 		}
+
 		return result;
 	
 	}

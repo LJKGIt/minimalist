@@ -163,7 +163,7 @@
 											</ul>
 										</div>
 										<%
-											//TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'acessory' 카테고리로 이동하게 만들었다.
+											// TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'acessory' 카테고리로 이동하게 만들었다.
 										%>
 										<div class="col-sm-3">
 											<h5>Featured</h5>

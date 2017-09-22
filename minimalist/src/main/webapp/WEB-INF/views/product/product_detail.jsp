@@ -270,7 +270,7 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div> -->
-                    <% //TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
+                    <% // TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
 					<a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a>
                     </div>
 					
