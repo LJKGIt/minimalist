@@ -286,7 +286,7 @@
 				var sct = $(window).scrollTop()
 
 				$('body section').each(function(i, e) {
-					bg(sct)
+					bg(sct);
 				})
 
 			})
@@ -301,7 +301,8 @@
 
 				} else {
 					$('.goTop').css({
-						'opacity' : '0'
+						//TODO [yjP] 원래 0이었음
+						'opacity' : '1'
 
 					})
 
@@ -329,6 +330,6 @@
 		})
 	</script>
 
-
+<script src="resources/js/slick.js"></script>
 </body>
 </html>
