@@ -30,6 +30,7 @@ public class ProductController {
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
 	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
+	// TODO [lintogi] ■ ACUTION 테이블에 product_name, category 등이 쓰이던데 이름이 겹치니 바꿔도 되는지 여쭤보기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
