@@ -89,8 +89,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
-									style="margin: 10px; width: 60px; float: left;" />
+									src="${ pageContext.request.contextPath }/resources/img_product/${ recent.product_code }_1.jpg"
+									style="margin: 10px; width: 60px; height: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -113,8 +113,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
-									style="margin: 10px; width: 60px; float: left;" />
+									src="resources/img/sample.gif"
+									style="margin: 10px; width: 60px; height: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -136,8 +136,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
-									style="margin: 10px; width: 60px; float: left;" />
+									src="resources/img/sample.gif"
+									style="margin: 10px; width: 60px; height: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -159,8 +159,8 @@
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="customer-order.jsp"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
-									style="margin: 10px; width: 60px; float: left;" />
+									src="resources/img/sample.gif"
+									style="margin: 10px; width: 60px; height: 60px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
@@ -241,7 +241,7 @@
 
 				<!-- RECENT VIEW (모바일 구현 X) -->
 				<div class="col-md-1 visible-lg-block visible-md-block"
-					style="position: fixed; margin-left: 480px; left: 50%; bottom: 165px;">
+					style="position: absolute; margin-left: 480px; left: 50%;">
 					<!-- 893px ~ 1080px 까지는 달라짐 -->
 					<div class="box" style="width: 150px; padding: 10px;">
 						<div class="box"
@@ -299,7 +299,7 @@
 				var sct = $(window).scrollTop()
 
 				$('body section').each(function(i, e) {
-					bg(sct)
+					bg(sct);
 				})
 
 			})
@@ -314,7 +314,8 @@
 
 				} else {
 					$('.goTop').css({
-						'opacity' : '0'
+						//TODO [yjP] 원래 0이었음
+						'opacity' : '1'
 
 					})
 
@@ -342,6 +343,6 @@
 		})
 	</script>
 
-
+<script src="resources/js/slick.js"></script>
 </body>
 </html>
