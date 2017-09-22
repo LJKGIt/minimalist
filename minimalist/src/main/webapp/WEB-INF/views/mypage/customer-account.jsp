@@ -79,7 +79,7 @@
 								<!-- PASSWORD FORM 
 								 <input type="password"
 										class="form-control" id="member_pwd" name="member_pwd">
-								</div>
+								</div> 
 								<div class="form-group">
 									<label for="pwd2">Password Check</label> <input type="password"
 										class="form-control" id="member_pwd2">
