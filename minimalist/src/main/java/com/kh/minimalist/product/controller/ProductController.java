@@ -96,9 +96,10 @@ public class ProductController {
 	}
 
 	// TODO [lintogi] UPDATE 오류다.
-	@RequestMapping(value = "productDelete.do", method = RequestMethod.GET)
+	@RequestMapping(value = "productDelete.do", method = RequestMethod.POST)
 	public String productDelete(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
+		System.out.println(product);
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productDelete(product);
 			if(result > 0){
