@@ -14,8 +14,6 @@ DROP TABLE QNA CASCADE CONSTRAINTS;
 DROP TABLE PRODUCT_IMAGE CASCADE CONSTRAINTS;
 DROP TABLE INCOME CASCADE CONSTRAINTS;
 
-
-
 ------------------------------------------------생성
 
 --회원 테이블
@@ -33,9 +31,6 @@ POINT NUMBER,
 GRADE NUMBER,
 DORMANT_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_DOR CHECK (DORMANT_YN IN('y', 'n')),
 EMAIL VARCHAR2(100));
-
-
-
 
 --대여 아이템(상품)
 CREATE TABLE PRODUCT(
@@ -65,8 +60,6 @@ RETURN_DATE DATE,
 CONSTRAINT RENT_LIST_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
 CONSTRAINT  RENT_LIST_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE SET NULL);
 
-
-
 --대여예약
 CREATE TABLE RENTAL_RESERVE(
 PRODUCT_CODE NUMBER,
@@ -76,14 +69,12 @@ RETURN_DATE DATE,
 CONSTRAINT RESERVE_RENT_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
 CONSTRAINT  RESERVE_RENT_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
-
 --찜목록
 CREATE TABLE CART(
 MEMBER_ID VARCHAR2(20),
 PRODUCT_CODE NUMBER,
 CONSTRAINT CART_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
 CONSTRAINT  CART_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
-
 
 --쪽지
 CREATE TABLE MESSAGE(
@@ -94,7 +85,6 @@ MESSAGE_CONTENT VARCHAR2(500),
 SEND_DATE DATE,
 CHECK_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_MSG CHECK (CHECK_YN IN('y', 'n')),
 CONSTRAINT MESSAGE_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
-
 
 -- 경매
 CREATE TABLE AUCTION(
@@ -121,7 +111,6 @@ ALERT_DATE DATE,
 CONSTRAINT ALERT_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE),
 CONSTRAINT  ALERT_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
 
-
 --공지사항
 CREATE TABLE NOTICE(
 NOTICE_NO NUMBER PRIMARY KEY,
@@ -129,21 +118,7 @@ NOTICE_TITLE VARCHAR2(100),
 NOTICE_CONTENT VARCHAR2(1000),
 NOTICE_DATE DATE);
 
-
 --후기게시판
-<<<<<<< HEAD
-create table review(
-review_no number primary key,
-product_code number,
-member_id varchar2(20),
-review_title varchar2(50),
-review_content varchar2(1000),
-review_rating number,
-image_path varchar2(1000),
-review_date date,
-constraint review_fk1 foreign key (member_id) references member (member_id),
-constraint review_fk2 foreign key (product_code) references product (product_code) on delete cascade);
-=======
 CREATE TABLE REVIEW(
 REVIEW_NO NUMBER PRIMARY KEY,
 PRODUCT_CODE NUMBER,
@@ -156,8 +131,6 @@ RENAME_IMG_NAME VARCHAR2(100),
 REVIEW_DATE DATE,
 CONSTRAINT REVIEW_FK1 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID),
 CONSTRAINT REVIEW_FK2 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE) ON DELETE CASCADE);
->>>>>>> refs/remotes/origin/branch_lintogi
-
 
 --문의 게시판
 CREATE TABLE QNA(
@@ -186,12 +159,17 @@ CONSTRAINT INCO_FK1 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE)
 CONSTRAINT INCO_FK2 FOREIGN KEY (AUCTION_CODE) REFERENCES AUCTION (AUCTION_CODE),
 CONSTRAINT INCO_UNI UNIQUE (PRODUCT_CODE, INCOME_DATE));
 
-
 ------------------------------- 샘플데이터 ------------------------------------
 
 INSERT INTO MEMBER VALUES(
-'admin', 'admin', '관리자', TO_DATE('19891002', 'yymmdd'), SYSDATE,
+'admin', 'admin', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE,
 '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com');
+INSERT INTO MEMBER VALUES(
+'usera', 'usera', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE,
+'010-1111-1111', '11-11', '역삼동','고시원', 0, 0, 'n', 'asdf01@gmail.com');
+INSERT INTO MEMBER VALUES(
+'userb', 'userb', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE,
+'010-2222-2222', '22-22', '역삼동','고시원', 0, 0, 'n', 'asdf02@gmail.com');
 
 CREATE TABLE PRODUCT_IMAGE(
     IMAGE_CODE VARCHAR2(200),
@@ -258,7 +236,7 @@ INSERT INTO PRODUCT_IMAGE VALUES(1500000008, '1500000008_3.jpg');
 
 
 INSERT INTO RENT_LIST VALUES(
-1, 2, 'admin', TO_DATE('20170808', 'yymmdd'), TO_DATE('20170815', 'yymmdd'));
+1, 2, 'admin', TO_DATE('20170808', 'YYMMDD'), TO_DATE('20170815', 'YYMMDD'));
 
 INSERT INTO RENTAL_RESERVE VALUES(
 2, 'admin', SYSDATE, SYSDATE);
@@ -270,21 +248,21 @@ INSERT INTO MESSAGE VALUES(
 1, 'admin', '안녕', '나는 관리자야', SYSDATE, 'n');
 
 INSERT INTO AUCTION VALUES(
-1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171025', 'yymmdd'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
+1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
 
 INSERT INTO AUCTION VALUES(
-2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171028', 'yymmdd'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
+2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(
-3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'yymmdd'), TO_DATE('20171030', 'yymmdd'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
+3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(
-4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'yymmdd'), TO_DATE('20170909', 'yymmdd'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
+4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(
-5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'yymmdd'), TO_DATE('20171021', 'yymmdd'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
+5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
 
 
 
 INSERT INTO ALERT VALUES(
-'admin', 3, TO_DATE('20170901', 'yymmdd'));
+'admin', 3, TO_DATE('20170901', 'YYMMDD'));
 
 
 INSERT INTO NOTICE VALUES(

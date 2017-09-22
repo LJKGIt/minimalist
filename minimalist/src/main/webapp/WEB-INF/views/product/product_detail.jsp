@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
 	<% // TODO [lintogi] 브랜드, 색상, 정렬 처리하기. %>
    	<c:import url="../main/header.jsp" />
 
-    <div id="all">
+    <div id="all" style="background:white;">
 
         <div id="content">
             <div class="container">
@@ -26,9 +27,9 @@
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li><a href="#">Ladies</a>
+                        <li><a href="#">Product</a>
                         </li>
-                        <li><a href="#">Dress</a><% //TODO [lintogi] 카테고리 순서 처리하기. %>
+                        <li><a href="#">${fn:toUpperCase(product.product_category)}</a>
                         </li>
                         <li>${ product.product_name }</li>
                     </ul>
@@ -214,7 +215,11 @@
                                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
                                     <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
                                 </p>
-
+								<script type="text/javascript">
+									$(function(){
+										alert("가가");
+									});
+								</script>
 
                             </div>
 
@@ -270,7 +275,6 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div> -->
-                    <% // TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
 					<a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a>
                     </div>
 					
@@ -282,17 +286,17 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
+                            <div class="product same-height" style="border:none;">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
@@ -478,7 +482,11 @@
 
 
 
-
+	<script type="text/javascript">
+		$(function(){
+			$('body').css("background", "white");
+		});
+	</script>
 
 
 </body>

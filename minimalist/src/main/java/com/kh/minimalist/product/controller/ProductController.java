@@ -26,7 +26,6 @@ public class ProductController {
 
 	
 	// TODO [lintogi] 찜 목록을 만들기.
-	// TODO [lintogi] list.jsp의 바탕을 하얗게 만들기.
 	
 
 	
@@ -43,7 +42,6 @@ public class ProductController {
 				new CookieUtils().setCookie(((Member) session.getAttribute("member")).getMember_id(),
 						String.valueOf(product.getProduct_code()), 365, request, response);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

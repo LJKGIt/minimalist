@@ -159,7 +159,6 @@ public class MemberController {
 	// }
 	// })
 	// } catch (Exception e) {
-	// // TODO: handle exception
 	// }
 	// }
 	
@@ -180,7 +179,6 @@ public class MemberController {
 				}
 				model.addAttribute("cookieList", cookieList);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
