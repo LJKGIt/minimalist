@@ -26,30 +26,33 @@ public class WishController {
 	@RequestMapping(value = "wishInsert.do", method = RequestMethod.POST)
 	public void wishInsert(@RequestParam("product_code") int product_code, Model model, HttpSession session,
 			HttpServletResponse response) {
-
+		PrintWriter writer = null;
 		if ((Member) session.getAttribute("member") != null) {
 			Wish wish = new Wish(((Member) session.getAttribute("member")).getMember_id(), product_code);
-			// TODO [lintogi] WISH 테이블에서 두 개 컬럼을 조합으로하여 PRIMARY_KEY를 지정하기.
 			int result = wishService.wishInsert(wish);
 
 			try {
-				PrintWriter writer = response.getWriter();
+				writer = response.getWriter();
 				if (result > 0) {
 					writer.append("true");
 				} else {
 					writer.append("false");
 				}
-				// TODO [lintogi] flush, close 하던데 뭔지 알아보기.
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				writer.flush();
+				writer.close();
 			}
 		} else {
 			try {
-				PrintWriter writer = response.getWriter();
+				writer = response.getWriter();
 				writer.append("login");
-				// TODO [lintogi] flush, close 하던데 뭔지 알아보기.
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				writer.flush();
+				writer.close();
 			}
 		}
 
@@ -58,29 +61,33 @@ public class WishController {
 	@RequestMapping(value = "wishDelete.do", method = RequestMethod.POST)
 	public void wishDelete(@RequestParam("product_code") int product_code, Model model, HttpSession session,
 			HttpServletResponse response) {
+		PrintWriter writer = null;
 		if ((Member) session.getAttribute("member") != null) {
 			Wish wish = new Wish(((Member) session.getAttribute("member")).getMember_id(), product_code);
 			// TODO [lintogi] WISH 테이블에서 두 개 컬럼을 조합으로하여 PRIMARY_KEY를 지정하기.
 			int result = wishService.wishDelete(wish);
-
 			try {
-				PrintWriter writer = response.getWriter();
+				writer = response.getWriter();
 				if (result > 0) {
 					writer.append("true");
 				} else {
 					writer.append("false");
 				}
-				// TODO [lintogi] flush, close 하던데 뭔지 알아보기.
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				writer.flush();
+				writer.close();
 			}
 		} else {
 			try {
-				PrintWriter writer = response.getWriter();
+				writer = response.getWriter();
 				writer.append("login");
-				// TODO [lintogi] flush, close 하던데 뭔지 알아보기.
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				writer.flush();
+				writer.close();
 			}
 		}
 	}

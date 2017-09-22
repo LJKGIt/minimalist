@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+			<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <!DOCTYPE html>
             <html>
 
@@ -141,67 +142,11 @@
                                                 <div class="box">
                                                     <h1 class="text-center">${ product.product_name }</h1>
                                                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &#38; care and sizing</a> </p>
-                                                    <p class="price">${ product.rent_price }</p>
+                                                    <p class="price"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                                     <p class="text-center buttons"> <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 바로구매</a>
                                                         <c:if test="${ empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Add to wishlist</a> </c:if>
                                                         <c:if test="${ not empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Remove to wishlist</a> </c:if>
-                                                            <% // TODO [lintogi] 하트 색상이 바뀌는지 font-color 같은 것으로 테스트하기. style="font-color:red;"%>
-                                                                <% // TODO [lintogi] 버튼 눌린 효과 만들기. %>
                                                     </p>
-                                                    <% // TODO [lintogi] 나중에 아래로 옮기기. %>
-                                                        <script type="text/javascript">
-                                                            $(function () {
-                                                                $('#i_a_wish').on('click', function () {
-                                                                    var this_i_a_wish = $(this);
-                                                                    if (this_i_a_wish.text() == " Add to wishlist") {
-                                                                        $.ajax({
-                                                                            url: "wishInsert.do"
-                                                                            , type: "POST"
-                                                                            , // TODO 150000001 값을 동적으로 바꾸기.
-                                                                            data: {
-                                                                                product_code: 1500000001
-                                                                            }
-                                                                            , success: function (data) {
-                                                                                if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");
-                                                                                    <% // TODO [lintogi] 값 변경으로 바꾸기. %>
-                                                                                }
-                                                                                else if (data == "false") {
-                                                                                    alert("찜하기 중 오류가 발생했습니다.");
-                                                                                }
-                                                                                else if (data == "login") {
-                                                                                    alert("로그인해주시기 바랍니다.");
-                                                                                }
-                                                                            }
-                                                                            , error: function (data) {
-                                                                                alert("찜하기 중 오류가 발생했습니다.");
-                                                                            }
-                                                                        }); //ajax */
-                                                                    }
-                                                                    else if (this_i_a_wish.text() == " Remove to wishlist") {
-                                                                        $.ajax({
-                                                                            url: "wishDelete.do"
-                                                                            , type: "POST"
-                                                                            , data: {
-                                                                                product_code: 1500000001
-                                                                            }
-                                                                            , success: function (data) {
-                                                                                if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Add to wishlist");
-                                                                                }
-                                                                                else {
-                                                                                    alert("찜하기 중 오류가 발생했습니다.");
-                                                                                }
-                                                                            }
-                                                                            , error: function (data) {
-                                                                                alert("찜하기 중 오류가 발생했습니다.");
-                                                                            }
-                                                                        }); //ajax */
-                                                                    }
-                                                                    return false;
-                                                                }); //click
-                                                            }); //ready
-                                                        </script>
                                                 </div>
                                                 <div class="row" id="thumbs">
                                                     <div class="col-xs-4">
@@ -388,6 +333,58 @@
                                 $('body').css("background", "white");
                             });
                         </script>
+                        <script type="text/javascript">
+                                                            $(function () {
+                                                                $('#i_a_wish').on('click', function () {
+                                                                    var this_i_a_wish = $(this);
+                                                                    if (this_i_a_wish.text() == " Add to wishlist") {
+                                                                        $.ajax({
+                                                                            url: "wishInsert.do"
+                                                                            , type: "POST"
+                                                                            , 
+                                                                            data: {
+                                                                                product_code: ${ product.product_code }
+                                                                            }
+                                                                            , success: function (data) {
+                                                                                if (data == "true") {
+                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");
+                                                                                }
+                                                                                else if (data == "false") {
+                                                                                    alert("찜하기 중 오류가 발생했습니다.");
+                                                                                }
+                                                                                else if (data == "login") {
+                                                                                    alert("로그인해주시기 바랍니다.");
+                                                                                }
+                                                                            }
+                                                                            , error: function (data) {
+                                                                                alert("찜하기 중 오류가 발생했습니다.");
+                                                                            }
+                                                                        }); //ajax */
+                                                                    }
+                                                                    else if (this_i_a_wish.text() == " Remove to wishlist") {
+                                                                        $.ajax({
+                                                                            url: "wishDelete.do"
+                                                                            , type: "POST"
+                                                                            , data: {
+                                                                                product_code: ${ product.product_code }
+                                                                            }
+                                                                            , success: function (data) {
+                                                                                if (data == "true") {
+                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Add to wishlist");
+                                                                                }
+                                                                                else {
+                                                                                    alert("찜하기 중 오류가 발생했습니다.");
+                                                                                }
+                                                                            }
+                                                                            , error: function (data) {
+                                                                                alert("찜하기 중 오류가 발생했습니다.");
+                                                                            }
+                                                                        }); //ajax */
+                                                                    }
+                                                                    return false;
+                                                                }); //click
+                                                            }); //ready
+                                                        </script>
             </body>
 
             </html>

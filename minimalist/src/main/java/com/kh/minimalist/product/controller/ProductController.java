@@ -29,19 +29,20 @@ public class ProductController {
 	private WishService wishService;
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
-	
+
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		String result = null;
 
 		Product product_return = productService.productDetail(product);
-		
+
 		Wish wish = null;
-		if((Member) session.getAttribute("member") != null){
-			wish = wishService.wishSelectOne(new Wish(((Member) session.getAttribute("member")).getMember_id(), product.getProduct_code()));
+		if ((Member) session.getAttribute("member") != null) {
+			wish = wishService.wishSelectOne(
+					new Wish(((Member) session.getAttribute("member")).getMember_id(), product.getProduct_code()));
 		}
-		
+
 		// UPDATE COOKIE
 		if ((Member) session.getAttribute("member") != null) {
 			try {
@@ -67,11 +68,7 @@ public class ProductController {
 	public String productList(Product product, Model model) {
 		String result = null;
 		ArrayList<Product> productList = productService.productList(product);
-		
-		for(Product aa : productList){
-			System.out.println(aa);
-		}
-		
+
 		if (productList != null && productList.size() != 0) {
 			model.addAttribute("productList", productList);
 			result = "product/product_list";
