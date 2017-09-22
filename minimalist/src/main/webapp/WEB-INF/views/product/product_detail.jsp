@@ -7,7 +7,7 @@
 
             <head>
                 <title> Obaju : e-commerce template </title>
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </head>
+            </head>
 
             <body>
                 <% // TODO [lintogi] 조회수 처리하기. %>
@@ -142,9 +142,9 @@
                                                     <h1 class="text-center">${ product.product_name }</h1>
                                                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &#38; care and sizing</a> </p>
                                                     <p class="price">${ product.rent_price }</p>
-                                                    <p class="text-center buttons"> <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 구매</a>
-                                                        <c:if test="${ empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart'></i> Add to wishlist</a> </c:if>
-                                                        <c:if test="${ not empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart'></i> Remove to wishlist</a> </c:if>
+                                                    <p class="text-center buttons"> <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 바로구매</a>
+                                                        <c:if test="${ empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Add to wishlist</a> </c:if>
+                                                        <c:if test="${ not empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Remove to wishlist</a> </c:if>
                                                             <% // TODO [lintogi] 하트 색상이 바뀌는지 font-color 같은 것으로 테스트하기. style="font-color:red;"%>
                                                                 <% // TODO [lintogi] 버튼 눌린 효과 만들기. %>
                                                     </p>
@@ -163,7 +163,7 @@
                                                                             }
                                                                             , success: function (data) {
                                                                                 if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart'></i> Remove to wishlist");
+                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");
                                                                                     <% // TODO [lintogi] 값 변경으로 바꾸기. %>
                                                                                 }
                                                                                 else if (data == "false") {
@@ -187,7 +187,7 @@
                                                                             }
                                                                             , success: function (data) {
                                                                                 if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart'></i> Add to wishlist");
+                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Add to wishlist");
                                                                                 }
                                                                                 else {
                                                                                     alert("찜하기 중 오류가 발생했습니다.");
