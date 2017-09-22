@@ -24,5 +24,12 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.productList(product);
 	}
 
+	@Override
+	public void productHit(Product product) {
+		System.out.println("3");
+		productDao.productHit(product);
+		System.out.println("4");
+	}
+
 
 }

@@ -8,5 +8,7 @@ public interface ProductService {
 	Product productDetail(Product product);
 
 	ArrayList<Product> productList(Product product);
+
+	void productHit(Product product);
 	
 }

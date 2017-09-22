@@ -42,5 +42,10 @@
 		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
+	<update id="productHit" parameterType="Product">
+		UPDATE PRODUCT  
+		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
+		WHERE PRODUCT_CODE = #{product_code}
+	</update>
 
 </mapper>

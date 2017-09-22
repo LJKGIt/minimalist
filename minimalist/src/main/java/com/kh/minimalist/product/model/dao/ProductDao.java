@@ -11,22 +11,27 @@ import com.kh.minimalist.product.model.vo.Product;
 
 @Repository("productDao")
 public class ProductDao {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ProductDao(){
+	public ProductDao() {
 	}
-	
+
 	public Product productDetail(Product product) {
-		return sqlSession.selectOne("Product.productDetail", product) ;
+		return sqlSession.selectOne("Product.productDetail", product);
 	}
 
 	public ArrayList<Product> productList(Product product) {
 		List<Product> productList = sqlSession.selectList("Product.productList", product);
-		return (ArrayList<Product>)productList;
+		return (ArrayList<Product>) productList;
 	}
 
-	
+	public void productHit(Product product) {
+		System.out.println("5");
+		System.out.println(product);
+		int result = sqlSession.update("Product.productHit", product);
+		System.out.println("6");
+	}
 
 }

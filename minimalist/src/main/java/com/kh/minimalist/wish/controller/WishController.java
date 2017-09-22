@@ -64,7 +64,6 @@ public class WishController {
 		PrintWriter writer = null;
 		if ((Member) session.getAttribute("member") != null) {
 			Wish wish = new Wish(((Member) session.getAttribute("member")).getMember_id(), product_code);
-			// TODO [lintogi] WISH 테이블에서 두 개 컬럼을 조합으로하여 PRIMARY_KEY를 지정하기.
 			int result = wishService.wishDelete(wish);
 			try {
 				writer = response.getWriter();

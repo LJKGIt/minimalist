@@ -29,14 +29,18 @@ public class ProductController {
 	private WishService wishService;
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
+	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		String result = null;
 
+		System.out.println("1");
+		productService.productHit(product);
+		System.out.println("2");
 		Product product_return = productService.productDetail(product);
-
+		
 		Wish wish = null;
 		if ((Member) session.getAttribute("member") != null) {
 			wish = wishService.wishSelectOne(
@@ -52,6 +56,7 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
+		
 		if (product_return != null) {
 			model.addAttribute("product", product_return);
 			model.addAttribute("wish", wish);
