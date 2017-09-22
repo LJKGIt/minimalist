@@ -5,26 +5,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<title>Obaju : e-commerce template</title>
-=======
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<!-- integrity, crossorigin가 오류나고 중요하지 않은 코드이므로 주석으로 처리했습니다.
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  	 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>
-        Obaju : e-commerce template
-    </title>
->>>>>>> refs/remotes/origin/branch_lintogi
+<!-- integrity, crossorigin가 오류나고 중요하지 않은 코드이므로 주석으로 처리했습니다.
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<title>
+    Obaju : e-commerce template
+</title>
 </head>
 <body style="min-width: 360px;">
 
@@ -47,11 +37,11 @@
 						</div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li class="active"><a href="mypage.do"><i
+								<li class="active"><a href="member.mypage.do"><i
 										class="fa fa-list"></i> 주문내역</a></li>
 								<li><a href="wishlist.do"><i class="fa fa-heart"></i> 찜
 										목록</a></li>
-								<li><a href="infomation.do"><i class="fa fa-user"></i>
+								<li><a href="passwordCheck.do"><i class="fa fa-user"></i>
 										내 정보보기</a></li>
 								<li><a href="#"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
 								</li>

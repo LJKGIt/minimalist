@@ -65,122 +65,73 @@
 
                 <div class="col-md-9">
                     <div class="box">
-                        <h1>My account</h1>
-                        <p class="lead">Change your personal details or your password here.</p>
-                        <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        <form action="mupdate.do" method="post">
+								<div class="form-group">
+									<label for="id">ID</label><br>
+									<input type="text"
+										class="form-control" value="${ member.member_id }" disabled id="member_id" name="member_id" style="width: 60%; display: inline; margin-right: 20px;">
+										<div id="checkID"></div>
+								</div>
+								
+								<div class="form-group">
+									<label for="pwd">Password</label>
+								<a href="#" class="btn btn-primary"> 비밀번호 변경하기</a>
+								<!-- PASSWORD FORM 
+								 <input type="password"
+										class="form-control" id="member_pwd" name="member_pwd">
+								</div>
+								<div class="form-group">
+									<label for="pwd2">Password Check</label> <input type="password"
+										class="form-control" id="member_pwd2">
+										<div id="checkPwd"></div>
+										-->
+								</div> 
+								<div class="form-group">
+									<label for="name">Name</label> <input type="text"
+										class="form-control" id="member_name" name="member_name" style="width: 50%;">
+								</div>
+								<div class="form-group">
+									<label for="birth">Birth</label> <input type="date"
+										class="form-control" id="birth" name="birth" style="width: 50%">
+								</div>
+								<div class="form-group">
+									<label for="phone">Phone</label> <input type="tel"
+										class="form-control" id="phone" name="phone">
+								</div>
+								<!-- ADDRESS -->
+								<div class="form-group">
+									<label for="address">Address</label><br>
+								<input type="text" id="postcode" name="post"
+									placeholder="우편번호" class="form-control" style="width: 30%; display: inline; margin: 0 20px 10px 0"> <input type="button"
+									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary">
+								<input type="text" id="address" name="address1" placeholder="주소" class="form-control" style="margin-bottom: 10px;">
+								<input type="text" id="address2" name="address2"
+									placeholder="상세주소" class="form-control" ><br>
+								<div id="checkAddress"></div>
+								</div>
+								
+								<div class="form-group">
+									<label for="email">Email</label><br> <input type="text"
+										class="form-control" id="email_id" name="email1" style="width: 20%; display:inline;">@
+										<input type="text"
+										class="form-control" id="email_id2" name="email2" style="width: 20%; display:inline;">
+										<select class="form-control" id="email_sel" style="width: 20%; display:inline;">
+											<option>직접입력</option>
+											<option>naver.com</option>
+											<option>gmail.com</option>
+											<option>nate.com</option>
+											<option>iei.or.kr</option>
+										</select>
+										<a href="emailAuth.do" class="btn btn-primary">ㅇㅈ</a>
+								</div>
 
-                        <h3>Change password</h3>
 
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="password_old">Old password</label>
-                                        <input type="password" class="form-control" id="password_old">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="password_1">New password</label>
-                                        <input type="password" class="form-control" id="password_1">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="password_2">Retype new password</label>
-                                        <input type="password" class="form-control" id="password_2">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save new password</button>
-                            </div>
-                        </form>
-
-                        <hr>
-
-                        <h3>Personal details</h3>
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="firstname">Firstname</label>
-                                        <input type="text" class="form-control" id="firstname">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="lastname">Lastname</label>
-                                        <input type="text" class="form-control" id="lastname">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="company">Company</label>
-                                        <input type="text" class="form-control" id="company">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="street">Street</label>
-                                        <input type="text" class="form-control" id="street">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <div class="row">
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="city">Company</label>
-                                        <input type="text" class="form-control" id="city">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="zip">ZIP</label>
-                                        <input type="text" class="form-control" id="zip">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="state">State</label>
-                                        <select class="form-control" id="state"></select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="country">Country</label>
-                                        <select class="form-control" id="country"></select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="phone">Telephone</label>
-                                        <input type="text" class="form-control" id="phone">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="text" class="form-control" id="email">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
-
-                                </div>
-                            </div>
-                        </form>
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-user-md"></i> Register
+									</button>
+								</div>
+							</form>
                     </div>
                 </div>
 

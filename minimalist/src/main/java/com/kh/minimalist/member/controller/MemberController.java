@@ -198,9 +198,20 @@ public class MemberController {
 		return "mypage/customer-wishlist";
 	}
 
-	@RequestMapping("infomation.do")
-	public String myInfomation() {
-		return "mypage/customer-account";
+	@RequestMapping("passwordCheck.do")
+	public String myPasswordCheck() {
+		return "mypage/passwordCheck";
+	}
+	
+	@RequestMapping("information.do")
+	public String myInfomaion(Member m, HttpSession session){
+		String result = "mypage/passwordCheck";
+		if(m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())){
+			result = "mypage/customer-account";
+		}
+		return result;
+		
+		
 	}
 
 	// 회원 검색 페이지로 이동.

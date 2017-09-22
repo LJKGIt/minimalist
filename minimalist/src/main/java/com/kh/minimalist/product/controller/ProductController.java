@@ -43,7 +43,6 @@ public class ProductController {
 				new CookieUtils().setCookie(((Member) session.getAttribute("member")).getMember_id(),
 						String.valueOf(product.getProduct_code()), 365, request, response);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
