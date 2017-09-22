@@ -24,4 +24,5 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.productList(product);
 	}
 
+
 }

@@ -26,6 +26,7 @@ public class ProductDao {
 		List<Product> productList = sqlSession.selectList("Product.productList", product);
 		return (ArrayList<Product>)productList;
 	}
+
 	
 
 }
