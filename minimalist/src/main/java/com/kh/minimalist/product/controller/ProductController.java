@@ -28,8 +28,8 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] 찜 목록을 만들기.
-
+	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
+	
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
@@ -37,7 +37,6 @@ public class ProductController {
 
 		Product product_return = productService.productDetail(product);
 		
-		// TODO [lintogi] detail.jsp에서 null 여부 확인해서 Wish에 Add, Remove를 처리하기.
 		Wish wish = null;
 		if((Member) session.getAttribute("member") != null){
 			wish = wishService.wishSelectOne(new Wish(((Member) session.getAttribute("member")).getMember_id(), product.getProduct_code()));
