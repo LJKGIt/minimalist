@@ -200,7 +200,7 @@ input {
                      
                      
                 <tr><td><strong>상품명</strong></td><td><input type="text" name="product_name" style="width:98%;"></td></tr>
-                <tr><td><strong>카테고리 </strong></td><td><select name="category" value="카테고리" style="width:98%;">
+                <tr><td><strong>카테고리 </strong></td><td><select name="category" style="width:98%;">
                   <option value="의류">의류</option>
                       <option value="잡화">잡화</option>
                       <option value="악세사리">악세사리</option>

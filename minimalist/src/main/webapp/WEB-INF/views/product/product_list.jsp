@@ -18,7 +18,7 @@
 
 	<c:import url="../main/header.jsp" />
 
-    <div id="all">
+    <div id="all" style="background:white;">
 
         <div id="content">
             <div class="container">
@@ -218,11 +218,10 @@
                     <div class="row products">
  						<c:forEach var="product" items="${ productList }">
 	                        <div class="col-md-4 col-sm-6">
-	                            <div class="product">
+	                            <div class="product" style="border:none;">
 	                                <div class="flip-container">
 	                                    <div class="flipper">
 	                                        <div class="front">
-	                                        ${ product.product_code }
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
 	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
@@ -489,6 +488,10 @@
 
     </div>
     <!-- /#all -->
-
+	<script type="text/javascript">
+		$(function(){
+			$('body').css("background", "white");
+		});
+	</script>
 </body>
 </html>

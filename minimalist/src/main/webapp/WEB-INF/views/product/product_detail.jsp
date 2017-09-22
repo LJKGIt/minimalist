@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>
         Obaju : e-commerce template
     </title>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-
 <body>
 	<% // TODO [lintogi] 조회수 처리하기. %>
 	<% // TODO [lintogi] 브랜드, 색상, 정렬 처리하기. %>
    	<c:import url="../main/header.jsp" />
 
-    <div id="all">
+    <div id="all" style="background:white;">
 
         <div id="content">
             <div class="container">
@@ -26,9 +25,9 @@
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li><a href="#">Ladies</a>
+                        <li><a href="#">Product</a>
                         </li>
-                        <li><a href="#">Dress</a><% //TODO [lintogi] 카테고리 순서 처리하기. %>
+                        <li><a href="#">${fn:toUpperCase(product.product_category)}</a>
                         </li>
                         <li>${ product.product_name }</li>
                     </ul>
@@ -211,10 +210,59 @@
                                 <p class="price">${ product.rent_price }</p>
 
                                 <p class="text-center buttons">
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-                                    <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 구매</a> 
+                                    <a href="" class="btn btn-default" id="i_a_wish"><i class=""></i> Add to wishlist</a>
+                                    <% // TODO [lintogi] DB에서 조회해서 JSTL 처리하기. %>
+                                    <% // TODO [lintogi] 하트 색상이 바뀌는지 font-color 같은 것으로 테스트하기. %>
+                                    <% // TODO [lintogi] 버튼 눌린 효과 만들기. %>
+                                    <a href="" class="btn btn-default" style="font-color:red;"><i class="fa fa-heart"></i> Remove to wishlist</a>
                                 </p>
-
+                                <% // TODO [lintogi] 나중에 아래로 옮기기. %>
+								<script type="text/javascript">
+									$(function(){
+										$('#i_a_wish').on('click', function(){
+											var this_i_a_wish = $(this);
+											if(this_i_a_wish.text() == " Add to wishlist"){
+												$.ajax({
+													url: "wishInsert.do",
+													type: "POST",
+													// TODO 150000001 값을 동적으로 바꾸기.
+													data: {product_code : 1500000001},
+													success: function(data){
+														if(data == "true"){
+															this_i_a_wish.html("<i class='fa fa-heart'></i> Remove to wishlist");
+															<% // TODO [lintogi] 값 변경으로 바꾸기. %>
+														} else if(data == "false"){
+															alert("찜하기 중 오류가 발생했습니다.");
+														} else if(data == "login"){
+															alert("로그인해주시기 바랍니다.");
+														}
+													},
+													error: function(data){
+														alert("찜하기 중 오류가 발생했습니다.");
+													}
+												}); //ajax */
+											} else if(this_i_a_wish.text() == " Remove to wishlist"){
+												$.ajax({
+													url: "wishDelete.do",
+													type: "POST",
+													data: {product_code : 1500000001},
+													success: function(data){
+														if(data == "true"){
+															this_i_a_wish.html("<i class='fa fa-heart'></i> Add to wishlist");
+														} else {
+															alert("찜하기 중 오류가 발생했습니다.");
+														}
+													},
+													error: function(data){
+														alert("찜하기 중 오류가 발생했습니다.");
+													}
+												}); //ajax */
+											}
+											return false;
+										}); //click
+									}); //ready
+								</script>
 
                             </div>
 
@@ -270,7 +318,6 @@
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
                             </div> -->
-                    <% // TODO [lintogi] 만들다가 합쳐진 내용 - 나중에 이 위치에 계속 두는 것인지 확인받기. %>
 					<a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a>
                     </div>
 					
@@ -282,17 +329,17 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
+                            <div class="product same-height" style="border:none;">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="${ pageContext.request.contextPath }/resources/img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
@@ -478,7 +525,11 @@
 
 
 
-
+	<script type="text/javascript">
+		$(function(){
+			$('body').css("background", "white");
+		});
+	</script>
 
 
 </body>

@@ -5,9 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,6 @@ import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
-import com.kh.minimalist.product.model.service.ProductServiceImpl;
 import com.kh.minimalist.product.model.vo.Product;
 
 @Controller
@@ -162,7 +159,6 @@ public class MemberController {
 	// }
 	// })
 	// } catch (Exception e) {
-	// // TODO: handle exception
 	// }
 	// }
 	
@@ -183,7 +179,6 @@ public class MemberController {
 				}
 				model.addAttribute("cookieList", cookieList);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";

@@ -30,6 +30,18 @@
 <link href="resources/css/custom.css" rel="stylesheet">
 <script src="resources/js/respond.min.js"></script>
 <link rel="shortcut icon" href="resources/favicon.png">
+
+    <!-- *** SCRIPTS TO INCLUDE ***
+ _________________________________________________________ -->
+    <script src="resources/js/jquery-1.11.0.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/jquery.cookie.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/modernizr.js"></script>
+    <script src="resources/js/bootstrap-hover-dropdown.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/front.js"></script>
+    
 </head>
 
 
@@ -146,44 +158,44 @@
 												<li><a
 													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Outer</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=dress">DRESS</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">DRESS</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=top">TOP</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">TOP</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=bottom">BOTTOM</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">BOTTOM</a></li>
 											</ul>
 										</div>
 										<div class="col-sm-3">
 											<h5>Miscellaneous</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=bag">BAG</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">BAG</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">ACESSORY</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">ACESSORY</a></li>
 											</ul>
 										</div>
 										<%
-											// TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'acessory' 카테고리로 이동하게 만들었다.
+											// TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'outer' 카테고리로 이동하게 만들었다.
 										%>
 										<div class="col-sm-3">
 											<h5>Featured</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Trainers</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Trainers</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Sandals</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Sandals</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Hiking
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Hiking
 														shoes</a></li>
 											</ul>
 											<h5>Looks and trends</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Trainers</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Trainers</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Sandals</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Sandals</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Hiking
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Hiking
 														shoes</a></li>
 											</ul>
 										</div>
