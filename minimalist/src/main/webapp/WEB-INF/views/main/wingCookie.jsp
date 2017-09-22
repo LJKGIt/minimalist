@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cookieList" value="${ cookieList }"/>
 <%
+
+// TODO [lintogi] 왜 안 적혀있지?
+
 @SuppressWarnings("unchecked")
 List<String> reverseList = (List<String>)request.getAttribute("cookieList");
 Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList);%>

@@ -8,44 +8,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 
-integrity, crossorigin가 오류나고 중요하지 않은 코드이므로 주석으로 처리했습니다.
 <link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-crossorigin="anonymous">
- -->
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <title>Obaju : e-commerce template</title>
 </head>
 <body style="min-width: 360px;">
-
-	<!-- COOKIE TEST -->
-	<table style="width:200">
-		<tr height="25">
-			<td width="100">상품명</td>
-			<td width="100">단가</td>
-		</tr>
-		<tr height="25">
-			<td width="100"><a href="bag.do">뺶</a></td>
-			<td width="100">100</td>
-		</tr>
-		<tr height="25">
-			<td width="100"><a href="shirt.do">셔츠</a></td>
-			<td width="100">200</td>
-		</tr>
-		<tr height="25">
-			<td width="100"><a href="pants.do">바지</a></td>
-			<td width="100">200</td>
-		</tr>
-	</table>
-
-	<BR /> 오늘본 상품 목록
-	<br />
-
-
-	<!-- COOKIE TEST END -->
 
 	<c:import url="../main/header.jsp" />
 	<div id="all">

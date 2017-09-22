@@ -137,7 +137,7 @@
 										Logout</span> <i class="fa fa-sign-out"> Logout</i>
 								</a>
 								<!-- 마이페이지 연결 -->
-								<a href="mypage.do" class="btn btn-default"> <span
+								<a href="member.mypage.do" class="btn btn-default"> <span
 									class="sr-only">My Page</span> <i class="fa fa-user">
 										MyPage</i>
 								</a>

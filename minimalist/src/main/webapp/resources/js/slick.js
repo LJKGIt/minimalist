@@ -441,8 +441,8 @@
 
         if (_.options.arrows === true ) {
 
-            _.$prevArrow = $(_.options.prevArrow).addClass('slick-arrow');
-            _.$nextArrow = $(_.options.nextArrow).addClass('slick-arrow');
+            _.$prevArrow = $(_.options.prevArrow).addClass('slick-arrow').css('margin', '5px');
+            _.$nextArrow = $(_.options.nextArrow).addClass('slick-arrow').css('margin-bottom', '10px');
 
             if( _.slideCount > _.options.slidesToShow ) {
 
@@ -587,7 +587,6 @@
                     'width':(100 / _.options.slidesPerRow) + '%',
                     'display': 'inline-block'
                 });
-
         }
 
     };
