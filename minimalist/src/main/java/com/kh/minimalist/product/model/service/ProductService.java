@@ -10,5 +10,7 @@ public interface ProductService {
 	ArrayList<Product> productList(Product product);
 
 	void productHit(Product product);
+
+	int productDelete(Product product);
 	
 }

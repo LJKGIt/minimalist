@@ -19,6 +19,8 @@
   		<result property="product_size77" column="PRODUCT_SIZE77"/>
   		<result property="product_color" column="PRODUCT_COLOR"/>
   		<result property="receive_date" column="RECEIVE_DATE"/>
+  		<result property="product_hit" column="PRODUCT_HIT"/>
+  		<result property="product_delete" column="PRODUCT_DELETE"/>
 
 		<collection property="productImageList" ofType="ProductImage">
 			<result property="product_image_path" column="PRODUCT_IMAGE_PATH"/>
@@ -30,7 +32,8 @@
 		SELECT * 
 		FROM PRODUCT A 
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
-		WHERE PRODUCT_CODE = #{product_code} 
+		WHERE PRODUCT_CODE = #{product_code}
+		AND PRODUCT_DELETE = 0
 		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
@@ -39,6 +42,7 @@
 		FROM PRODUCT A 
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
 		WHERE PRODUCT_CATEGORY = #{product_category} 
+		AND PRODUCT_DELETE = 0
 		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
@@ -47,5 +51,15 @@
 		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
 		WHERE PRODUCT_CODE = #{product_code}
 	</update>
-
+	<!-- UPDATE PRODUCT  
+		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
+		WHERE PRODUCT_CODE = #{product_code} -->
+	
+	<!-- <update id="productDelete" parameterType="Product">
+		UPDATE PRODUCT  
+		SET PRODUCT_DELETE = 1
+		WHERE PRODUCT_CODE = #{product_code}
+	</update> -->
+	
+	
 </mapper>

@@ -11,7 +11,6 @@
             </head>
 
             <body>
-                <% // TODO [lintogi] 조회수 처리하기. %>
                     <% // TODO [lintogi] 브랜드, 색상, 정렬 처리하기. %>
                         <c:import url="../main/header.jsp" />
                         <div id="all" style="background:white;">
@@ -144,8 +143,8 @@
                                                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &#38; care and sizing</a> </p>
                                                     <p class="price"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                                     <p class="text-center buttons"> <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 바로구매</a>
-                                                        <c:if test="${ empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Add to wishlist</a> </c:if>
-                                                        <c:if test="${ not empty wish }"> <a href="" class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Remove to wishlist</a> </c:if>
+                                                        <c:if test="${ empty wish }"> <a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Add to wishlist</a> </c:if>
+                                                        <c:if test="${ not empty wish }"> <a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Remove to wishlist</a> </c:if>
                                                     </p>
                                                 </div>
                                                 <div class="row" id="thumbs">
@@ -187,7 +186,11 @@
                                     <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
                                     <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                                 </p>
-                            </div> --><a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a> </div>
+                            </div> --><a href="review.selectList.do?product_code=${product.product_code}" class="btn btn-primary">상품후기 목록 보기</a>
+                            <c:if test="${ member.member_id eq 'admin' }">
+                            	<a href="productDelete.do?product_code=${product.product_code}" class="btn btn-primary">삭제하기</a>
+                            </c:if>
+                            </div>
                                         <div class="row same-height-row">
                                             <div class="col-md-3 col-sm-6">
                                                 <div class="box same-height">
@@ -334,57 +337,49 @@
                             });
                         </script>
                         <script type="text/javascript">
-                                                            $(function () {
-                                                                $('#i_a_wish').on('click', function () {
-                                                                    var this_i_a_wish = $(this);
-                                                                    if (this_i_a_wish.text() == " Add to wishlist") {
-                                                                        $.ajax({
-                                                                            url: "wishInsert.do"
-                                                                            , type: "POST"
-                                                                            , 
-                                                                            data: {
-                                                                                product_code: ${ product.product_code }
-                                                                            }
-                                                                            , success: function (data) {
-                                                                                if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");
-                                                                                }
-                                                                                else if (data == "false") {
-                                                                                    alert("찜하기 중 오류가 발생했습니다.");
-                                                                                }
-                                                                                else if (data == "login") {
-                                                                                    alert("로그인해주시기 바랍니다.");
-                                                                                }
-                                                                            }
-                                                                            , error: function (data) {
-                                                                                alert("찜하기 중 오류가 발생했습니다.");
-                                                                            }
-                                                                        }); //ajax */
-                                                                    }
-                                                                    else if (this_i_a_wish.text() == " Remove to wishlist") {
-                                                                        $.ajax({
-                                                                            url: "wishDelete.do"
-                                                                            , type: "POST"
-                                                                            , data: {
-                                                                                product_code: ${ product.product_code }
-                                                                            }
-                                                                            , success: function (data) {
-                                                                                if (data == "true") {
-                                                                                    this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Add to wishlist");
-                                                                                }
-                                                                                else {
-                                                                                    alert("찜하기 중 오류가 발생했습니다.");
-                                                                                }
-                                                                            }
-                                                                            , error: function (data) {
-                                                                                alert("찜하기 중 오류가 발생했습니다.");
-                                                                            }
-                                                                        }); //ajax */
-                                                                    }
-                                                                    return false;
-                                                                }); //click
-                                                            }); //ready
-                                                        </script>
+                             $(function () {
+                                 $('#i_a_wish').on('click', function () {
+                                     var this_i_a_wish = $(this);
+                                     if (this_i_a_wish.text() == " Add to wishlist") {
+                                         $.ajax({
+                                             url: "wishInsert.do", 
+                                             type: "POST", 
+                                             data: { product_code: ${ product.product_code } }, 
+                                             success: function (data) {
+                                                 if (data == "true") {
+                                                     this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");
+                                                 }
+                                                 else if (data == "false") {
+                                                     alert("찜하기 중 오류가 발생했습니다.");
+                                                 }
+                                                 else if (data == "login") {
+                                                     alert("로그인해주시기 바랍니다.");
+                                                 }
+                                             }, error: function (data) {
+                                                 alert("찜하기 중 오류가 발생했습니다.");
+                                             }
+                                         }); //ajax */
+                                     }
+                                     else if (this_i_a_wish.text() == " Remove to wishlist") {
+                                         $.ajax({
+                                             url: "wishDelete.do", 
+                                             type: "POST", 
+                                             data: { product_code: ${ product.product_code } }, 
+                                             success: function (data) {
+                                                 if (data == "true") {
+                                                     this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Add to wishlist");
+                                                 }
+                                                 else {
+                                                     alert("찜하기 중 오류가 발생했습니다.");
+                                                 }
+                                             }, error: function (data) {
+                                                 alert("찜하기 중 오류가 발생했습니다.");
+                                             }
+                                         }); //ajax */
+                                     }
+                                 }); //click
+                             }); //ready
+                         </script>
             </body>
 
             </html>

@@ -34,13 +34,28 @@ public class ProductController {
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		String result = null;
+		String returnResult = "main/404";
+
+		// TODO [lintogi] product-mapper.xml에서 update 쿼리문이 실행되지 않는다.
+		// ______________ <update> 태그에는 문제가 없다. 쿼리문(내용)만 SELECT로 바꾸면 잘 된다.
+		// _______________________________________ └-> SELECT * FROM PRODUCT
+		// WHERE PRODUCT_CODE = #{product_code}
+		// ______________ 위 결과에 따르면 #{} 기호는 문제가 없다.
+		// ______________ 대, 소문자 차이도 확인해봤지만 똑같다.
+		// ______________ UPDATE PRODUCT SET PRODUCT_HIT = 15 와 같이 #{} 기호 없이,
+		// parameterType 없이 작업해봤지만 문제는 여전하다.
+		// ______________ 위 결과에 따르면 순수하게 UPDATE 구문에 문제가 있다.
+		// ______________ 그렇다고 UPDATE PRODUCT만 써보면 SET가 없다고 오류가 나오기는 한다.
+		// ______________ productList.do 등 다른 페이지는 잘 나오니 maven, spring, server
+		// 문제는 아니다.
+		// ______________ Repositories를 날려보고 이클립스를 껐다 켜도 문제는 여전하다.
 
 		System.out.println("1");
-		productService.productHit(product);
+		// productService.productHit(product);
 		System.out.println("2");
+
 		Product product_return = productService.productDetail(product);
-		
+
 		Wish wish = null;
 		if ((Member) session.getAttribute("member") != null) {
 			wish = wishService.wishSelectOne(
@@ -56,32 +71,42 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (product_return != null) {
 			model.addAttribute("product", product_return);
 			model.addAttribute("wish", wish);
-			result = "product/product_detail";
-		} else {
-			result = "main/404";
+			returnResult = "product/product_detail";
 		}
 
-		return result;
+		return returnResult;
 
 	}
 
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, Model model) {
-		String result = null;
+		String returnResult = "main/404";
 		ArrayList<Product> productList = productService.productList(product);
 
 		if (productList != null && productList.size() != 0) {
 			model.addAttribute("productList", productList);
-			result = "product/product_list";
-		} else {
-			result = "main/404";
+			returnResult = "product/product_list";
 		}
 
-		return result;
+		return returnResult;
+	}
+
+	// TODO [lintogi] UPDATE 오류다.
+	@RequestMapping(value = "productDelete.do", method = RequestMethod.GET)
+	public String productDelete(Product product, Model model, HttpSession session) {
+		String returnResult = "main/404";
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+			int result = productService.productDelete(product);
+			if(result > 0){
+				returnResult = "redirect:productList.do";
+			}
+		} 
+
+		return returnResult;
 	}
 
 }

@@ -31,5 +31,10 @@ public class ProductServiceImpl implements ProductService{
 		System.out.println("4");
 	}
 
+	@Override
+	public int productDelete(Product product) {
+		return productDao.productDelete(product);
+	}
+
 
 }
