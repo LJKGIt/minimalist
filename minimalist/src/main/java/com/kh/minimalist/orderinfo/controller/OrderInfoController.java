@@ -23,6 +23,8 @@ public class OrderInfoController {
 	private OrderInfoService orderInfoService;
 	@Autowired
 	private ProductService productService;
+	
+	// TODO [lintogi] 재영이 형이 만드신 INSERT ALL에 대해서 제약 조건을 이용해 반환 값이 상황에 따라서 어떻게 반환되는지 실험하기.
 
 	// TODO [lintogi] 결제 API를 사용하기.
 	@RequestMapping(value = "orderInfoInsert.do", method = RequestMethod.POST)
