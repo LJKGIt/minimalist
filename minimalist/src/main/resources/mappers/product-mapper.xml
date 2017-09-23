@@ -37,13 +37,24 @@
 		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
 	</select>
 
-	<select id="productList" parameterType="Product" resultType="Product" resultMap="resultProduct">
-		SELECT * 
+	<select id="productTotalCount" parameterType="Product" resultType="_int">
+		SELECT COUNT(*)
 		FROM PRODUCT A 
-		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
 		WHERE PRODUCT_CATEGORY = #{product_category} 
 		AND PRODUCT_DELETE = 0
-		ORDER BY PRODUCT_IMAGE_PATH ASC, PRODUCT_CODE ASC
+		ORDER BY PRODUCT_CODE ASC
+	</select>
+
+	<select id="productList" parameterType="map" resultType="Product" resultMap="resultProduct">
+		SELECT *
+		FROM(SELECT *
+			FROM (SELECT ROWNUM RNUM, A.* 
+					FROM PRODUCT A 
+					WHERE PRODUCT_CATEGORY = #{product.product_category} 
+					AND PRODUCT_DELETE = 0
+					ORDER BY PRODUCT_CODE ASC)
+			WHERE RNUM &#62;= #{startCount} AND RNUM &#60;= #{endCount})
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
 	</select>
 
 	<update id="productHit" parameterType="Product">

@@ -1,7 +1,10 @@
 package com.kh.minimalist.product.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +33,8 @@ public class ProductController {
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
 	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
-	// TODO [lintogi] ■ ACUTION 테이블에 product_name, category 등이 쓰이던데 이름이 겹치니 바꿔도 되는지 여쭤보기.
+	// TODO [lintogi] ■ ACUTION 테이블에 product_name, category 등이 쓰이던데 이름이 겹치니 바꿔도
+	// 되는지 여쭤보기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
@@ -83,14 +87,67 @@ public class ProductController {
 
 	}
 
+	// TODO [lintogi] JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Product product, Model model) {
+	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
 		String returnResult = "main/404";
-		ArrayList<Product> productList = productService.productList(product);
+
+		boolean withAjax = false;
+		int productPage = 1;
+		int totalCount = productService.productTotalCount(product);
+		int startCount = 0;
+		int endCount = 0;
+
+		// AJAX로 접근했는지 확인
+		if (request.getParameter("productPage") != null) {
+			withAjax = true;
+			try {
+				productPage = Integer.parseInt(request.getParameter("productPage"));
+			} catch (NumberFormatException e) {
+				return "main/404";
+			}
+		}
+		
+		// productPage에 잘못된 값이 들어왔을 때
+		if ((productPage - 1) * 9 + 1 > totalCount) {
+			productPage = totalCount / 9;
+		} else if (productPage < 0) {
+			productPage = 1;
+		}
+
+		startCount = (productPage - 1) * 9 + 1;
+		if (Math.ceil(totalCount / 9.0) == productPage) {
+			endCount = totalCount;
+		} else {
+			endCount = productPage * 9;
+		}
+
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("product", product);
+		hashMap.put("startCount", startCount);
+		hashMap.put("endCount", endCount);
+		ArrayList<Product> productList = productService.productList(hashMap);
 
 		if (productList != null && productList.size() != 0) {
-			model.addAttribute("productList", productList);
-			returnResult = "product/product_list";
+
+			if (withAjax) {
+
+				PrintWriter writer = null;
+				try {
+					returnResult = null;
+					writer = response.getWriter();
+					writer.append("true");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					writer.flush();
+					writer.close();
+				}
+
+			} else {
+				model.addAttribute("productList", productList);
+				returnResult = "product/product_list";
+			}
 		}
 
 		return returnResult;
@@ -101,12 +158,13 @@ public class ProductController {
 	public String productDelete(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
 		System.out.println(product);
-		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+		if (session.getAttribute("member") != null
+				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productDelete(product);
-			if(result > 0){
+			if (result > 0) {
 				returnResult = "redirect:productList.do";
 			}
-		} 
+		}
 
 		return returnResult;
 	}

@@ -1,6 +1,7 @@
 package com.kh.minimalist.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,10 +23,15 @@ public class ProductDao {
 		return sqlSession.selectOne("Product.productDetail", product);
 	}
 
-	public ArrayList<Product> productList(Product product) {
-		List<Product> productList = sqlSession.selectList("Product.productList", product);
+	public int productTotalCount(Product product) {
+		return sqlSession.selectOne("Product.productTotalCount", product);
+	}
+	
+	public ArrayList<Product> productList(HashMap<String, Object> hashMap) {
+		List<Product> productList = sqlSession.selectList("Product.productList", hashMap);
 		return (ArrayList<Product>) productList;
 	}
+	
 
 	public void productHit(Product product) {
 		System.out.println("5");
@@ -37,5 +43,9 @@ public class ProductDao {
 	public int productDelete(Product product) {
 		return sqlSession.update("Product.productDelete", product);
 	}
+
+
+
+
 
 }
