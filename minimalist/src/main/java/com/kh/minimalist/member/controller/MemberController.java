@@ -36,13 +36,6 @@ public class MemberController {
 	@Autowired
 	private ProductService productService;
 
-	// 관리자 페이지 이동용 메서드
-	@RequestMapping(value = "manage.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String management() {
-
-		return "manager/manageHome";
-	}
-
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String loginCheck(Member m, HttpSession session) {
 

@@ -34,6 +34,7 @@ public class ProductController {
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
 	// TODO [lintogi] ■ 장흠이 형에게 아톰의 정렬 상태를 여쭤보기. (AJAX 부분까지.)
 	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
+	// TODO [lintogi] 완성될 쯤에 반응형 웹에 대해 링크 연결을 싹 정리하기.
 	// TODO [lintogi] 관리자 페이지에 왼쪽 윙바를 임포트하는 것으로 바꿀지 생각하기.
 	// TODO [lintogi] ■ ACUTION 테이블에 product_name, category 등이 쓰이던데 이름이 겹치니 바꿔도 되는지 여쭤보기.
 
@@ -179,8 +180,7 @@ public class ProductController {
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			// int result = productService.productUpdate(product);
 			// if (result > 0) {
-			// // TODO [lintogi] 쿼리스트링 말고 이미 model에 requestScope로 담겨진 product니까 그냥 전달되는지 확인하기.
-			// returnResult = "redirect:productDetail.do?product_code=" +
+			// returnResult = "redirect:productDetail.do?product_code=" + productService.productRecentProductCode(product);
 			// product.getProduct_code();
 			// }
 		}

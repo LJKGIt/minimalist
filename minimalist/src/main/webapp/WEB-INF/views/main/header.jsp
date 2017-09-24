@@ -43,12 +43,6 @@
 </head>
 
 <body>
-	<%
-		// TODO [lintogi] 이동하기.
-	%>
-	<c:if test="${ sessionScope.member.member_id eq 'admin' }">
-		<a href="productInsertView.do">대여 상품 등록하기</a>
-	</c:if>
 	<!-- *** TOPBAR ***
  _________________________________________________________ -->
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
@@ -310,17 +304,17 @@
 							class="hidden-sm"> Logout</span>
 						</a>
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
-							<a href="manage.do" class="btn navbar-btn btn-primary"> <span
-								class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-								class="hidden-sm"> admin</span>
+							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
+								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
+								class="hidden-sm"> 관리</span>
 							</a>
 						</c:if><c:if test="${ not sessionScope.member.member_id eq 'admin' }">
 							<a href="mypage.do" class="btn btn-primary navbar-btn"><i
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
-						</c:if>
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
-							Message</button>
+							<i class="fa fa-envelope"></i></button>
+						</c:if>
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
 						data-toggle="collapse" data-target="#search">
