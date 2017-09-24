@@ -9,7 +9,6 @@ DROP TABLE MESSAGE CASCADE CONSTRAINTS;
 DROP TABLE AUCTION CASCADE CONSTRAINTS;
 DROP TABLE ALERT CASCADE CONSTRAINTS;
 DROP TABLE NOTICE CASCADE CONSTRAINTS;
-DROP TABLE FAQ CASCADE CONSTRAINTS;
 DROP TABLE REVIEW CASCADE CONSTRAINTS;
 DROP TABLE QNA CASCADE CONSTRAINTS;
 DROP TABLE PRODUCT_IMAGE CASCADE CONSTRAINTS;
@@ -297,16 +296,9 @@ COMMENT ON COLUMN INCOME.INCOME_DATE IS '■ 모르겠습니다. ■';
 
 ------------------------------ 샘플 데이터 ------------------------------
 
-INSERT INTO MEMBER VALUES(
-'admin', 'admin', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE,
-'010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com');
-INSERT INTO MEMBER VALUES(
-'usera', 'usera', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE,
-'010-1111-1111', '11-11', '역삼동','고시원', 0, 0, 'n', 'asdf01@gmail.com');
-INSERT INTO MEMBER VALUES(
-'userb', 'userb', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE,
-'010-2222-2222', '22-22', '역삼동','고시원', 0, 0, 'n', 'asdf02@gmail.com');
-
+INSERT INTO MEMBER VALUES('admin', 'admin', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE, '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com');
+INSERT INTO MEMBER VALUES('usera', 'usera', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE, '010-1111-1111', '111-11', '가가시 가가구','가가로 11', 0, 0, 'n', 'asdf01@gmail.com');
+INSERT INTO MEMBER VALUES('userb', 'userb', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE, '010-2222-2222', '222-22', '나나시 나나구','나나로 22', 0, 0, 'n', 'asdf02@gmail.com');
 
 /* OUTER 15 */
 INSERT INTO PRODUCT VALUES(1500000001, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'), DEFAULT, DEFAULT);
@@ -413,43 +405,27 @@ INSERT INTO PRODUCT_IMAGE VALUES(1500000024, '1500000008_1.jpg');
 INSERT INTO PRODUCT_IMAGE VALUES(1500000024, '1500000008_2.jpg');
 INSERT INTO PRODUCT_IMAGE VALUES(1500000024, '1500000008_3.jpg');
 
-INSERT INTO RENT_LIST VALUES(
-1, 2, 'admin', TO_DATE('20170808', 'YYMMDD'), TO_DATE('20170815', 'YYMMDD'));
+INSERT INTO RENT_LIST VALUES(1, 1500000001, 'admin', TO_DATE('20170808', 'YYMMDD'), TO_DATE('20170815', 'YYMMDD'));
 
-INSERT INTO RENTAL_RESERVE VALUES(
-2, 'admin', SYSDATE, SYSDATE);
+INSERT INTO RENTAL_RESERVE VALUES(1500000001, 'admin', SYSDATE, SYSDATE);
 
-INSERT INTO CART VALUES(
-'usera', 1500000001);
+INSERT INTO WISH VALUES('usera', 1500000001);
 
-INSERT INTO MESSAGE VALUES(
-1, 'admin', '안녕', '나는 관리자야', SYSDATE, 'n');
+INSERT INTO MESSAGE VALUES(1, 'admin', '안녕', '나는 관리자야', SYSDATE, 'n');
 
-INSERT INTO AUCTION VALUES(
-1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
 
-INSERT INTO AUCTION VALUES(
-2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(
-3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(
-4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(
-5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
+INSERT INTO ALERT VALUES('admin', 1500000001, TO_DATE('170901', 'YYMMDD'));
 
-INSERT INTO ALERT VALUES(
-'admin', 3, TO_DATE('20170901', 'YYMMDD'));
+INSERT INTO NOTICE VALUES(1, '공지사항', '대여 대여 및 구매시 적립금을 드려요.', SYSDATE);
 
-INSERT INTO NOTICE VALUES(
-1, '공지사항', '대여 대여 및 구매시 적립금을 드려요.', SYSDATE);
+INSERT INTO REVIEW VALUES(1, 1500000001, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
+INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
 
-INSERT INTO REVIEW VALUES(
-1, 1, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
-INSERT INTO REVIEW VALUES(
-2, 1500000001, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
-
-INSERT INTO QNA VALUES(
-1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸',
-SYSDATE, NULL);
+INSERT INTO QNA VALUES(1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸', SYSDATE, NULL);
 
 COMMIT;
