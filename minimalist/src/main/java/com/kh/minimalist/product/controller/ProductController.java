@@ -1,10 +1,12 @@
 package com.kh.minimalist.product.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.vo.Member;
@@ -205,6 +209,42 @@ public class ProductController {
 		}
 
 		return returnResult;
+	}
+
+	@RequestMapping(value = "productImageUpload.do", method = RequestMethod.POST)
+	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multi) {
+		String returnResult = "false";
+		// TODO [lintogi] 경로가 target 아래로 잡힌다. 해결하기.
+		// String root = request.getSession().getServletContext().getRealPath("/");
+		String root = "C:\\workspace\\minimalist\\src\\main\\webapp\\";
+		String path = root + "resources\\img_product\\";
+		String newFileName = "";
+		File dir = new File(path);
+		if (!dir.isDirectory()) {
+			dir.mkdir();
+		}
+		Iterator<String> files = multi.getFileNames();
+		while (files.hasNext()) {
+			String uploadFile = files.next();
+			MultipartFile mFile = multi.getFile(uploadFile);
+			String fileName = mFile.getOriginalFilename();
+			// TODO [lintogi] 테이블에 컬럼 추가하기.
+			// 그리고 "true" + "바뀐 이름"   값을 view의 jquery까지 보내주기. index hidden까지 옮기기. 
+			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+			newFileName = fileName;
+			try {
+				mFile.transferTo(new File(path + newFileName));
+				returnResult = "true";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			response.getWriter().append(returnResult);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

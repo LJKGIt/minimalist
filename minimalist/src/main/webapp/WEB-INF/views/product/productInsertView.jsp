@@ -42,7 +42,7 @@
 
                 <div class="col-md-9" id="customer-order">
                     <div class="box">
-                    	<form action="productInsert.do" method="POST" class="form-horizontal">
+                    	<form id="i_form_insert" action="productInsert.do" method="POST" class="form-horizontal" enctype="multipart/form-data">
 							<fieldset>
 								<!-- Form Name -->
 								<legend>대여 상품 등록</legend>
@@ -166,13 +166,14 @@
 								  </div>
 								</div>
 								
-								<% // TODO [lintogi] 자바스크립트에 아래 세 개 input도 null 처리하기. %>
 								<% // TODO [lintogi] 이미지 삽입에 대한 처리하기. %>
 								<!-- File Button --> 
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_input_image1">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_input_image1" name="filebutton" class="input-file" type="file">
+								    <input id="i_input_hidden_image1" name="n_input_image1" type="hidden">
+								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
 								
@@ -181,6 +182,8 @@
 								  <label class="col-md-3 control-label" for="i_input_image2">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_input_image2" name="filebutton" class="input-file" type="file">
+								    <input id="i_input_hidden_image2" name="n_input_image2" type="hidden">
+								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
 								
@@ -189,6 +192,8 @@
 								  <label class="col-md-3 control-label" for="i_input_image3">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_input_image3" name="filebutton" class="input-file" type="file">
+								    <input id="i_input_hidden_image3" name="n_input_image3" type="hidden">
+								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
 								
@@ -204,54 +209,54 @@
 								<script type="text/javascript">
 									$(function(){
 										
-										
+										// 각각의 요소에 대해 비어있는 값을 확인합니다.
 										$('#i_input_name').on('focusout', function(){
-											if($('#i_input_name').val() == ""){
-												$('#i_input_name').parent().children('span').eq(0).text("이름을 입력해주시기 바랍니다.");
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("이름을 입력해주시기 바랍니다.");
 											}
 										});
 										$('#i_input_name').on('keypress', function(){
-											$('#i_input_name').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_select_category').on('focusout', function(){
-											if($('#i_select_category').val() == null){
-												$('#i_select_category').parent().children('span').eq(0).text("카테고리를 선택해주시기 바랍니다.");
+											if($(this).val() == null){
+												$(this).parent().children('span').eq(0).text("카테고리를 선택해주시기 바랍니다.");
 											}
 										});
 										$('#i_select_category').on('change', function(){
-											$('#i_select_category').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_select_brand').on('focusout', function(){
-											if($('#i_select_brand').val() == null){
-												$('#i_select_brand').parent().children('span').eq(0).text("브랜드를 선택해주시기 바랍니다.");
+											if($(this).val() == null){
+												$(this).parent().children('span').eq(0).text("브랜드를 선택해주시기 바랍니다.");
 											}
 										});
 										$('#i_select_brand').on('change', function(){
-											$('#i_select_brand').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_textarea_descript').on('focusout', function(){
-											if($('#i_textarea_descript').val() == ""){
-												$('#i_textarea_descript').parent().children('span').eq(0).text("내용을 입력해주시기 바랍니다.");
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("내용을 입력해주시기 바랍니다.");
 											}
 										});
 										$('#i_textarea_descript').on('keypress', function(){
-											$('#i_textarea_descript').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_input_original_price').on('focusout', function(){
-											if($('#i_input_original_price').val() == ""){
-												$('#i_input_original_price').parent().children('span').eq(0).text("원가를 입력해주시기 바랍니다.");
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("원가를 입력해주시기 바랍니다.");
 											}
 										});
 										$('#i_input_original_price').on('keypress', function(){
-											$('#i_input_original_price').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_input_rent_price').on('focusout', function(){
-											if($('#i_input_rent_price').val() == ""){
-												$('#i_input_rent_price').parent().children('span').eq(0).text("대여 금액을 입력해주시기 바랍니다.");
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("대여 금액을 입력해주시기 바랍니다.");
 											}
 										});
 										$('#i_input_rent_price').on('keypress', function(){
-											$('#i_input_rent_price').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
 										});
 										$('#i_input_size_33,#i_input_size_44,#i_input_size_55,#i_input_size_66,#i_input_size_77').on('click', function(){
 											if($('#i_input_size_33').prop("checked") == false && $('#i_input_size_44').prop("checked") == false && $('#i_input_size_55').prop("checked") == false && $('#i_input_size_66').prop("checked") == false && $('#i_input_size_77').prop("checked") == false){
@@ -261,26 +266,109 @@
 											}
 										});
 										$('#i_input_color').on('focusout', function(){
-											if($('#i_input_color').val() == ""){
-												$('#i_input_color').parent().children('span').eq(0).text("색상을 입력해주시기 바랍니다.");
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("색상을 입력해주시기 바랍니다.");
 											}
 										});
 										$('#i_input_color').on('keypress', function(){
-											$('#i_input_color').parent().children('span').eq(0).text("");
+											$(this).parent().children('span').eq(0).text("");
+										});
+										$('#i_input_image1').on('focusout', function(){
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+											}
+										});
+										$('#i_input_image2').on('focusout', function(){
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+											}
+										});
+										$('#i_input_image3').on('focusout', function(){
+											if($(this).val() == ""){
+												$(this).parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+											}
 										});
 										
-										
+										// 파일 첨부 시 jpg, jpeg 파일인지 확인합니다.
+										// AJAX로 서버에 업로드합니다.
+										// img 태그로 보여줍니다.
 										$('#i_input_image1').on('change', function(){
-											$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $('#i_input_image1').val().split('\\').reverse()[0]);
+											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
+												var formData = new FormData($('#i_form_insert')[0]);
+												$.ajax({
+												    url: "productImageUpload.do",                                                                        
+												    type: "POST",
+												    data : formData,
+										            processData : false,
+										            contentType : false,
+												    success: function (data) {
+												    	if(data != "true"){
+												    		alert("파일 업로드에 실패했습니다.");
+												    	}
+												    }, error: function (data) {
+												    	alert("파일 업로드에 실패했습니다.");
+												    }
+												}); //ajax
+												$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
+												$(this).parent().children('span').eq(0).text("");
+												$('#i_input_hidden_image1').val($(this).val().split('\\').reverse()[0]);
+											} else {
+												$(this).parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$(this).focus();
+											}
 										});
 										$('#i_input_image2').on('change', function(){
-											$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $('#i_input_image2').val().split('\\').reverse()[0]);
+											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
+												var formData = new FormData($('#i_form_insert')[0]);
+												$.ajax({
+												    url: "productImageUpload.do",                                                                        
+												    type: "POST",
+												    data : formData,
+										            processData : false,
+										            contentType : false,
+												    success: function (data) {
+												    	if(data != "true"){
+												    		alert("파일 업로드에 실패했습니다.");
+												    	}
+												    }, error: function (data) {
+												    	alert("파일 업로드에 실패했습니다.");
+												    }
+												}); //ajax
+												$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
+												$(this).parent().children('span').eq(0).text("");
+												$('#i_input_hidden_image2').val($(this).val().split('\\').reverse()[0]);
+											} else {
+												$(this).parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$(this).focus();
+											}
 										});
 										$('#i_input_image3').on('change', function(){
-											$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $('#i_input_image3').val().split('\\').reverse()[0]);
+											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
+												var formData = new FormData($('#i_form_insert')[0]);
+												$.ajax({
+												    url: "productImageUpload.do",                                                                        
+												    type: "POST",
+												    data : formData,
+										            processData : false,
+										            contentType : false,
+												    success: function (data) {
+												    	if(data != "true"){
+												    		alert("파일 업로드에 실패했습니다.");
+												    	}
+												    }, error: function (data) {
+												    	alert("파일 업로드에 실패했습니다.");
+												    }
+												}); //ajax
+												$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
+												$(this).parent().children('span').eq(0).text("");
+												$('#i_input_hidden_image3').val($(this).val().split('\\').reverse()[0]);
+											} else {
+												$(this).parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$(this).focus();
+											}
 										});
-										
-										
+
+										// submit 버튼을 클릭 시 비어있는 값을 확인합니다.
 										$('#i_button_submit').on('click', function(){
 											if($('#i_input_name').val() == ""){
 												$('#i_input_name').parent().children('span').eq(0).text("이름을 입력해주시기 바랍니다.");
@@ -313,6 +401,30 @@
 											} else if($('#i_input_color').val() == ""){
 												$('#i_input_color').parent().children('span').eq(0).text("색상을 입력해주시기 바랍니다.");
 												$('#i_input_color').focus();
+												return false;
+											} else if($('#i_input_image1').val() == ""){
+												$('#i_input_image1').parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+												$('#i_input_image1').focus();
+												return false;
+											} else if($('#i_input_image1').val().split('.').reverse()[0].toLowerCase() != "jpg"){
+												$('#i_input_image1').parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$('#i_input_image1').focus();
+												return false;
+											} else if($('#i_input_image2').val() == ""){
+												$('#i_input_image2').parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+												$('#i_input_image2').focus();
+												return false;
+											} else if($('#i_input_image2').val().split('.').reverse()[0].toLowerCase() != "jpg"){
+												$('#i_input_image2').parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$('#i_input_image2').focus();
+												return false;
+											} else if($('#i_input_image3').val() == ""){
+												$('#i_input_image3').parent().children('span').eq(0).text("이미지 파일을 첨부해주시기 바랍니다.");
+												$('#i_input_image3').focus();
+												return false;
+											} else if($('#i_input_image3').val().split('.').reverse()[0].toLowerCase() != "jpg"){
+												$('#i_input_image3').parent().children('span').eq(0).text("JPG 파일만 올려주시기 바랍니다.");
+												$('#i_input_image3').focus();
 												return false;
 											}
 										});
