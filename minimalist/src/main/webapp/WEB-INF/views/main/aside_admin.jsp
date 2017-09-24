@@ -32,9 +32,6 @@
                                 	<a href="notice.viewWriteForm.do">공지사항 등록</a>
                                 </li>
                                 <li>
-                                	<a href="qna.selectList.do">1:1문의 답변</a>
-                                </li>
-                                <li>
                                 	<a href="member.memberSearchView.do">회원관리</a>
                                 </li>
                                 <li>
