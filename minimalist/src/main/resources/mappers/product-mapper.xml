@@ -73,7 +73,7 @@
 	</update> -->
 	
 	<insert id="productInsert" parameterType="Product">
-		INSERT INTO PRODUCT VALUES(#{product_code}, #{product_name}, #{product_category}, #{product_brand}, #{pproduct_descript}, #{pproduct_original_price}, #{prent_price}, #{pproduct_size33}, #{pproduct_size44}, #{pproduct_size55}, #{pproduct_size66}, #{pproduct_size77}, #{pproduct_color}, #{preceive_date}, 0, 0);
+		INSERT INTO PRODUCT VALUES((SELECT MAX(PRODUCT_CODE) FROM PRODUCT)+1, #{product_name}, #{product_category}, #{product_brand}, #{product_descript}, #{product_original_price}, #{rent_price}, #{product_size33}, #{product_size44}, #{product_size55}, #{product_size66}, #{product_size77}, #{product_color}, SYSDATE, 0, 0)
 	</insert>
 	
 	<update id="productUpdate" parameterType="Product">
@@ -94,5 +94,12 @@
 			, RECEIVE_DATE = #{receive_date}
 		WHERE PRODUCT_CODE = #{product_code}
 	</update>
+	
+	<select id="productRecentProductCode" parameterType="Product" resultType="_int">
+		SELECT MAX(PRODUCT_CODE)
+		FROM PRODUCT
+		WHERE PRODUCT_DELETE = 0
+		ORDER BY PRODUCT_CODE ASC
+	</select>
 	
 </mapper>

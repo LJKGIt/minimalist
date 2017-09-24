@@ -26,12 +26,11 @@ public class ProductDao {
 	public int productTotalCount(Product product) {
 		return sqlSession.selectOne("Product.productTotalCount", product);
 	}
-	
+
 	public ArrayList<Product> productList(HashMap<String, Object> hashMap) {
 		List<Product> productList = sqlSession.selectList("Product.productList", hashMap);
 		return (ArrayList<Product>) productList;
 	}
-	
 
 	public void productHit(Product product) {
 		System.out.println("5");
@@ -52,8 +51,8 @@ public class ProductDao {
 		return sqlSession.update("Product.productUpdate", product);
 	}
 
-
-
-
+	public int productRecentProductCode(Product product) {
+		return sqlSession.selectOne("Product.productRecentProductCode", product);
+	}
 
 }

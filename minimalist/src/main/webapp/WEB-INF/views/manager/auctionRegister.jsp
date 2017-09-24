@@ -164,7 +164,7 @@ input {
                                     <a href="member.memberSearchView.do">회원관리</a>
                                 </li>
                                 <li>
-                                    <a href="">대여상품 등록</a>
+                                    <a href="productInsertView.do">대여상품 등록</a>
                                 </li>
                                 <li>
                                     <a href="auction.viewRegister.do">경매상품 등록</a>

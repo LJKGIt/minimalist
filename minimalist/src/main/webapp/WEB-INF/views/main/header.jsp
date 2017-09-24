@@ -47,6 +47,10 @@
 
 
 <body>
+<% // TODO [lintogi] 이동하기. %>
+<c:if test="${ sessionScope.member.member_id eq 'admin' }">
+	<a href="productInsertView.do">대여 상품 등록하기</a>
+</c:if>
 	<!-- *** TOPBAR ***
  _________________________________________________________ -->
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"

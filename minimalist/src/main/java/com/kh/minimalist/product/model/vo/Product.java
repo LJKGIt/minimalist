@@ -16,11 +16,11 @@ public class Product implements Serializable {
 	private String product_descript;
 	private int product_original_price;
 	private int rent_price;
-	private String product_size33;
-	private String product_size44;
-	private String product_size55;
-	private String product_size66;
-	private String product_size77;
+	private String product_size33 = "0";
+	private String product_size44 = "0";
+	private String product_size55 = "0";
+	private String product_size66 = "0";
+	private String product_size77 = "0";
 	private String product_color;
 	private Date receive_date;
 	private int product_hit;

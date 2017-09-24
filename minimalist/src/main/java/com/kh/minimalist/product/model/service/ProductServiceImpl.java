@@ -53,6 +53,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.productUpdate(product);
 	}
 
+	@Override
+	public int productRecentProductCode(Product product) {
+		return productDao.productRecentProductCode(product);
+	}
+
 
 
 }

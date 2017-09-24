@@ -20,4 +20,6 @@ public interface ProductService {
 	
 	int productUpdate(Product product);
 
+	int productRecentProductCode(Product product);
+
 }
