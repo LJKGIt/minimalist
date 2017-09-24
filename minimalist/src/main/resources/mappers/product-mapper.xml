@@ -72,5 +72,27 @@
 		WHERE PRODUCT_CODE = #{product_code}
 	</update> -->
 	
+	<insert id="productInsert" parameterType="Product">
+		INSERT INTO PRODUCT VALUES(#{product_code}, #{product_name}, #{product_category}, #{product_brand}, #{pproduct_descript}, #{pproduct_original_price}, #{prent_price}, #{pproduct_size33}, #{pproduct_size44}, #{pproduct_size55}, #{pproduct_size66}, #{pproduct_size77}, #{pproduct_color}, #{preceive_date}, 0, 0);
+	</insert>
+	
+	<update id="productUpdate" parameterType="Product">
+		UPDATE PRODUCT 
+		SET PRODUCT_CODE = #{product_code}
+			, PRODUCT_NAME = #{product_name}
+			, PRODUCT_CATEGORY = #{product_category}
+			, PRODUCT_BRAND = #{product_brand}
+			, PRODUCT_DESCRIPT = #{product_descript}
+			, PRODUCT_ORIGINAL_PRICE = #{product_original_price}
+			, RENT_PRICE = #{rent_price}
+			, PRODUCT_SIZE33 = #{product_size33}
+			, PRODUCT_SIZE44 = #{product_size44}
+			, PRODUCT_SIZE55 = #{product_size55}
+			, PRODUCT_SIZE66 = #{product_size66}
+			, PRODUCT_SIZE77 = #{product_size77}
+			, PRODUCT_COLOR = #{product_color}
+			, RECEIVE_DATE = #{receive_date}
+		WHERE PRODUCT_CODE = #{product_code}
+	</update>
 	
 </mapper>

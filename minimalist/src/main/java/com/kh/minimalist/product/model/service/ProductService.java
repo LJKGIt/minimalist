@@ -16,4 +16,8 @@ public interface ProductService {
 
 	int productTotalCount(Product product);
 
+	int productInsert(Product product);
+	
+	int productUpdate(Product product);
+
 }

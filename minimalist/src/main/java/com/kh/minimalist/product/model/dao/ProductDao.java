@@ -44,6 +44,14 @@ public class ProductDao {
 		return sqlSession.update("Product.productDelete", product);
 	}
 
+	public int productInsert(Product product) {
+		return sqlSession.insert("Product.productInsert", product);
+	}
+
+	public int productUpdate(Product product) {
+		return sqlSession.update("Product.productUpdate", product);
+	}
+
 
 
 
