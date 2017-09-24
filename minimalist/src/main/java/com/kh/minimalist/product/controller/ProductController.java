@@ -39,8 +39,6 @@ public class ProductController {
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
-		// TODO
-		System.out.println("디테일 : " + product);
 		// TODO [lintogi] product-mapper.xml에서 update 쿼리문이 실행되지 않는다.
 		// ______________ <update> 태그에는 문제가 없다. 쿼리문(내용)만 SELECT로 바꾸면 잘 된다.
 		// _______________________________________ └-> SELECT * FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}
@@ -52,9 +50,9 @@ public class ProductController {
 		// ______________ productList.do 등 다른 페이지는 잘 나오니 maven, spring, server 문제는 아니다.
 		// ______________ Repositories를 날려보고 이클립스를 껐다 켜도 문제는 여전하다.
 
-		System.out.println("1");
+		System.out.println("productDetail.do (1)");
 		// productService.productHit(product);
-		System.out.println("2");
+		System.out.println("productDetail.do (2)");
 
 		Product product_return = productService.productDetail(product);
 
@@ -193,7 +191,6 @@ public class ProductController {
 	@RequestMapping(value = "productDelete.do", method = RequestMethod.POST)
 	public String productDelete(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
-		System.out.println(product);
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productDelete(product);
 			if (result > 0) {
