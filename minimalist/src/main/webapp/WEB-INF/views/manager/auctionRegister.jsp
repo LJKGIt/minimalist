@@ -143,47 +143,7 @@ input {
 
                 </div>
 
-                <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Management</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                	<a href="notice.viewWriteForm.do">공지사항 등록</a>
-                                </li>
-                                <li>
-                                	<a href="qna.selectList.do">1:1문의 답변</a>
-                                </li>
-                                <li>
-                                    <a href="member.memberSearchView.do">회원관리</a>
-                                </li>
-                                <li>
-                                    <a href="productInsertView.do">대여상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewRegister.do">경매상품 등록</a>
-                                </li>
-                                 <li>
-                                    <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <!-- *** PAGES MENU END *** -->
-
-
-                    
-                </div>
-
+				<c:import url="../main/aside_admin.jsp" />
                 <div class="col-md-9">
 
 
