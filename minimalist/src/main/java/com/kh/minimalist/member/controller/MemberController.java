@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.orderinfo.model.service.OrderInfoService;
+import com.kh.minimalist.orderinfo.model.vo.OrderInfo;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
 
@@ -35,6 +37,9 @@ public class MemberController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private OrderInfoService orderInfoService;
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String loginCheck(Member m, HttpSession session) {
@@ -156,14 +161,20 @@ public class MemberController {
 	// }
 	
 
-	@RequestMapping("mypage.do")
+	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
-		String result = null;
+		String result = "main/404";
+		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		
+//		MY ORDER LIST
+		ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
+		if(myOrder != null)
+			model.addAttribute("myOrder", myOrder);
 		
 //		RECENT VIEW (COOKIE) 
 		if (((Member) session.getAttribute("member")) != null) {
 			try {
-				List<String> list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
+				List<String> list = new CookieUtils().getValueList(member_id, request);
 				ArrayList<Product> cookieList = new ArrayList<Product>();
 				
 				if(list != null){
@@ -175,15 +186,9 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
-		} else {
-			result = "main/404";
 		}
+		
 		return result;
-	}
-
-	@RequestMapping("wishlist.do")
-	public String myWishList() {
-		return "mypage/customer-wishlist";
 	}
 
 	@RequestMapping("passwordCheck.do")
@@ -198,10 +203,8 @@ public class MemberController {
 			result = "mypage/customer-account";
 		}
 		return result;
-		
-		
 	}
-
+	
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {

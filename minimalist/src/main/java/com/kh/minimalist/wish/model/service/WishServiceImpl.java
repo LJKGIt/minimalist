@@ -1,5 +1,7 @@
 package com.kh.minimalist.wish.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,11 @@ public class WishServiceImpl implements WishService {
 	@Override
 	public Wish wishSelectOne(Wish Wish) {
 		return wishDao.wishSelectOne(Wish);
+	}
+
+	@Override
+	public ArrayList<Wish> myWish(String member_id) {
+		return wishDao.myWish(member_id);
 	}
 
 }
