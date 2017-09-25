@@ -5,10 +5,8 @@
 <html>
 
 <head>
-<title>
-		Minimalist
-	</title>
- <link rel="shortcut icon" href="resources/img/favicon6.ico" type="image/x-icon">
+
+
  <meta charset="utf-8">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
@@ -35,8 +33,8 @@
 	id="theme-stylesheet">
 <!-- your stylesheet with modifications -->
 <link href="resources/css/custom.css" rel="stylesheet">
-<script src="resources/js/respond.min.js"></script>
 
+<script src="resources/js/respond.min.js"></script>
 
 
 <!-- *** SCRIPTS TO INCLUDE ***
@@ -50,7 +48,10 @@
 <script src="resources/js/owl.carousel.min.js"></script>
 <script src="resources/js/front.js"></script>
 	
-
+ <title>
+       Minimalist
+    </title>
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 </head>
 
 <body>

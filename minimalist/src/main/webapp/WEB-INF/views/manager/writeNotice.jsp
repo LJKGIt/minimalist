@@ -5,7 +5,9 @@
 
 <!DOCTYPE html>
 <html>
+<head>
 <style type="text/css">
+
 element.style {
     display: none;
 }
@@ -119,7 +121,10 @@ input {
  
 </style>
 
-<head>
+ <title>
+       Minimalist
+    </title>
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 
 </head>
 
