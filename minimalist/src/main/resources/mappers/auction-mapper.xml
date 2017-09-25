@@ -50,7 +50,7 @@
 			auction_size, auction_color, image_path, payment_yn from (
 			select * from auction 
 			where auction_category=#{auction_category} and
-			end_date&gt;=sysdate
+			 end_date&gt;=sysdate
 			order by end_date desc)
 			where rownum&lt;=#{endRow})
 			where rnum&gt;=#{startRow}
