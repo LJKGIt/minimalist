@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.income.model.service.IncomeService;
 import com.kh.minimalist.income.model.vo.Income;
 
@@ -23,6 +24,8 @@ public class IncomeController {
 
 	@Autowired
 	private IncomeService incomeService;
+	@Autowired
+	private AuctionService auctionService;
 	
 	//매출 전체 리스트~
 	@RequestMapping(value="income.selectList.do", method={RequestMethod.POST, RequestMethod.GET})
@@ -98,49 +101,43 @@ public class IncomeController {
 		return "manager/income";
 	}
 	
-	//매출 포함 - 경매
-	@RequestMapping(value="income.insertIncome.do", method={RequestMethod.POST, RequestMethod.GET})
-	public void insertIncome(HttpServletRequest request,
-			HttpServletResponse response) throws IOException{
+	//경매 결제 페이지 이동.
+	@RequestMapping(value="income.viewOrder.do")
+	public String viewOrder(HttpServletRequest request, Model model){
 		
-		int product_code;
-		int auction_code;
-		
-		Income inc=new Income();
-		
-		//대여인 경우
-		if(request.getParameter("product_code")!=null){
-			product_code=Integer.parseInt(request.getParameter("product_code"));
-			inc.setProduct_code(product_code);
-			Date income_date=Date.valueOf(request.getParameter("income_date"));
-			inc.setIncome_date(income_date);
-		}
-		//경매인 경우
-		else if(request.getParameter("auction_code")!=null){
-			auction_code=Integer.parseInt(request.getParameter("auction_code"));
-			inc.setAuction_code(auction_code);
-			//경매인 경우에는 집계 버튼을 눌렀을때 집계하므로. sysdate로 집계.
-		}
-		
+		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int income=Integer.parseInt(request.getParameter("income"));
 		
+		model.addAttribute("auction_code", auction_code);
+		model.addAttribute("income", income);
+		return "order/auctionOrder";
+	}
+	
+	//매출 포함 - 경매
+	@RequestMapping(value="income.insertIncome.do", method={RequestMethod.POST, RequestMethod.GET})
+	public String insertIncome(HttpServletRequest request) {
+		
+		Income inc=new Income();
+	
+		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
+		int income=Integer.parseInt(request.getParameter("income"));
+		inc.setAuction_code(auction_code);
 		inc.setIncome(income);
 		
 		
-		
+		//매출에 집계.
 		int result=incomeService.insertIncome(inc);
 		
-		PrintWriter writer=response.getWriter();
 		
+		String tmp=null;
 		if(result>0){
-			writer.append("yes");
-		} else {
-			writer.append("no");
+			tmp="main/index";
+			//추가적으로 경매 완료 디비 결제 완료로 수정해야함.
+		}else {
+			tmp="main/404";
 		}
 		
-		writer.flush();
-		writer.close();
-		
+		return tmp;
 	}
 	
 	//매출 기간별 리스트~
@@ -226,6 +223,9 @@ public class IncomeController {
 		
 		return "manager/income";
 	}
+	
+	
+	
 	
 	
 }

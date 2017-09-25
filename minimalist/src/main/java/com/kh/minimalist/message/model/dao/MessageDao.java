@@ -32,6 +32,11 @@ public class MessageDao {
 		
 		return sqlSession.insert("Message.messageInsert", map);
 	}
-	
+
+	//경매 완료 쪽지
+	public int insertMessage2(Message m){
+		
+		return sqlSession.insert("endAuctionMessage", m);
+	}
 
 }

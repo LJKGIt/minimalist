@@ -15,4 +15,5 @@ public interface MessageService {
 
 	int insertMessage(ArrayList idList, Message message);
 
+	int insertMessage2(Message m);
 }

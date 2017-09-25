@@ -505,10 +505,9 @@ public class AuctionController {
 		public void checkPayment(HttpServletRequest request, HttpServletResponse response) throws IOException{
 			
 			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
-			String message=request.getParameter("message");
-			
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("auction_code", auction_code);
+			String message="y";
 			map.put("message", message);
 			
 			int result=auctionService.checkPayment(map);
