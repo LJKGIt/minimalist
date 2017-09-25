@@ -86,7 +86,6 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>JUUN.J</strong></li>
 									<li>${ myOrder.product_code }</li>
-									<% //TODO [yjP] 갓현상님께 JOIN 과외받기 %>
 									<li>price : $1,605,000</li>
 									<li>size : 55</li>
 								</ul>

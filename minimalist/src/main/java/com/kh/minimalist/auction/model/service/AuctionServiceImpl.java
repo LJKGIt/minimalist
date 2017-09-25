@@ -46,15 +46,15 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public int countRowCategory(String category) {
+	public int countRowCategory(String auction_category) {
 		
-		return auctionDao.countRowCategory(category);
+		return auctionDao.countRowCategory(auction_category);
 	}
 
 	@Override
-	public ArrayList<Auction> selectListCategory(HashMap<String, Object> map) {
+	public ArrayList<Auction> selectListAuctionCategory(HashMap<String, Object> map) {
 		
-		return auctionDao.selectListCategory(map);
+		return auctionDao.selectListAuctionCategory(map);
 	}
 
 	@Override

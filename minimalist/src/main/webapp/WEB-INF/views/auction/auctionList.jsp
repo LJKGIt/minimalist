@@ -130,7 +130,7 @@ body {
                                     
                                 </a>
                                 <div class="text">
-                                    <h3><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.product_brand} <br> ${au.product_name }</a></h3>
+                                    <h3><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand} <br> ${au.auction_name }</a></h3>
                                     <p class="price"><font size=3px>현재 입찰가 : <fmt:formatNumber value="${au.bid_price}" type="currency"/></font> </p>
                                     <p align="center"><font color="red">경매 종료 :<fmt:formatDate value="${au.end_date}" type="date" pattern="MM월dd일"/></font> </p>
                                     <p class="buttons">
@@ -152,7 +152,7 @@ body {
                     </div>
                     <!-- /.products -->
 					<!-- 전체상품의 경우 -->
-					<c:if test="${empty category}">
+					<c:if test="${empty auction_category}">
                     <div class="pages">
 
                        
@@ -177,25 +177,25 @@ body {
                     
                     </c:if>
                     <!-- 카테고리가 있는 경우 -->
-                    <c:if test="${!empty category}">
+                    <c:if test="${!empty auction_category}">
                     <div class="pages">
 
                        
 
                         <ul class="pagination">
                         	<c:if test="${currentPage ne 1}">
-                        		<li><a href="auction.selectList.do?page=${currentPage-1}&category=${category}">&laquo;</a></li>
+                        		<li><a href="auction.selectList.do?page=${currentPage-1}&auction_category=${auction_category}">&laquo;</a></li>
                         	</c:if>
                         	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
                         		<c:if test="${page eq currentPage}">                        	
                         			<li class="active"><a href="#">${page}</a>
                         		</c:if>
                         		<c:if test="${page ne currentPage}">
-                        			<li><a href="auction.selectList.do?page=${page}&category=${category}">${page}</a></li>
+                        			<li><a href="auction.selectList.do?page=${page}&auction_category=${auction_category}">${page}</a></li>
                         		</c:if>
                         	</c:forEach>
                         	<c:if test="${currentPage ne maxPage}">
-                        		<li><a href="auction.selectList.do?page=${currentPage+1}&category=${category}">&raquo;</a></li>
+                        		<li><a href="auction.selectList.do?page=${currentPage+1}&auction_category=${auction_category}">&raquo;</a></li>
                         	</c:if>
                         </ul>
                     </div>

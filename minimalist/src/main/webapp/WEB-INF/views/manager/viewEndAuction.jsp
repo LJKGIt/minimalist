@@ -213,7 +213,7 @@ $(function(){
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
-                 		 <li><a href="auction.viewAuctionEnd.do?page=${currentPage-1}&category=${category}">&laquo;</a></li>
+                 		 <li><a href="auction.viewAuctionEnd.do?page=${currentPage-1}&category=${auction_category}">&laquo;</a></li>
                     </c:if>
 					<c:forEach var="page" begin="${startPage}" end="${endPage}">
 					<c:if test="${page eq currentPage}">
@@ -224,7 +224,7 @@ $(function(){
 					</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne maxPage}">
-                        <li><a href="auction.viewAuctionEnd.do?page=${currentPage+1}&category=${category}">&raquo;</a></li>
+                        <li><a href="auction.viewAuctionEnd.do?page=${currentPage+1}&category=${auction_category}">&raquo;</a></li>
                      </c:if>
 				</ul>
 			 </div>

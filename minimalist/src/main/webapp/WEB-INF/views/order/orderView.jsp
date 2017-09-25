@@ -38,7 +38,6 @@
                     
                     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
                     <script type="text/javascript">
-						<% // TODO [lintogi] i_input >> type 값으로 바꾸기. %>
 						$(function(){
 							$('input').on('click', function(){
 								var IMP = window.IMP; // 생략가능
