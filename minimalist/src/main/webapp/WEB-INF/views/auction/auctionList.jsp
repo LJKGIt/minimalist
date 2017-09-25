@@ -53,11 +53,11 @@ body {
                                 <li class="active">
                                     <a href="auction.selectList.do">경매중인 상품</a>
                                     <ul>
-                                        <li class="active"><a href="auction.selectList.do?category=의류">의류</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">의류</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?category=잡화">잡화</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">잡화</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?category=악세사리">악세사리</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">악세사리</a>
                                         </li>  
                                     </ul>
                                </li>
