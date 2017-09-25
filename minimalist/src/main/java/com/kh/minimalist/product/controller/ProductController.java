@@ -40,6 +40,7 @@ public class ProductController {
 	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
 	// TODO [lintogi] 완성될 쯤에 반응형 웹에 대해 링크 연결을 싹 정리하기.
 	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로 처리하기.
+	// TODO [lintogi] 데이터 넣고나서 재영이 형에게 메인 홈페이지 TOP 상품에 대해서 순서 다시 확인 받기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
