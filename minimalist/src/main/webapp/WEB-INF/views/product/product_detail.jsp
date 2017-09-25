@@ -462,7 +462,7 @@
             url: "wishInsert.do",
             type: "POST",
             data: {
-              product_code: $ {product.product_code}
+              product_code: ${ product.product_code }
             },
             success: function (data) {
               if (data == "true") {
@@ -482,7 +482,7 @@
             url: "wishDelete.do",
             type: "POST",
             data: {
-              product_code: $ {product.product_code}
+              product_code: ${product.product_code}
             },
             success: function (data) {
               if (data == "true") {

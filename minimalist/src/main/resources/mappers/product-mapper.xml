@@ -66,11 +66,11 @@
 		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
 		WHERE PRODUCT_CODE = #{product_code} -->
 	
-	<!-- <update id="productDelete" parameterType="Product">
+	<update id="productDelete" parameterType="Product">
 		UPDATE PRODUCT  
 		SET PRODUCT_DELETE = 1
 		WHERE PRODUCT_CODE = #{product_code}
-	</update> -->
+	</update>
 	
 	<insert id="productInsert" parameterType="Product">
 		INSERT INTO PRODUCT VALUES((SELECT MAX(PRODUCT_CODE) FROM PRODUCT)+1, #{product_name}, #{product_category}, #{product_brand}, #{product_descript}, #{product_original_price}, #{rent_price}, #{product_size33}, #{product_size44}, #{product_size55}, #{product_size66}, #{product_size77}, #{product_color}, SYSDATE, 0, 0)

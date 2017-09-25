@@ -106,13 +106,21 @@ public class IncomeController {
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int income=Integer.parseInt(request.getParameter("income"));
 		
+
+	// 경매 결제 페이지 이동.
+	@RequestMapping(value = "income.viewOrder.do")
+	public String viewOrder(HttpServletRequest request, Model model) {
+
+		int auction_code = Integer.parseInt(request.getParameter("auction_code"));
+		int income = Integer.parseInt(request.getParameter("income"));
+
 		model.addAttribute("auction_code", auction_code);
 		model.addAttribute("income", income);
 		return "order/auctionOrder";
 	}
-	
-	//매출 포함 - 경매
-	@RequestMapping(value="income.insertIncome.do", method={RequestMethod.POST, RequestMethod.GET})
+
+	// 매출 포함 - 경매
+	@RequestMapping(value = "income.insertIncome.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String insertIncome(HttpServletRequest request) {
 		
 		Income inc=new Income();
