@@ -36,13 +36,13 @@
 						</form>
                     </div>
                     
+                    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
                     <script type="text/javascript">
 						<% // TODO [lintogi] i_input >> type 값으로 바꾸기. %>
 						$(function(){
 							$('input').on('click', function(){
-								// var IMP = window.IMP;
-								// IMP.init('imp29035988');
-								window.IMP.init('imp72883964');
+								var IMP = window.IMP; // 생략가능
+								IMP.init('imp72883964'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 								var cc = confirm("결제하시겠습니까?");
 								<% // TODO [litnogi] name 값에 상품 이름을 집어넣기. %>
 								<% // TODO [litnogi] 컨트롤러에서 보안 처리하기. %>
@@ -97,8 +97,6 @@
 						});
 						</script>
 						
-						<script src="https://service.iamport.kr/js/iamport.payment-1.1.4.js" type="text/javascript"></script>
-
                     <!-- <div class="box info-bar">
                         <div class="row">
                             <div class="col-sm-12 col-md-4 products-showing">
