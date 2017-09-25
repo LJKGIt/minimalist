@@ -55,8 +55,6 @@
 
 <body>
 
-	<!-- *** TOPBAR ***
- _________________________________________________________ -->
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
 		aria-labelledby="Login" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
@@ -92,6 +90,44 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--  *** Message-Modal *** -->
+
+	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
+		aria-labelledby="Login" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="Login" style="margin-left: 30px;">message</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel-group" id="accordion" style="padding: 2px 10px;">
+					<c:forEach items="${ messageList }" var="list">					
+						<div class="panel panel-primary">
+							<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">
+										${ list.message_title } </a>
+								</h4>
+							</div>
+							<div id="msg${list.message_number}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>${ list.message_content }</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<!-- panel -->
+					</div>
+					<!-- modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- *** Message-Modal End*** -->
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -114,7 +150,7 @@
 					</button>
 					<a class="btn btn-default navbar-toggle"
 						href="resources/basket.html"> <i class="fa fa-shopping-cart"></i>
-						<span class="hidden-xs"> <!-- 3 items in cart -->
+						<span class="hidden-xs"> 
 					</span>
 					</a>
 				</div>
@@ -223,9 +259,9 @@
 												<a href="auction.selectList.do">전체상품</a>
 											</h5>
 											<ul>
-												<li><a href="auction.selectList.do?category=의류">의류</a></li>
-												<li><a href="auction.selectList.do?category=잡화">잡화</a></li>
-												<li><a href="auction.selectList.do?category=악세사리">악세사리</a></li>
+												<li><a href="auction.selectList.do?auction_category=의류">의류</a></li>
+												<li><a href="auction.selectList.do?auction_category=잡화">잡화</a></li>
+												<li><a href="auction.selectList.do?auction_category=악세사리">악세사리</a></li>
 											</ul>
 										</div>
 									</div>

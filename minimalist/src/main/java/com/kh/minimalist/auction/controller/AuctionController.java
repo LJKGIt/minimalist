@@ -141,12 +141,13 @@ public class AuctionController {
 	@RequestMapping(value="auction.selectList.do", method={RequestMethod.POST, RequestMethod.GET})
 	public String selectList(Model model ,HttpServletRequest request) throws UnsupportedEncodingException{
 		
-		request.setCharacterEncoding("utf-8");
+		
 		
 		String auction_category=null;
 		//전체 검색인 경우.
 		if(request.getParameter("auction_category")!=null){
 			auction_category=request.getParameter("auction_category");
+			System.out.println("카테고리 : "+auction_category);
 		}
 		
 		
@@ -199,7 +200,7 @@ public class AuctionController {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		if(auction_category!=null){
-			map.put("category", auction_category);
+			map.put("auction_category", auction_category);
 		}
 		
 		map.put("startRow", startRow);
@@ -211,6 +212,7 @@ public class AuctionController {
 		}else {
 			list=auctionService.selectList(map);
 		}
+		System.out.println("옥션 갯수 : "+list.size());
 		
 		if(auction_category!=null){
 			model.addAttribute("auction_category", auction_category);
