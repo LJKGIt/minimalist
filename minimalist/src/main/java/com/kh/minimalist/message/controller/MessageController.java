@@ -61,9 +61,9 @@ public class MessageController {
 
 		m.setMember_id(member_id);
 		
-		String title="낙찰된 경매건에 대해 결제 부탁드립니다.";
+		String title="결제링크";
 		
-		String content="<a href=\"192.168.30.6:8888/minimalist/income.viewOrder.do?auction_code="+auction_code+"&income="+income+"\">결제</a>";
+		String content="/income.viewOrder.do?auction_code="+auction_code+"&income="+income+"";
 		
 		m.setMessage_content(content);
 		m.setMessage_title(title);

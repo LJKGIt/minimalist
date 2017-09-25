@@ -112,11 +112,23 @@
 										${ list.message_title } </a>
 								</h4>
 							</div>
+							<c:choose>
+							<c:when test="${list.message_title ne '결제링크' }">
 							<div id="msg${list.message_number}" class="panel-collapse collapse">
 								<div class="panel-body">
 									<p>${ list.message_content }</p>
 									</div>
 								</div>
+								</c:when>
+								
+								<c:when test="${list.message_title eq '결제링크' }">
+								<div id="msg${list.message_number}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p><a href="${ pageContext.request.contextPath}${list.message_content}">결제</a></p>
+									</div>
+								</div>
+								</c:when>
+								</c:choose>
 							</div>
 						</c:forEach>
 						<!-- panel -->
