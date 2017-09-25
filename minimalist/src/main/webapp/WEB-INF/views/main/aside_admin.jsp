@@ -32,7 +32,7 @@
                                 	<a href="notice.viewWriteForm.do">공지사항 등록</a>
                                 </li>
                                 <li>
-                                	<a href="member.memberSearchView.do">회원관리</a>
+                                	<a href="">회원관리</a>
                                 </li>
                                 <li>
                                 	<a href="member.memberSearchView.do">쪽지</a>

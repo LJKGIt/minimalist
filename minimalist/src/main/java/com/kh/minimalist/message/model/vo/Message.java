@@ -3,7 +3,7 @@ package com.kh.minimalist.message.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Message implements Serializable{
+public class Message implements Serializable, Cloneable{
 	private static final long serialVersionUID = -383697330037579389L;
 	private int message_number;
 	private String member_id;
@@ -23,6 +23,10 @@ public class Message implements Serializable{
 		this.message_content = message_content;
 		this.send_date = send_date;
 		this.check_yn = check_yn;
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 	public int getMessage_number() {
 		return message_number;

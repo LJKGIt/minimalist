@@ -349,4 +349,26 @@
 	<!-- *** NAVBAR END *** -->
 </body>
 
+<script type="text/javascript">
+		function readCheck(num, rchk) {
+			var mNum = num.replace("#msg","");
+			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
+				console.log(mNum);
+				$.ajax({
+					url : "mChkUpdate.do",
+					data : {
+						mNum : mNum
+					},
+					type : "POST",
+					dataType : "text",
+					success : function(data){
+						$(rchk).parent().parent().css({"background-color" :"white", "color": "#4fbfa8"});
+						
+					}
+				})
+			}
+		}
+</script>
+
+
 </html>

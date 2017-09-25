@@ -14,4 +14,13 @@
 	<update id="messageChkUpdate" parameterType="_int">
 		update message set check_yn = 'y' where message_number = #{mNum}
 	</update>
+	
+	<insert id="messageInsert" parameterType="java.util.HashMap">
+		INSERT ALL 
+		<foreach collection="idList" item="id" index="index">
+			INTO MESSAGE VALUES ((SELECT MAX(MESSAGE_NUMBER) FROM MESSAGE)+${index+1}, '${id}', #{message.message_title}, #{message.message_content}, SYSDATE, DEFAULT)
+		</foreach>
+		SELECT * FROM DUAL
+		
+	</insert>
 </mapper>
