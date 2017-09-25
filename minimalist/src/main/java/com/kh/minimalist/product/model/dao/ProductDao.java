@@ -33,13 +33,11 @@ public class ProductDao {
 	}
 
 	public void productHit(Product product) {
-		System.out.println("5");
 		System.out.println(product);
-		sqlSession.update("Product.productHit", product);
-		System.out.println("6");
 	}
 
 	public int productDelete(Product product) {
+		System.out.println("4");
 		return sqlSession.update("Product.productDelete", product);
 	}
 

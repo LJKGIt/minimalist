@@ -30,8 +30,15 @@ public class MessageServiceImpl implements MessageService{
 
 
 	@Override
-	public int insertMessage(ArrayList idList, Message message) {
+	public int insertMessage(ArrayList<String> idList, Message message) {
 		return messageDao.insertMessage(idList, message);
+	}
+
+
+	@Override
+	public int insertMessage2(Message m) {
+		
+		return messageDao.insertMessage2(m);
 	}
 	
 	

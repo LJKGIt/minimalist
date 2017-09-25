@@ -59,9 +59,8 @@ position: absolute;
 
 <head>
 
-    <title>
-        Obaju : e-commerce template
-    </title>
+
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 
 
 </head>
@@ -141,20 +140,20 @@ position: absolute;
                <form action="auction.updateAuction.do"  method="post" enctype="multipart/form-data">
 <table>
 <tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${auction.auction_code}" readonly></td></tr>
-<tr><th>상품명 : </th><td><input type="text" name="product_name" value="${auction.product_name}"></td></tr>
-<tr><th>상품 카테고리 : </th><td><select name="category">
+<tr><th>상품명 : </th><td><input type="text" name="auction_name" value="${auction.auction_name}"></td></tr>
+<tr><th>상품 카테고리 : </th><td><select name="auction_category">
 	<c:set var="calist" value="의류,잡화,가방"/>
 		 <c:forTokens var="category" items="${calist}" delims="," >
-                   <c:if test="${category eq auction.product_category}">
+                   <c:if test="${category eq auction.auction_category}">
                       <option value="${category}" selected>${category}</option>
                       </c:if> 
                       <option value="${category}">${category}</option>
           </c:forTokens>
                       </select></td></tr>
-<tr><th>상품 브랜드 : </th><td><input type="text" name="product_brand" value="${auction.product_brand}"></td></tr>
-<tr><th>물품 사이즈 : </th><td><input type="text" name="product_size" value="${auction. product_size}" ></td></tr>
-<tr><th>물품 색상 : </th><td><input type="text" name="product_color" value="${auction.product_color}"></td></tr>
-<tr><th>상품 설명 : </th><td><textarea name="product_descript">${auction.product_descript}</textarea></td></tr>
+<tr><th>상품 브랜드 : </th><td><input type="text" name="auction_brand" value="${auction.auction_brand}"></td></tr>
+<tr><th>물품 사이즈 : </th><td><input type="text" name="auction_size" value="${auction.auction_size}" ></td></tr>
+<tr><th>물품 색상 : </th><td><input type="text" name="auction_color" value="${auction.auction_color}"></td></tr>
+<tr><th>상품 설명 : </th><td><textarea name="auction_descript">${auction.auction_descript}</textarea></td></tr>
 <tr><th>경매시작가격 : </th><td><input type="number" name="bid_price"  value="${auction.bid_price}"></td></tr>
 <tr><th>경매시작일 : </th><td><input type="date" name="start_date"  value="${auction.start_date}"></td></tr>
 <tr><th>경매종료일 : </th><td><input type="date" name="end_date" value="${auction.end_date}"></td></tr>

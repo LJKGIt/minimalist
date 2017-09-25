@@ -8,7 +8,7 @@
 <head>
 
     <title>
-        Obaju : e-commerce template
+        Minimalist
     </title>
 
 </head>

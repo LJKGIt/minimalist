@@ -64,56 +64,10 @@ position: absolute;
 </style>
 
 <head>
-<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
-<script>
-$(function(){
-	//확인 버튼.
-	$('.check').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "auction.checkPayment.do",
-			type : "post",
-			data : {message : arr[0], auction_code : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					location.reload();
-				}else if(value=='no'){
-					alert("실패");
-				}
-			}
-		});
-		
-	});
-	
-	
-	//매출 추가
-	$('#incomeBtn').click(function(){
-		var arr=($(this).val()).split(',');
-		$.ajax({
-			url : "income.insertIncome.do",
-			type : "post",
-			data : {auction_code : arr[0], income : arr[1]},
-			dataType : "text",
-			success : function(value){
-				if(value=='yes'){
-					alert("매출에 집계되었습니다.");
-				}else if(value=='no'){
-					alert("이미 집계된 항목입니다.");
-				}
-			}
-			
-		});
-	});
-});
 
 
-</script>
-
-    <title>
-        Obaju : e-commerce template
-    </title>
-
+    
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 
 </head>
 
@@ -164,9 +118,8 @@ $(function(){
 			<th style="width:12%;">금액</th>
 			<th style="width:12%;">낙찰 ID</th>
 			<th style="width:12%;">결제</th>
-			<th style="width:13%;">확인</th>
 			<th style="width:13%;">쪽지</th>
-			<th style="width:13%;">집계</th>
+	
 			</tr>
 			</thead>
 			<tbody>
@@ -181,26 +134,11 @@ $(function(){
 			<c:if test="${au.payment_yn eq 'y' }">
 			결제완료
 			</c:if>
-			<td>
-			<c:if test="${au.payment_yn eq 'n' }">
-<%-- <<<<<<< HEAD
-			<button type="button" class="check" value="y,${au.auction_code}">확인</button>
-======= --%>
-			<button type="button" class="check" value="y,${au.auction_code}" style="pont-size:10px;">결제확인</button>
+	
 
-			</c:if>
-			<c:if test="${au.payment_yn eq 'y' }">
-<%-- <<<<<<< HEAD
-			<button type="button" class="check" value="n,${au.auction_code}">취소</button>
-======= --%>
-			<button type="button" class="check" value="n,${au.auction_code}" style="pont-size:10px;">되돌리기</button>
-
-			</c:if>
-			</td>
-
-			<td><button type="button" style="pont-size:10px;">전송</button></td>
-			<td><button type="button" id="incomeBtn" value="${au.auction_code},${au.bid_price}">집계</button></td>
-
+			<td><a href="message.endAuctionInsertMessage.do?member_id=${au.member_id}&auction_code=${au.auction_code}&income=${au.bid_price}
+			&root=${ pageContext.request.contextPath }"><button type="button" style="pont-size:10px;">전송</button></a></td>
+		
 			</tr>
 			
 			</c:forEach>
@@ -213,7 +151,7 @@ $(function(){
 			 <div class="pages">
 				<ul class="pagination">
 					<c:if test="${currentPage ne 1}">
-                 		 <li><a href="auction.viewAuctionEnd.do?page=${currentPage-1}&category=${category}">&laquo;</a></li>
+                 		 <li><a href="auction.viewAuctionEnd.do?page=${currentPage-1}&category=${auction_category}">&laquo;</a></li>
                     </c:if>
 					<c:forEach var="page" begin="${startPage}" end="${endPage}">
 					<c:if test="${page eq currentPage}">
@@ -224,7 +162,7 @@ $(function(){
 					</c:if>
 					</c:forEach>
 					<c:if test="${currentPage ne maxPage}">
-                        <li><a href="auction.viewAuctionEnd.do?page=${currentPage+1}&category=${category}">&raquo;</a></li>
+                        <li><a href="auction.viewAuctionEnd.do?page=${currentPage+1}&category=${auction_category}">&raquo;</a></li>
                      </c:if>
 				</ul>
 			 </div>

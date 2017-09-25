@@ -10,7 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<title>Obaju : e-commerce template</title>
+
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 </head>
 <body style="min-width: 360px;">
 
@@ -91,8 +92,8 @@
 										<div class="text">
 											<h3>
 												<a
-													href="auction.selectOne.do?auction_code=${au.auction_code}">${au.product_brand}
-													- ${au.product_name }</a>
+													href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand}
+													- ${au.auction_name }</a>
 											</h3>
 											<p class="price">
 												<font size=3px>현재 입찰가 : <fmt:formatNumber

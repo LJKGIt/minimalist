@@ -58,5 +58,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public ArrayList<Review> myReview(String member_id) {
 		return reviewDao.myReview(member_id);
 	}
-	
 }

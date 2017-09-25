@@ -36,16 +36,16 @@ public class AuctionDao {
 	
 	
 	//카테고리 row수
-	public int countRowCategory(String category){
+	public int countRowCategory(String auction_category){
 		
-		return sqlSession.selectOne("Auction.countRowCategory", category);
+		return sqlSession.selectOne("Auction.countRowCategory", auction_category);
 	}
 	
 	//카테고리 리스트
-	public ArrayList<Auction> selectListCategory(HashMap<String, Object> map){
+	public ArrayList<Auction> selectListAuctionCategory(HashMap<String, Object> map){
 		List<Auction> list=null;
 		
-		list=sqlSession.selectList("Auction.selectListCategory", map);
+		list=sqlSession.selectList("Auction.selectListAcutionCategory", map);
 		
 		
 		return (ArrayList<Auction>)list;

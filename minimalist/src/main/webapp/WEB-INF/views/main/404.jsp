@@ -6,9 +6,8 @@
 <html>
 
 <head>
-    <title>
-        Obaju : e-commerce template
-    </title>
+   
+       <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -34,18 +33,18 @@
                             <div class="box">
 
                                 <p class="text-center">
-                                    <img src="resources/img/logo.png" alt="Obaju template">
+                                    <img src="resources/img/logo23.png" alt="Obaju template">
                                 </p>
 
                                 <h3>요청하신 페이지를 찾을 수 없습니다.</h3>
                                 <p>주소가 잘못 입력 되었거나 수정, 삭제되어 요청하신 페이지를 찾을 수 없습니다.</p>
                                 <p>입력하신 주소가 정확한지 다시 한번 확인해 주세요.</p>
                                 <hr>
-                                <h4 class="text-muted">Error 404 - Page not found</h4>
+                                <h4 class="text-muted">요청하신 페이지는 오류페이지입니다.</h4>
 
                                 <!-- <p class="text-center">To continue please use the <strong>Search form</strong> or <strong>Menu</strong> above.</p> -->
 
-                                <p class="buttons"><a href="index.do" class="btn btn-primary"><i class="fa fa-home"></i> Go to Homepage</a>
+                                <p class="buttons"><a href="index.do" class="btn btn-primary"><i class="fa fa-home"></i>main으로 가기</a>
                                 </p>
                             </div>
                         </div>
