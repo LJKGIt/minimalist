@@ -90,9 +90,7 @@ border-top: 1px none #888;!important;
 
 <head>
 
-   <title>
-       Minimalist
-    </title>
+  
      <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 
 
