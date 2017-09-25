@@ -158,7 +158,7 @@ COMMENT ON COLUMN WISH.PRODUCT_CODE IS '대여 코드';
 CREATE TABLE MESSAGE(
     MESSAGE_NUMBER NUMBER PRIMARY KEY, /* 쪽지 번호 */
     MEMBER_ID VARCHAR2(20), /* 회원 아이디 */
-    MESSAGE_TITLE VARCHAR2(50), /* 쪽지 제목 */
+    MESSAGE_TITLE VARCHAR2(100), /* 쪽지 제목 */
     MESSAGE_CONTENT VARCHAR2(500), /* 쪽지 내용 */
     SEND_DATE DATE, /* 보낸 날짜 */
     CHECK_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_MSG CHECK (CHECK_YN IN('y', 'n')), /* 확인 여부 */
@@ -238,8 +238,7 @@ CREATE TABLE REVIEW(
     REVIEW_TITLE VARCHAR2(50), /* 후기 제목 */
     REVIEW_CONTENT VARCHAR2(1000), /* 후기 내용 */
     REVIEW_RATING NUMBER, /* 별 갯수 */
-    ORIGINAL_IMG_NAME VARCHAR2(1000), /* 이미지 원본 이름 */
-    RENAME_IMG_NAME VARCHAR2(100), /* 이미지 바뀐 이름 */
+    image_path varchar2(100),/* 이미지 이름 */
     REVIEW_DATE DATE, /* 후기 작성 날짜 */
     CONSTRAINT REVIEW_FK1 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID),
     CONSTRAINT REVIEW_FK2 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE) ON DELETE CASCADE
@@ -419,15 +418,15 @@ INSERT INTO MESSAGE VALUES(1, 'admin', '안녕', '나는 관리자야', SYSDATE,
 INSERT INTO AUCTION VALUES(1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(4, '옷(끝)', '의류', '보세', '화려함', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(4, '옷(끝)', '의류', '보세', '화려함', 'usera', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
 INSERT INTO AUCTION VALUES(5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
 
 INSERT INTO ALERT VALUES('admin', 1500000001, TO_DATE('170901', 'YYMMDD'));
 
 INSERT INTO NOTICE VALUES(1, '공지사항', '대여 및 구매시 적립금을 드려요.', SYSDATE);
 
-INSERT INTO REVIEW VALUES(1, 1500000001, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
-INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', NULL, NULL, SYSDATE);
+INSERT INTO REVIEW VALUES(1, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, SYSDATE);
+INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', NULL, SYSDATE);
 
 INSERT INTO QNA VALUES(1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸', SYSDATE, NULL);
 
