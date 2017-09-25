@@ -194,7 +194,7 @@ public String memberList(Model model) {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
-		System.out.println("update : " + m);
+		System.out.println("update : " + m); 
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
 		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 		
