@@ -131,19 +131,7 @@ NOTICE_DATE DATE);
 
 
 --후기게시판
-<<<<<<< HEAD
-create table review(
-review_no number primary key,
-product_code number,
-member_id varchar2(20),
-review_title varchar2(50),
-review_content varchar2(1000),
-review_rating number,
-image_path varchar2(1000),
-review_date date,
-constraint review_fk1 foreign key (member_id) references member (member_id),
-constraint review_fk2 foreign key (product_code) references product (product_code) on delete cascade);
-=======
+
 CREATE TABLE REVIEW(
 REVIEW_NO NUMBER PRIMARY KEY,
 PRODUCT_CODE NUMBER,
@@ -156,7 +144,7 @@ RENAME_IMG_NAME VARCHAR2(100),
 REVIEW_DATE DATE,
 CONSTRAINT REVIEW_FK1 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID),
 CONSTRAINT REVIEW_FK2 FOREIGN KEY (PRODUCT_CODE) REFERENCES PRODUCT (PRODUCT_CODE) ON DELETE CASCADE);
->>>>>>> refs/remotes/origin/branch_lintogi
+
 
 
 --문의 게시판

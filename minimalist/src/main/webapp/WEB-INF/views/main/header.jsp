@@ -5,11 +5,13 @@
 <html>
 
 <head>
+ 
+    
 <meta charset="utf-8">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Obaju e-commerce template">
+<meta name="description" content="minimalist">
 <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
 <meta name="keywords" content="">
 <link rel="stylesheet"
@@ -29,7 +31,8 @@
 <!-- your stylesheet with modifications -->
 <link href="resources/css/custom.css" rel="stylesheet">
 <script src="resources/js/respond.min.js"></script>
-<link rel="shortcut icon" href="resources/favicon.png">
+
+ <link rel="shortcut icon" href="resources/img/favicon%20(6).ico" type="image/x-icon">
 </head>
 
 
