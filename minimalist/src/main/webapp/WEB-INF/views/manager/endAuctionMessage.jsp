@@ -158,7 +158,7 @@ input {
 						<h1 align="center">쪽지 보내기</h1>
 
 
-						<form action="message.writeMessage.do" method="post">
+						<form action="message.endAuctionInsertMessage.do" method="post">
 							<table class="board-write-1s mgT40">
 
 								<colgroup>
@@ -169,18 +169,22 @@ input {
 
 									<tr>
 										<td><strong>수신인</strong></td>
-										<td><input type="text" id="mId_List" name="mId_List" style="width: 75%;"><a
-											href="javascript:mSearch()" class="btn btn-primary" style="margin-left: 10px;">아이디
-												검색</a></td>
+										<td><input type="text"  name="member_id" style="width: 75%;" value="${member_id}" readonly>
+											
 									</tr>
 									<tr>
 										<td><strong>제목</strong></td>
-										<td><input type="text" name="message_title" style="width: 98%;"></td>
+										<td><input type="text" name="message_title" style="width: 98%;" value="낙찰된 경매건에 대해 결제 부탁드립니다."></td>
 									</tr>
 									<tr>
 										<td><strong>내용</strong></td>
-										<td><textarea name="message_content" cols="30" rows="7"
-												placeholder="내용을 입력하세요." style="width: 98%; height: 280px;"></textarea>
+										<td><!-- <textarea name="message_content" cols="30" rows="7"
+												placeholder="내용을 입력하세요." style="width: 98%; height: 280px;">
+												
+												</textarea> -->
+												
+												<input type="text" name="message_content" 
+												value="http://localhost:8888/minimalist/income.viewOrder.do?auction_code=${auction_code}&income=${income}">
 
 
 										</td>
@@ -194,13 +198,13 @@ input {
 							</div>
 
 						</form>
-						<!-- <thead>
+						<thead>
 
 						</thead>
 						<tbody>
 
 
-						</tbody> -->
+						</tbody>
 
 
 

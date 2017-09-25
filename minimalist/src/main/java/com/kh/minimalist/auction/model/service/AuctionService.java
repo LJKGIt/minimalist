@@ -18,9 +18,9 @@ public interface AuctionService {
 	
 	int reloadPrice(int auction_code);
 	
-	int countRowCategory(String category);
+	int countRowCategory(String auction_category);
 	
-	ArrayList<Auction> selectListCategory(HashMap<String, Object> map);
+	ArrayList<Auction> selectListAuctionCategory(HashMap<String, Object> map);
 	
 	int insertAuction(Auction auction);
 	

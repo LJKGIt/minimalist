@@ -29,15 +29,17 @@
                     </ul>
 
                    <div class="box">
-                        <form action="orderInfoInsert.do" method="POST">
-							<input type="text" name="product_code" value="${ product.product_code }">
-							<input type="text" name="product_name" value="${ product.product_name }">
+                        <form action="income.insertIncome.do" method="POST">
+                        	경매물품 : <a href="auction.selectOne.do?auction_code=${auction_code}">물품확인</a><br>
+							경매코드 : <input type="text" name="auction_code" value="${ auction_code }" readonly><br>
+							결제가격 : <input type="text" name="income" value="${ income }" readonly><br>
 							<input id="i_submit_order" type="submit" value="결제하기">
 						</form>
                     </div>
                     
                     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
                     <script type="text/javascript">
+						<% // TODO [lintogi] i_input >> type 값으로 바꾸기. %>
 						$(function(){
 							$('input').on('click', function(){
 								var IMP = window.IMP; // 생략가능
