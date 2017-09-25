@@ -55,6 +55,7 @@ public class OrderInfoController {
 		String returnResult = "main/404";
 
 		if ((Member) session.getAttribute("member") != null) {
+			// TODO [lintogi] 에러 페이지에 "404" 문구를 없애고 "ERROR"로 바꾸기. 그리고 값을 넘길 수 있게 하고, 여기는 가입하라는 메시지를 보내기.
 			Product product_return = productService.productDetail(product);
 			model.addAttribute("product", product_return);
 			returnResult = "order/orderView";

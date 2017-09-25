@@ -1,5 +1,7 @@
 package com.kh.minimalist.message.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,5 +24,14 @@ public class MessageDao {
 	public int updateMessageChk(int mNum) {
 		return sqlSession.update("Message.messageChkUpdate", mNum);
 	}
+
+	public int insertMessage(ArrayList idList, Message message) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("idList", idList);
+		map.put("message", message);
+		
+		return sqlSession.insert("Message.messageInsert", map);
+	}
+	
 
 }

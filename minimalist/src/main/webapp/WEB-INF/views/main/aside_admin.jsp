@@ -20,19 +20,19 @@
 
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="active">
-                                    <a href="customer-orders.html"><i class="fa fa-list"></i> My orders</a>
+                                    <a href="#"><i class="fa fa-list"></i> My orders</a>
                                 </li>
                                 <li>
-                                    <a href="customer-wishlist.html"><i class="fa fa-heart"></i> My wishlist</a>
+                                    <a href="#"><i class="fa fa-heart"></i> My wishlist</a>
                                 </li>
                                 <li>
-                                    <a href="customer-account.html"><i class="fa fa-user"></i> My account</a>
+                                    <a href="#"><i class="fa fa-user"></i> My account</a>
                                 </li>
                                 <li>
                                 	<a href="notice.viewWriteForm.do">공지사항 등록</a>
                                 </li>
                                 <li>
-                                	<a href="member.memberSearchView.do">회원관리</a>
+                                	<a href="">회원관리</a>
                                 </li>
                                 <li>
                                 	<a href="member.memberSearchView.do">쪽지</a>

@@ -1,5 +1,7 @@
 package com.kh.minimalist.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.minimalist.member.model.vo.Member;
 
 public interface MemberService {
@@ -10,4 +12,6 @@ public interface MemberService {
 	int memberIdChk (String member_id);
 	
 	Member searchMember(String member_id);
+
+	ArrayList<Member> mList();
 }

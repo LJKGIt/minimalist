@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -88,19 +90,27 @@ public class MemberController {
 
 	}
 
-	@RequestMapping("minsert.do")
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
+	@RequestMapping(value= "minsert.do", method = RequestMethod.POST)
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+		
+		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+		
+		m.setPhone(phone);
+
 		m.setEmail(email);
 		int result = memberService.minsert(m);
 
 		if (result > 0) {
-			return "main/index";
-		} else {
+
+			return "redirect:index.do";			
+		}
+		else {
+
 			return "main/404";
 		}
 
@@ -112,59 +122,25 @@ public class MemberController {
 		return "member/register";
 	}
 
-	// @RequestMapping("emailAuth.do")
-	// public ModelAndView emailAuth(HttpServletResponse response,
-	// HttpServletRequest request) throws Exception {
-	// String email = request.getParameter("email");
-	// String authNum = "";
-	//
-	// authNum = RandomNum();
-	//
-	// sendEmail(email.toString(), authNum);
-	//
-	// ModelAndView mv = new ModelAndView();
-	// mv.setViewName("member/register");
-	// mv.addObject("email", email);
-	// mv.addObject("authNum", authNum);
-	//
-	// return mv;
-	// }
-	//
-	// private void sendEmail(String email, String authNum) {
-	// String host = "stmp.gmail.com";
-	// String subject = "NEGABOX 인증번호 전달";
-	// String fromName = "네가박스 관리자";
-	// String from = "ruew12@gmail.com";
-	// String to1 = email;
-	//
-	// String content = "인증번호 [ " + authNum + " ]";
-	//
-	// try {
-	// Properties prop = new Properties();
-	// prop.put("mail.smtp.starttls.enable", "true");
-	// prop.put("mail.transport.protocol", "smtp");
-	// prop.put("mail.smtp.host", host);
-	// prop.setProperty("mail.smtp.socketFactory.class",
-	// "javax.net.ssl.SSLSocketFactory");
-	// prop.put("mail.smtp.port", "465");
-	// prop.put("mail.smtp.user", from);
-	// prop.put("mail.smtp.auth", "true");
-	//
-	// Session mailSession = Session.getInstance(prop, new
-	// javax.mail.Authenticator() {
-	// protected PasswordAuthentication getPasswordAuthentication() {
-	// return new PasswordAuthentication()
-	// }
-	// })
-	// } catch (Exception e) {
-	// }
-	// }
 	
+
+
+@RequestMapping("memberList.do")
+public String memberList(Model model) {
+	
+	ArrayList<Member> list = new ArrayList<Member>();
+	
+	list = memberService.mList();
+	model.addAttribute("list", list);
+	
+	return "manager/mSearchPopup";
+}
 
 	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
 		String result = "main/404";
 		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+
 		
 //		MY ORDER LIST
 		ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
@@ -209,23 +185,30 @@ public class MemberController {
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {
 
-		return "manager/memberSearch";
+		return "manager/sendMessage";
 	}
+	
 
 	// 회원 검색
 	@RequestMapping(value = "member.memberSearch.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String searchMemer(HttpServletRequest request, Model model) {
+	public void searchMemer(HttpServletRequest request, HttpServletResponse response ,Model model) throws IOException {
 
 		String member_id = request.getParameter("member_id");
 
 		Member member = memberService.searchMember(member_id);
 
+		
+		PrintWriter writer=response.getWriter();
 		if (member != null) {
+			String id=member.getMember_id();
 			model.addAttribute("member", member);
+			writer.append(id);
+			
 		} else {
-
+			writer.append("no");
+			
 		}
-
-		return "manager/memberSearch";
+		writer.close();
+		
 	}
 }

@@ -75,8 +75,18 @@
 										class="form-control" id="birth" name="birth" style="width: 50%">
 								</div>
 								<div class="form-group">
-									<label for="phone">Phone</label> <input type="tel"
-										class="form-control" id="phone" name="phone">
+									<label for="phone">Phone</label><br>
+									<select class="form-control" id="tel_first" style="width: 20%; display: inline; margin: 0 20px 10px 0;">
+											<option>010</option>
+											<option>016</option>
+											<option>017</option>
+											<option>018</option>
+											<option>019</option>
+										</select>
+									<input type="tel"
+										class="form-control" id="phone1" name="phone1" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
+									<input type="tel"
+										class="form-control" id="phone2" name="phone2" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
 								</div>
 								<!-- ADDRESS -->
 								<div class="form-group">
@@ -102,7 +112,6 @@
 											<option>nate.com</option>
 											<option>iei.or.kr</option>
 										</select>
-										<a href="emailAuth.do" class="btn btn-primary">ㅇㅈ</a>
 								</div>
 
 
@@ -130,7 +139,12 @@
 	
 	<!-- ADDRESS SCRIPT -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script>
+<script>	
+	$('#tel_first').change(function() {
+    		$('#phone1').focus();
+    })
+    
+	
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

@@ -1,6 +1,10 @@
 package com.kh.minimalist.member.model.dao;
 
 import com.kh.minimalist.member.model.vo.Member;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +33,11 @@ public class MemberDao {
 	public Member searchMember(String member_id){
 		
 		return sqlSession.selectOne("Member.searchMember", member_id);
+	}
+
+	public ArrayList<Member> mList() {
+		List<Member> list = sqlSession.selectList("Member.memberList");
+		
+		return (ArrayList<Member>) list;
 	}
 }

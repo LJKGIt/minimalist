@@ -40,6 +40,9 @@
 <script src="resources/js/bootstrap-hover-dropdown.js"></script>
 <script src="resources/js/owl.carousel.min.js"></script>
 <script src="resources/js/front.js"></script>
+	<title>
+		MINIMALIST
+	</title>
 </head>
 
 <body>
@@ -308,8 +311,10 @@
 								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
 								class="hidden-sm"> 관리</span>
 							</a>
+
 						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
+
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
@@ -343,5 +348,27 @@
 	<!-- /#navbar -->
 	<!-- *** NAVBAR END *** -->
 </body>
+
+<script type="text/javascript">
+		function readCheck(num, rchk) {
+			var mNum = num.replace("#msg","");
+			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
+				console.log(mNum);
+				$.ajax({
+					url : "mChkUpdate.do",
+					data : {
+						mNum : mNum
+					},
+					type : "POST",
+					dataType : "text",
+					success : function(data){
+						$(rchk).parent().parent().css({"background-color" :"white", "color": "#4fbfa8"});
+						
+					}
+				})
+			}
+		}
+</script>
+
 
 </html>

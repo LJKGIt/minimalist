@@ -142,7 +142,7 @@
                                                     <h1 class="text-center">${ product.product_name }</h1>
                                                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &#38; care and sizing</a> </p>
                                                     <p class="price"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
-                                                    <p class="text-center buttons"> <a href="orderView.do?product_code=${ product.product_code }" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 바로구매</a>
+                                                    <p class="text-center buttons"> <a href="orderView.do?product_code=${ product.product_code }" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 바로대여</a>
                                                         <c:if test="${ empty wish }"> <a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Add to wishlist</a> </c:if>
                                                         <c:if test="${ not empty wish }"> <a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color:#ff5757;"></i> Remove to wishlist</a> </c:if>
                                                     </p>

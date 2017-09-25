@@ -1,5 +1,6 @@
 package com.kh.minimalist.message.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int updateMessageChk(int mNum) {
 		return messageDao.updateMessageChk(mNum);
+	}
+
+
+	@Override
+	public int insertMessage(ArrayList idList, Message message) {
+		return messageDao.insertMessage(idList, message);
 	}
 	
 	

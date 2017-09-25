@@ -1,10 +1,12 @@
 package com.kh.minimalist.product.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.vo.Member;
@@ -32,11 +36,13 @@ public class ProductController {
 	private WishService wishService;
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
+	// TODO [lintogi] ■ 탭에 이미지 아이콘 넣기.
 	// TODO [lintogi] ■ 장흠이 형에게 아톰의 정렬 상태를 여쭤보기. (AJAX 부분까지.)
 	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
 	// TODO [lintogi] 완성될 쯤에 반응형 웹에 대해 링크 연결을 싹 정리하기.
 	// TODO [lintogi] 관리자 페이지에 왼쪽 윙바를 임포트하는 것으로 바꿀지 생각하기.
 	// TODO [lintogi] ■ ACUTION 테이블에 product_name, category 등이 쓰이던데 이름이 겹치니 바꿔도 되는지 여쭤보기.
+	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로 처리해줘야 하는데 input[type=hidden] 외에 방법이 있는지 아이디어 물어보기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -82,6 +88,7 @@ public class ProductController {
 
 	}
 
+	// TODO [lintogi] 또 imgae 순서가 이상하다.
 	// TODO [lintogi] JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -158,6 +165,8 @@ public class ProductController {
 	}
 
 	// TODO [lintogi] 이미지 삽입하는 것을 처리하기.
+	// TODO [lintogi] 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면 될 것 같다.
+	// TODO [lintogi] 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다. 
 	@RequestMapping(value = "productInsert.do", method = RequestMethod.POST)
 	public String productInsert(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
@@ -200,6 +209,42 @@ public class ProductController {
 		}
 
 		return returnResult;
+	}
+
+	@RequestMapping(value = "productImageUpload.do", method = RequestMethod.POST)
+	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multi) {
+		String returnResult = "false";
+		// TODO [lintogi] 경로가 target 아래로 잡힌다. 해결하기.
+		// String root = request.getSession().getServletContext().getRealPath("/");
+		String root = "C:\\workspace\\minimalist\\src\\main\\webapp\\";
+		String path = root + "resources\\img_product\\";
+		String newFileName = "";
+		File dir = new File(path);
+		if (!dir.isDirectory()) {
+			dir.mkdir();
+		}
+		Iterator<String> files = multi.getFileNames();
+		while (files.hasNext()) {
+			String uploadFile = files.next();
+			MultipartFile mFile = multi.getFile(uploadFile);
+			String fileName = mFile.getOriginalFilename();
+			// TODO [lintogi] 테이블에 컬럼 추가하기.
+			// 그리고 "true" + "바뀐 이름"   값을 view의 jquery까지 보내주기. index hidden까지 옮기기. 
+			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+			newFileName = fileName;
+			try {
+				mFile.transferTo(new File(path + newFileName));
+				returnResult = "true";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			response.getWriter().append(returnResult);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

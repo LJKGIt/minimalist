@@ -91,6 +91,7 @@ position: absolute;
 
                     <div class="box" id="contact">
                        <h1>매출 현황</h1>
+                       
            <form action="income.selectListByDate.do" method="post"> 
                         기간 : <input type="date" name="startDate" id="startDate">
                         <input type="date" name="endDate" id="endDate">
@@ -109,15 +110,16 @@ position: absolute;
         <th style="width:200px">매출액</th>
    </tr>
    <tbody>
-  		<c:if test="${empty list}">
+   <c:choose>
+  		<c:when test="${empty list}">
   		<tr>
   		<th></th>
   		<th></th>
   		<th>매출이 없습니다.</th>
   		<th></th>
   		</tr>
-  		</c:if>
-  		<c:if test="${!empty list}">
+  		</c:when>
+  		<c:when test="${!empty list}">
    		<!--  forEach -->
    		<c:forEach var="inc" items="${list}">
    		<tr>
@@ -152,7 +154,8 @@ position: absolute;
    		</td>
    		</tr>
    		</c:forEach>
-   		</c:if>
+   		 </c:when>
+   		</c:choose>
     </tbody>
    <tbody>
    <tr><th>
@@ -183,7 +186,7 @@ position: absolute;
                         </ul>
                     </div>
 
-					 
+					
 
 
                 </div>

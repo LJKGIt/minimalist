@@ -76,8 +76,8 @@ public class IncomeController {
 		ArrayList<Income> list=incomeService.selectList(map);
 		
 		System.out.println("리스트 사이즈 : "+list.size());
-		String tmp;
-		if(list.size()>0){
+		
+		
 			//총 매출 집계.
 			int total=0;
 			for(Income inc : list){
@@ -90,12 +90,12 @@ public class IncomeController {
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("maxPage", maxPage);
-			tmp="manager/income";
-		}else {
-			tmp="main/404";
-		}
+			
+	
+			
 		
-		return tmp;
+		
+		return "manager/income";
 	}
 	
 	//매출 포함 - 경매
@@ -205,8 +205,8 @@ public class IncomeController {
 		ArrayList<Income> list=incomeService.selectListByDate(map);
 		
 		System.out.println("리스트 사이즈 : "+list.size());
-		String tmp;
-		if(list.size()>0){
+		
+		
 			//총 매출 집계.
 			int total=0;
 			for(Income inc : list){
@@ -221,13 +221,10 @@ public class IncomeController {
 			model.addAttribute("maxPage", maxPage);
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
-			tmp="manager/income";
-		}else {
-			tmp="main/404";
-		}
+			
 		
 		
-		return tmp;
+		return "manager/income";
 	}
 	
 	
