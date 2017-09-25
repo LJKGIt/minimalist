@@ -6,12 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>
-        Obaju : e-commerce template
-    </title>
-
-
 </head>
 
 <body>

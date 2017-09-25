@@ -46,15 +46,15 @@
 	</select>
 
 	<select id="productList" parameterType="map" resultType="Product" resultMap="resultProduct">
-		SELECT *
-		FROM(SELECT *
-			FROM (SELECT ROWNUM RNUM, A.* 
-					FROM PRODUCT A 
-					WHERE PRODUCT_CATEGORY = #{product.product_category} 
-					AND PRODUCT_DELETE = 0
-					ORDER BY PRODUCT_CODE ASC)
-			WHERE RNUM &#62;= #{startCount} AND RNUM &#60;= #{endCount})
-		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
+		SELECT * 
+		FROM(SELECT ROWNUM RNUM, A.* 
+			FROM (SELECT * 
+					FROM PRODUCT 
+					WHERE PRODUCT_DELETE = 0 
+					ORDER BY RECEIVE_DATE DESC) A) 
+		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
+        WHERE RNUM &#62;=1 AND RNUM &#60;= 10 
+        ORDER BY PRODUCT_CODE DESC, PRODUCT_IMAGE_PATH ASC 
 	</select>
 
 	<update id="productHit" parameterType="Product">
