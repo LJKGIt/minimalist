@@ -129,7 +129,6 @@
                             <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
                         </p>
 
-
                     </div>
                     <!-- /.col-md-3 -->
 
@@ -142,9 +141,6 @@
         <!-- /#footer -->
 
         <!-- *** FOOTER END *** -->
-
-
-
 
         <!-- *** COPYRIGHT ***
  _________________________________________________________ -->
@@ -164,19 +160,5 @@
         <!-- *** COPYRIGHT END *** -->
 
 
-    <!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
-    <script src="resources/js/jquery-1.11.0.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/jquery.cookie.js"></script>
-    <script src="resources/js/waypoints.min.js"></script>
-    <script src="resources/js/modernizr.js"></script>
-    <script src="resources/js/bootstrap-hover-dropdown.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/front.js"></script>
-
-
-
-	
 </body>
 </html>

@@ -32,10 +32,25 @@
 <link href="resources/css/custom.css" rel="stylesheet">
 <script src="resources/js/respond.min.js"></script>
 
+
  <link rel="shortcut icon" href="resources/img/favicon%20(6).ico" type="image/x-icon">
+
+
+<!-- *** SCRIPTS TO INCLUDE ***
+ _________________________________________________________ -->
+<script src="resources/js/jquery-1.11.0.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.cookie.js"></script>
+<script src="resources/js/waypoints.min.js"></script>
+<script src="resources/js/modernizr.js"></script>
+<script src="resources/js/bootstrap-hover-dropdown.js"></script>
+<script src="resources/js/owl.carousel.min.js"></script>
+<script src="resources/js/front.js"></script>
+	<title>
+		MINIMALIST
+	</title>
+
 </head>
-
-
 
 <body>
 	<!-- *** TOPBAR ***
@@ -75,15 +90,15 @@
 			</div>
 		</div>
 	</div>
-	
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand home" href="index.do"
-					data-animate-hover="bounce"> <img src="resources/img/logo23.png"
-					alt="Obaju logo" class="hidden-xs"> <img
-					src="resources/img/logo23-2.png" alt="Obaju logo"
-					class="visible-xs"><span class="sr-only">Minimalist home </span>
+					data-animate-hover="bounce"> <img
+					src="resources/img/logo23.png" alt="Obaju logo" class="hidden-xs">
+					<img src="resources/img/logo23-2.png" alt="Obaju logo"
+					class="visible-xs"><span class="sr-only">Minimalist
+						home </span>
 				</a>
 				<div class="navbar-buttons">
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -100,16 +115,14 @@
 						<span class="hidden-xs"> <!-- 3 items in cart -->
 					</span>
 					</a>
-
 				</div>
 			</div>
 			<!--/.navbar-header -->
 			<div class="navbar-collapse collapse" id="navigation">
-
 				<ul class="nav navbar-nav navbar-left">
 					<li class="hidden-md hidden-lg hidden-sm"
 						style="text-align: center; margin-bottom: 12.5px;">
-						<div style="">
+						<div>
 							<c:if test="${ empty sessionScope.member }">
 								<button type="button" class="btn btn-default"
 									data-toggle="modal" data-target="#login-modal"
@@ -128,7 +141,7 @@
 										Logout</span> <i class="fa fa-sign-out"> Logout</i>
 								</a>
 								<!-- 마이페이지 연결 -->
-								<a href="mypage.do" class="btn btn-default"> <span
+								<a href="member.mypage.do" class="btn btn-default"> <span
 									class="sr-only">My Page</span> <i class="fa fa-user">
 										MyPage</i>
 								</a>
@@ -138,7 +151,8 @@
 					<li class="active"><a href="index.do">How</a></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Product <b class="caret"></b></a>
+						data-hover="dropdown" data-delay="200">Product <b
+							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
@@ -149,44 +163,44 @@
 												<li><a
 													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Outer</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=dress">DRESS</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">DRESS</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=top">TOP</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">TOP</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=bottom">BOTTOM</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">BOTTOM</a></li>
 											</ul>
 										</div>
 										<div class="col-sm-3">
 											<h5>Miscellaneous</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=bag">BAG</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">BAG</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">ACESSORY</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">ACESSORY</a></li>
 											</ul>
 										</div>
 										<%
-											//TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'acessory' 카테고리로 이동하게 만들었다.
+											// TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'outer' 카테고리로 이동하게 만들었다.
 										%>
 										<div class="col-sm-3">
 											<h5>Featured</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Trainers</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Trainers</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Sandals</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Sandals</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Hiking
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Hiking
 														shoes</a></li>
 											</ul>
 											<h5>Looks and trends</h5>
 											<ul>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Trainers</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Trainers</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Sandals</a></li>
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Sandals</a></li>
 												<li><a
-													href="${ pageContext.request.contextPath }/productList.do?product_category=accessory">Hiking
+													href="${ pageContext.request.contextPath }/productList.do?product_category=outer">Hiking
 														shoes</a></li>
 											</ul>
 										</div>
@@ -196,7 +210,8 @@
 						</ul></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Auction <b class="caret"></b></a>
+						data-hover="dropdown" data-delay="200">Auction <b
+							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
@@ -209,17 +224,16 @@
 												<li><a href="auction.selectList.do?category=의류">의류</a></li>
 												<li><a href="auction.selectList.do?category=잡화">잡화</a></li>
 												<li><a href="auction.selectList.do?category=악세사리">악세사리</a></li>
-
 											</ul>
 										</div>
 									</div>
-
 								</div> <!-- /.yamm-content -->
 							</li>
 						</ul></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Community <b class="caret"></b></a>
+						data-hover="dropdown" data-delay="200">Community <b
+							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
@@ -234,11 +248,8 @@
 										<div class="col-sm-3">
 											<h5>질문 답변</h5>
 											<ul>
-
 												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
 												<li><a href="qna.selectList.do">1:1 문의</a></li>
-
-
 												<li><a href="register.do">Register</a></li>
 												<li><a href="resources/customer-orders.html">Orders
 														history</a></li>
@@ -248,7 +259,6 @@
 												<li><a href="resources/customer-account.html">Customer
 														account / change password</a></li>
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
 											<h5>Order process</h5>
@@ -285,48 +295,38 @@
 			</div>
 			<!--/.nav-collapse -->
 			<div class="navbar-buttons">
-
 				<!--/.nav-collapse -->
 				<div class="navbar-collapse collapse right" id="search-not-mobile">
-
-
 					<c:if test="${ empty sessionScope.member }">
-
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#login-modal">
 							<span class="sr-only">Toggle login</span> <i
 								class="fa fa-sign-in"></i><span class="hidden-sm"> Login</span>
 						</button>
-
 						<a href="register.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">sign up</span> <i class="fa fa-sign-in"></i><span
 							class="hidden-sm"> Sign up</span>
 						</a>
-
-
 					</c:if>
-					
 					<c:if test="${ !empty sessionScope.member }">
-					
-						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
-							<a href="manage.do" class="btn navbar-btn btn-primary"> <span
-							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-							class="hidden-sm"> admin</span>
-						</a>
-						</c:if>
-
 						<a href="logout.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
 							class="hidden-sm"> Logout</span>
 						</a>
+						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
+							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
+								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
+								class="hidden-sm"> 관리</span>
+							</a>
 
+						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
+							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
-
-						<a href="mypage.do" class="btn btn-primary navbar-btn"><i
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
-							Message</button>
+							<i class="fa fa-envelope"></i></button>
+						</c:if>
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
 						data-toggle="collapse" data-target="#search">
@@ -355,5 +355,27 @@
 	<!-- /#navbar -->
 	<!-- *** NAVBAR END *** -->
 </body>
+
+<script type="text/javascript">
+		function readCheck(num, rchk) {
+			var mNum = num.replace("#msg","");
+			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
+				console.log(mNum);
+				$.ajax({
+					url : "mChkUpdate.do",
+					data : {
+						mNum : mNum
+					},
+					type : "POST",
+					dataType : "text",
+					success : function(data){
+						$(rchk).parent().parent().css({"background-color" :"white", "color": "#4fbfa8"});
+						
+					}
+				})
+			}
+		}
+</script>
+
 
 </html>

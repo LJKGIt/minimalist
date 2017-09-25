@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<style>
 
 $(function(){
 	$('#searching').click(function(){
@@ -97,47 +97,7 @@ position: absolute;
 
                 </div>
 
-                <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Management</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                	<a href="notice.viewWriteForm.do">공지사항 등록</a>
-                                </li>
-                                <li>
-                                	<a href="qna.selectList.do">1:1문의 답변</a>
-                                </li>
-                                <li>
-                                    <a href="">회원관리</a>
-                                </li>
-                                <li>
-                                    <a href="">대여상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewRegister.do">경매상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
-                                </li>
-								
-								
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <!-- *** PAGES MENU END *** -->
-
-
-                    
-                </div>
+                <c:import url="../main/aside_admin.jsp" />
 
                 <div class="col-md-9">
 
@@ -150,13 +110,13 @@ position: absolute;
               	</p>
              
              <div id="result"></div> 
-    <thead>
+    <!-- <thead>
    	 
     </thead>
     <tbody>
     	
    			
-    </tbody>
+    </tbody> -->
 
 
 					

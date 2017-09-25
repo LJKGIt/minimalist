@@ -125,8 +125,6 @@ input {
 </head>
 
 <body>
-	<% // TODO [lintogi] 조회수 처리하기. %>
-	<% // TODO [lintogi] 브랜드, 색상, 정렬 처리하기. %>
    	<c:import url="../main/header.jsp" />
 
     <div id="all">
@@ -140,7 +138,7 @@ input {
                         </li>
                         <li><a href="#">Ladies</a>
                         </li>
-                        <li><a href="#">Dress</a><% //TODO [lintogi] 카테고리 순서 처리하기. %>
+                        <li><a href="#">Dress</a>
                         </li>
                         <li></li>
                     </ul>

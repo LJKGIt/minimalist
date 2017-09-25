@@ -85,60 +85,13 @@ position: absolute;
 
                 </div>
 
-                <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Pages</h3>
-                        </div>
-
-                         <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                	<a href="notice.viewWriteForm.do">공지사항 등록</a>
-                                </li>
-                                <li>
-                                	<a href="qna.selectList.do">1:1문의 답변</a>
-                                </li>
-                                <li>
-                                    <a href="member.memberSearchView.do">쪽지보내기</a>
-                                </li>
-                                <li>
-                                    <a href="">대여상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewRegister.do">경매상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewAuctionEnd.do">종료된 경매 확인</a>
-                                </li>
-                                 <li>
-                                    <a href="income.selectList.do">매출 확인</a>
-                                </li>
-								
-								
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <!-- *** PAGES MENU END *** -->
-
-
-                    <div class="banner">
-                        <a href="#">
-                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
-                </div>
-
+				<c:import url="../main/aside_admin.jsp" />
                 <div class="col-md-9">
 
 
                     <div class="box" id="contact">
                        <h1>매출 현황</h1>
+                       
            <form action="income.selectListByDate.do" method="post"> 
                         기간 : <input type="date" name="startDate" id="startDate">
                         <input type="date" name="endDate" id="endDate">
@@ -157,15 +110,16 @@ position: absolute;
         <th style="width:200px">매출액</th>
    </tr>
    <tbody>
-  		<c:if test="${empty list}">
+   <c:choose>
+  		<c:when test="${empty list}">
   		<tr>
   		<th></th>
   		<th></th>
   		<th>매출이 없습니다.</th>
   		<th></th>
   		</tr>
-  		</c:if>
-  		<c:if test="${!empty list}">
+  		</c:when>
+  		<c:when test="${!empty list}">
    		<!--  forEach -->
    		<c:forEach var="inc" items="${list}">
    		<tr>
@@ -200,7 +154,8 @@ position: absolute;
    		</td>
    		</tr>
    		</c:forEach>
-   		</c:if>
+   		 </c:when>
+   		</c:choose>
     </tbody>
    <tbody>
    <tr><th>
@@ -231,7 +186,7 @@ position: absolute;
                         </ul>
                     </div>
 
-					 
+					
 
 
                 </div>

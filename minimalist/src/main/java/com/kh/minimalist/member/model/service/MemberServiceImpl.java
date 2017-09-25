@@ -2,6 +2,9 @@ package com.kh.minimalist.member.model.service;
 
 import com.kh.minimalist.member.model.dao.MemberDao;
 import com.kh.minimalist.member.model.vo.Member;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,12 @@ public class MemberServiceImpl implements MemberService {
 	public Member searchMember(String member_id) {
 		
 		return memberDao.searchMember(member_id);
+	}
+
+	@Override
+	public ArrayList<Member> mList() {
+		
+		return memberDao.mList();
 	}
 	
 }

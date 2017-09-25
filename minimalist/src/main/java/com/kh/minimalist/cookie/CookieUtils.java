@@ -54,13 +54,14 @@ public class CookieUtils {
 		if (cookieValues != null) {
 			list = new ArrayList<String>(Arrays.asList(cookieValues));
 
-			if (list.size() > 5) { // 값이 5개를 초과하면, 최근 것 5개만 담는다.
-				int start = list.size() - 5;
+			if (list.size() > 10) { // 값이 n개를 초과하면, 최근 것 n개만 담는다.
+				int start = list.size() - 10;
 				List<String> copyList = new ArrayList<String>();
 				for (int i = start; i < list.size(); i++) {
 					copyList.add(list.get(i));
 				}
 				list = copyList;
+				
 			}
 		}
 		return list;
