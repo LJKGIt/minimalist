@@ -85,37 +85,36 @@ position: absolute;
                 </div>
 
                 <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
+                   <!-- *** PAGES MENU ***
+_________________________________________________________ -->
+                   <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Pages</h3>
-                        </div>
+                       <div class="panel-heading">
+                           <h3 class="panel-title">Pages</h3>
+                       </div>
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="qna.selectFaq.do">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="#">1:1문의</a>
-                                </li>
+                       <div class="panel-body">
+                           <ul class="nav nav-pills nav-stacked">
+                               <li>
+                                   <a href="qna.selectFaq.do">자주하는 질문</a>
+                               </li>
+                               <li>
+                                   <a href="#">1:1문의</a>
+                               </li>
 
-                            </ul>
+                           </ul>
 
-                        </div>
-                    </div>
+                       </div>
+                   </div>
+                   <!-- *** PAGES MENU END *** -->
 
-                    <!-- *** PAGES MENU END *** -->
 
-
-                    <div class="banner">
-                        <a href="#">
-                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
-                </div>
+                   <div class="banner">
+                       <a href="#">
+                           <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
+                       </a>
+                   </div>
+               </div>
 
                 <div class="col-md-9">
 

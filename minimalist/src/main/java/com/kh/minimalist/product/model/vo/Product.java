@@ -16,23 +16,31 @@ public class Product implements Serializable {
 	private String product_descript;
 	private int product_original_price;
 	private int rent_price;
-	private String product_size33;
-	private String product_size44;
-	private String product_size55;
-	private String product_size66;
-	private String product_size77;
+	private String product_size33 = "0";
+	private String product_size44 = "0";
+	private String product_size55 = "0";
+	private String product_size66 = "0";
+	private String product_size77 = "0";
 	private String product_color;
 	private Date receive_date;
+	private int product_hit;
+	private String product_delete;
 
 	private ArrayList<ProductImage> productImageList;
 
 	public Product() {
 	}
 
+	public Product(int product_code) {
+		super();
+		this.product_code = product_code;
+	}
+
 	public Product(int product_code, String product_name, String product_category, String product_brand,
 			String product_descript, int product_original_price, int rent_price, String product_size33,
 			String product_size44, String product_size55, String product_size66, String product_size77,
-			String product_color, Date receive_date, ArrayList<ProductImage> productImageList) {
+			String product_color, Date receive_date, int product_hit, String product_delete,
+			ArrayList<ProductImage> productImageList) {
 		super();
 		this.product_code = product_code;
 		this.product_name = product_name;
@@ -48,12 +56,9 @@ public class Product implements Serializable {
 		this.product_size77 = product_size77;
 		this.product_color = product_color;
 		this.receive_date = receive_date;
+		this.product_hit = product_hit;
+		this.product_delete = product_delete;
 		this.productImageList = productImageList;
-	}
-
-	public Product(int product_code) {
-		super();
-		this.product_code = product_code;
 	}
 
 	@Override
@@ -63,8 +68,8 @@ public class Product implements Serializable {
 				+ ", product_original_price=" + product_original_price + ", rent_price=" + rent_price
 				+ ", product_size33=" + product_size33 + ", product_size44=" + product_size44 + ", product_size55="
 				+ product_size55 + ", product_size66=" + product_size66 + ", product_size77=" + product_size77
-				+ ", product_color=" + product_color + ", receive_date=" + receive_date + ", productImageList="
-				+ productImageList + "]";
+				+ ", product_color=" + product_color + ", receive_date=" + receive_date + ", product_hit=" + product_hit
+				+ ", product_delete=" + product_delete + ", productImageList=" + productImageList + "]";
 	}
 
 	public int getProduct_code() {
@@ -177,6 +182,22 @@ public class Product implements Serializable {
 
 	public void setReceive_date(Date receive_date) {
 		this.receive_date = receive_date;
+	}
+
+	public int getProduct_hit() {
+		return product_hit;
+	}
+
+	public void setProduct_hit(int product_hit) {
+		this.product_hit = product_hit;
+	}
+
+	public String getProduct_delete() {
+		return product_delete;
+	}
+
+	public void setProduct_delete(String product_delete) {
+		this.product_delete = product_delete;
 	}
 
 	public ArrayList<ProductImage> getProductImageList() {

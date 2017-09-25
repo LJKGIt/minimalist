@@ -18,9 +18,9 @@
 
 	<c:import url="../main/header.jsp" />
 
-    <div id="all">
+    <div id="all" style="background:white;">
 
-        <div id="content">
+        <div id="content" >
             <div class="container">
 
                 <div class="col-md-12">
@@ -215,14 +215,13 @@
                         </div>
                     </div> -->
 
-                    <div class="row products">
+                    <div class="row products" id="i_div_products">
  						<c:forEach var="product" items="${ productList }">
 	                        <div class="col-md-4 col-sm-6">
-	                            <div class="product">
+	                            <div class="product" style="border:none;">
 	                                <div class="flip-container">
 	                                    <div class="flipper">
 	                                        <div class="front">
-	                                        ${ product.product_code }
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
 	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
@@ -455,8 +454,53 @@
                     <div class="pages">
 
                         <p class="loadMore">
-                            <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
+                            <a id="i_a_load_more" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
                         </p>
+                        
+						<script type="text/javascript">
+							var productPage = 1;
+							$('#i_a_load_more').on('click', function(){
+								var temp = "";
+								if(productPage == 1){
+									$(this).remove();
+									++productPage;
+								}
+								
+								for(var i = 0; i < 9; i++){
+									temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
+								}
+								$('#i_div_products').html($('#i_div_products').html()+ temp);
+								
+								//$.ajax({
+                                //    url: "productList.do", 
+                                //    type: "GET",
+                                //    data: { product_category : '${ product.product_category }', productPage : ++productPage }, 
+                                //    success: function (data) {
+                                //    	alert(data);
+                                //    }, error: function (data) {
+                                //    	alert("error");
+                                //    }
+                                //}); //ajax
+							}); //click
+
+							$(document).bind('scroll', '#content', function(){ 
+								if(productPage > 1){
+									var elem = $('#content');
+									if($(window).scrollTop() >= $('#content').offset().top + $('#content').outerHeight() - window.innerHeight){
+										var temp = "";
+										if(productPage == 1){
+											$(this).remove();
+											++productPage;
+										}
+										for(var i = 0; i < 9; i++){
+											temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
+										}
+										$('#i_div_products').html($('#i_div_products').html()+ temp);
+										
+									}
+								}
+							}); 
+						</script>
 
                         <!-- <ul class="pagination">
                             <li><a href="#">&laquo;</a>
@@ -489,6 +533,10 @@
 
     </div>
     <!-- /#all -->
-
+	<script type="text/javascript">
+		$(function(){
+			$('body').css("background", "white");
+		});
+	</script>
 </body>
 </html>
