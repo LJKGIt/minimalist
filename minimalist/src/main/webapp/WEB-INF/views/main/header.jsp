@@ -311,7 +311,7 @@
 								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
 								class="hidden-sm"> 관리</span>
 							</a>
-						</c:if><c:if test="${ not sessionScope.member.member_id eq 'admin' }">
+						</c:if><c:if test="${ not (sessionScope.member.member_id eq 'admin') }">
 							<a href="mypage.do" class="btn btn-primary navbar-btn"><i
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
 						<button type="button" class="btn navbar-btn btn-primary"
