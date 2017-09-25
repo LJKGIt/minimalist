@@ -5,15 +5,20 @@
 <html>
 
 <head>
- 
-    
-<meta charset="utf-8">
+<title>
+		Minimalist
+	</title>
+ <link rel="shortcut icon" href="resources/img/favicon6.ico" type="image/x-icon">
+ <meta charset="utf-8">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="minimalist">
 <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
 <meta name="keywords" content="">
+
+ 
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
@@ -33,8 +38,6 @@
 <script src="resources/js/respond.min.js"></script>
 
 
- <link rel="shortcut icon" href="resources/img/favicon%20(6).ico" type="image/x-icon">
-
 
 <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
@@ -46,13 +49,12 @@
 <script src="resources/js/bootstrap-hover-dropdown.js"></script>
 <script src="resources/js/owl.carousel.min.js"></script>
 <script src="resources/js/front.js"></script>
-	<title>
-		MINIMALIST
-	</title>
+	
 
 </head>
 
 <body>
+
 	<!-- *** TOPBAR ***
  _________________________________________________________ -->
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
@@ -376,6 +378,6 @@
 			}
 		}
 </script>
-
+ 
 
 </html>
