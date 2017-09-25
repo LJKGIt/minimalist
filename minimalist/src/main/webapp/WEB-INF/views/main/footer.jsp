@@ -174,6 +174,7 @@
     <script src="resources/js/bootstrap-hover-dropdown.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/front.js"></script>
+    
 
 
 

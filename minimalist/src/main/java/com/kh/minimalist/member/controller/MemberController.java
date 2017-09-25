@@ -3,6 +3,7 @@ package com.kh.minimalist.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,17 +95,20 @@ public class MemberController {
 
 	}
 		
-	@RequestMapping("minsert.do")
+	@RequestMapping(value= "minsert.do", method = RequestMethod.POST)
 	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 		
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+		
+		m.setPhone(phone);
 		m.setEmail(email);
 		int result = memberService.minsert(m);
 		
 		if (result > 0) {
-			return "main/index";			
+			return "redirect:index.do";			
 		}
 		else {
 			return "main/404";
@@ -116,6 +120,17 @@ public class MemberController {
 	public String register(){
 		
 		return "member/register";
+	}
+	
+	@RequestMapping("memberList.do")
+	public String memberList(Model model) {
+		
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		list = memberService.mList();
+		model.addAttribute("list", list);
+		
+		return "manager/mSearchPopup";
 	}
 	
 //	@RequestMapping("emailAuth.do")

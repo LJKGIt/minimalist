@@ -23,6 +23,10 @@
 	<insert id="mInsert" parameterType="Member">
 		INSERT INTO MEMBER VALUES (#{member_id}, #{member_pwd}, #{member_name}, #{birth}, default, #{phone}, #{post}, #{address1}, #{address2}, 0, 1, default, #{email})
 	</insert>
+	
+	<select id="memberList" parameterType="Member" resultType="Member" resultMap="resultMember">
+		SELECT * FROM MEMBER
+	</select>
 
 <!-- 	<insert id="insertMember" parameterType="Member" flushCache="true"
  statementType="PREPARED" useGeneratedKeys="true" timeout="20">

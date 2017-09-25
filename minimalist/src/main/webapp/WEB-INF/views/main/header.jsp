@@ -403,7 +403,6 @@
 <script type="text/javascript">
 		function readCheck(num, rchk) {
 			var mNum = num.replace("#msg","");
-			console.log($(rchk).attr("data-sendYn"));
 			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
 				console.log(mNum);
 				$.ajax({
