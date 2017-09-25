@@ -116,7 +116,8 @@ border-bottom: 2px solid #cccccc;
     margin-bottom: 20px;
 }
 .table table-condensed_b>.answer{
-border-top: 2px solid #ddd;
+border-top: 2px dashed #ddd;
+border-bottom: 2px dashed #ddd;
 
 }
 .form-control col-lg-12> #btn{
@@ -289,7 +290,7 @@ button {
                     	<table class="table table-condensed_b">
                         <tbody class="answer"><tr>
                                
-                              <td colspan="1"><strong>관리자 답변 :</strong> &nbsp;&nbsp;<span id="showComment">${qna.qna_comment}</span> </td></tr>
+                              <td colspan="1" style="border-top-style:2px dashed #ccc;"><strong>관리자 답변 :</strong> &nbsp;&nbsp;<span id="showComment">${qna.qna_comment}</span> </td></tr>
                                  <tr><td>  
                                 <textarea id="comment" class="form-control col-lg-12"  cols="30" rows="4"></textarea>
                                  <div class="form-group">

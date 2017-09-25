@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>
-        Obaju : e-commerce template
+      Minimalist
     </title>
     
-    
-    
+
+    <link rel="shortcut icon" href="resources/img/favicon6.ico" type="image/x-icon">
     <style type="text/css">
 .navbar-expand-lg .navbar-collapse {
     display: -ms-flexbox!important;

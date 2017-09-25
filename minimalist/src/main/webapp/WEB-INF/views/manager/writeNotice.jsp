@@ -120,10 +120,12 @@ input {
 </style>
 
 <head>
+
 </head>
 
 <body>
 	<c:import url="../main/header.jsp" /> 
+	
 <div id="all">
 
         <div id="content">

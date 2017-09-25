@@ -178,16 +178,17 @@ input {
 									</tr>
 									<tr>
 										<td><strong>내용</strong></td>
-										<td><!-- <textarea name="message_content" cols="30" rows="7"
+										<td> <textarea name="message_content" cols="30" rows="7"
 												placeholder="내용을 입력하세요." style="width: 98%; height: 280px;">
-												
-												</textarea> -->
-												
+												<a href="${ pageContext.request.contextPath }/income.viewOrder.do?auction_code=${auction_code}&income=${income}">결제</a>
+												</textarea> 
+												<%-- 
 												<input type="text" name="message_content" 
 												value="http://localhost:8888/minimalist/income.viewOrder.do?auction_code=${auction_code}&income=${income}">
-
+	 --%>
 
 										</td>
+										
 									</tr>
 
 
@@ -198,13 +199,7 @@ input {
 							</div>
 
 						</form>
-						<thead>
-
-						</thead>
-						<tbody>
-
-
-						</tbody>
+					
 
 
 

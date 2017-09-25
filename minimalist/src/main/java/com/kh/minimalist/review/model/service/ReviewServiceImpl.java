@@ -53,5 +53,6 @@ public class ReviewServiceImpl implements ReviewService {
 	
 		return reviewDao.deleteReview(review_no);
 	}
+
 	
 }

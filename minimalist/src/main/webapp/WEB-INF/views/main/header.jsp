@@ -5,13 +5,20 @@
 <html>
 
 <head>
-<meta charset="utf-8">
+<title>
+		Minimalist
+	</title>
+ <link rel="shortcut icon" href="resources/img/favicon6.ico" type="image/x-icon">
+ <meta charset="utf-8">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Obaju e-commerce template">
+<meta name="description" content="minimalist">
 <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
 <meta name="keywords" content="">
+
+ 
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
@@ -29,7 +36,9 @@
 <!-- your stylesheet with modifications -->
 <link href="resources/css/custom.css" rel="stylesheet">
 <script src="resources/js/respond.min.js"></script>
-<link rel="shortcut icon" href="resources/favicon.png">
+
+
+
 <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
 <script src="resources/js/jquery-1.11.0.min.js"></script>
@@ -40,14 +49,12 @@
 <script src="resources/js/bootstrap-hover-dropdown.js"></script>
 <script src="resources/js/owl.carousel.min.js"></script>
 <script src="resources/js/front.js"></script>
-	<title>
-		MINIMALIST
-	</title>
+	
+
 </head>
 
 <body>
-	<!-- *** TOPBAR ***
- _________________________________________________________ -->
+
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
 		aria-labelledby="Login" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
@@ -83,6 +90,44 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--  *** Message-Modal *** -->
+
+	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
+		aria-labelledby="Login" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="Login" style="margin-left: 30px;">message</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel-group" id="accordion" style="padding: 2px 10px;">
+					<c:forEach items="${ messageList }" var="list">					
+						<div class="panel panel-primary">
+							<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">
+										${ list.message_title } </a>
+								</h4>
+							</div>
+							<div id="msg${list.message_number}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>${ list.message_content }</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<!-- panel -->
+					</div>
+					<!-- modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- *** Message-Modal End*** -->
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -105,7 +150,7 @@
 					</button>
 					<a class="btn btn-default navbar-toggle"
 						href="resources/basket.html"> <i class="fa fa-shopping-cart"></i>
-						<span class="hidden-xs"> <!-- 3 items in cart -->
+						<span class="hidden-xs"> 
 					</span>
 					</a>
 				</div>
@@ -369,6 +414,6 @@
 			}
 		}
 </script>
-
+ 
 
 </html>
