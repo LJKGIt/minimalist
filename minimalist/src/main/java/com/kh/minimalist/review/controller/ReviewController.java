@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
 import com.kh.minimalist.review.model.service.ReviewService;
@@ -310,6 +313,20 @@ public class ReviewController {
 		
 		return tmp;
 		
+	}
+	
+	@RequestMapping("review.myReview.do")
+	public String myReview(HttpSession session, Model model){
+		String result = "main/404";
+		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		
+		if(member_id != null){
+			ArrayList<Review> list = reviewService.myReview(member_id);
+			result = "mypage/customer-review";
+			model.addAttribute("reviewList", list);
+		}
+		
+		return result;
 	}
 	
 }

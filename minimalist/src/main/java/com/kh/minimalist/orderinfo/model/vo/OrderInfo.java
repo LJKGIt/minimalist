@@ -3,6 +3,8 @@ package com.kh.minimalist.orderinfo.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.kh.minimalist.product.model.vo.Product;
+
 public class OrderInfo implements Serializable {
 
 	/**
@@ -13,6 +15,16 @@ public class OrderInfo implements Serializable {
 	private String member_id;
 	private int product_code;
 	private Date orderinfo_date;
+	
+	private Product productJoin;
+
+	public Product getProductJoin() {
+		return productJoin;
+	}
+
+	public void setProductJoin(Product productJoin) {
+		this.productJoin = productJoin;
+	}
 
 	public OrderInfo() {
 	}

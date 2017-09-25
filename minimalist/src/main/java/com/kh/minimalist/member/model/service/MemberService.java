@@ -14,4 +14,6 @@ public interface MemberService {
 	Member searchMember(String member_id);
 
 	ArrayList<Member> mList();
+
+	int mupdate(Member m);
 }

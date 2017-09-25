@@ -5,7 +5,7 @@
 	<resultMap id="resultWish" type="Wish">
   		<result property="member_id" column="MEMBER_ID"/>
   		<result property="product_code" column="PRODUCT_CODE"/>
-  		<!-- <association property="ProductJoin"  javaType="Product">
+  		<association property="productJoin"  javaType="Product">
   			<id property="product_code" column="PRODUCT_CODE" />
 	  		<result property="product_name" column="PRODUCT_NAME"/>
 	  		<result property="product_category" column="PRODUCT_CATEGORY"/>
@@ -23,10 +23,10 @@
 	  		<result property="product_hit" column="PRODUCT_HIT"/>
 	  		<result property="product_delete" column="PRODUCT_DELETE"/>
   		</association>
-  		<collection property="ProductImageJoin" ofType="ProductImage">
+  		<collection property="productImageJoin" ofType="ProductImage">
   			<result property="product_image_path" column="PRODUCT_IMAGE_PATH"/>
 			<result property="product_code" column="PRODUCT_CODE" />
-  		</collection> -->
+  		</collection>
 	</resultMap>
 
 	<insert id="wishInsert" parameterType="Wish">
@@ -47,7 +47,6 @@
 	</select>
 	
 	<select id="myWish" parameterType="string" resultType="Wish" resultMap="resultWish">
-		<!-- SELECT * FROM WISH WHERE MEMBER_ID = #{member_id} -->
 		SELECT *
 		FROM WISH A
 		JOIN PRODUCT B USING (PRODUCT_CODE)

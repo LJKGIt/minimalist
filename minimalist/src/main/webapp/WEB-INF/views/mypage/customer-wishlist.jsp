@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +62,7 @@
                     </ul>
 
                     <div class="box">
-                        <h1>찜 목록</h1>
+                        <h1>Wish List</h1>
                         <p class="lead">찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록</p>
                     </div>
 
@@ -77,27 +77,25 @@
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
-                                            <a href="detail.jsp">
-                                                <img src="resources/img/product1.jpg" alt="" class="img-responsive">
+                                            <a href="productDetail.do?product_code=${ wish.product_code }">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ wish.productImageJoin[0].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
-                                            <a href="detail.jsp">
-                                                <img src="resources/img/product1_2.jpg" alt="" class="img-responsive">
+                                            <a href="productDetail.do?product_code=${ wish.product_code }">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ wish.productImageJoin[1].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="detail.jsp" class="invisible">
+                                <a href="productDetail.do?product_code=${ wish.product_code }" class="invisible">
                                     <img src="resources/img/product1.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
-                                    <h3><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product_code }</a></h3>
-                                    <p class="price">$143.00</p>
-                                    <p class="buttons">
-                                        <a href="detail.jsp" class="btn btn-default">View detail</a>
-                                        <a href="basket.jsp" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    </p>
+                                	<h3><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_brand }</a></h3>
+	                                <h3><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_name }</a></h3>
+                                   
+                                    <p class="price"><fmt:formatNumber value="${ wish.product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                 </div>
                                 <!-- /.text -->
                             </div>
