@@ -102,6 +102,7 @@ public class IncomeController {
 	@RequestMapping(value="income.viewOrder.do")
 	public String viewOrder(HttpServletRequest request, Model model){
 		
+		System.out.println("경매 결제 페이지로 이동");
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int income=Integer.parseInt(request.getParameter("income"));
 		

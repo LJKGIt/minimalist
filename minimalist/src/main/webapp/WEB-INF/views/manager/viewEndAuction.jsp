@@ -138,7 +138,8 @@ position: absolute;
 			</c:if>
 	
 
-			<td><a href="message.endAuctionMessage.do?member_id=${au.member_id}&auction_code=${au.auction_code}&income=${au.bid_price}"><button type="button" style="pont-size:10px;">전송</button></a></td>
+			<td><a href="message.endAuctionInsertMessage.do?member_id=${au.member_id}&auction_code=${au.auction_code}&income=${au.bid_price}
+			&root=${ pageContext.request.contextPath }"><button type="button" style="pont-size:10px;">전송</button></a></td>
 		
 			</tr>
 			
