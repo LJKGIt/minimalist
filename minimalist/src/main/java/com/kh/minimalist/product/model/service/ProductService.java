@@ -9,6 +9,8 @@ public interface ProductService {
 	Product productDetail(Product product);
 
 	ArrayList<Product> productList(HashMap<String, Object> hashMap);
+	
+	ArrayList<Product> productList();
 
 	void productHit(Product product);
 

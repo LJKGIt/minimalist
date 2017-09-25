@@ -56,6 +56,17 @@
 			WHERE RNUM &#62;= #{startCount} AND RNUM &#60;= #{endCount})
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
 	</select>
+	
+	<select id="newProductList" resultType="Product" resultMap="resultProduct">
+		SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT *
+               FROM PRODUCT
+               WHERE PRODUCT_DELETE = 0
+               ORDER BY RECEIVE_DATE DESC) A)
+      JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE)
+        WHERE RNUM &#60; 10
+        ORDER BY PRODUCT_CODE DESC, PRODUCT_IMAGE_PATH ASC
+	</select>
+	
 
 	<update id="productHit" parameterType="Product">
 		UPDATE PRODUCT  
