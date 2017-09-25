@@ -8,7 +8,7 @@
 	</resultMap>
 	
 	<select id="messageList" parameterType="string" resultType="Message" resultMap="resultMessage">
-		select * from message where member_id=#{member_id}
+		select * from message where member_id=#{member_id} order by send_date desc
 	</select>
 	<update id="messageChkUpdate" parameterType="_int">
 		update message set check_yn = 'y' where message_number = #{mNum}

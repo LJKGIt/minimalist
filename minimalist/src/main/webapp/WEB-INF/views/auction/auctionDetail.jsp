@@ -70,10 +70,8 @@ $(function(){
 
    
 
-    <title>
-        Obaju : e-commerce template
-    </title>
-
+ 
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
    
 
 
@@ -183,8 +181,8 @@ $(function(){
                                 <h1 class="text-center">${auction.auction_brand} <br> ${auction.auction_name}</h1>
                              
                                 <p class="price"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bid_price}</span> 원</font></p>
-								<p><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매 종료 :<fmt:formatDate value="${auction.end_date}" type="date" pattern="MM월dd일"/></font></p>
+								<p align="center"><font color="red">
+								경매 종료 :<fmt:formatDate value="${auction.end_date}" type="date" pattern="MM월dd일"/></font></p>
                                <c:if test="${sessionScope.member.member_id eq 'admin'}">
                                <a href="auction.viewUpdateForm.do?auction_code=${auction.auction_code}"><button type="button">수정</button></a>
                                <a href="auction.deleteAuction.do?auction_code=${auction.auction_code}"><button type="button">삭제</button></a>

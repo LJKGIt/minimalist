@@ -57,9 +57,8 @@ position: absolute;
  
 </style>
 
-    <title>
-        Obaju : e-commerce template
-    </title>
+ 
+     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 
 </head>
 
