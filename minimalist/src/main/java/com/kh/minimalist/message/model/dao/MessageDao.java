@@ -25,7 +25,7 @@ public class MessageDao {
 		return sqlSession.update("Message.messageChkUpdate", mNum);
 	}
 
-	public int insertMessage(ArrayList idList, Message message) {
+	public int insertMessage(ArrayList<String> idList, Message message) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("idList", idList);
 		map.put("message", message);

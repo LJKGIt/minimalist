@@ -194,13 +194,13 @@ input {
 							</div>
 
 						</form>
-						<thead>
+						<!-- <thead>
 
 						</thead>
 						<tbody>
 
 
-						</tbody>
+						</tbody> -->
 
 
 

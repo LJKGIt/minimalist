@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.minimalist.message.model.service.MessageService;
 import com.kh.minimalist.message.model.vo.Message;
-import com.kh.minimalist.notice.model.vo.Notice;
 
 @Controller
 public class MessageController {
@@ -33,7 +32,7 @@ public class MessageController {
 	public String writeMessage(HttpServletRequest request, Message message){
 		
 		String[] list = request.getParameter("mId_List").split(",");
-		ArrayList idList = new ArrayList();
+		ArrayList<String> idList = new ArrayList<String>();
 		for (int i=0; i<list.length; i++) {
 			idList.add(list[i]);
 		}
