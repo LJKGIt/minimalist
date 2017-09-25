@@ -5,6 +5,28 @@
 	<resultMap id="resultWish" type="Wish">
   		<result property="member_id" column="MEMBER_ID"/>
   		<result property="product_code" column="PRODUCT_CODE"/>
+  		<!-- <association property="ProductJoin"  javaType="Product">
+  			<id property="product_code" column="PRODUCT_CODE" />
+	  		<result property="product_name" column="PRODUCT_NAME"/>
+	  		<result property="product_category" column="PRODUCT_CATEGORY"/>
+	  		<result property="product_brand" column="PRODUCT_BRAND"/>
+	  		<result property="product_descript" column="PRODUCT_DESCRIPT"/>
+	  		<result property="product_original_price" column="PRODUCT_ORIGINAL_PRICE"/>
+	  		<result property="rent_price" column="RENT_PRICE"/>
+	  		<result property="product_size33" column="PRODUCT_SIZE33"/>
+	  		<result property="product_size44" column="PRODUCT_SIZE44"/>
+	  		<result property="product_size55" column="PRODUCT_SIZE55"/>
+	  		<result property="product_size66" column="PRODUCT_SIZE66"/>
+	  		<result property="product_size77" column="PRODUCT_SIZE77"/>
+	  		<result property="product_color" column="PRODUCT_COLOR"/>
+	  		<result property="receive_date" column="RECEIVE_DATE"/>
+	  		<result property="product_hit" column="PRODUCT_HIT"/>
+	  		<result property="product_delete" column="PRODUCT_DELETE"/>
+  		</association>
+  		<collection property="ProductImageJoin" ofType="ProductImage">
+  			<result property="product_image_path" column="PRODUCT_IMAGE_PATH"/>
+			<result property="product_code" column="PRODUCT_CODE" />
+  		</collection> -->
 	</resultMap>
 
 	<insert id="wishInsert" parameterType="Wish">
@@ -22,5 +44,14 @@
 		FROM WISH
 		WHERE MEMBER_ID = #{member_id}
 		AND PRODUCT_CODE = #{product_code}
+	</select>
+	
+	<select id="myWish" parameterType="string" resultType="Wish" resultMap="resultWish">
+		<!-- SELECT * FROM WISH WHERE MEMBER_ID = #{member_id} -->
+		SELECT *
+		FROM WISH A
+		JOIN PRODUCT B USING (PRODUCT_CODE)
+		JOIN PRODUCT_IMAGE C USING (PRODUCT_CODE)
+		WHERE A.MEMBER_ID = #{member_id}
 	</select>
 </mapper>

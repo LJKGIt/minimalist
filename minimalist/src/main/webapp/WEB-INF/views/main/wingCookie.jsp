@@ -36,9 +36,6 @@ Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList
 </style>
 
 
-
-<script src="resources/js/jquery-1.11.0.min.js"></script>
-
 <body>
 	<!-- COOKIE ENTITY -->
 	<section class="vertical slider">
@@ -46,7 +43,7 @@ Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList
 		<c:forEach var="recent" items="${cookieList}" varStatus="status">
 			<div style="position: relative;" class="cookie">
 				<button name="${ recent.product_code }" class="btn btn-link btn-xs delCookie"
-					style="display: none; color: black; position: absolute; top: 0; right: 0px; text-decoration: none;"><span class="glyphicon glyphicon-remove "></span></button>
+					style="display: none; color: black; position: absolute; top: 0; right: 0px; text-decoration: none;"><span class="fa fa-remove "></span></button>
 				<a href="productDetail.do?product_code=${ recent.product_code }">
 					<img src="${ pageContext.request.contextPath }/resources/img_product/${ recent.product_code }_1.jpg"
 					alt="${ recent.product_name }" style="width: 100px;"><br><%--  ${ recent.product_name } --%>

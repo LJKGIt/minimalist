@@ -57,7 +57,7 @@ public class ProductController {
 		// ______________ 그렇다고 UPDATE PRODUCT만 써보면 SET가 없다고 오류가 나오기는 한다.
 		// ______________ productList.do 등 다른 페이지는 잘 나오니 maven, spring, server 문제는 아니다.
 		// ______________ Repositories를 날려보고 이클립스를 껐다 켜도 문제는 여전하다.
-
+		String member_id = ((Member) session.getAttribute("member")).getMember_id();
 		System.out.println("productDetail.do (1)");
 		// productService.productHit(product);
 		System.out.println("productDetail.do (2)");
@@ -66,13 +66,13 @@ public class ProductController {
 
 		Wish wish = null;
 		if ((Member) session.getAttribute("member") != null) {
-			wish = wishService.wishSelectOne(new Wish(((Member) session.getAttribute("member")).getMember_id(), product.getProduct_code()));
+			wish = wishService.wishSelectOne(new Wish(member_id, product.getProduct_code()));
 		}
 
 		// UPDATE COOKIE
 		if ((Member) session.getAttribute("member") != null) {
 			try {
-				new CookieUtils().setCookie(((Member) session.getAttribute("member")).getMember_id(), String.valueOf(product.getProduct_code()), 365, request, response);
+				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request, response);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}

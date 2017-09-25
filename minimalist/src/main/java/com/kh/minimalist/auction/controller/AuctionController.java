@@ -526,8 +526,7 @@ public class AuctionController {
 		
 		@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
 		public String selectMemberAuction(HttpSession session, Model model) throws UnsupportedEncodingException{
-			String member_id = ((Member)session.getAttribute("member")).getMember_id();
-			ArrayList<Auction> list = auctionService.selectMemberAuction(member_id);
+			ArrayList<Auction> list = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
 			model.addAttribute("list", list);
 			return "mypage/customer-auction";
 		}

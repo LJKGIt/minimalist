@@ -90,5 +90,17 @@ public class WishController {
 			}
 		}
 	}
+	
+	@RequestMapping("wish.wishlist.do")
+	public String myWishList(HttpSession session, Model model) {
+		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		String result = "main/404";
+		if(member_id != null){
+			model.addAttribute("wishList", wishService.myWish(member_id));
+			result = "mypage/customer-wishlist";
+		}
+		return result;
+	}
+
 
 }
