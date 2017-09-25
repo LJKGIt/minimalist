@@ -23,4 +23,8 @@
 		SELECT * FROM DUAL
 		
 	</insert>
+	
+	<insert id="endAuctionMessage" parameterType="Message">
+	insert into message values((SELECT MAX(MESSAGE_NUMBER) FROM MESSAGE)+1, #{member_id}, #{message_title}, #{message_content}, sysdate, default)
+	</insert>
 </mapper>
