@@ -5,10 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-      Minimalist
-    </title>
-    
+ 
 
     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
     <style type="text/css">
