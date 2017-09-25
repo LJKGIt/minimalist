@@ -33,13 +33,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void productHit(Product product) {
-		System.out.println("3");
 		productDao.productHit(product);
-		System.out.println("4");
 	}
 
 	@Override
 	public int productDelete(Product product) {
+		System.out.println("3");
 		return productDao.productDelete(product);
 	}
 
