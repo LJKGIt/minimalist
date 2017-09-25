@@ -91,8 +91,8 @@
 										<div class="text">
 											<h3>
 												<a
-													href="auction.selectOne.do?auction_code=${au.auction_code}">${au.product_brand}
-													- ${au.product_name }</a>
+													href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand}
+													- ${au.auction_name }</a>
 											</h3>
 											<p class="price">
 												<font size=3px>현재 입찰가 : <fmt:formatNumber

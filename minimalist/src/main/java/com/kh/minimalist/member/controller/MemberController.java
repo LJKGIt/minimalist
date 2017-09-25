@@ -6,8 +6,6 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,10 +34,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private OrderInfoService orderInfoService;
 
@@ -90,16 +88,17 @@ public class MemberController {
 
 	}
 
-	@RequestMapping(value= "minsert.do", method = RequestMethod.POST)
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
-		
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
-		
+		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
+				+ request.getParameter("phone2");
+
 		m.setPhone(phone);
 
 		m.setEmail(email);
@@ -107,9 +106,8 @@ public class MemberController {
 
 		if (result > 0) {
 
-			return "redirect:index.do";			
-		}
-		else {
+			return "redirect:index.do";
+		} else {
 
 			return "main/404";
 		}
@@ -122,39 +120,35 @@ public class MemberController {
 		return "member/register";
 	}
 
-	
+	@RequestMapping("memberList.do")
+	public String memberList(Model model) {
 
+		ArrayList<Member> list = new ArrayList<Member>();
 
-@RequestMapping("memberList.do")
-public String memberList(Model model) {
-	
-	ArrayList<Member> list = new ArrayList<Member>();
-	
-	list = memberService.mList();
-	model.addAttribute("list", list);
-	
-	return "manager/mSearchPopup";
-}
+		list = memberService.mList();
+		model.addAttribute("list", list);
+
+		return "manager/mSearchPopup";
+	}
 
 	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
 		String result = "main/404";
 		String member_id = ((Member) session.getAttribute("member")).getMember_id();
 
-		
-//		MY ORDER LIST
+		// MY ORDER LIST
 		ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
-		if(myOrder != null)
+		if (myOrder != null)
 			model.addAttribute("myOrder", myOrder);
-		
-//		RECENT VIEW (COOKIE) 
+
+		// RECENT VIEW (COOKIE)
 		if (((Member) session.getAttribute("member")) != null) {
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);
 				ArrayList<Product> cookieList = new ArrayList<Product>();
-				
-				if(list != null){
-					for(String product_code : list)
+
+				if (list != null) {
+					for (String product_code : list)
 						cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
 				}
 				model.addAttribute("cookieList", cookieList);
@@ -163,7 +157,7 @@ public String memberList(Model model) {
 			}
 			result = "mypage/customer-orders";
 		}
-		
+
 		return result;
 	}
 
@@ -171,44 +165,42 @@ public String memberList(Model model) {
 	public String myPasswordCheck() {
 		return "mypage/passwordCheck";
 	}
-	
+
 	@RequestMapping("information.do")
-	public String myInfomaion(Member m, HttpSession session){
+	public String myInfomaion(Member m, HttpSession session) {
 		String result = "mypage/passwordCheck";
-		if(m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())){
+		if (m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())) {
 			result = "mypage/customer-account";
 		}
 		return result;
 	}
-	
+
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {
 
 		return "manager/sendMessage";
 	}
-	
 
 	// 회원 검색
 	@RequestMapping(value = "member.memberSearch.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public void searchMemer(HttpServletRequest request, HttpServletResponse response ,Model model) throws IOException {
+	public void searchMemer(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 
 		String member_id = request.getParameter("member_id");
 
 		Member member = memberService.searchMember(member_id);
 
-		
-		PrintWriter writer=response.getWriter();
+		PrintWriter writer = response.getWriter();
 		if (member != null) {
-			String id=member.getMember_id();
+			String id = member.getMember_id();
 			model.addAttribute("member", member);
 			writer.append(id);
-			
+
 		} else {
 			writer.append("no");
-			
+
 		}
 		writer.close();
-		
+
 	}
 }

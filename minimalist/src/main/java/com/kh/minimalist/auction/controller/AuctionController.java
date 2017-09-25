@@ -57,7 +57,7 @@ public class AuctionController {
 		map.put("img2", uploadFile2);
 		map.put("img3", uploadFile3);
 		
-		String category=request.getParameter("category");
+		String auction_category=request.getParameter("auction_category");
 		
 		
 		String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_auction";
@@ -73,7 +73,7 @@ public class AuctionController {
 			//파일이름은 카테고리 + 시간으로 변경
 			String name="img"+(i+1);
 			fileName[i]=((MultipartFile) map.get(name)).getOriginalFilename();
-			SimpleDateFormat sdf = new SimpleDateFormat(category+"yyyyMMddHHmmss"+i);
+			SimpleDateFormat sdf = new SimpleDateFormat(auction_category+"yyyyMMddHHmmss"+i);
 			reName[i] = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + fileName[i].substring(fileName[i].lastIndexOf(".") + 1);
 
 			fullPath[i]=savePath+"\\"+reName[i];
@@ -98,13 +98,13 @@ public class AuctionController {
 		//db 저장용 객체 생성.
 		Auction auction=new Auction();
 		//객체에 값 넣기.
-		auction.setProduct_name(request.getParameter("product_name"));
-		auction.setProduct_category(request.getParameter("category"));
-		auction.setProduct_brand(request.getParameter("product_brand"));
-		auction.setProduct_color(request.getParameter("product_color"));
-		auction.setProduct_descript(request.getParameter("product_descript"));
+		auction.setAuction_name(request.getParameter("auction_name"));
+		auction.setAuction_category(request.getParameter("auction_category"));
+		auction.setAuction_brand(request.getParameter("auction_brand"));
+		auction.setAuction_color(request.getParameter("auction_color"));
+		auction.setAuction_descript(request.getParameter("auction_descript"));
 		auction.setBid_price(Integer.parseInt(request.getParameter("bid_price")));
-		auction.setProduct_size(request.getParameter("product_size"));
+		auction.setAuction_size(request.getParameter("auction_size"));
 		
 		Date start=Date.valueOf(request.getParameter("start_date"));
 		Date end=Date.valueOf(request.getParameter("end_date"));
@@ -143,10 +143,10 @@ public class AuctionController {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String category=null;
+		String auction_category=null;
 		//전체 검색인 경우.
-		if(request.getParameter("category")!=null){
-			category=request.getParameter("category");
+		if(request.getParameter("auction_category")!=null){
+			auction_category=request.getParameter("auction_category");
 		}
 		
 		
@@ -160,9 +160,9 @@ public class AuctionController {
 		
 		int countRow=0;
 		//전체 글의 갯수
-		if(category!=null){
+		if(auction_category!=null){
 			//특정 카테고리만 보여줄 경우
-			countRow=auctionService.countRowCategory(category);
+			countRow=auctionService.countRowCategory(auction_category);
 		}else{
 			countRow=auctionService.countRow();
 		}
@@ -198,22 +198,22 @@ public class AuctionController {
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
-		if(category!=null){
-			map.put("category", category);
+		if(auction_category!=null){
+			map.put("category", auction_category);
 		}
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		
 		ArrayList<Auction> list=null;
-		if(category!=null){
-			list=auctionService.selectListCategory(map);
+		if(auction_category!=null){
+			list=auctionService.selectListAuctionCategory(map);
 		}else {
 			list=auctionService.selectList(map);
 		}
 		
-		if(category!=null){
-			model.addAttribute("category", category);
+		if(auction_category!=null){
+			model.addAttribute("auction_category", auction_category);
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("currentPage", currentPage);
@@ -357,7 +357,7 @@ public class AuctionController {
 				map.put("img2", uploadFile2);
 				map.put("img3", uploadFile3);
 				
-				String category=request.getParameter("category");
+				String auction_category=request.getParameter("auction_category");
 				
 				
 				String savePath="C:\\workspace\\minimalist\\src\\main\\webapp\\resources\\img_auction";
@@ -373,7 +373,7 @@ public class AuctionController {
 					//파일이름은 카테고리 + 시간으로 변경
 					String name="img"+(i+1);
 					fileName[i]=((MultipartFile) map.get(name)).getOriginalFilename();
-					SimpleDateFormat sdf = new SimpleDateFormat(category+"yyyyMMddHHmmss"+i);
+					SimpleDateFormat sdf = new SimpleDateFormat(auction_category+"yyyyMMddHHmmss"+i);
 					reName[i] = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + fileName[i].substring(fileName[i].lastIndexOf(".") + 1);
 
 					fullPath[i]=savePath+"\\"+reName[i];
@@ -413,13 +413,13 @@ public class AuctionController {
 			
 			auction.setAuction_code(auction_code);
 			//객체에 값 넣기.
-			auction.setProduct_name(request.getParameter("product_name"));
-			auction.setProduct_category(request.getParameter("category"));
-			auction.setProduct_brand(request.getParameter("product_brand"));
-			auction.setProduct_color(request.getParameter("product_color"));
-			auction.setProduct_descript(request.getParameter("product_descript"));
+			auction.setAuction_name(request.getParameter("auction_name"));
+			auction.setAuction_category(request.getParameter("category"));
+			auction.setAuction_brand(request.getParameter("auction_brand"));
+			auction.setAuction_color(request.getParameter("auction_color"));
+			auction.setAuction_descript(request.getParameter("auction_descript"));
 			auction.setBid_price(Integer.parseInt(request.getParameter("bid_price")));
-			auction.setProduct_size(request.getParameter("product_size"));
+			auction.setAuction_size(request.getParameter("auction_size"));
 			
 			Date start=Date.valueOf(request.getParameter("start_date"));
 			Date end=Date.valueOf(request.getParameter("end_date"));

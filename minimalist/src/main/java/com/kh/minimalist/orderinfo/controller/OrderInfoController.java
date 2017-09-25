@@ -26,9 +26,8 @@ public class OrderInfoController {
 	
 	// TODO [lintogi] 재영이 형이 만드신 INSERT ALL에 대해서 제약 조건을 이용해 반환 값이 상황에 따라서 어떻게 반환되는지 실험하기.
 
-	// TODO [lintogi] 결제 API를 사용하기.
 	@RequestMapping(value = "orderInfoInsert.do", method = RequestMethod.POST)
-	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
+	public String orderInfoInsert(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		String returnResult = "main/404";
 		int result = 0;
@@ -40,8 +39,7 @@ public class OrderInfoController {
 			result = orderInfoService.orderInfoInsert(orderInfo);
 		}
 		if (result > 0) {
-			// TODO [lintogi] 주문 내역 조회 페이지가 완성되면 거기로 이동시키기.
-			returnResult = "main/index";
+			returnResult = "redirect:member.mypage.do";
 		}
 
 		return returnResult;

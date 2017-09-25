@@ -8,16 +8,16 @@ public class Auction implements Serializable {
 	
 	private static final long serialVersionUID = -3836973302037579389L;
 	private int auction_code;
-	private String product_name;
-	private String product_category;
-	private String product_brand;
-	private String product_descript;
+	private String auction_name;
+	private String auction_category;
+	private String auction_brand;
+	private String auction_descript;
 	private String member_id;
 	private int bid_price;
 	private Date start_date;
 	private Date end_date;
-	private String product_size;
-	private String product_color;
+	private String auction_size;
+	private String auction_color;
 	private String image_path;
 	private String payment_yn;
 	
@@ -30,21 +30,21 @@ public class Auction implements Serializable {
 
 
 
-	public Auction(int auction_code, String product_name, String product_category, String product_brand,
-			String product_descript, String member_id, int bid_price, Date start_date, Date end_date,
-			String product_size, String product_color, String image_path, String payment_yn) {
+	public Auction(int auction_code, String auction_name, String auction_category, String auction_brand,
+			String auction_descript, String member_id, int bid_price, Date start_date, Date end_date,
+			String auction_size, String auction_color, String image_path, String payment_yn) {
 		super();
 		this.auction_code = auction_code;
-		this.product_name = product_name;
-		this.product_category = product_category;
-		this.product_brand = product_brand;
-		this.product_descript = product_descript;
+		this.auction_name = auction_name;
+		this.auction_category = auction_category;
+		this.auction_brand = auction_brand;
+		this.auction_descript = auction_descript;
 		this.member_id = member_id;
 		this.bid_price = bid_price;
 		this.start_date = start_date;
 		this.end_date = end_date;
-		this.product_size = product_size;
-		this.product_color = product_color;
+		this.auction_size = auction_size;
+		this.auction_color = auction_color;
 		this.image_path = image_path;
 		this.payment_yn = payment_yn;
 	}
@@ -66,43 +66,43 @@ public class Auction implements Serializable {
 	}
 
 
-	public String getProduct_name() {
-		return product_name;
+	public String getauction_name() {
+		return auction_name;
 	}
 
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setAuction_name(String auction_name) {
+		this.auction_name = auction_name;
 	}
 
 
-	public String getProduct_category() {
-		return product_category;
+	public String getauction_category() {
+		return auction_category;
 	}
 
 
-	public void setProduct_category(String product_category) {
-		this.product_category = product_category;
+	public void setAuction_category(String auction_category) {
+		this.auction_category = auction_category;
 	}
 
 
-	public String getProduct_brand() {
-		return product_brand;
+	public String getauction_brand() {
+		return auction_brand;
 	}
 
 
-	public void setProduct_brand(String product_brand) {
-		this.product_brand = product_brand;
+	public void setAuction_brand(String auction_brand) {
+		this.auction_brand = auction_brand;
 	}
 
 
-	public String getProduct_descript() {
-		return product_descript;
+	public String getauction_descript() {
+		return auction_descript;
 	}
 
 
-	public void setProduct_descript(String product_descript) {
-		this.product_descript = product_descript;
+	public void setAuction_descript(String auction_descript) {
+		this.auction_descript = auction_descript;
 	}
 
 
@@ -146,23 +146,23 @@ public class Auction implements Serializable {
 	}
 
 
-	public String getProduct_size() {
-		return product_size;
+	public String getauction_size() {
+		return auction_size;
 	}
 
 
-	public void setProduct_size(String product_size) {
-		this.product_size = product_size;
+	public void setAuction_size(String auction_size) {
+		this.auction_size = auction_size;
 	}
 
 
-	public String getProduct_color() {
-		return product_color;
+	public String getauction_color() {
+		return auction_color;
 	}
 
 
-	public void setProduct_color(String product_color) {
-		this.product_color = product_color;
+	public void setAuction_color(String auction_color) {
+		this.auction_color = auction_color;
 	}
 
 
@@ -194,10 +194,10 @@ public class Auction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Auction [auction_code=" + auction_code + ", product_name=" + product_name + ", product_category="
-				+ product_category + ", product_brand=" + product_brand + ", product_descript=" + product_descript
+		return "Auction [auction_code=" + auction_code + ", auction_name=" + auction_name + ", auction_category="
+				+ auction_category + ", auction_brand=" + auction_brand + ", auction_descript=" + auction_descript
 				+ ", member_id=" + member_id + ", bid_price=" + bid_price + ", start_date=" + start_date + ", end_date="
-				+ end_date + ", product_size=" + product_size + ", product_color=" + product_color + ", image_path="
+				+ end_date + ", auction_size=" + auction_size + ", auction_color=" + auction_color + ", image_path="
 				+ image_path + "]";
 	}
 

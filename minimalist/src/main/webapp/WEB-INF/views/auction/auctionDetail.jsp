@@ -117,11 +117,11 @@ $(function(){
                                 <li class="active">
                                     <a href="auction.selectList.do">경매중인 상품</a>
                                     <ul>
-                                        <li class="active"><a href="auction.selectList.do?category=의류">의류</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">의류</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?category=잡화">잡화</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">잡화</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?category=악세사리">악세사리</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">악세사리</a>
                                         </li>  
                                     </ul>
                                </li>
@@ -180,7 +180,7 @@ $(function(){
                         <div class="col-sm-6">
                             <div class="box">
                             	<span id="code" style="display:none">${auction.auction_code}</span>
-                                <h1 class="text-center">${auction.product_brand} <br> ${auction.product_name}</h1>
+                                <h1 class="text-center">${auction.auction_brand} <br> ${auction.auction_name}</h1>
                              
                                 <p class="price"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bid_price}</span> 원</font></p>
 								<p><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -219,11 +219,11 @@ $(function(){
                     <div class="box" id="details">
                         <p>
                             <h4>Product details</h4>
-                            <p>${auction.product_descript}</p>
+                            <p>${auction.auction_descript}</p>
                             <h4>color&#38;size</h4>
                             <ul>
-                                <li>color : ${auction.product_color}</li>
-                                <li>size : ${auction.product_size }</li>
+                                <li>color : ${auction.auction_color}</li>
+                                <li>size : ${auction.auction_size }</li>
                                 
                             </ul>
                             

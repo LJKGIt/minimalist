@@ -160,17 +160,17 @@ input {
                      
                      
                 <tr><td><strong>상품명</strong></td><td><input type="text" name="product_name" style="width:98%;"></td></tr>
-                <tr><td><strong>카테고리 </strong></td><td><select name="category" style="width:98%;">
+                <tr><td><strong>카테고리 </strong></td><td><select name="auction_category" style="width:98%;">
                   <option value="의류">의류</option>
                       <option value="잡화">잡화</option>
                       <option value="악세사리">악세사리</option>
                       </select></td></tr>
                       
-                <tr><td><strong>브랜드</strong></td><td><input type="text" name="product_brand" style="width:98%;"></td></tr>
-                <tr><td><strong>사이즈</strong></td><td><input type="text" name="product_size" style="width:98%;"></td></tr>
-                <tr><td><strong>색상</strong></td><td><input type="text"name="product_color" style="width:98%;"></td></tr>
+                <tr><td><strong>브랜드</strong></td><td><input type="text" name="auction_brand" style="width:98%;"></td></tr>
+                <tr><td><strong>사이즈</strong></td><td><input type="text" name="auction_size" style="width:98%;"></td></tr>
+                <tr><td><strong>색상</strong></td><td><input type="text"name="auction_color" style="width:98%;"></td></tr>
                 <tr><td><strong>설명</strong></td><td>
-                <textarea name="product_descript" cols="30" rows="7" placeholder="내용을 입력하세요." style="width:98%;height:280px;"></textarea></td></tr>
+                <textarea name="auction_descript" cols="30" rows="7" placeholder="내용을 입력하세요." style="width:98%;height:280px;"></textarea></td></tr>
                 <tr><td><strong>경매시작가격</strong></td><td><input type="number" name="bid_price"  style="width:98%;"></td></tr>
                 <tr><td><strong>경매시작일</strong></td><td><input type="date" name="start_date"style="width:98%;"></td></tr>
                 <tr><td><strong>경매종료일</strong></td><td><input type="date" name="end_date" style="width:98%;"></td></tr>
