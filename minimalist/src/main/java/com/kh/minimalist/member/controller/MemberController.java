@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.minimalist.cookie.CookieUtils;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.message.model.service.MessageService;
 import com.kh.minimalist.orderinfo.model.service.OrderInfoService;
 import com.kh.minimalist.orderinfo.model.vo.OrderInfo;
 import com.kh.minimalist.product.model.service.ProductService;
@@ -40,15 +41,22 @@ public class MemberController {
 
 	@Autowired
 	private OrderInfoService orderInfoService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member m, HttpSession session) {
-
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String result = "main/index";
 		Member member = memberService.loginMember(m);
 		if (member != null) {
 			session.setAttribute("member", member);
+			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+				result = "redirect:"+request.getHeader("referer");
+			}
+			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
 		}
-		return "main/index";
+		return result;
 	}
 
 	@RequestMapping("logout.do")

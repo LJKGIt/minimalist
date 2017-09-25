@@ -30,8 +30,8 @@
 
                    <div class="box">
                         <form action="orderInfoInsert.do" method="POST">
-							<input type="text" name="product_code" value="${ product.product_code }">
-							<input type="text" name="product_name" value="${ product.product_name }">
+							<input type="text" name="product_code" value="${ product.product_code }" readonly>
+							<input type="text" name="product_name" value="${ product.product_name }" readonly>
 							<input id="i_submit_order" type="submit" value="결제하기">
 						</form>
                     </div>
