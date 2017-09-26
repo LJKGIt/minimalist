@@ -51,6 +51,7 @@
  <title>
        Minimalist
     </title>
+     
 </head>
 
 <body>
