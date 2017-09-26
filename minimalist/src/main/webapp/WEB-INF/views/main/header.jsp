@@ -432,7 +432,7 @@
 			  var link = document.createElement('link');
 			    link.type = 'image/x-icon';
 			    link.rel = 'shortcut icon';
-			    link.href = 'resources/favicon6.ico';
+			    link.href = 'resources/favicon11.png';
 			    document.getElementsByTagName('head')[0].appendChild(link);
 			
 			
