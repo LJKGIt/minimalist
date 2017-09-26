@@ -45,7 +45,7 @@
 	</update>
 
     <select id="searchMember" parameterType="string" resultType="Member">
-    select * from member where member_id=#{member_id}
+    	SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
     </select>
 
 </mapper>

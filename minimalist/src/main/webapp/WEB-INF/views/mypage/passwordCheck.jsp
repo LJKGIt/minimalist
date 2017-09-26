@@ -61,7 +61,7 @@
                         <h3>Password reconfirm</h3>
 
 
-                        <form action="information.do" method="post">
+                        <form action="member.information.do" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">

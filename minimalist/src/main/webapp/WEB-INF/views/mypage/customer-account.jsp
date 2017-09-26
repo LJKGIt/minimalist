@@ -82,7 +82,7 @@
 										<div id="checkPwd"></div>
 										-->
 								</div> 
-								<a href="#" class="btn btn-primary" style="margin-bottom: 20px;"> 비밀번호 변경하기</a>
+								<a href="javascript:passChange()" class="btn btn-primary" style="margin-bottom: 20px;"> 비밀번호 변경하기</a>
 								<div class="form-group">
 									<label for="name">Name</label> <input type="text" value="${ updateMember.member_name }"
 										class="form-control" id="member_name" name="member_name" style="width: 50%;">
@@ -215,8 +215,7 @@
 					} else {
 						$('#checkID').text("이미 사용중입니다.").css("color", "red");
 					}
-				} // TODO
-				   //피피티에 파크용쥰 써주
+				}
 			})
 		}
 	});
@@ -262,7 +261,12 @@
     			$('#email_id2').val(emailAdr);
     		}
     })
-		
+    
+    // PASSWORD CHANGE POPUP
+    var openPop;
+	function passChange(){
+    	openPop = window.open("member.passwordView.do", "a", "width=470 height=410, left=100, top=100");
+	}
 	
 </script>
 </body>

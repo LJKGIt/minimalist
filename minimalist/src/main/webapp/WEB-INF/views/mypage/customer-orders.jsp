@@ -11,6 +11,7 @@
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  	 -->
+ 	 <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 </head>
 <body style="min-width: 360px;">
 
@@ -37,7 +38,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 										class="fa fa-list"></i> 주문내역</a></li>
 								<li><a href="wish.wishlist.do"><i class="fa fa-heart"></i> 찜
 										목록</a></li>
-								<li><a href="passwordCheck.do"><i class="fa fa-user"></i>
+								<li><a href="member.passwordCheck.do"><i class="fa fa-user"></i>
 										내 정보보기</a></li>
 								<li><a href="review.myReview.do"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
 								</li>
