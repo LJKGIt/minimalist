@@ -196,7 +196,7 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [litogi] 수정 페이지 만들기.
+	// TODO [lintogi] 수정 페이지 만들기.
 	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
 	public String productUpdate(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
