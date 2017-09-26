@@ -30,7 +30,6 @@ public class WishController {
 		if ((Member) session.getAttribute("member") != null) {
 			Wish wish = new Wish(((Member) session.getAttribute("member")).getMember_id(), product_code);
 			int result = wishService.wishInsert(wish);
-
 			try {
 				writer = response.getWriter();
 				if (result > 0) {
