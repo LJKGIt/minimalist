@@ -19,6 +19,6 @@ public interface ReviewService {
 	int updateReview(Review review);
 	
 	int deleteReview(int review_no);
-	
-	
+
+	ArrayList<Review> myReview(String member_id);
 }

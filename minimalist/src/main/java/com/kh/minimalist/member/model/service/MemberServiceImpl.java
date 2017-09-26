@@ -40,5 +40,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDao.mList();
 	}
+
+	@Override
+	public int mupdate(Member m) {
+		return memberDao.mupdate(m);
+	}
 	
 }

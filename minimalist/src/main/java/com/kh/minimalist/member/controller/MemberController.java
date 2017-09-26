@@ -169,20 +169,54 @@ public class MemberController {
 		return result;
 	}
 
+//	PASSWORD CHECK
 	@RequestMapping("passwordCheck.do")
 	public String myPasswordCheck() {
 		return "mypage/passwordCheck";
 	}
-
+	
+//	MEMBER UPDATE
 	@RequestMapping("information.do")
-	public String myInfomaion(Member m, HttpSession session) {
+	public String myInfomaion(Member m, HttpSession session, Model model){
 		String result = "mypage/passwordCheck";
 		if (m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())) {
 			result = "mypage/customer-account";
+			Member member = memberService.loginMember(m);
+			model.addAttribute("updateMember", member);
+			return "mypage/customer-account";
 		}
 		return result;
 	}
+	
+//	회원 업데이트
+	// TODO [yjP] 멤버 업데이트 하다가 말았음
+	@RequestMapping("member.memberUpdate.do")
+	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		String resultPage = "main/404";
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/plain; utf-8");
 
+		System.out.println("update : " + m); 
+		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+		
+		m.setPhone(phone);
+
+		m.setEmail(email);
+		int result = memberService.mupdate(m);
+
+		if (result > 0) {
+
+			resultPage = "redirect:information.do";			
+		}
+		else {
+
+			
+		}
+		return resultPage;
+	}
+	
+	
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {
@@ -211,4 +245,5 @@ public class MemberController {
 		writer.close();
 
 	}
+	
 }

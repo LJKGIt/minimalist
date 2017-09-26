@@ -54,5 +54,8 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.deleteReview(review_no);
 	}
 
-	
+	@Override
+	public ArrayList<Review> myReview(String member_id) {
+		return reviewDao.myReview(member_id);
+	}
 }

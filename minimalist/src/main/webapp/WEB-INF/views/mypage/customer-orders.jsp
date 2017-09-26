@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
+<!DOCTYPE html>
+<html>
 <head>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<!-- integrity, crossorigin가 오류나고 중요하지 않은 코드이므로 주석으로 처리했습니다.
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  	 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
 </head>
 <body style="min-width: 360px;">
 
@@ -40,7 +39,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 										목록</a></li>
 								<li><a href="passwordCheck.do"><i class="fa fa-user"></i>
 										내 정보보기</a></li>
-								<li><a href="#"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
+								<li><a href="review.myReview.do"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
 								</li>
 								<li><a href="qna.selectList.do"><i
 										class="fa fa-sign-out"></i> 내 상품문의(다른 곳으로 이동)</a></li>
@@ -81,19 +80,19 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 							<hr style="margin: 5px;">
 							<div class="row" style="margin: 0;">
 								<a href="productDetail.do?product_code=${ myOrder.product_code }"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/1500000001_1.jpg"
+									src="${ pageContext.request.contextPath }/resources/img_product/${ myOrder.productJoin.product_code }_1.jpg"
 									style="margin: 0 10px 10px 0; width: 100px; float: left;" />
 								</a>
 								<ul style="list-style-type: none; margin-left: 65px;">
-									<li><strong>JUUN.J</strong></li>
-									<li>${ myOrder.product_code }</li>
-									<li>price : $1,605,000</li>
+									<li><strong>${ myOrder.productJoin.product_brand }</strong></li>
+									<li><h4><a href="productDetail.do?product_code=${ myOrder.product_code }" style="color: black;">${ myOrder.productJoin.product_name }</a></h4></li>
+									<% //TODO [yjP] SIZE COLUMN 추가 후 INSERT %>
 									<li>size : 55</li>
 								</ul>
 							</div>
 							<div class="row" style="margin: 0;">
-								<strong>72,500원</strong> <span class="label label-info"
-									style="float: right;">Being prepared</span>
+								<strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
+								<span class="label label-info" style="float: right;">Being prepared</span>
 							</div>
 						</div>
 						</c:forEach>

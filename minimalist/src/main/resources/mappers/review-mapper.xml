@@ -54,4 +54,9 @@
 	delete from review
 	where review_no=#{review_no}
 	</delete>
+	
+	<!-- MY REVIEW -->
+	<select id="myReview" parameterType="string" resultType="Review">
+		SELECT * FROM REVIEW WHERE MEMBER_ID = #{member_id} ORDER BY REVIEW_DATE DESC
+	</select>
 </mapper>
