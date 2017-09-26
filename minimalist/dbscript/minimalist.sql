@@ -20,7 +20,7 @@ DROP TABLE ORDERINFO CASCADE CONSTRAINTS;
 /* 회원 테이블 */
 CREATE TABLE MEMBER(
     MEMBER_ID VARCHAR2(50) PRIMARY KEY, /* 회원 아이디 */
-    MEMBER_PWD VARCHAR2(50), /* 회원 비밀번호 */
+    MEMBER_PWD VARCHAR2(500), /* 회원 비밀번호 */
     MEMBER_NAME VARCHAR2(12), /* 회원 이름 */
     BIRTH DATE, /* 생년월일 */
     REGIST_DATE DATE DEFAULT SYSDATE, /* 가입 날짜 */
@@ -31,7 +31,8 @@ CREATE TABLE MEMBER(
     POINT NUMBER, /* 포인트 */
     GRADE NUMBER, /* 등급 */
     DORMANT_YN CHAR(1) DEFAULT 'n' CONSTRAINT CHK_DOR CHECK (DORMANT_YN IN('y', 'n')), /* 휴면여부 */
-    EMAIL VARCHAR2(100) /* 이메일 */
+    EMAIL VARCHAR2(100), /* 이메일 */
+    SALT VARCHAR2 (200) /* SHA-256 */
 );
 
 COMMENT ON COLUMN MEMBER.MEMBER_ID IS '회원 아이디';
@@ -47,6 +48,7 @@ COMMENT ON COLUMN MEMBER.POINT IS '포인트';
 COMMENT ON COLUMN MEMBER.GRADE IS '등급';
 COMMENT ON COLUMN MEMBER.DORMANT_YN IS '휴면여부';
 COMMENT ON COLUMN MEMBER.EMAIL IS '이메일';
+COMMENT ON COLUMN MEMBER.SALT IS 'SHA-256';
 
 /* 대여 */
 CREATE TABLE PRODUCT(
@@ -294,10 +296,12 @@ COMMENT ON COLUMN INCOME.INCOME IS '수입고유번호';
 COMMENT ON COLUMN INCOME.INCOME_DATE IS '수입일';
 
 ------------------------------ 샘플 데이터 ------------------------------
-
-INSERT INTO MEMBER VALUES('admin', 'admin', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE, '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com');
-INSERT INTO MEMBER VALUES('usera', 'usera', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE, '010-1111-1111', '111-11', '가가시 가가구','가가로 11', 0, 0, 'n', 'asdf01@gmail.com');
-INSERT INTO MEMBER VALUES('userb', 'userb', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE, '010-2222-2222', '222-22', '나나시 나나구','나나로 22', 0, 0, 'n', 'asdf02@gmail.com');
+-- admin password : qweqwe
+-- usera password : asdasd
+-- userb password : zxczxc
+INSERT INTO MEMBER VALUES('admin', '9c7f18d8b1ec46ec42373a7503ded3622abb792bba368d24cfd005de73b648cf', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE, '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com', 'e3144b8e5b42fbbe');
+INSERT INTO MEMBER VALUES('usera', '9f482821f08b077d5f4647382642f5b599a4ff19b0232cda531454c07bbee279', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE, '010-1111-1111', '111-11', '가가시 가가구','가가로 11', 0, 0, 'n', 'asdf01@gmail.com', '0c05bcf2fe31be71');
+INSERT INTO MEMBER VALUES('userb', '8a0ac72cb8e93e0fd417998673b5c42295b18bb78672757b0ec95ba61f2df0f7', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE, '010-2222-2222', '222-22', '나나시 나나구','나나로 22', 0, 0, 'n', 'asdf02@gmail.com', '8005688f5fbbf608');
 
 /* OUTER 15 */
 INSERT INTO PRODUCT VALUES(1500000001, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'), DEFAULT, DEFAULT);
