@@ -57,13 +57,7 @@ position: absolute;
  
 </style>
 
-<head>
 
-   
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
-
-
-</head>
 
 <body>
 	<c:import url="../main/header.jsp" />
