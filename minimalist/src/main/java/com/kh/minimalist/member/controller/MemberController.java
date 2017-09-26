@@ -19,7 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kh.minimalist.cookie.CookieUtils;
+import com.kh.minimalist.commonUtil.CookieUtils;
+import com.kh.minimalist.commonUtil.SHA256Util;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.message.model.service.MessageService;
@@ -48,7 +49,12 @@ public class MemberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
+		
+		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
+		
 		Member member = memberService.loginMember(m);
+		
+		
 		if (member != null) {
 			session.setAttribute("member", member);
 			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
@@ -102,7 +108,10 @@ public class MemberController {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
-
+		String salt = SHA256Util.generateSalt();
+		String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), salt);
+		m.setMember_pwd(newPassword);
+		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
 				+ request.getParameter("phone2");

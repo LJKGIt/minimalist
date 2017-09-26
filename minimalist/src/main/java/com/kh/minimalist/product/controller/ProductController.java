@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.kh.minimalist.cookie.CookieUtils;
+import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;

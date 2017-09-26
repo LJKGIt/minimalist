@@ -1,4 +1,4 @@
-package com.kh.minimalist.cookie;
+package com.kh.minimalist.commonUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
