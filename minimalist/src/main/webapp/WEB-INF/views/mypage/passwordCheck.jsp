@@ -4,10 +4,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
- 
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
-</head>
+
 <body>
 	<c:import url="../main/header.jsp" />
 
@@ -61,7 +58,7 @@
                         <h3>Password reconfirm</h3>
 
 
-                        <form action="information.do" method="post">
+                        <form action="member.information.do" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">

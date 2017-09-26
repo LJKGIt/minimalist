@@ -169,16 +169,18 @@ public class MemberController {
 		return result;
 	}
 
-//	PASSWORD CHECK
-	@RequestMapping("passwordCheck.do")
+//	-> PASSWORD CHECK
+	@RequestMapping("member.passwordCheck.do")
 	public String myPasswordCheck() {
 		return "mypage/passwordCheck";
 	}
 	
-//	MEMBER UPDATE
-	@RequestMapping("information.do")
+//	PASSWORD CHECK -> MEMBER UPDATE VIEW
+	@RequestMapping("member.information.do")
 	public String myInfomaion(Member m, HttpSession session, Model model){
 		String result = "mypage/passwordCheck";
+		System.out.println("1 : " + m.getMember_pwd());
+		System.out.println("2 : " + ((Member) session.getAttribute("member")).getMember_pwd());
 		if (m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())) {
 			result = "mypage/customer-account";
 			Member member = memberService.loginMember(m);
@@ -188,10 +190,10 @@ public class MemberController {
 		return result;
 	}
 	
-//	회원 업데이트
+//	MEMBER UPDATE VIEW -> MEMBER UPDATE
 	// TODO [yjP] 멤버 업데이트 하다가 말았음
 	@RequestMapping("member.memberUpdate.do")
-	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException{
 		String resultPage = "main/404";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
@@ -199,15 +201,13 @@ public class MemberController {
 		System.out.println("update : " + m); 
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
 		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
-		
+		m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 		m.setPhone(phone);
-
 		m.setEmail(email);
 		int result = memberService.mupdate(m);
 
 		if (result > 0) {
-
-			resultPage = "redirect:information.do";			
+			resultPage = "redirect:passwordCheck.do";			
 		}
 		else {
 
@@ -215,6 +215,15 @@ public class MemberController {
 		}
 		return resultPage;
 	}
+	
+//	PASSWORD CHANGE POPUP(VIEW)
+	@RequestMapping("member.passwordView.do")
+	public String passwordView(Model model, HttpSession session){
+		model.addAttribute("member", memberService.searchMember(((Member)session.getAttribute("member")).getMember_id()));
+		return "mypage/passwordChange";
+	}
+	
+//	TODO [yjP] PASSWORD UPDATE
 	
 	
 	// 회원 검색 페이지로 이동.

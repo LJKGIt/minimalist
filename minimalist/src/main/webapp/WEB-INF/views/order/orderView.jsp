@@ -23,10 +23,9 @@
                     </ul>
 
                    <div class="box">
-                        <form action="income.insertIncome.do" method="POST">
-                        	경매물품 : <a href="auction.selectOne.do?auction_code=${auction_code}">물품확인</a><br>
-							경매코드 : <input type="text" name="auction_code" value="${ auction_code }" readonly><br>
-							결제가격 : <input type="text" name="income" value="${ income }" readonly><br>
+                        <form action="orderInfoInsert.do" method="POST">
+							<input type="text" name="product_code" value="${ product.product_code }" readonly>
+							<input type="text" name="product_name" value="${ product.product_name }" readonly>
 							<input id="i_submit_order" type="submit" value="결제하기">
 						</form>
                     </div>
