@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -134,35 +135,37 @@
 
                 <div class="container">
                     <div class="product-slider">
+                    <c:forEach var="product" items="${ productList }">
                         <div class="item">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
-                                            <a href="detail.jsp">
-                                                <img src="resources/img/product1.jpg" alt="" class="img-responsive">
+                                            <a href="productDetail.do?product_code=${ product.product_code }">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="back">
-                                            <a href="detail.jsp">
-                                                <img src="resources/img/product1_2.jpg" alt="" class="img-responsive">
+                                            <a href="productDetail.do?product_code=${ product.product_code }">
+                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="detail.jsp" class="invisible">
-                                    <img src="resources/img/product1.jpg" alt="" class="img-responsive">
+                                <a href="productDetail.do?product_code=${ product.product_code }" class="invisible">
+                                    <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
-                                    <h3><a href="detail.jsp">Fur coat with very but very very long name</a></h3>
-                                    <p class="price">$143.00</p>
+                                    <h3><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_name }</a></h3>
+                                     ${ product.product_code }
+                                    <p class="price" style="margin:0px 0px 5px 0px;"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                 </div>
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
                         </div>
-
-                        <div class="item">
+					</c:forEach>
+                      <!--   <div class="item">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -185,27 +188,27 @@
                                     <h3><a href="detail.jsp">White Blouse Armani</a></h3>
                                     <p class="price"><del>$280</del> $143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon sale">
                                     <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon gift">
                                     <div class="theribbon">GIFT</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="item">
@@ -231,9 +234,9 @@
                                     <h3><a href="detail.jsp">Black Blouse Versace</a></h3>
                                     <p class="price">$143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="item">
@@ -259,9 +262,9 @@
                                     <h3><a href="detail.jsp">Black Blouse Versace</a></h3>
                                     <p class="price">$143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="item">
@@ -287,15 +290,15 @@
                                     <h3><a href="detail.jsp">White Blouse Versace</a></h3>
                                     <p class="price">$143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="item">
@@ -321,18 +324,18 @@
                                     <h3><a href="detail.jsp">Fur coat</a></h3>
                                     <p class="price">$143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon gift">
                                     <div class="theribbon">GIFT</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
-                        <!-- /.col-md-4 -->
+                        /.col-md-4
 
                         <div class="item">
                             <div class="product">
@@ -357,27 +360,27 @@
                                     <h3><a href="detail.jsp">White Blouse Armani</a></h3>
                                     <p class="price"><del>$280</del> $143.00</p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon sale">
                                     <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon gift">
                                     <div class="theribbon">GIFT</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="item">
@@ -403,8 +406,8 @@
                                     <h3><a href="detail.jsp">Black Blouse Versace</a></h3>
                                     <p class="price">$143.00</p>
                                 </div>
-                                <!-- /.text -->
-                            </div>
+                                /.text
+                            </div> -->
                             <!-- /.product -->
                         </div>
 

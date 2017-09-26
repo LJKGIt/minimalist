@@ -57,6 +57,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.productRecentProductCode(product);
 	}
 
+	@Override
+	public ArrayList<Product> productList() {
+		return productDao.productList();
+	}
+
 
 
 }

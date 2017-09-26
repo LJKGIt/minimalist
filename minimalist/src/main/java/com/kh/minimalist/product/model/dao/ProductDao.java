@@ -53,4 +53,9 @@ public class ProductDao {
 		return sqlSession.selectOne("Product.productRecentProductCode", product);
 	}
 
+	public ArrayList<Product> productList() {
+		List<Product> productList = sqlSession.selectList("Product.newProductList");
+		return (ArrayList<Product>) productList;
+	}
+
 }
