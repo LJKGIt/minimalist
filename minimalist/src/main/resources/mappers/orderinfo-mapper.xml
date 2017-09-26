@@ -9,14 +9,36 @@
   		<result property="member_id" column="MEMBER_ID"/>
   		<result property="product_code" column="PRODUCT_CODE"/>
   		<result property="orderinfo_date" column="ORDERINFO_DATE"/>
+  		<association property="productJoin"  javaType="Product">
+  			<id property="product_code" column="PRODUCT_CODE" />
+	  		<result property="product_name" column="PRODUCT_NAME"/>
+	  		<result property="product_category" column="PRODUCT_CATEGORY"/>
+	  		<result property="product_brand" column="PRODUCT_BRAND"/>
+	  		<result property="product_descript" column="PRODUCT_DESCRIPT"/>
+	  		<result property="product_original_price" column="PRODUCT_ORIGINAL_PRICE"/>
+	  		<result property="rent_price" column="RENT_PRICE"/>
+	  		<result property="product_size33" column="PRODUCT_SIZE33"/>
+	  		<result property="product_size44" column="PRODUCT_SIZE44"/>
+	  		<result property="product_size55" column="PRODUCT_SIZE55"/>
+	  		<result property="product_size66" column="PRODUCT_SIZE66"/>
+	  		<result property="product_size77" column="PRODUCT_SIZE77"/>
+	  		<result property="product_color" column="PRODUCT_COLOR"/>
+	  		<result property="receive_date" column="RECEIVE_DATE"/>
+	  		<result property="product_hit" column="PRODUCT_HIT"/>
+	  		<result property="product_delete" column="PRODUCT_DELETE"/>
+  		</association>
 	</resultMap>
 
 	<insert id="orderInfoInsert" parameterType="OrderInfo"> 
 		INSERT INTO ORDERINFO VALUES((SELECT MAX(ORDERINFO_CODE) FROM ORDERINFO)+1, #{ member_id }, #{ product_code }, SYSDATE)
 	</insert>
 	
-	<select id="myOrder" parameterType="string" resultType="OrderInfo">
-		SELECT * FROM ORDERINFO WHERE MEMBER_ID = #{member_id} ORDER BY ORDERINFO_DATE DESC
+	<select id="myOrder" parameterType="string" resultType="OrderInfo" resultMap="resultOrderInfo">
+		<!-- SELECT * FROM ORDERINFO WHERE MEMBER_ID = #{member_id} ORDER BY ORDERINFO_DATE DESC -->
+		SELECT * 
+		FROM ORDERINFO 
+		JOIN PRODUCT USING(PRODUCT_CODE)
+		WHERE MEMBER_ID = #{member_id} ORDER BY ORDERINFO_DATE DESC
 	</select>
 	
 </mapper>

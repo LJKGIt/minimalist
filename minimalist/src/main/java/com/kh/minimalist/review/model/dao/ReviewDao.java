@@ -51,4 +51,9 @@ public class ReviewDao {
 		
 		return sqlSession.delete("Review.deleteReview", review_no);
 	}
+
+	public ArrayList<Review> myReview(String member_id) {
+		List<Review> list = sqlSession.selectList("Review.myReview", member_id); 
+		return (ArrayList<Review>) list;
+	}
 }

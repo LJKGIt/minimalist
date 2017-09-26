@@ -40,4 +40,8 @@ public class MemberDao {
 		
 		return (ArrayList<Member>) list;
 	}
+
+	public int mupdate(Member m) {
+		return sqlSession.update("Member.updateMember", m);
+	}
 }
