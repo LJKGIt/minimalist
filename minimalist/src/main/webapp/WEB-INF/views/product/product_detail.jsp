@@ -184,16 +184,10 @@
 										바로대여
 									</a>
 									<c:if test="${ empty wish }">
-										<a class="btn btn-default" id="i_a_wish"> <i
-											class='fa fa-heart' style="color: #ff5757;"></i> Add to
-											wishlist
-										</a>
+										<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Add to wishlist</a>
 									</c:if>
 									<c:if test="${ not empty wish }">
-										<a class="btn btn-default" id="i_a_wish"> <i
-											class='fa fa-heart' style="color: #ff5757;"></i> Remove to
-											wishlist
-										</a>
+										<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Remove to wishlist</a>
 									</c:if>
 								</p>
 							</div>
@@ -261,7 +255,7 @@
 							class="btn btn-primary">상품후기 목록 보기</a>
 						<c:if test="${ member.member_id eq 'admin' }">
 							<a
-								href="javascript:$.post('productDelete.do', {product_code:'${product.product_code}'})"
+								href="productDelete.do?product_code=${product.product_code}"
 								class="btn btn-primary">삭제하기</a>
 
 						</c:if>
@@ -458,9 +452,7 @@
           $.ajax({
             url: "wishInsert.do",
             type: "POST",
-            data: {
-              product_code: ${ product.product_code }
-            },
+            data: { product_code: ${ product.product_code } },
             success: function (data) {
               if (data == "true") {
                 this_i_a_wish.html("<i class='fa fa-heart' style='color:#ff5757;'></i> Remove to wishlist");

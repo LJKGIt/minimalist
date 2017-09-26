@@ -61,7 +61,7 @@
 	insert into auction values
 	((select max(auction_code) from auction)+1,
 	#{auction_name}, #{auction_category}, #{auction_brand}, #{auction_descript}, null,
-	#{bid_price}, #{start_date}, #{end_date}, #{auction_size}, #{auction_color}, #{image_path})
+	#{bid_price}, #{start_date}, #{end_date}, #{auction_size}, #{auction_color}, #{image_path}, default)
 	
 	</insert>
 	

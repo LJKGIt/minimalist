@@ -129,7 +129,7 @@ public class AuctionController {
 		
 		String tmp="";
 		if(result>0){
-			tmp="manager/manageHome";
+			tmp="manager/auctionRegister";
 		}else {
 			tmp="main/404";
 		}

@@ -47,18 +47,21 @@ public class ProductController {
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		String returnResult = "main/404";
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		String member_id = null;
+		if (session.getAttribute("member") != null) {
+			member_id = ((Member) session.getAttribute("member")).getMember_id();
+		}
 		productService.productHit(product);
 
 		Product product_return = productService.productDetail(product);
 
 		Wish wish = null;
-		if ((Member) session.getAttribute("member") != null) {
+		if (member_id != null) {
 			wish = wishService.wishSelectOne(new Wish(member_id, product.getProduct_code()));
 		}
 
 		// UPDATE COOKIE
-		if ((Member) session.getAttribute("member") != null) {
+		if (member_id != null) {
 			try {
 				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request,
 						response);
@@ -90,7 +93,7 @@ public class ProductController {
 		int endCount = 0;
 		System.out.println("1");
 		// product_category가 null이면 기본 값을 주기.
-		if(product.getProduct_category() == null){
+		if (product.getProduct_category() == null) {
 			System.out.println("2");
 			product.setProduct_category("outer");
 			System.out.println("3");
@@ -142,6 +145,7 @@ public class ProductController {
 				System.out.println("20");
 				PrintWriter writer = null;
 				try {
+					System.out.println("21");
 					returnResult = null;
 					writer = response.getWriter();
 					writer.append("true");
@@ -153,11 +157,12 @@ public class ProductController {
 				}
 
 			} else {
+				System.out.println("22");
 				model.addAttribute("productList", productList);
 				returnResult = "product/product_list";
 			}
 		}
-
+		System.out.println(returnResult);
 		return returnResult;
 	}
 
@@ -191,32 +196,38 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [litogi] 수정 페이지 만들기.
+	// TODO [lintogi] 수정 페이지 만들기.
 	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
 	public String productUpdate(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
 
 		// if (session.getAttribute("member") != null
-		// 		&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
-		// 	int result = productService.productUpdate(product);
-		// 	if (result > 0) {
-		// 		returnResult = "redirect:productDetail.do?product_code="
-		// 				+ productService.productRecentProductCode(product);
-		// 		product.getProduct_code();
-		// 	}
+		// && ((Member)
+		// session.getAttribute("member")).getMember_id().equals("admin")) {
+		// int result = productService.productUpdate(product);
+		// if (result > 0) {
+		// returnResult = "redirect:productDetail.do?product_code="
+		// + productService.productRecentProductCode(product);
+		// product.getProduct_code();
+		// }
 		// }
 
 		return returnResult;
 	}
+
 	// TODO [lintogi] 파비콘이 나오지 않는 것에 대해서 알아보기.
 	// TODO [lintogi] UPDATE 오류다.
-	@RequestMapping(value = "productDelete.do", method = RequestMethod.POST)
+	@RequestMapping(value = "productDelete.do", method = RequestMethod.GET)
 	public String productDelete(Product product, Model model, HttpSession session) {
+		System.out.println("51");
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null
 				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+			System.out.println("52");
 			int result = productService.productDelete(product);
+			System.out.println("53");
 			if (result > 0) {
+				System.out.println("54");
 				returnResult = "redirect:productList.do";
 			}
 		}

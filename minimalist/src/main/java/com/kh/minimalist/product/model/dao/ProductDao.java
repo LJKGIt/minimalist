@@ -37,7 +37,6 @@ public class ProductDao {
 	}
 
 	public int productDelete(Product product) {
-		System.out.println("4");
 		return sqlSession.update("Product.productDelete", product);
 	}
 
