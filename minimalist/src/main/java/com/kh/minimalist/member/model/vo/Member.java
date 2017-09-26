@@ -21,11 +21,16 @@ public class Member implements Serializable {
 	private int grade;
 	private char dormant_yn;
 	private String email;
+	private String salt;
+	
+	
 	public Member() {
 		super();
 	}
+	
 	public Member(String member_id, String member_pwd, String member_name, Date birth, Date regist_date, String phone,
-			String post, String address1, String address2, int point, int grade, char dormant_yn, String email) {
+			String post, String address1, String address2, int point, int grade, char dormant_yn, String email,
+			String salt) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -40,6 +45,7 @@ public class Member implements Serializable {
 		this.grade = grade;
 		this.dormant_yn = dormant_yn;
 		this.email = email;
+		this.salt = salt;
 	}
 	public String getMember_id() {
 		return member_id;
@@ -119,15 +125,20 @@ public class Member implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getSalt() {
+		return salt;
 	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
 				+ ", birth=" + birth + ", regist_date=" + regist_date + ", phone=" + phone + ", post=" + post
 				+ ", address1=" + address1 + ", address2=" + address2 + ", point=" + point + ", grade=" + grade
-				+ ", dormant_yn=" + dormant_yn + ", email=" + email + "]";
+				+ ", dormant_yn=" + dormant_yn + ", email=" + email + ", salt=" + salt + "]";
 	}
+	
 	
 }
