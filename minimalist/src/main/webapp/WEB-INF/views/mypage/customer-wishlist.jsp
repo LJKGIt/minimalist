@@ -4,10 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<head>
-  
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
-</head>
+
 
 <body>
    	<c:import url="../main/header.jsp" />

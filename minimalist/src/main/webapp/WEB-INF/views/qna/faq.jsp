@@ -4,17 +4,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
 
-    
-
-  
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
-    
-
-
-
-</head>
 
 <body>
 

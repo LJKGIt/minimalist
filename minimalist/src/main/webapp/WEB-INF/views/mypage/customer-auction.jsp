@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
+   
 </head>
 <body style="min-width: 360px;">
 

@@ -51,7 +51,7 @@
  <title>
        Minimalist
     </title>
-     <link rel="shortcut icon" href="resources/favicon6.ico" type="image/x-icon">
+     
 </head>
 
 <body>
@@ -426,6 +426,26 @@
 				})
 			}
 		}
+		
+		$(function(){
+			
+			  var link = document.createElement('link');
+			    link.type = 'image/x-icon';
+			    link.rel = 'shortcut icon';
+			    link.href = 'resources/favicon6.ico';
+			    document.getElementsByTagName('head')[0].appendChild(link);
+			
+			
+		});
+		
+		
+			
+			
+	
+
+		
+		
+		
 </script>
  
 
