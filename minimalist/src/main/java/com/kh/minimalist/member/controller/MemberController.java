@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,10 +52,15 @@ public class MemberController {
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
 		
-		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
-		
-		Member member = memberService.loginMember(m);
-		
+		// SQL injection에 대비해 정규식 표현을 적용합니다.
+		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
+		Member member = null;
+		Matcher me = p.matcher(m.getMember_id());
+		System.out.println(me);
+		if(p.matcher(m.getMember_id()).find()){
+			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
+			member = memberService.loginMember(m);
+		}
 		
 		if (member != null) {
 			session.setAttribute("member", member);
