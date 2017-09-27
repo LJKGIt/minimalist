@@ -25,12 +25,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
-		String returnResult = "main/404";
 		ArrayList<Product> productList = productService.productList();
-		
 		model.addAttribute("productList", productList);
-		
-		return returnResult;
+		return "main/index";
 	}
 	
 }
