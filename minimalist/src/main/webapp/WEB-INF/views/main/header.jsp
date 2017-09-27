@@ -198,8 +198,10 @@
 								</a>
 							</c:if>
 						</div>
-					</li>
-					<li class="active"><a href="index.do">How</a></li>
+
+					<!-- </li>
+					 <li class="active"><a href="index.do">How</a></li> -->
+
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
 						data-hover="dropdown" data-delay="200">Product <b
@@ -301,43 +303,11 @@
 											<ul>
 												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
 												<li><a href="qna.selectList.do">1:1 문의</a></li>
-												<li><a href="register.do">Register</a></li>
-												<li><a href="resources/customer-orders.html">Orders
-														history</a></li>
-												<li><a href="resources/customer-order.html">Order
-														history detail</a></li>
-												<li><a href="resources/customer-wishlist.html">Wishlist</a></li>
-												<li><a href="resources/customer-account.html">Customer
-														account / change password</a></li>
+												
 											</ul>
 										</div>
-										<div class="col-sm-3">
-											<h5>Order process</h5>
-											<ul>
-												<li><a href="resources/basket.jsp">Shopping cart</a></li>
-												<li><a href="resources/checkout1.jsp">Checkout -
-														step 1</a></li>
-												<li><a href="resources/checkout2.jsp">Checkout -
-														step 2</a></li>
-												<li><a href="resources/checkout3.jsp">Checkout -
-														step 3</a></li>
-												<li><a href="resources/checkout4.jsp">Checkout -
-														step 4</a></li>
-											</ul>
-										</div>
-										<div class="col-sm-3">
-											<h5>Pages and blog</h5>
-											<ul>
-												<li><a href="resources/blog.jsp">Blog listing</a></li>
-												<li><a href="resources/post.jsp">Blog Post</a></li>
-												<li><a href="resources/faq.jsp">FAQ</a></li>
-												<li><a href="resources/text.jsp">Text page</a></li>
-												<li><a href="resources/text-right.jsp">Text page -
-														right sidebar</a></li>
-												<li><a href="resources/404.jsp">404 page</a></li>
-												<li><a href="resources/contact.jsp">Contact</a></li>
-											</ul>
-										</div>
+										
+										
 									</div>
 								</div> <!-- /.yamm-content -->
 							</li>
@@ -362,7 +332,7 @@
 					<c:if test="${ !empty sessionScope.member }">
 						<a href="logout.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-							class="hidden-sm"> Logout</span>
+							class="hidden-sm"></span>
 						</a>
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
@@ -373,7 +343,7 @@
 						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
-							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
+							class="fa fa-user"></i><span class="hidden-sm"></span></a>
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
 							<i class="fa fa-envelope"></i></button>
@@ -431,8 +401,12 @@
 			
 			  var link = document.createElement('link');
 			    link.type = 'image/x-icon';
+
 			    link.rel = 'shortcut icon';
+
 			    link.href = 'resources/t9.png';
+
+
 			    document.getElementsByTagName('head')[0].appendChild(link);
 			
 			

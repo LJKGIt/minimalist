@@ -21,13 +21,29 @@
                         </li>
                         <li>결제</li>
                     </ul>
+                    
+                    
+                    <!-- 이미지 처리 -->
+                    <c:forTokens var="au" items="${auction.image_path}" delims=","  varStatus="index">
+                    <c:if test="${index.count eq 1 }">
+                    <c:set var="img1" value="/minimalist/resources/img_auction/${au}"/>
+                    </c:if>
+                    
+                    </c:forTokens>
 
                    <div class="box">
+                   <h3 align="center">물품 확인</h3>
+                   <p align="center"><img src="${img1}"></p>
                         <form action="income.insertIncome.do" method="POST">
-                        	경매물품 : <a href="auction.selectOne.do?auction_code=${auction_code}">물품확인</a><br>
-							경매코드 : <input type="text" name="auction_code" value="${ auction_code }" readonly><br>
-							결제가격 : <input type="text" name="income" value="${ income }" readonly><br>
-							<input id="i_submit_order" type="submit" value="결제하기">
+                        <table style="margin:auto">
+                        	<tr><th>물품명 : </th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
+                        
+                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
+                        	
+							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly></td></tr>
+							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${auction.bid_price}" readonly></td></tr>
+							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
+						</table>
 						</form>
                     </div>
                     
