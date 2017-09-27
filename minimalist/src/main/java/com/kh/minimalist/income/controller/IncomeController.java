@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.minimalist.auction.model.service.AuctionService;
+import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.income.model.service.IncomeService;
 import com.kh.minimalist.income.model.vo.Income;
 
@@ -105,10 +106,9 @@ public class IncomeController {
 	public String viewOrder(HttpServletRequest request, Model model) {
 
 		int auction_code = Integer.parseInt(request.getParameter("auction_code"));
-		int income = Integer.parseInt(request.getParameter("income"));
-
-		model.addAttribute("auction_code", auction_code);
-		model.addAttribute("income", income);
+		Auction auction=auctionService.selectOne(auction_code);
+		model.addAttribute("auction", auction);
+	
 		return "order/auctionOrder";
 	}
 
