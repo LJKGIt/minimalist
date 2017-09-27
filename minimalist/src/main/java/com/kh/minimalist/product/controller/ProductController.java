@@ -211,11 +211,8 @@ public class ProductController {
 	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, MultipartHttpServletRequest multi) {
 		String returnResult = "false";
-		// TODO [lintogi] 경로가 target 아래로 잡힌다. 해결하기.
-		// String root =
-		// request.getSession().getServletContext().getRealPath("/");
-		String root = "C:\\workspace\\minimalist\\src\\main\\webapp\\";
-		String path = root + "resources\\img_product\\";
+		String root = request.getSession().getServletContext().getRealPath("/").substring(0, request.getSession().getServletContext().getRealPath("/").indexOf("target"));
+		String path = root + "src\\main\\webapp\\resources\\img_product\\";
 		String newFileName = "";
 		File dir = new File(path);
 		if (!dir.isDirectory()) {
@@ -224,13 +221,14 @@ public class ProductController {
 		Iterator<String> files = multi.getFileNames();
 		while (files.hasNext()) {
 			String uploadFile = files.next();
+			System.out.println("uploadFile : " + uploadFile);
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
 			// TODO [lintogi] 테이블에 컬럼 추가하기.
 			// 그리고 "true" + "바뀐 이름" 값을 view의 jquery까지 보내주기. index hidden까지 옮기기.
-			// newFileName = System.currentTimeMillis() + "." +
-			// fileName.substring(fileName.lastIndexOf(".") + 1);
+			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 			newFileName = fileName;
+			System.out.println(path + newFileName);
 			try {
 				mFile.transferTo(new File(path + newFileName));
 				returnResult = "true";

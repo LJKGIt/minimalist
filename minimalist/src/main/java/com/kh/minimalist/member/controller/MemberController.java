@@ -56,22 +56,39 @@ public class MemberController {
 		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
 		Member member = null;
 		// TODO [전원] NullPointer나면 몇 번째 줄에서 났는지 확인하기.
-		if(p.matcher(
+		boolean patternBoolean = false;
+		try{
+		patternBoolean = p.matcher(
 				m.getMember_id())
-				.find() 
+				.find();
+		} catch(NullPointerException e){
+			System.out.println("망");
+		}
+		if(patternBoolean 
 				&& m.getMember_id() != "" 
 				&& m.getMember_pwd() != ""){
+			System.out.println("1");
 			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
+			System.out.println("2");
 			member = memberService.loginMember(m);
+			System.out.println("member : " + member);
 		}
+		System.out.println("3");
 		
 		if (member != null) {
+			System.out.println("4");
 			session.setAttribute("member", member);
+			System.out.println("5");
 			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+				System.out.println("6");
 				result = "redirect:"+request.getHeader("referer");
+				
 			}
+			System.out.println("7");
 			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
+			System.out.println("8");
 		}
+		System.out.println("9");
 		return result;
 	}
 

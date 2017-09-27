@@ -154,7 +154,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image1" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image1" name="filebutton1" class="input-file" type="file">
 								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -164,7 +164,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image2">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image2" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image2" name="filebutton2" class="input-file" type="file">
 								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -174,7 +174,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image3">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image3" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image3" name="filebutton3" class="input-file" type="file">
 								    <input id="i_hidden_hidden_image3" name="n_hidden_image3" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -276,6 +276,7 @@
 										// AJAX로 서버에 업로드합니다.
 										// img 태그로 보여줍니다.
 										$('#i_file_image1').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -285,14 +286,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image1').val($(this).val().split('\\').reverse()[0]);
 											} else {
@@ -301,6 +303,7 @@
 											}
 										});
 										$('#i_file_image2').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -310,14 +313,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image2').val($(this).val().split('\\').reverse()[0]);
 											} else {
@@ -326,6 +330,7 @@
 											}
 										});
 										$('#i_file_image3').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -335,14 +340,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image3').val($(this).val().split('\\').reverse()[0]);
 											} else {
