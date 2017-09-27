@@ -43,6 +43,12 @@
 		SET MEMBER_NAME = #{member_name}, BIRTH = #{birth}, PHONE = #{phone}, POST = #{post}, ADDRESS1 = #{address1}, ADDRESS2 = #{address2}, EMAIL = #{email} 
 		WHERE MEMBER_ID = #{member_id}
 	</update>
+	
+	<update id="passwordUpdate" parameterType="Member">
+		UPDATE MEMBER
+		SET MEMBER_PWD = #{member_pwd}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 
     <select id="searchMember" parameterType="string" resultType="Member">
     	SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}

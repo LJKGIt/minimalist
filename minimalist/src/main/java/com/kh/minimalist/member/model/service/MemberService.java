@@ -16,4 +16,6 @@ public interface MemberService {
 	ArrayList<Member> mList();
 
 	int mupdate(Member m);
+	
+	int passwordUpdate(Member m);
 }
