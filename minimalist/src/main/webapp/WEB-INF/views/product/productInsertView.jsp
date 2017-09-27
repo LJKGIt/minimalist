@@ -61,7 +61,7 @@
 								</div>
 								
 								
-								<% // TODO [lintogi] 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
+								<% // TODO [lintogi] ■ 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
 								<!-- Select Basic -->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_select_brand">브랜드</label>
@@ -149,7 +149,7 @@
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
-								<% // TODO [lintogi] ORDERINFO 테이블에 사이즈에 대한 컬럼도 넣기. %>
+								<% // TODO [lintogi] ■ ORDERINFO 테이블에 사이즈에 대한 컬럼도 넣기. %>
 								<!-- File Button --> 
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>
@@ -356,7 +356,7 @@
 												$(this).focus();
 											}
 										});
-										<% // TODO [lintogi] 배송 API가 적용되면 ORDERINFO 테이블에 컬럼으로 배송중, 배송완료 등에 대한 컬럼을 만들기. %>
+										<% // TODO [lintogi] □ 배송 API가 적용되면 ORDERINFO 테이블에 컬럼으로 배송중, 배송완료 등에 대한 컬럼을 만들기. %>
 										// submit 버튼을 클릭 시 비어있는 값을 확인합니다.
 										$('#i_submit').on('click', function(){
 											if($('#i_text_name').val() == ""){
@@ -424,7 +424,6 @@
 								  <label class="col-md-3 control-label" for="button1id"></label>
 								  <div class="col-md-8">
 								    <button type="submit" id="i_button_submit" name="button1id" class="btn btn-success">등록하기</button>
-								    <% // TODO [lintogi] 자바스크립트로 새로고침 하기. %>
 								    <button type="button" name="button2id" class="btn btn-danger" onclick="javascript:location.reload();">다시 쓰기</button>
 								  </div>
 								</div>

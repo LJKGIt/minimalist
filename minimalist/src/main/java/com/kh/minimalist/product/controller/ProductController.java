@@ -37,15 +37,11 @@ public class ProductController {
 
 	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
 	// TODO [lintogi] ■ 탭에 이미지 아이콘 넣기. (9월 25일에 란희에게 맡겼다.)
-	// TODO [lintogi] 완성될 쯤에 DB 스크립트 파일에 컬럼별로 주석을 추가하고, COMMENTS 값을 삽입하기.
-	// TODO [lintogi] 완성될 쯤에 반응형 웹에 대해 링크 연결을 싹 정리하기.
-	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로
-	// 처리하기.
-	// TODO [lintogi] 데이터 넣고나서 재영이 형에게 메인 홈페이지 TOP 상품에 대해서 순서 다시 확인 받기.
+	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로 처리하기.
+	// TODO [lintogi] ■ 데이터 넣고나서 재영이 형에게 메인 홈페이지 TOP 상품에 대해서 순서 다시 확인 받기.
 
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
-	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) {
+	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
 		String member_id = null;
 		if (session.getAttribute("member") != null) {
@@ -63,8 +59,7 @@ public class ProductController {
 		// UPDATE COOKIE
 		if (member_id != null) {
 			try {
-				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request,
-						response);
+				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request, response);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -80,8 +75,7 @@ public class ProductController {
 
 	}
 
-	// TODO [lintogi] 또 imgae 순서가 이상하다.
-	// TODO [lintogi] JSON으로 마무리하기.
+	// TODO [lintogi] ■ JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
 		String returnResult = "main/404";
@@ -146,34 +140,30 @@ public class ProductController {
 	@RequestMapping(value = "productInsertView.do", method = RequestMethod.GET)
 	public String productInsertView(Model model, HttpSession session) {
 		String returnResult = "main/404";
-		if (session.getAttribute("member") != null
-				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			returnResult = "product/productInsertView";
 		}
 		return returnResult;
 	}
 
-	// TODO [lintogi] 이미지 삽입하는 것을 처리하기.
-	// TODO [lintogi] 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면
-	// 될 것 같다.
-	// TODO [lintogi] 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다.
+	// TODO [lintogi] ■ 이미지 삽입하는 것을 처리하기.
+	// TODO [lintogi] ■ 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면 될 것 같다.
+	// TODO [lintogi] ■ 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다.
 	@RequestMapping(value = "productInsert.do", method = RequestMethod.POST)
 	public String productInsert(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
 		product.setProduct_code(1500000026);
-		if (session.getAttribute("member") != null
-				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productInsert(product);
 			if (result > 0) {
-				returnResult = "redirect:productDetail.do?product_code="
-						+ productService.productRecentProductCode(product);
+				returnResult = "redirect:productDetail.do?product_code=" + productService.productRecentProductCode(product);
 			}
 		}
 
 		return returnResult;
 	}
 
-	// TODO [lintogi] 수정 페이지 만들기.
+	// TODO [lintogi] ■ 수정 페이지 만들기.
 	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
 	public String productUpdate(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
@@ -192,13 +182,10 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] 파비콘이 나오지 않는 것에 대해서 알아보기.
-	// TODO [lintogi] UPDATE 오류다.
 	@RequestMapping(value = "productDelete.do", method = RequestMethod.GET)
 	public String productDelete(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
-		if (session.getAttribute("member") != null
-				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productDelete(product);
 			if (result > 0) {
 				returnResult = "redirect:productList.do";
@@ -208,8 +195,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "productImageUpload.do", method = RequestMethod.POST)
-	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response, MultipartHttpServletRequest multi) {
+	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multi) {
 		String returnResult = "false";
 		String root = request.getSession().getServletContext().getRealPath("/").substring(0, request.getSession().getServletContext().getRealPath("/").indexOf("target"));
 		String path = root + "src\\main\\webapp\\resources\\img_product\\";
@@ -224,8 +210,6 @@ public class ProductController {
 			System.out.println("uploadFile : " + uploadFile);
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
-			// TODO [lintogi] 테이블에 컬럼 추가하기.
-			// 그리고 "true" + "바뀐 이름" 값을 view의 jquery까지 보내주기. index hidden까지 옮기기.
 			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 			newFileName = fileName;
 			System.out.println(path + newFileName);

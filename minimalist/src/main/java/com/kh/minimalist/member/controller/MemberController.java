@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,51 +43,42 @@ public class MemberController {
 
 	@Autowired
 	private OrderInfoService orderInfoService;
-	
+
 	@Autowired
 	private MessageService messageService;
 
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response){
 		String result = "main/index";
-		
+
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
-		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
+		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
-		// TODO [전원] NullPointer나면 몇 번째 줄에서 났는지 확인하기.
+		// TODO [lintogi] □ if로 null이 아닌 것을 확인했음에도 NullPointerException를 던지고 그 순서가 절차지향을 무시한다.
 		boolean patternBoolean = false;
-		try{
-		patternBoolean = p.matcher(
-				m.getMember_id())
-				.find();
-		} catch(NullPointerException e){
-			System.out.println("망");
+		try {
+			// if(p == null)
+			// 	System.out.println("망p");
+			// if(p.matcher(m.getMember_id()) == null)
+			// 	System.out.println("망m");
+			if (p != null && p.matcher(m.getMember_id()) != null)
+				patternBoolean = p.matcher(m.getMember_id()).find();
+		} catch (NullPointerException e) {
+			// System.out.println("망n");
 		}
-		if(patternBoolean 
-				&& m.getMember_id() != "" 
-				&& m.getMember_pwd() != ""){
-			System.out.println("1");
+		if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
 			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
-			System.out.println("2");
 			member = memberService.loginMember(m);
-			System.out.println("member : " + member);
 		}
-		System.out.println("3");
-		
+
 		if (member != null) {
-			System.out.println("4");
 			session.setAttribute("member", member);
-			System.out.println("5");
 			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
-				System.out.println("6");
-				result = "redirect:"+request.getHeader("referer");
-				
+				result = "redirect:" + request.getHeader("referer");
+
 			}
-			System.out.println("7");
 			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
-			System.out.println("8");
 		}
-		System.out.println("9");
 		return result;
 	}
 
@@ -104,8 +94,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("memberidchk.do")
-	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws IOException {
+	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
@@ -130,8 +119,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
@@ -140,8 +128,7 @@ public class MemberController {
 		m.setMember_pwd(newPassword);
 		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
-				+ request.getParameter("phone2");
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 
 		m.setPhone(phone);
 
@@ -179,8 +166,7 @@ public class MemberController {
 	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
 		response.setContentType("text/html; charset=utf-8");
-		
-		
+
 		if (((Member) session.getAttribute("member")) != null) {
 			String member_id = ((Member) session.getAttribute("member")).getMember_id();
 
@@ -188,7 +174,7 @@ public class MemberController {
 			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
 			if (myOrder != null)
 				model.addAttribute("myOrder", myOrder);
-			
+
 			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);
@@ -203,27 +189,26 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
-		}else{
-			
-			PrintWriter out = response.getWriter();
-            out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>"); //관리자 등급별로 메뉴 제어
-            out.flush(); 
+		} else {
 
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>"); //관리자 등급별로 메뉴 제어
+			out.flush();
 
 		}
 
 		return result;
 	}
 
-//	-> PASSWORD CHECK
+	//	-> PASSWORD CHECK
 	@RequestMapping("member.passwordCheck.do")
 	public String myPasswordCheck() {
 		return "mypage/passwordCheck";
 	}
-	
-//	PASSWORD CHECK -> MEMBER UPDATE VIEW
+
+	//	PASSWORD CHECK -> MEMBER UPDATE VIEW
 	@RequestMapping("member.information.do")
-	public String myInfomaion(Member m, HttpSession session, Model model){
+	public String myInfomaion(Member m, HttpSession session, Model model) {
 		String result = "mypage/passwordCheck";
 		if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()).getSalt()).equals(((Member) session.getAttribute("member")).getMember_pwd())) {
 			m.setMember_pwd(((Member) session.getAttribute("member")).getMember_pwd());
@@ -234,17 +219,17 @@ public class MemberController {
 		}
 		return result;
 	}
-	
-//	MEMBER UPDATE VIEW -> MEMBER UPDATE
+
+	//	MEMBER UPDATE VIEW -> MEMBER UPDATE
 	// TODO [yjP] 멤버 업데이트 하다가 말았음
 	@RequestMapping("member.memberUpdate.do")
-	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException{
+	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException {
 		String resultPage = "main/404";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
-		System.out.println("update : " + m); 
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+		System.out.println("update : " + m);
+		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 		m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 		m.setPhone(phone);
@@ -252,26 +237,24 @@ public class MemberController {
 		int result = memberService.mupdate(m);
 
 		if (result > 0) {
-			resultPage = "redirect:passwordCheck.do";			
-		}
-		else {
+			resultPage = "redirect:passwordCheck.do";
+		} else {
 
-			
 		}
 		return resultPage;
 	}
-	
-//	PASSWORD CHANGE POPUP(VIEW)
+
+	//	PASSWORD CHANGE POPUP(VIEW)
 	@RequestMapping("member.passwordView.do")
-	public String passwordView(Model model, HttpSession session){
-		model.addAttribute("member", memberService.searchMember(((Member)session.getAttribute("member")).getMember_id()));
+	public String passwordView(Model model, HttpSession session) {
+		model.addAttribute("member", memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()));
 		return "mypage/passwordChange";
 	}
-	
-//	TODO [yjP] PASSWORD UPDATE
-//	@RequestMapping("member.passwordUpdate.do")
-//	public String 
-	
+
+	//	TODO [yjP] PASSWORD UPDATE
+	//	@RequestMapping("member.passwordUpdate.do")
+	//	public String 
+
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {
@@ -300,5 +283,5 @@ public class MemberController {
 		writer.close();
 
 	}
-	
+
 }
