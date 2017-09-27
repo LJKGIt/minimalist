@@ -91,61 +91,40 @@ public class ProductController {
 		int totalCount = productService.productTotalCount(product);
 		int startCount = 0;
 		int endCount = 0;
-		System.out.println("1");
 		// product_category가 null이면 기본 값을 주기.
 		if (product.getProduct_category() == null) {
-			System.out.println("2");
 			product.setProduct_category("outer");
-			System.out.println("3");
 		}
-		System.out.println("4");
 		// AJAX로 접근했는지 확인
 		if (request.getParameter("productPage") != null) {
-			System.out.println("5");
 			withAjax = true;
-			System.out.println("6");
 			try {
-				System.out.println("7");
 				productPage = Integer.parseInt(request.getParameter("productPage"));
-				System.out.println("8");
 			} catch (NumberFormatException e) {
-				System.out.println("9");
 				return "main/404";
 			}
 		}
-		System.out.println("10");
 		// productPage에 잘못된 값이 들어왔을 때
 		if ((productPage - 1) * 9 + 1 > totalCount) {
-			System.out.println("11");
 			productPage = totalCount / 9;
 		} else if (productPage < 0) {
-			System.out.println("12");
 			productPage = 1;
 		}
-		System.out.println("13");
 		startCount = (productPage - 1) * 9 + 1;
 		if (Math.ceil(totalCount / 9.0) == productPage) {
-			System.out.println("14");
 			endCount = totalCount;
 		} else {
-			System.out.println("15");
 			endCount = productPage * 9;
 		}
-		System.out.println("16");
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
-		System.out.println("17");
 		ArrayList<Product> productList = productService.productList(hashMap);
-		System.out.println("18");
 		if (productList != null && productList.size() != 0) {
-			System.out.println("19");
 			if (withAjax) {
-				System.out.println("20");
 				PrintWriter writer = null;
 				try {
-					System.out.println("21");
 					returnResult = null;
 					writer = response.getWriter();
 					writer.append("true");
@@ -157,12 +136,10 @@ public class ProductController {
 				}
 
 			} else {
-				System.out.println("22");
 				model.addAttribute("productList", productList);
 				returnResult = "product/product_list";
 			}
 		}
-		System.out.println(returnResult);
 		return returnResult;
 	}
 
@@ -219,19 +196,14 @@ public class ProductController {
 	// TODO [lintogi] UPDATE 오류다.
 	@RequestMapping(value = "productDelete.do", method = RequestMethod.GET)
 	public String productDelete(Product product, Model model, HttpSession session) {
-		System.out.println("51");
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null
 				&& ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
-			System.out.println("52");
 			int result = productService.productDelete(product);
-			System.out.println("53");
 			if (result > 0) {
-				System.out.println("54");
 				returnResult = "redirect:productList.do";
 			}
 		}
-		System.out.println("9");
 		return returnResult;
 	}
 
