@@ -116,7 +116,7 @@ _________________________________________________________ -->
                        <h1>1:1문의</h1>
 
                        
-                <p><font color="gray">회원님의 문의사항에 빠른 답변 드리도록 노력하겠습니다.</font></p>
+              
 
                      
                         
@@ -135,9 +135,12 @@ _________________________________________________________ -->
     <c:if test="${empty sessionScope.member}">
     	로그인 해주세요.
     	 <font color="red">자신이 등록한 질문만 열람이 가능합니다.</font>
+    	 <hr>
     </c:if>
     
       <c:if test="${!empty sessionScope.member}">
+        <p><font color="gray">${sessionScope.member.member_id}님의 문의사항에 빠른 답변 드리도록 노력하겠습니다.</font></p>
+        <hr>
     <c:choose>
     
     
