@@ -25,34 +25,7 @@
 
                 </div>
 
-                <div class="col-md-3">
-                    <!-- *** CUSTOMER MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Customer section</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="customer-orders.jsp"><i class="fa fa-list"></i> 주문내역</a>
-                                </li>
-                                <li>
-                                    <a href="customer-wishlist.jsp"><i class="fa fa-heart"></i> 찜 목록</a>
-                                </li>
-                                <li class="active">
-                                    <a href="customer-account.jsp"><i class="fa fa-user"></i> 내 정보보기</a>
-                                </li>
-                                <li>
-                                    <a href="index.jsp"><i class="fa fa-sign-out"></i> Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.col-md-3 -->
-
-                    <!-- *** CUSTOMER MENU END *** -->
-                </div>
+                <c:import url="mypageAside.jsp"/>
 
                 <div class="col-md-9">
                     <div class="box">
@@ -78,33 +51,33 @@
 								</div> 
 								<a href="javascript:passChange()" class="btn btn-primary" style="margin-bottom: 20px;"> 비밀번호 변경하기</a>
 								<div class="form-group">
-									<label for="name">Name</label> <input type="text" value="${ updateMember.member_name }"
+									<label for="name">Name</label> <input type="text" value="${ member.member_name }"
 										class="form-control" id="member_name" name="member_name" style="width: 50%;">
 								</div>
 								<div class="form-group">
-									<label for="birth">Birth</label> <input type="date" value="${ updateMember.birth }"
+									<label for="birth">Birth</label> <input type="date" value="${ member.birth }"
 										class="form-control" id="birth" name="birth" style="width: 50%">
 								</div>
 								<div class="form-group">
-									<label for="phone">Phone</label> <input type="tel" value="${ updateMember.phone }"
+									<label for="phone">Phone</label> <input type="tel" value="${ member.phone }"
 										class="form-control" id="phone" name="phone">
 								</div>
 								<!-- ADDRESS -->
 								<div class="form-group">
 									<label for="address">Address</label><br>
-								<input type="text" id="postcode" name="post"  value="${ updateMember.post }"
+								<input type="text" id="postcode" name="post"  value="${ member.post }"
 									placeholder="우편번호" class="form-control" style="width: 30%; display: inline; margin: 0 20px 10px 0"> <input type="button"
 									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary">
-								<input type="text" id="address" name="address1" placeholder="주소" class="form-control" value="${ updateMember.address1 }" style="margin-bottom: 10px;">
-								<input type="text" id="address2" name="address2" value="${ updateMember.address2 }"
+								<input type="text" id="address" name="address1" placeholder="주소" class="form-control" value="${ member.address1 }" style="margin-bottom: 10px;">
+								<input type="text" id="address2" name="address2" value="${ member.address2 }"
 									placeholder="상세주소" class="form-control" ><br>
 								<div id="checkAddress"></div>
 								</div>
 								
 								<div class="form-group">
-									<label for="email">Email</label><br> <input type="text" value="${ fn:substringBefore(updateMember.email, '@') }"
+									<label for="email">Email</label><br> <input type="text" value="${ fn:substringBefore(member.email, '@') }"
 										class="form-control" id="email_id" name="email1" style="width: 20%; display:inline;">@
-										<input type="text" value="${ fn:substringAfter(updateMember.email, '@') }" 
+										<input type="text" value="${ fn:substringAfter(member.email, '@') }" 
 										class="form-control" id="email_id2" name="email2" style="width: 20%; display:inline;">
 										<select class="form-control" id="email_sel" style="width: 20%; display:inline;">
 											<option>직접입력</option>

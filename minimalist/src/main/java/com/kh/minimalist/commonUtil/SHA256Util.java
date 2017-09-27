@@ -50,7 +50,7 @@ public class SHA256Util {
         
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < salt.length; i++) {
-            // byte 값을 Hex 값으로 바꾸기.
+            // byte 값을 Hex 값으로 바꾸기 (16진법으로 표시)
             sb.append(String.format("%02x",salt[i]));
         }
         

@@ -22,37 +22,10 @@
 				<div class="col-md-11">
 					<ul class="breadcrumb">
 						<li><a href="index.do">Home</a></li>
-						<li>내 경매내역</li>
+						<li>내 경매</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<!-- *** CUSTOMER MENU ***
- _________________________________________________________ -->
-					<div class="panel panel-default sidebar-menu">
-						<div class="panel-heading">
-							<h3 class="panel-title">Customer section</h3>
-						</div>
-						<div class="panel-body">
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="mypage.do"><i
-										class="fa fa-list"></i> 주문내역</a></li>
-								<li><a href="wishlist.do"><i class="fa fa-heart"></i> 찜
-										목록</a></li>
-								<li><a href="infomation.do"><i class="fa fa-user"></i>
-										내 정보보기</a></li>
-								<li><a href="#"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
-								</li>
-								<li><a href="#"><i class="fa fa-sign-out"></i> 내 상품문의</a></li>
-								<li class="active"><a href="auction.selectMemberAuction.do"><i
-										class="fa fa-sign-out"></i> 내 경매내역</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /.col-md-3 -->
-					<!-- *** CUSTOMER MENU END *** -->
-
-
-				</div>
+				<c:import url="mypageAside.jsp"/>
 				<div class="col-md-8">
 						<!-- 경매 -->
 						<c:if test="${!empty list}">

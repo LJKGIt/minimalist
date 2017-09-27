@@ -12,7 +12,7 @@ body {
 }
 
 #top {
-	background: red;
+	background: #4fbfa8;
 	color : white;
 	padding: 0 20px;
 }
