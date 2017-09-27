@@ -46,14 +46,13 @@ public class MemberController {
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
 		if(m.getMember_id() != "" && m.getMember_pwd() != "")
 			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 		
 		Member member = memberService.loginMember(m);
-		
 		
 		if (member != null) {
 			session.setAttribute("member", member);
@@ -149,17 +148,20 @@ public class MemberController {
 	}
 
 	@RequestMapping("member.mypage.do")
-	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
+	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
-
-		// MY ORDER LIST
-		ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
-		if (myOrder != null)
-			model.addAttribute("myOrder", myOrder);
-
-		// RECENT VIEW (COOKIE)
+		response.setContentType("text/html; charset=utf-8");
+		
+		
 		if (((Member) session.getAttribute("member")) != null) {
+			String member_id = ((Member) session.getAttribute("member")).getMember_id();
+
+			// MY ORDER LIST
+			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
+			if (myOrder != null)
+				model.addAttribute("myOrder", myOrder);
+			
+			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);
 				ArrayList<Product> cookieList = new ArrayList<Product>();
@@ -173,6 +175,13 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
+		}else{
+			
+			PrintWriter out = response.getWriter();
+            out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>"); //관리자 등급별로 메뉴 제어
+            out.flush(); 
+
+
 		}
 
 		return result;
@@ -232,7 +241,8 @@ public class MemberController {
 	}
 	
 //	TODO [yjP] PASSWORD UPDATE
-	
+//	@RequestMapping("member.passwordUpdate.do")
+//	public String 
 	
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
