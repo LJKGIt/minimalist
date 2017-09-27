@@ -44,4 +44,8 @@ public class MemberDao {
 	public int mupdate(Member m) {
 		return sqlSession.update("Member.updateMember", m);
 	}
+
+	public int passwordUpdate(Member m) {
+		return sqlSession.update("Member.passwordUpdate", m);
+	}
 }

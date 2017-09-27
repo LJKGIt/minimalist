@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,8 +113,7 @@ public class MemberController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 		String salt = SHA256Util.generateSalt();
-		String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), salt);
-		m.setMember_pwd(newPassword);
+		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
 		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
@@ -219,7 +217,7 @@ public class MemberController {
 	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException{
 		String resultPage = "main/404";
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/plain; utf-8");
+		response.setContentType("text/html; charset=utf-8");
 
 		System.out.println("update : " + m); 
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
@@ -247,8 +245,27 @@ public class MemberController {
 	}
 	
 //	TODO [yjP] PASSWORD UPDATE
-//	@RequestMapping("member.passwordUpdate.do")
-//	public String 
+	@RequestMapping("member.passwordUpdate.do")
+	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=utf-8");
+		
+		String memberSalt = ((Member) session.getAttribute("member")).getSalt();
+		String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), memberSalt);
+		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		m.setMember_id(member_id);
+		m.setMember_pwd(newPassword);
+		int result = memberService.passwordUpdate(m);
+		
+		if(result > 0){
+			PrintWriter out = response.getWriter();
+            out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
+            out.flush();
+		}else{
+			PrintWriter out = response.getWriter();
+            out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
+            out.flush();
+		}
+	}
 	
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
