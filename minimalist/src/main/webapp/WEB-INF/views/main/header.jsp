@@ -303,43 +303,11 @@
 											<ul>
 												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
 												<li><a href="qna.selectList.do">1:1 문의</a></li>
-												<li><a href="register.do">Register</a></li>
-												<li><a href="resources/customer-orders.html">Orders
-														history</a></li>
-												<li><a href="resources/customer-order.html">Order
-														history detail</a></li>
-												<li><a href="resources/customer-wishlist.html">Wishlist</a></li>
-												<li><a href="resources/customer-account.html">Customer
-														account / change password</a></li>
+												
 											</ul>
 										</div>
-										<div class="col-sm-3">
-											<h5>Order process</h5>
-											<ul>
-												<li><a href="resources/basket.jsp">Shopping cart</a></li>
-												<li><a href="resources/checkout1.jsp">Checkout -
-														step 1</a></li>
-												<li><a href="resources/checkout2.jsp">Checkout -
-														step 2</a></li>
-												<li><a href="resources/checkout3.jsp">Checkout -
-														step 3</a></li>
-												<li><a href="resources/checkout4.jsp">Checkout -
-														step 4</a></li>
-											</ul>
-										</div>
-										<div class="col-sm-3">
-											<h5>Pages and blog</h5>
-											<ul>
-												<li><a href="resources/blog.jsp">Blog listing</a></li>
-												<li><a href="resources/post.jsp">Blog Post</a></li>
-												<li><a href="resources/faq.jsp">FAQ</a></li>
-												<li><a href="resources/text.jsp">Text page</a></li>
-												<li><a href="resources/text-right.jsp">Text page -
-														right sidebar</a></li>
-												<li><a href="resources/404.jsp">404 page</a></li>
-												<li><a href="resources/contact.jsp">Contact</a></li>
-											</ul>
-										</div>
+										
+										
 									</div>
 								</div> <!-- /.yamm-content -->
 							</li>
