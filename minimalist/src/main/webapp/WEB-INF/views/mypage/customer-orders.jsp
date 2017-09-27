@@ -28,35 +28,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 						<li>주문내역</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<!-- *** CUSTOMER MENU ***
- _________________________________________________________ -->
-					<div class="panel panel-default sidebar-menu">
-						<div class="panel-heading">
-							<h3 class="panel-title">Customer section</h3>
-						</div>
-						<div class="panel-body">
-							<ul class="nav nav-pills nav-stacked">
-								<li class="active"><a href="member.mypage.do"><i
-										class="fa fa-list"></i> 주문내역</a></li>
-								<li><a href="wish.wishlist.do"><i class="fa fa-heart"></i> 찜
-										목록</a></li>
-								<li><a href="member.passwordCheck.do"><i class="fa fa-user"></i>
-										내 정보보기</a></li>
-								<li><a href="review.myReview.do"><i class="fa fa-sign-out"></i> 내가 쓴 후기</a>
-								</li>
-								<li><a href="qna.selectList.do"><i
-										class="fa fa-sign-out"></i> 내 상품문의(다른 곳으로 이동)</a></li>
-								<li><a href="auction.selectMemberAuction.do"><i
-										class="fa fa-sign-out"></i> 내 경매</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /.col-md-3 -->
-					<!-- *** CUSTOMER MENU END *** -->
-
-
-				</div>
+				<c:import url="mypageAside.jsp"/>
 				<div class="col-md-8" id="customer-orders">
 					<div class="box">
 						<h1>My M</h1>
@@ -96,7 +68,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 							</div>
 							<div class="row" style="margin: 0;">
 								<strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
-								<span class="label label-info" style="float: right;">Being prepared</span>
+								<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a>
 							</div>
 						</div>
 						</c:forEach>
@@ -144,10 +116,16 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 		$('#list > li:eq(4)').addClass('active');
 	</script> -->
 
-	<!-- GO TOP -->
 	<script>
 		$(function() {
-
+			
+			$( "#delivery" ).click(function() {
+			   window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#deliveryNo").val(), "a", "width=700 height=500, left=100, top=100");
+			}); 
+			
+			
+			
+			// GO TOP
 			$('.goTop').click(function() {
 
 				$('body,html').animate({

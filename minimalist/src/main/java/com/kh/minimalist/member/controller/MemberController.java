@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,14 +47,22 @@ public class MemberController {
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "login.do", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
 		
-		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
-		
-		Member member = memberService.loginMember(m);
-		
+		// SQL injection에 대비해 정규식 표현을 적용합니다.
+		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
+		Member member = null;
+		// TODO [전원] NullPointer나면 몇 번째 줄에서 났는지 확인하기.
+		if(p.matcher(
+				m.getMember_id())
+				.find() 
+				&& m.getMember_id() != "" 
+				&& m.getMember_pwd() != ""){
+			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
+			member = memberService.loginMember(m);
+		}
 		
 		if (member != null) {
 			session.setAttribute("member", member);
@@ -149,17 +158,20 @@ public class MemberController {
 	}
 
 	@RequestMapping("member.mypage.do")
-	public String myPageView(HttpSession session, HttpServletRequest request, Model model) {
+	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
-
-		// MY ORDER LIST
-		ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
-		if (myOrder != null)
-			model.addAttribute("myOrder", myOrder);
-
-		// RECENT VIEW (COOKIE)
+		response.setContentType("text/html; charset=utf-8");
+		
+		
 		if (((Member) session.getAttribute("member")) != null) {
+			String member_id = ((Member) session.getAttribute("member")).getMember_id();
+
+			// MY ORDER LIST
+			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
+			if (myOrder != null)
+				model.addAttribute("myOrder", myOrder);
+			
+			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);
 				ArrayList<Product> cookieList = new ArrayList<Product>();
@@ -173,6 +185,13 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
+		}else{
+			
+			PrintWriter out = response.getWriter();
+            out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>"); //관리자 등급별로 메뉴 제어
+            out.flush(); 
+
+
 		}
 
 		return result;
@@ -188,12 +207,12 @@ public class MemberController {
 	@RequestMapping("member.information.do")
 	public String myInfomaion(Member m, HttpSession session, Model model){
 		String result = "mypage/passwordCheck";
-		
 		if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()).getSalt()).equals(((Member) session.getAttribute("member")).getMember_pwd())) {
+			m.setMember_pwd(((Member) session.getAttribute("member")).getMember_pwd());
 			result = "mypage/customer-account";
 			Member member = memberService.loginMember(m);
+			System.out.println(member);
 			model.addAttribute("member", member);
-			return "mypage/customer-account";
 		}
 		return result;
 	}
@@ -232,7 +251,8 @@ public class MemberController {
 	}
 	
 //	TODO [yjP] PASSWORD UPDATE
-	
+//	@RequestMapping("member.passwordUpdate.do")
+//	public String 
 	
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")

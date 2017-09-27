@@ -1,10 +1,6 @@
 package com.kh.minimalist;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +25,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
-		String returnResult = "main/404";
 		ArrayList<Product> productList = productService.productList();
-		
 		model.addAttribute("productList", productList);
-		
 		return "main/index";
 	}
 	
