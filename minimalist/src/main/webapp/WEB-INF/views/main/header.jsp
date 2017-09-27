@@ -198,8 +198,8 @@
 								</a>
 							</c:if>
 						</div>
-					</li>
-					<li class="active"><a href="index.do">How</a></li>
+					<!-- </li>
+					 <li class="active"><a href="index.do">How</a></li> -->
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
 						data-hover="dropdown" data-delay="200">Product <b
@@ -362,7 +362,7 @@
 					<c:if test="${ !empty sessionScope.member }">
 						<a href="logout.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-							class="hidden-sm"> Logout</span>
+							class="hidden-sm"></span>
 						</a>
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
@@ -373,7 +373,7 @@
 						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
-							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
+							class="fa fa-user"></i><span class="hidden-sm"></span></a>
 						<button type="button" class="btn navbar-btn btn-primary"
 							data-toggle="modal" data-target="#message-modal">
 							<i class="fa fa-envelope"></i></button>
