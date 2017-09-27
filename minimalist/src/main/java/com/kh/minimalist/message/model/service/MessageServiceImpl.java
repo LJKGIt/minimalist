@@ -33,6 +33,12 @@ public class MessageServiceImpl implements MessageService{
 	public int insertMessage(ArrayList idList, Message message) {
 		return messageDao.insertMessage(idList, message);
 	}
+
+
+	@Override
+	public int selectMessageCount(String member_id) {
+		return messageDao.selectMessageCount(member_id);
+	}
 	
 	
 }

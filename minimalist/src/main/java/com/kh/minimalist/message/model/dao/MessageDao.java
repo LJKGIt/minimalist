@@ -32,6 +32,10 @@ public class MessageDao {
 		
 		return sqlSession.insert("Message.messageInsert", map);
 	}
+
+	public int selectMessageCount(String member_id) {
+		return sqlSession.selectOne("Message.messageCount", member_id);
+	}
 	
 
 }

@@ -48,7 +48,7 @@ public class MemberController {
 	private MessageService messageService;
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		String result = "main/index";
 		Member member = memberService.loginMember(m);
 		if (member != null) {
@@ -57,6 +57,10 @@ public class MemberController {
 				result = "redirect:"+request.getHeader("referer");
 			}
 			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
+			session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+			System.out.println(messageService.selectMessageCount(member.getMember_id()));
+		} else {
+			model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 		}
 		return result;
 	}

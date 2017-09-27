@@ -15,4 +15,6 @@ public interface MessageService {
 
 	int insertMessage(ArrayList idList, Message message);
 
+	int selectMessageCount(String member_id);
+
 }

@@ -331,7 +331,7 @@
 				<div class="navbar-collapse collapse right" id="search-not-mobile">
 					<c:if test="${ empty sessionScope.member }">
 						<button type="button" class="btn navbar-btn btn-primary"
-							data-toggle="modal" data-target="#login-modal">
+							data-toggle="modal" data-target="#login-modal" id="login-click">
 							<span class="sr-only">Toggle login</span> <i
 								class="fa fa-sign-in"></i><span class="hidden-sm"> Login</span>
 						</button>
@@ -355,9 +355,11 @@
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
+							
 						<button type="button" class="btn navbar-btn btn-primary"
-							data-toggle="modal" data-target="#message-modal">
-							<i class="fa fa-envelope"></i></button>
+							data-toggle="modal" data-target="#message-modal" style="width:50px">
+							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
+							
 						</c:if>
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
@@ -407,7 +409,24 @@
 				})
 			}
 		}
+		
+		$('#login-click').click(function(){
+			setTimeout(function() {
+				$('#id-modal').focus()
+			},475);
+		});
 </script>
-
+<c:if test="${ not empty loginError }">
+	<script type="text/javascript">
+		$(function(){
+			$('#login-modal').modal();
+			setTimeout(function() {
+				alert("${ loginError }");
+				$('#id-modal').focus()
+			},1000)
+			
+		})
+	</script>
+</c:if>
 
 </html>

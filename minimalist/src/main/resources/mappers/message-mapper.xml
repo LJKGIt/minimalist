@@ -11,6 +11,9 @@
 	<select id="messageList" parameterType="string" resultType="Message" resultMap="resultMessage">
 		select * from message where member_id=#{member_id}
 	</select>
+	<select id="messageCount" parameterType="string" resultType="_int">
+		select count(*) from message where member_id = #{member_id} and check_yn = 'n'
+	</select>
 	<update id="messageChkUpdate" parameterType="_int">
 		update message set check_yn = 'y' where message_number = #{mNum}
 	</update>
@@ -23,4 +26,5 @@
 		SELECT * FROM DUAL
 		
 	</insert>
+	
 </mapper>
