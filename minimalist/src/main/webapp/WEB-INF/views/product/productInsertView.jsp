@@ -82,12 +82,11 @@
 								  </div>
 								</div>
 								
-								
-								<% // TODO [lintogi] 내용을 수치 등 값으로 넣을 것이므로 사라질 요소다. %>
+								<% // TODO [lintogi] □ 내용을 수치 등 값으로 넣을 것이므로 사라질 요소다. %>
 								<!-- Textarea -->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_textarea_descript">설명</label>
-								  <div class="col-md-8">                     
+								  <div class="col-md-8">
 								    <textarea id="i_textarea_descript" class="form-control" name="product_descript"></textarea>
 								    <span class="help-block" style="color:red;"></span>
 								  </div>

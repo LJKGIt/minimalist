@@ -451,7 +451,6 @@
                                     ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                                 <p class="read-more"><a href="post.jsp" class="btn btn-primary">Continue reading</a>
                                 </p>
-                            </div>
 
                         </div>
 
