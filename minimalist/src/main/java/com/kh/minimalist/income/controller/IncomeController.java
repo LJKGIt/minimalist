@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.income.model.service.IncomeService;
 import com.kh.minimalist.income.model.vo.Income;
 
@@ -21,8 +20,6 @@ public class IncomeController {
 
 	@Autowired
 	private IncomeService incomeService;
-	@Autowired
-	private AuctionService auctionService;
 	
 	//매출 전체 리스트~
 	@RequestMapping(value="income.selectList.do", method={RequestMethod.POST, RequestMethod.GET})
