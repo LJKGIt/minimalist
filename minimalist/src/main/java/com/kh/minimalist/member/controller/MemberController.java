@@ -49,8 +49,8 @@ public class MemberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
-		
-		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
+		if(m.getMember_id() != "" && m.getMember_pwd() != "")
+			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 		
 		Member member = memberService.loginMember(m);
 		
@@ -188,12 +188,12 @@ public class MemberController {
 	@RequestMapping("member.information.do")
 	public String myInfomaion(Member m, HttpSession session, Model model){
 		String result = "mypage/passwordCheck";
-		
 		if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()).getSalt()).equals(((Member) session.getAttribute("member")).getMember_pwd())) {
+			m.setMember_pwd(((Member) session.getAttribute("member")).getMember_pwd());
 			result = "mypage/customer-account";
 			Member member = memberService.loginMember(m);
+			System.out.println(member);
 			model.addAttribute("member", member);
-			return "mypage/customer-account";
 		}
 		return result;
 	}
