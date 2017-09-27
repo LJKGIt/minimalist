@@ -46,7 +46,7 @@ public class MemberController {
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "login.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
 		

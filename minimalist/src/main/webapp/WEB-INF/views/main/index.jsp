@@ -141,6 +141,7 @@
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
+                                        <!-- 신규상품 for each -->
                                             <a href="productDetail.do?product_code=${ product.product_code }">
                                                 <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt="" class="img-responsive">
                                             </a>
