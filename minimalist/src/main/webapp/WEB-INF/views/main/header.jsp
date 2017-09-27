@@ -198,8 +198,10 @@
 								</a>
 							</c:if>
 						</div>
+
 					<!-- </li>
 					 <li class="active"><a href="index.do">How</a></li> -->
+
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
 						data-hover="dropdown" data-delay="200">Product <b
