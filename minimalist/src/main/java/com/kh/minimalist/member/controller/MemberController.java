@@ -188,12 +188,11 @@ public class MemberController {
 	@RequestMapping("member.information.do")
 	public String myInfomaion(Member m, HttpSession session, Model model){
 		String result = "mypage/passwordCheck";
-		System.out.println("1 : " + m.getMember_pwd());
-		System.out.println("2 : " + ((Member) session.getAttribute("member")).getMember_pwd());
-		if (m.getMember_pwd().equals(((Member) session.getAttribute("member")).getMember_pwd())) {
+		
+		if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()).getSalt()).equals(((Member) session.getAttribute("member")).getMember_pwd())) {
 			result = "mypage/customer-account";
 			Member member = memberService.loginMember(m);
-			model.addAttribute("updateMember", member);
+			model.addAttribute("member", member);
 			return "mypage/customer-account";
 		}
 		return result;
