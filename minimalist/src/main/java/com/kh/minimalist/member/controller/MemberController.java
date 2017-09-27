@@ -55,7 +55,12 @@ public class MemberController {
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
 		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
 		Member member = null;
-		if(p.matcher(m.getMember_id()).find() && m.getMember_id() != "" && m.getMember_pwd() != ""){
+		// TODO [전원] NullPointer나면 몇 번째 줄에서 났는지 확인하기.
+		if(p.matcher(
+				m.getMember_id())
+				.find() 
+				&& m.getMember_id() != "" 
+				&& m.getMember_pwd() != ""){
 			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 			member = memberService.loginMember(m);
 		}
