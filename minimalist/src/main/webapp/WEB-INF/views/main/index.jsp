@@ -6,48 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
-
-    <style type="text/css">
-.navbar-expand-lg .navbar-collapse {
-    display: -ms-flexbox!important;
-    display: flex!important;
-}
-    .navbar > .container {
-    position: relative;
-}
-
-
-.navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-}
-
-.navbar>.container, .navbar>.container-fluid {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-}
-
-
-.container {
-    max-width: 1140px;
-}
-
-.container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-    width: 100%;
-}
-   
-    </style>
 </head>
 <body> 
 	<c:import url="header.jsp" />
