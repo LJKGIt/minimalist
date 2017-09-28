@@ -66,19 +66,19 @@
                         <h1>FAQ</h1>
 
                        
-                <p><font color="gray">자주하는 질문들의 답변을 모아놓은 곳입니다.</font></p>
-
+                <font color="gray">자주하는 질문들의 답변을 모아놓은 곳입니다.</font><br>
+ 				<font color="gray">상세한 질문은 1:1문의를 이용해주세요.</font>
                         <hr>
 
                         <div class="panel-group" id="accordion">
-
-                            <div class="panel panel-primary">
+							
+							<div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
 
 					    <a data-toggle="collapse" data-parent="#accordion" href="#faq1">
 
-						1. 반품시 숙지해야할 사항은 어떻게 되나요?
+						1.대여상품은 어떻게 이용해야 되나요?
 
 					    </a>
 
@@ -86,7 +86,45 @@
                                 </div>
                                 <div id="faq1" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <p>반품하고자 하는 상품을 반품 신청서 뒷면에
+                                   
+                                      <img src="resources/img_qna/faq1.png" alt="" class="img-responsive">
+               
+
+<p>1. 아이템 주문</p>
+마음에 드는 아이템을 자유롭게 주문하세요.
+<hr>
+<p>2. 아이템 이용</p>
+주문한 아이템을 실생활에서 마음껏 입어보세요. 한 아이템 당 최대 15일까지 이용 가능합니다.
+<hr>
+<p>3. 구매하거나 새로 주문</p>
+이용 중 아이템을 돌려보내고 싶지 않을 때, My closet에서 바로 구매하실 수 있습니다. 주문 회차가 남아있다면 마음에 드는 아이템을 새로 주문하세요.
+<hr>
+<p>4. 아이템 맞교환</p>
+현재 이용중인 아이템이 있는 경우 새 주문을 하면 이용중인 아이템은 자동으로 반납이 신청되고, 새 아이템이 배송됩니다. (일요일, 공휴일 제외)
+*이용권 만료시 자동 반납됩니다.
+                                    
+                                       
+                      			</div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+
+					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+
+						2. 반품시 숙지해야할 사항은 어떻게 되나요?
+
+					    </a>
+
+					</h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                     
+                                        
+                                      <p>반품하고자 하는 상품을 반품 신청서 뒷면에
 										주문번호 또는 이름,전화번호,상품명,사이즈,색상,수량등을
 										정확히 기재해주세요. </p>
                                         <ul>
@@ -104,15 +142,15 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
 
-					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
 
-						2. 주문했는데 배송은 언제쯤 되나요?
+						3. 주문했는데 배송은 언제쯤 되나요?
 
 					    </a>
 
 					</h4>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
+                                <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
                                        주문후 입금이 완료되는 시점부터 상품준비에 들어가며
    					보통 주말제외 1~4일정도 소요되며,
@@ -128,15 +166,15 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
 
-					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+					    <a data-toggle="collapse" data-parent="#accordion" href="#collapsefour">
 
-						3. 입금은 언제까지 해야되나요?
+						4. 입금은 언제까지 해야되나요?
 
 					    </a>
 
 					</h4>
                                 </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
+                                <div id="collapsefour" class="panel-collapse collapse">
                                     <div class="panel-body">
                                        주문후 주문일로부터 3일이내 입금을 해주셔야 합니다.
       주문일로부터 3일이내 입금이 되지않을 경우 주문이 자동 취소되어
@@ -168,7 +206,7 @@
     <!-- /#all -->
 
 
-    
+  
 
 
 

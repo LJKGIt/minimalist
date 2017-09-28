@@ -43,28 +43,45 @@ public class MemberController {
 
 	@Autowired
 	private OrderInfoService orderInfoService;
-	
+
 	@Autowired
 	private MessageService messageService;
 
+
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+
 		String result = "main/index";
-		
+
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
-		Pattern p = Pattern.compile("(^[A-Za-z0-9_]{4,16}$)");
+		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
-		if(p.matcher(m.getMember_id()).find() && m.getMember_id() != "" && m.getMember_pwd() != ""){
+		// TODO [lintogi] □ if로 null이 아닌 것을 확인했음에도 NullPointerException를 던지고 그 순서가 절차지향을 무시한다.
+		boolean patternBoolean = false;
+		try {
+			// if(p == null)
+			// 	System.out.println("망p");
+			// if(p.matcher(m.getMember_id()) == null)
+			// 	System.out.println("망m");
+			if (p != null && p.matcher(m.getMember_id()) != null)
+				patternBoolean = p.matcher(m.getMember_id()).find();
+		} catch (NullPointerException e) {
+			// System.out.println("망n");
+		}
+		if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
 			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 			member = memberService.loginMember(m);
 		}
-		
+
 		if (member != null) {
 			session.setAttribute("member", member);
 			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
-				result = "redirect:"+request.getHeader("referer");
+				result = "redirect:" + request.getHeader("referer");
+
 			}
-			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
+			session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+		} else {
+			model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 		}
 		return result;
 	}
@@ -81,8 +98,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("memberidchk.do")
-	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws IOException {
+	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
@@ -107,8 +123,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
@@ -116,8 +131,7 @@ public class MemberController {
 		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
 		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
-				+ request.getParameter("phone2");
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 
 		m.setPhone(phone);
 
@@ -167,8 +181,7 @@ public class MemberController {
 	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
 		response.setContentType("text/html; charset=utf-8");
-		
-		
+
 		if (((Member) session.getAttribute("member")) != null) {
 			String member_id = ((Member) session.getAttribute("member")).getMember_id();
 
@@ -176,7 +189,7 @@ public class MemberController {
 			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
 			if (myOrder != null)
 				model.addAttribute("myOrder", myOrder);
-			
+
 			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);
@@ -197,13 +210,12 @@ public class MemberController {
 			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
             out.flush(); 
 
-
 		}
 
 		return result;
 	}
 
-//	-> PASSWORD CHECK
+	//	-> PASSWORD CHECK
 	@RequestMapping("member.passwordCheck.do")
 	public String myPasswordCheck(HttpSession session) {
 		String result = "main/404";
@@ -212,8 +224,8 @@ public class MemberController {
 		}
 		return result;
 	}
-	
-//	PASSWORD CHECK -> MEMBER UPDATE VIEW
+
+	//	PASSWORD CHECK -> MEMBER UPDATE VIEW
 	@RequestMapping("member.information.do")
 	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response) throws IOException{
 		response.setContentType("text/html; charset=utf-8");
@@ -265,8 +277,8 @@ public class MemberController {
 		out.flush(); 
         out.close();
 	}
-	
-//	PASSWORD CHANGE POPUP(VIEW)
+
+	//	PASSWORD CHANGE POPUP(VIEW)
 	@RequestMapping("member.passwordView.do")
 	public String passwordView(Model model, HttpSession session){
 		String result = "main/404";
@@ -277,7 +289,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("member.passwordUpdate.do")
-	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException{
+	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (((Member) session.getAttribute("member")) != null) {
@@ -302,7 +314,7 @@ public class MemberController {
 		}
 		out.close();
 	}
-	
+
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {
@@ -331,5 +343,5 @@ public class MemberController {
 		writer.close();
 
 	}
-	
+
 }

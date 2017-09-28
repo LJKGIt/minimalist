@@ -91,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-	
+<%-- 	
 	<!--  *** Message-Modal *** -->
 
 	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
@@ -140,7 +140,7 @@
 		</div>
 	</div>
 	
-	<!-- *** Message-Modal End*** -->
+	<!-- *** Message-Modal End*** --> --%>
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -198,8 +198,10 @@
 								</a>
 							</c:if>
 						</div>
-					</li>
-					<li class="active"><a href="index.do">How</a></li>
+
+					<!-- </li>
+					 <li class="active"><a href="index.do">How</a></li> -->
+
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
 						data-hover="dropdown" data-delay="200">Product <b
@@ -231,7 +233,7 @@
 											</ul>
 										</div>
 										<%
-											// TODO [lintogi] 있어보이게 하기 위한 임의의 목차이므로 'outer' 카테고리로 이동하게 만들었다.
+											// TODO [lintogi] □ 있어보이게 하기 위한 임의의 목차이므로 'outer' 카테고리로 이동하게 만들었다.
 										%>
 										<div class="col-sm-3">
 											<h5>Featured</h5>
@@ -301,43 +303,11 @@
 											<ul>
 												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
 												<li><a href="qna.selectList.do">1:1 문의</a></li>
-												<li><a href="register.do">Register</a></li>
-												<li><a href="resources/customer-orders.html">Orders
-														history</a></li>
-												<li><a href="resources/customer-order.html">Order
-														history detail</a></li>
-												<li><a href="resources/customer-wishlist.html">Wishlist</a></li>
-												<li><a href="resources/customer-account.html">Customer
-														account / change password</a></li>
+												
 											</ul>
 										</div>
-										<div class="col-sm-3">
-											<h5>Order process</h5>
-											<ul>
-												<li><a href="resources/basket.jsp">Shopping cart</a></li>
-												<li><a href="resources/checkout1.jsp">Checkout -
-														step 1</a></li>
-												<li><a href="resources/checkout2.jsp">Checkout -
-														step 2</a></li>
-												<li><a href="resources/checkout3.jsp">Checkout -
-														step 3</a></li>
-												<li><a href="resources/checkout4.jsp">Checkout -
-														step 4</a></li>
-											</ul>
-										</div>
-										<div class="col-sm-3">
-											<h5>Pages and blog</h5>
-											<ul>
-												<li><a href="resources/blog.jsp">Blog listing</a></li>
-												<li><a href="resources/post.jsp">Blog Post</a></li>
-												<li><a href="resources/faq.jsp">FAQ</a></li>
-												<li><a href="resources/text.jsp">Text page</a></li>
-												<li><a href="resources/text-right.jsp">Text page -
-														right sidebar</a></li>
-												<li><a href="resources/404.jsp">404 page</a></li>
-												<li><a href="resources/contact.jsp">Contact</a></li>
-											</ul>
-										</div>
+										
+										
 									</div>
 								</div> <!-- /.yamm-content -->
 							</li>
@@ -350,7 +320,7 @@
 				<div class="navbar-collapse collapse right" id="search-not-mobile">
 					<c:if test="${ empty sessionScope.member }">
 						<button type="button" class="btn navbar-btn btn-primary"
-							data-toggle="modal" data-target="#login-modal">
+							data-toggle="modal" data-target="#login-modal" id="login-click">
 							<span class="sr-only">Toggle login</span> <i
 								class="fa fa-sign-in"></i><span class="hidden-sm"> Login</span>
 						</button>
@@ -362,7 +332,7 @@
 					<c:if test="${ !empty sessionScope.member }">
 						<a href="logout.do" class="btn navbar-btn btn-primary"> <span
 							class="sr-only">Toggle logout</span> <i class="fa fa-sign-out"></i><span
-							class="hidden-sm"> Logout</span>
+							class="hidden-sm"></span>
 						</a>
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
@@ -373,10 +343,13 @@
 						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
-							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
+
+							class="fa fa-user"></i><span class="hidden-sm"></span></a>
+
 						<button type="button" class="btn navbar-btn btn-primary"
-							data-toggle="modal" data-target="#message-modal">
-							<i class="fa fa-envelope"></i></button>
+							id="message-click" style="width:50px">
+							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
+							
 						</c:if>
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
@@ -427,12 +400,18 @@
 			}
 		}
 		
+
+		
 		$(function(){
 			
 			  var link = document.createElement('link');
 			    link.type = 'image/x-icon';
+
 			    link.rel = 'shortcut icon';
+
 			    link.href = 'resources/t9.png';
+
+
 			    document.getElementsByTagName('head')[0].appendChild(link);
 			
 			
@@ -445,8 +424,31 @@
 
 		
 		
+
+
+		$('#login-click').click(function(){
+			setTimeout(function() {
+				$('#id-modal').focus()
+			},475);
+		});
 		
+		$('#message-click').click(function(){
+			var openPop;
+			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
+		})
 </script>
- 
+<c:if test="${ not empty loginError }">
+	<script type="text/javascript">
+		$(function(){
+			$('#login-modal').modal();
+			setTimeout(function() {
+				alert("${ loginError }");
+				$('#id-modal').focus()
+			},1000)
+			
+		})
+	</script>
+</c:if>
+
 
 </html>

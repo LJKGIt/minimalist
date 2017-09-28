@@ -61,7 +61,7 @@
 								</div>
 								
 								
-								<% // TODO [lintogi] 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
+								<% // TODO [lintogi] ■ 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
 								<!-- Select Basic -->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_select_brand">브랜드</label>
@@ -149,12 +149,12 @@
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
-								<% // TODO [lintogi] ORDERINFO 테이블에 사이즈에 대한 컬럼도 넣기. %>
+								<% // TODO [lintogi] ■ ORDERINFO 테이블에 사이즈에 대한 컬럼도 넣기. %>
 								<!-- File Button --> 
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image1" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image1" name="filebutton1" class="input-file" type="file">
 								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -164,7 +164,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image2">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image2" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image2" name="filebutton2" class="input-file" type="file">
 								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -174,7 +174,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image3">이미지 파일</label>
 								  <div class="col-md-8">
-								    <input id="i_file_image3" name="filebutton" class="input-file" type="file">
+								    <input id="i_file_image3" name="filebutton3" class="input-file" type="file">
 								    <input id="i_hidden_hidden_image3" name="n_hidden_image3" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -276,6 +276,7 @@
 										// AJAX로 서버에 업로드합니다.
 										// img 태그로 보여줍니다.
 										$('#i_file_image1').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -285,14 +286,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image1').val($(this).val().split('\\').reverse()[0]);
 											} else {
@@ -301,6 +303,7 @@
 											}
 										});
 										$('#i_file_image2').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -310,14 +313,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image2').val($(this).val().split('\\').reverse()[0]);
 											} else {
@@ -326,6 +330,7 @@
 											}
 										});
 										$('#i_file_image3').on('change', function(){
+											var this_image = $(this);
 											if($(this).val().split('.').reverse()[0].toLowerCase() == "jpg"){
 												var formData = new FormData($('#i_form_insert')[0]);
 												$.ajax({
@@ -335,14 +340,15 @@
 										            processData : false,
 										            contentType : false,
 												    success: function (data) {
-												    	if(data != "true"){
+												    	if(data == "true"){
+												    		$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
 												    }, error: function (data) {
 												    	alert("파일 업로드에 실패했습니다.");
 												    }
 												}); //ajax
-												$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + $(this).val().split('\\').reverse()[0]);
 												$(this).parent().children('span').eq(0).text("");
 												$('#i_hidden_image3').val($(this).val().split('\\').reverse()[0]);
 											} else {
@@ -350,7 +356,7 @@
 												$(this).focus();
 											}
 										});
-										<% // TODO [lintogi] 배송 API가 적용되면 ORDERINFO 테이블에 컬럼으로 배송중, 배송완료 등에 대한 컬럼을 만들기. %>
+										<% // TODO [lintogi] □ 배송 API가 적용되면 ORDERINFO 테이블에 컬럼으로 배송중, 배송완료 등에 대한 컬럼을 만들기. %>
 										// submit 버튼을 클릭 시 비어있는 값을 확인합니다.
 										$('#i_submit').on('click', function(){
 											if($('#i_text_name').val() == ""){
@@ -418,7 +424,6 @@
 								  <label class="col-md-3 control-label" for="button1id"></label>
 								  <div class="col-md-8">
 								    <button type="submit" id="i_button_submit" name="button1id" class="btn btn-success">등록하기</button>
-								    <% // TODO [lintogi] 자바스크립트로 새로고침 하기. %>
 								    <button type="button" name="button2id" class="btn btn-danger" onclick="javascript:location.reload();">다시 쓰기</button>
 								  </div>
 								</div>
