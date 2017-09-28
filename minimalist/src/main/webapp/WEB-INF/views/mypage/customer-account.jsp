@@ -32,52 +32,44 @@
                         <form action="member.memberUpdate.do" method="post">
 								<div class="form-group">
 									<label for="id">ID</label><br>
-									<input type="text"
-										class="form-control" value="${ member.member_id }" disabled id="member_id" name="member_id" style="width: 60%; display: inline; margin-right: 20px;">
-										<div id="checkID"></div>
+									<input type="text" 
+										class="form-control" value="${ updateMember.member_id }" disabled id="member_id" name="member_id" style="width: 60%; display: inline; margin-right: 20px;">
+									<div id="checkID"></div>
 								</div>
 								
 								<div class="form-group" style="margin-bottom: 0;">
 									<label for="pwd">Password</label>
-								<!-- PASSWORD FORM 
-								 <input type="password"
-										class="form-control" id="member_pwd" name="member_pwd">
-								</div> 
-								<div class="form-group">
-									<label for="pwd2">Password Check</label> <input type="password"
-										class="form-control" id="member_pwd2">
-										<div id="checkPwd"></div>
-										-->
 								</div> 
 								<a href="javascript:passChange()" class="btn btn-primary" style="margin-bottom: 20px;"> 비밀번호 변경하기</a>
+								
 								<div class="form-group">
-									<label for="name">Name</label> <input type="text" value="${ member.member_name }"
+									<label for="name">Name</label> <input type="text" value="${ updateMember.member_name }"
 										class="form-control" id="member_name" name="member_name" style="width: 50%;">
 								</div>
 								<div class="form-group">
-									<label for="birth">Birth</label> <input type="date" value="${ member.birth }"
+									<label for="birth">Birth</label> <input type="date" value="${ updateMember.birth }"
 										class="form-control" id="birth" name="birth" style="width: 50%">
 								</div>
 								<div class="form-group">
-									<label for="phone">Phone</label> <input type="tel" value="${ member.phone }"
+									<label for="phone">Phone</label> <input type="tel" value="${ updateMember.phone }"
 										class="form-control" id="phone" name="phone">
 								</div>
 								<!-- ADDRESS -->
 								<div class="form-group">
 									<label for="address">Address</label><br>
-								<input type="text" id="postcode" name="post"  value="${ member.post }"
+								<input type="text" id="postcode" name="post"  value="${ updateMember.post }"
 									placeholder="우편번호" class="form-control" style="width: 30%; display: inline; margin: 0 20px 10px 0"> <input type="button"
 									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary">
-								<input type="text" id="address" name="address1" placeholder="주소" class="form-control" value="${ member.address1 }" style="margin-bottom: 10px;">
-								<input type="text" id="address2" name="address2" value="${ member.address2 }"
+								<input type="text" id="address" name="address1" placeholder="주소" class="form-control" value="${ updateMember.address1 }" style="margin-bottom: 10px;">
+								<input type="text" id="address2" name="address2" value="${ updateMember.address2 }"
 									placeholder="상세주소" class="form-control" ><br>
 								<div id="checkAddress"></div>
 								</div>
 								
 								<div class="form-group">
-									<label for="email">Email</label><br> <input type="text" value="${ fn:substringBefore(member.email, '@') }"
+									<label for="email">Email</label><br> <input type="text" value="${ fn:substringBefore(updateMember.email, '@') }"
 										class="form-control" id="email_id" name="email1" style="width: 20%; display:inline;">@
-										<input type="text" value="${ fn:substringAfter(member.email, '@') }" 
+										<input type="text" value="${ fn:substringAfter(updateMember.email, '@') }" 
 										class="form-control" id="email_id2" name="email2" style="width: 20%; display:inline;">
 										<select class="form-control" id="email_sel" style="width: 20%; display:inline;">
 											<option>직접입력</option>
@@ -87,15 +79,22 @@
 											<option>iei.or.kr</option>
 										</select>
 								</div>
+								
+								<% // TODO 경매중일 때 탈퇴? %>
+								<div class="form-group" style="margin-bottom: 0;">
+									<label for="pwd">회원 탈퇴</label>
+								</div> 
+								<button type="button" onclick="deleteConfirm();" class="btn btn-primary" style="margin-bottom: 20px;"> 회원 탈퇴</button>
 
 
 								<div class="text-center">
-									<button type="submit" class="btn btn-primary">
-										<i class="fa fa-user-md"></i> 수정
-										<% //TODO [yjP] 아이콘 수정 %>
+									<button type="submit" class="btn btn-primary" onclick="return confirm(&quot;수정하시겠습니까?&quot;);">
+										 수정
 									</button>
 								</div>
 							</form>
+							
+							
                     </div>
                 </div>
 
@@ -108,11 +107,13 @@
     <!-- /#all -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
-    $('#tel_first').change(function() {
-    		$('#phone1').focus();
-    })
-    
-	
+
+function deleteConfirm(){
+	if(confirm("정말 탈퇴하시겠습니까?") == true){
+		location.href = "member.delete.do?member_id=${ updateMember.member_id }";
+	}
+}
+
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

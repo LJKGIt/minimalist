@@ -61,5 +61,11 @@
 		<c:import url="../main/footer.jsp" />
     </div>
     <!-- /#all -->
+    
+    <c:if test="${ !empty error }">
+    <script type="text/javascript">
+    	alert("${error}")
+    </script>
+    </c:if>
 </body>
 </html>
