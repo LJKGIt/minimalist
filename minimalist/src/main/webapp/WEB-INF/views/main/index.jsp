@@ -521,6 +521,12 @@
 
     
 
-
+<script type="text/javascript">
+	var openPop;
+	function mSearch() {
+		// 변수명 주면 값을 가지게됨
+		openPop = window.open("messageList.do", "a", "width=500 height=400, left=100, top=100");
+	}
+</script>
 </body>
 </html>

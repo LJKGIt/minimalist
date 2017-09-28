@@ -9,10 +9,14 @@
 	</resultMap>
 	
 	<select id="messageList" parameterType="string" resultType="Message" resultMap="resultMessage">
-		select * from message where member_id=#{member_id}
+		SELECT T.* FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM MESSAGE WHERE MEMBER_ID = #{member_id} ORDER BY SEND_DATE DESC) T) 
+		T
 	</select>
 	<select id="messageCount" parameterType="string" resultType="_int">
 		select count(*) from message where member_id = #{member_id} and check_yn = 'n'
+	</select>
+	<select id="countRow" parameterType="string" resultType="_int">
+		select count(*)	from message where member_id = #{member_id}
 	</select>
 	<update id="messageChkUpdate" parameterType="_int">
 		update message set check_yn = 'y' where message_number = #{mNum}
@@ -24,7 +28,10 @@
 			INTO MESSAGE VALUES ((SELECT MAX(MESSAGE_NUMBER) FROM MESSAGE)+${index+1}, '${id}', #{message.message_title}, #{message.message_content}, SYSDATE, DEFAULT)
 		</foreach>
 		SELECT * FROM DUAL
-		
 	</insert>
+	<delete id="messageDelete" parameterType="_int">
+		DELETE FROM MESSAGE WHERE MESSAGE_NUMBER = #{mNum}
+	</delete>
+	
 	
 </mapper>

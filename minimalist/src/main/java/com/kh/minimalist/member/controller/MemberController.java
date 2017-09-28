@@ -56,9 +56,7 @@ public class MemberController {
 			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
 				result = "redirect:"+request.getHeader("referer");
 			}
-			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
 			session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
-			System.out.println(messageService.selectMessageCount(member.getMember_id()));
 		} else {
 			model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 		}

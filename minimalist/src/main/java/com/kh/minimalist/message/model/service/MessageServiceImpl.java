@@ -1,8 +1,7 @@
 package com.kh.minimalist.message.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,6 @@ public class MessageServiceImpl implements MessageService{
 	private MessageDao messageDao;
 	
 	
-	@Override
-	public List<Message> selectMessageList(String member_id) {
-		
-		return messageDao.selectMessageList(member_id);
-	}
-
 
 	@Override
 	public int updateMessageChk(int mNum) {
@@ -39,6 +32,26 @@ public class MessageServiceImpl implements MessageService{
 	public int selectMessageCount(String member_id) {
 		return messageDao.selectMessageCount(member_id);
 	}
-	
+
+
+	@Override
+	public ArrayList<Message> selectMessageList(String member_id, HashMap<String, Integer> map) {
+		return messageDao.selectMessageList(member_id, map);
+	}
+
+
+	@Override
+	public int countRow(String member_id) {
+		return messageDao.countRow(member_id);
+	}
+
+
+	@Override
+	public int messageDelete(int mNum) {
+		return messageDao.messageDelete(mNum);
+	}
+
+
+
 	
 }

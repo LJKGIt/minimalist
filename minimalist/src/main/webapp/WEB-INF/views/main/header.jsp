@@ -84,7 +84,7 @@
 			</div>
 		</div>
 	</div>
-	
+<%-- 	
 	<!--  *** Message-Modal *** -->
 
 	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
@@ -121,7 +121,7 @@
 		</div>
 	</div>
 	
-	<!-- *** Message-Modal End*** -->
+	<!-- *** Message-Modal End*** --> --%>
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -357,7 +357,7 @@
 							class="fa fa-user"></i><span class="hidden-sm"> MyPage </span></a>
 							
 						<button type="button" class="btn navbar-btn btn-primary"
-							data-toggle="modal" data-target="#message-modal" style="width:50px">
+							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
 						</c:if>
@@ -415,6 +415,11 @@
 				$('#id-modal').focus()
 			},475);
 		});
+		
+		$('#message-click').click(function(){
+			var openPop;
+			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
+		})
 </script>
 <c:if test="${ not empty loginError }">
 	<script type="text/javascript">
