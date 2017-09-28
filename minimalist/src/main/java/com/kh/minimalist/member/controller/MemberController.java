@@ -48,7 +48,7 @@ public class MemberController {
 	private MessageService messageService;
 
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response){
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String result = "main/index";
 
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
@@ -249,30 +249,30 @@ public class MemberController {
 		model.addAttribute("member", memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()));
 		return "mypage/passwordChange";
 	}
-	
-//	TODO [yjP] PASSWORD UPDATE
+
+	//	TODO [yjP] PASSWORD UPDATE
 	@RequestMapping("member.passwordUpdate.do")
-	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException{
+	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
-		
+
 		String memberSalt = ((Member) session.getAttribute("member")).getSalt();
 		String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), memberSalt);
 		String member_id = ((Member) session.getAttribute("member")).getMember_id();
 		m.setMember_id(member_id);
 		m.setMember_pwd(newPassword);
 		int result = memberService.passwordUpdate(m);
-		
-		if(result > 0){
+
+		if (result > 0) {
 			PrintWriter out = response.getWriter();
-            out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
-            out.flush();
-		}else{
+			out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
+			out.flush();
+		} else {
 			PrintWriter out = response.getWriter();
-            out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
-            out.flush();
+			out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
+			out.flush();
 		}
 	}
-	
+
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
 	public String searchMemberView() {

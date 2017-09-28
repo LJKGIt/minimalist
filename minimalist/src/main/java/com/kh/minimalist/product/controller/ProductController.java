@@ -35,11 +35,10 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] ■ 로그인 시 이전 페이지 유지하는 기능이 합쳐지지 않았다.
-	// TODO [lintogi] ■ 탭에 이미지 아이콘 넣기. (9월 25일에 란희에게 맡겼다.)
 	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로 처리하기.
-	// TODO [lintogi] ■ 데이터 넣고나서 재영이 형에게 메인 홈페이지 TOP 상품에 대해서 순서 다시 확인 받기.
-
+	// TODO [lintogi] ■ 예약 기능을 추가하기.
+	// TODO [lintogi] ■ 데이터를 만들기.
+	// TODO [lintogi] ■ 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
@@ -194,6 +193,9 @@ public class ProductController {
 		return returnResult;
 	}
 
+	// TODO [lintogi] ■ 다중 처리에 오류가 있다.
+	// formData를 넘기던데 어느 form인지 어떻게 알지?
+	// name 값을 바꿔보기.
 	@RequestMapping(value = "productImageUpload.do", method = RequestMethod.POST)
 	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multi) {
 		String returnResult = "false";
