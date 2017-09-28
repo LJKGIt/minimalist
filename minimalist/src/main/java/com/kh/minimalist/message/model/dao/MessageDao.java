@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.message.model.vo.Message;
 
 
@@ -16,10 +18,6 @@ public class MessageDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	public List<Message> selectMessageList(String member_id) {
-		return sqlSession.selectList("Message.messageList", member_id);
-	}
 
 	public int updateMessageChk(int mNum) {
 		return sqlSession.update("Message.messageChkUpdate", mNum);
@@ -39,4 +37,20 @@ public class MessageDao {
 		return sqlSession.insert("endAuctionMessage", m);
 	}
 
+
+	public int selectMessageCount(String member_id) {
+		return sqlSession.selectOne("Message.messageCount", member_id);
+	}
+
+	public int countRow(String member_id) {
+		return sqlSession.selectOne("Message.countRow", member_id);
+	}
+
+	public ArrayList<Message> selectMessageList(HashMap<String, Object> map) {
+		return new ArrayList<Message>(sqlSession.selectList("Message.messageList", map));
+	}
+
+	public int messageDelete(int mNum) {
+		return sqlSession.delete("Message.messageDelete", mNum);
+	}
 }

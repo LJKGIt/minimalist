@@ -47,8 +47,10 @@ public class MemberController {
 	@Autowired
 	private MessageService messageService;
 
+
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+
 		String result = "main/index";
 
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
@@ -77,7 +79,9 @@ public class MemberController {
 				result = "redirect:" + request.getHeader("referer");
 
 			}
-			session.setAttribute("messageList", messageService.selectMessageList(member.getMember_id()));
+			session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+		} else {
+			model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 		}
 		return result;
 	}
