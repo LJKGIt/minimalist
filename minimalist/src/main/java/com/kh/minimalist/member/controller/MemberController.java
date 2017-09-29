@@ -48,28 +48,19 @@ public class MemberController {
 	private MessageService messageService;
 
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			Model model) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		String result = "main/index";
 		model.addAttribute("loginError", null);
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
 		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
-		// TODO [lintogi] □ if로 null이 아닌 것을 확인했음에도 NullPointerException를 던지고 그
-		// 순서가 절차지향을 무시한다.
 		boolean patternBoolean = false;
 		try {
-			// if(p == null)
-			// System.out.println("망p");
-			// if(p.matcher(m.getMember_id()) == null)
-			// System.out.println("망m");
 			if (p != null && p.matcher(m.getMember_id()) != null)
 				patternBoolean = p.matcher(m.getMember_id()).find();
 
-			if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != ""
-					&& memberService.searchMember(m.getMember_id()) != null) {
-				m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(),
-						memberService.searchMember(m.getMember_id()).getSalt()));
+			if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
+				m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 				member = memberService.loginMember(m);
 			}
 
@@ -83,9 +74,7 @@ public class MemberController {
 			} else {
 				model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 			}
-			System.out.println(model.toString());
 		} catch (NullPointerException e) {
-			// System.out.println("망n");
 		}
 		return result;
 	}
@@ -102,8 +91,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("memberidchk.do")
-	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws IOException {
+	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
@@ -128,8 +116,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
@@ -137,8 +124,7 @@ public class MemberController {
 		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
 		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
-				+ request.getParameter("phone2");
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 
 		m.setPhone(phone);
 
@@ -185,8 +171,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("member.mypage.do")
-	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model)
-			throws IOException {
+	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
 		response.setContentType("text/html; charset=utf-8");
 
@@ -215,8 +200,7 @@ public class MemberController {
 		} else {
 
 			PrintWriter out = response.getWriter();
-			out.println(
-					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 			out.flush();
 
 		}
@@ -236,15 +220,12 @@ public class MemberController {
 
 	// PASSWORD CHECK -> MEMBER UPDATE VIEW
 	@RequestMapping("member.information.do")
-	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response)
-			throws IOException {
+	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		String result = "mypage/passwordCheck";
 		Member sessionMember = (Member) session.getAttribute("member");
 		if (sessionMember != null) {
-			if (SHA256Util
-					.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt())
-					.equals(sessionMember.getMember_pwd())) {
+			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
 				m.setMember_pwd(sessionMember.getMember_pwd());
 				model.addAttribute("updateMember", memberService.loginMember(m));
 				result = "mypage/customer-account";
@@ -253,8 +234,7 @@ public class MemberController {
 			}
 		} else {
 			PrintWriter out = response.getWriter();
-			out.println(
-					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 			out.flush();
 			out.close();
 		}
@@ -263,8 +243,7 @@ public class MemberController {
 
 	// MEMBER UPDATE VIEW -> MEMBER UPDATE
 	@RequestMapping("member.memberUpdate.do")
-	public void memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) throws IOException {
+	public void memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -273,23 +252,19 @@ public class MemberController {
 			System.out.println("member.memberUpdate.do : " + m);
 			// TODO [yjP] member_id=null 뜨는 이유??
 			String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
-					+ request.getParameter("phone2");
+			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 			m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 			m.setPhone(phone);
 			m.setEmail(email);
 
 			if (memberService.mupdate(m) > 0) {
-				out.println(
-						"<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
+				out.println("<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
 			} else {
-				out.println(
-						"<script>alert('회원정보가 수정 실패!!'); location.href = 'redirect:member.passwordCheck.do'</script>");
+				out.println("<script>alert('회원정보가 수정 실패!!'); location.href = 'redirect:member.passwordCheck.do'</script>");
 			}
 
 		} else {
-			out.println(
-					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 		}
 		out.flush();
 		out.close();
@@ -326,8 +301,7 @@ public class MemberController {
 				out.flush();
 			}
 		} else {
-			out.println(
-					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 			out.flush();
 		}
 		out.close();
