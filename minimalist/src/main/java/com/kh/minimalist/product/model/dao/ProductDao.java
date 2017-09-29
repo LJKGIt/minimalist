@@ -57,4 +57,9 @@ public class ProductDao {
 		return (ArrayList<Product>) productList;
 	}
 
+	public ArrayList<Product> productListAll() {
+		List<Product> list = sqlSession.selectList("Product.productListAll");
+		return (ArrayList<Product>) list;
+	}
+
 }

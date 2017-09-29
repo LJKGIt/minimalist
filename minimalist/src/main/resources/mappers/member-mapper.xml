@@ -13,7 +13,7 @@
 	</select>
 	 -->
 	<select id="loginCheck" parameterType="Member" resultType="Member" resultMap="resultMember">
-		SELECT * FROM MEMBER WHERE member_id = #{member_id} and member_pwd = #{member_pwd}
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id} AND MEMBER_PWD = #{member_pwd}
 	</select>
 	
 	<select id="idChk" parameterType="string" resultType="_int">
@@ -32,11 +32,11 @@
  statementType="PREPARED" useGeneratedKeys="true" timeout="20">
  	INSERT INTO MEMBER VALUES(#{id}, #{passwd}, #{name}, #{email}, #{gender}, #{age}, #{phone}, #{address}, DEFAULT)
   </insert>
+ -->
 
-
-<delete id="deleteMember" parameterType="string" flushCache="true" statementType="PREPARED">
-	DELETE FROM MEMBER WHERE ID = #{userid}
-  </delete> -->
+	<delete id="deleteMember" parameterType="Member">
+		DELETE FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</delete>
   
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
