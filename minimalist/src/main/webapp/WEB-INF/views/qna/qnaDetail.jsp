@@ -247,7 +247,7 @@ thead{
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>QUESTION & ANSWER</li>
+                        <li>QUESTION &#38; ANSWER</li>
                         <li>Detail</li>
                     </ul>
 
@@ -259,7 +259,7 @@ _________________________________________________________ -->
                    <div class="panel panel-default sidebar-menu">
 
                        <div class="panel-heading">
-                           <h3 class="panel-title">QUESTION & ANSWER</h3>
+                           <h3 class="panel-title">QUESTION &#38; ANSWER</h3>
                        </div>
 
                        <div class="panel-body">
