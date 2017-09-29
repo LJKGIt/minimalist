@@ -52,4 +52,8 @@ public class MemberDao {
 	public int deleteMember(Member m) {
 		return sqlSession.delete("Member.deleteMember", m);
 	}
+
+	public int chkDormant(String member_id) {
+		return sqlSession.selectOne("Member.chkDormant", member_id);
+	}
 }

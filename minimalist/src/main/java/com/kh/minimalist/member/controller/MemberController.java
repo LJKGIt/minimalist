@@ -73,13 +73,15 @@ public class MemberController {
 				member = memberService.loginMember(m);
 			}
 
-			if (member != null) {
+			if (member != null && member.getDormant_yn() == 'n') {
 				session.setAttribute("member", member);
 				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
 					result = "redirect:" + request.getHeader("referer");
 
 				}
 				session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+			} else if (member.getDormant_yn() == 'y') {
+				model.addAttribute("loginError", "탈퇴한 회원입니다.");
 			} else {
 				model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 			}
