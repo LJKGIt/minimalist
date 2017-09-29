@@ -49,7 +49,7 @@ public class MemberDao {
 		return sqlSession.update("Member.passwordUpdate", m);
 	}
 
-	public int deleteMember(Member m) {
-		return sqlSession.delete("Member.deleteMember", m);
+	public int dormantMember(Member m) {
+		return sqlSession.delete("Member.dormantMember", m);
 	}
 }

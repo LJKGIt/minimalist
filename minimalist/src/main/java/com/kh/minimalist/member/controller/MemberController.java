@@ -148,10 +148,10 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping("member.delete.do")
+	@RequestMapping("member.dormant.do")
 	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
 		if((Member)session.getAttribute("member") != null){
-			if(memberService.memberDelete(m) > 0){
+			if(memberService.dormantMember(m) > 0){
 				System.out.println("탈퇴 완료");
 			}else{
 				System.out.println("회원탈퇴 실패");
@@ -235,6 +235,7 @@ public class MemberController {
 			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
 				m.setMember_pwd(sessionMember.getMember_pwd());
 				model.addAttribute("updateMember", memberService.loginMember(m));
+				model.addAttribute("telList", new String[]{"010", "011", "016", "017", "018", "019"});
 				result = "mypage/customer-account"; 
 			}else{
 				model.addAttribute("error", "비밀번호가 틀렸습니다.");
@@ -256,14 +257,11 @@ public class MemberController {
 		PrintWriter out = response.getWriter();
 		if((Member) session.getAttribute("member") != null){
 		
-			System.out.println("member.memberUpdate.do : " + m); 
-			// TODO [yjP] member_id=null 뜨는 이유??
 			String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
 			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
-			m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 			m.setPhone(phone);
 			m.setEmail(email);
-			
+			System.out.println("member.memberUpdate.do : " + m);
 			if (memberService.mupdate(m) > 0) {
 	            out.println("<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
 			}

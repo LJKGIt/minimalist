@@ -52,8 +52,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int memberDelete(Member m) {
-		return memberDao.deleteMember(m);
+	public int dormantMember(Member m) {
+		return memberDao.dormantMember(m);
 	}
 	
 }

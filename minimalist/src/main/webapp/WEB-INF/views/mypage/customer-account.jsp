@@ -33,8 +33,8 @@
 								<div class="form-group">
 									<label for="id">ID</label><br>
 									<input type="text" 
-										class="form-control" value="${ updateMember.member_id }" disabled id="member_id" name="member_id" style="width: 60%; display: inline; margin-right: 20px;">
-									<div id="checkID"></div>
+										class="form-control" value="${ updateMember.member_id }" readonly id="member_id" name="member_id" style="width: 60%; display: inline; margin-right: 20px;">
+									<div id="checkID"></div> 
 								</div>
 								
 								<div class="form-group" style="margin-bottom: 0;">
@@ -51,8 +51,24 @@
 										class="form-control" id="birth" name="birth" style="width: 50%">
 								</div>
 								<div class="form-group">
-									<label for="phone">Phone</label> <input type="tel" value="${ updateMember.phone }"
-										class="form-control" id="phone" name="phone">
+									<label for="phone">Phone${ tel_first }</label><br>
+									
+									<select class="form-control" id="tel_first" name="tel_first" style="width: 20%; display: inline; margin: 0 20px 10px 0;">
+										<c:forEach var="tel" items="${ telList }">
+										
+											<c:if test="${ fn:substringBefore(updateMember.phone, '-') eq tel }">
+												<option selected>${ tel }</option>	
+											</c:if>
+											
+											<c:if test="${ tel_first ne tel }">
+												<option>${ tel }</option>	
+											</c:if>
+										</c:forEach>
+									</select>
+									<input type="tel"
+										class="form-control" value="${ fn:substringBefore(fn:substringAfter(updateMember.phone, '-'), '-') }" id="phone1" name="phone1" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
+									<input type="tel"
+										class="form-control" value="${ fn:substringAfter(fn:substringAfter(updateMember.phone, '-'), '-') }" id="phone2" name="phone2" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
 								</div>
 								<!-- ADDRESS -->
 								<div class="form-group">
@@ -110,7 +126,7 @@
 
 function deleteConfirm(){
 	if(confirm("정말 탈퇴하시겠습니까?") == true){
-		location.href = "member.delete.do?member_id=${ updateMember.member_id }";
+		location.href = "member.dormant.do?member_id=${ updateMember.member_id }";
 	}
 }
 
@@ -157,78 +173,6 @@ function deleteConfirm(){
     } // ADDRESS API Close
     
     
-    // ID Check
-    	$('#member_id').focusout(function() {
-		var value = $('#member_id').val();
-		var regex = /^[A-Za-z0-9_]{4,16}$/;
-		
-		if(value == "" || value == null){
-			$('#member_id').text("필수 입력");
-		} else if(!regex.test(value)) {
-			// 4자리 이상 16자리 이하, 영문과 숫자만
-			$('#checkID').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
-		} else {
-			// 중복확인
-			$.ajax({
-				url : "memberidchk.do",
-				data : {
-					member_id : value
-				},
-				type : "post",
-				dataType : "text",
-				success : function(data){
-					if(data == 1){
-						$('#checkID').text("사용가능한 아이디입니다.");
-						$('#member_pwd').focus();
-					} else {
-						$('#checkID').text("이미 사용중입니다.").css("color", "red");
-					}
-				}
-			})
-		}
-	});
- 	// PASSWORD CHECK
-		$('#member_pwd').focusout(function(){
-			var password1 = $('#member_pwd').val();
-			var password2 = $('#member_pwd2').val();
-			var regex = /^[A-Za-z0-9+]{6,16}$/;
-			
-			if(password1 == "" || password1 == null){
-				$('#checkPwd').text('필수입력');
-			}else if(!password2 && password1 != password2){
-				$('#checkPwd').text('필수입력');
-			}else if(password1 != password2){
-				$('#checkPwd').text('안 맞음');
-			}else if(!regex.test(password1)){
-				$('#checkPwd').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
-			}else if(password1 == password2){
-				$('#checkPwd').text('일치');
-			}
-		});
-		
-		$('#member_pwd2').focusout(function(){
-			
-			var password1 = $('#member_pwd').val();
-			var password2 = $('#member_pwd2').val();
-			var regex = /^[A-Za-z0-9+]{6,16}$/;
-			
-			if(password2 == "" || password2 == null){
-				$('#checkPwd').text('필수입력');
-			}else if(password1 != password2){
-				$('#checkPwd').text('안 맞음');
-			}else if(!regex.test(password1)){
-				$('#checkPwd').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
-			}else if(password1 == password2){
-				$('#checkPwd').text('일치');
-			}
-		}); // PASSWORD CHECK close
-    $('#email_sel').change(function() {
-    		var emailAdr = $('#email_sel').val();
-    		
-    		if (emailAdr != "직접입력") {
-    			$('#email_id2').val(emailAdr);
-    		}
-    })
     
     // PASSWORD CHANGE POPUP
     var openPop;

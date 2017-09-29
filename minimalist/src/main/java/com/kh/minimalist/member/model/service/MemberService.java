@@ -19,5 +19,5 @@ public interface MemberService {
 	
 	int passwordUpdate(Member m);
 
-	int memberDelete(Member m);
+	int dormantMember(Member m);
 }
