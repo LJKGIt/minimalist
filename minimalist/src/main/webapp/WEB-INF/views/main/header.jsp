@@ -453,7 +453,7 @@
 			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
 		})
 </script>
-<c:if test="${ not empty loginError }">
+<c:if test="${! empty loginError}">
 	<script type="text/javascript">
 		$(function(){
 			$('#login-modal').modal();
