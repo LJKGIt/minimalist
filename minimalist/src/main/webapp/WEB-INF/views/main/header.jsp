@@ -94,8 +94,8 @@
 			</div>
 		</div>
 	</div>
-<%-- 	
-	<!--  *** Message-Modal *** -->
+
+<!--  *** Message-Modal *** -->
 
 	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
 		aria-labelledby="Login" aria-hidden="true">
@@ -116,23 +116,11 @@
 										${ list.message_title } </a>
 								</h4>
 							</div>
-							<c:choose>
-							<c:when test="${list.message_title ne '결제링크' }">
 							<div id="msg${list.message_number}" class="panel-collapse collapse">
 								<div class="panel-body">
 									<p>${ list.message_content }</p>
 									</div>
 								</div>
-								</c:when>
-								
-								<c:when test="${list.message_title eq '결제링크' }">
-								<div id="msg${list.message_number}" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p><a href="${ pageContext.request.contextPath}${list.message_content}">결제</a></p>
-									</div>
-								</div>
-								</c:when>
-								</c:choose>
 							</div>
 						</c:forEach>
 						<!-- panel -->
@@ -143,7 +131,7 @@
 		</div>
 	</div>
 	
-	<!-- *** Message-Modal End*** --> --%>
+	<!-- *** Message-Modal End*** -->
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -195,10 +183,15 @@
 										Logout</span> <i class="fa fa-sign-out"> Logout</i>
 								</a>
 								<!-- 마이페이지 연결 -->
-								<a href="member.mypage.do" class="btn btn-default"> <span
+								<a href="member.mypage.do" class="btn btn-default" style="margin-right: 10px;"> <span
 									class="sr-only">My Page</span> <i class="fa fa-user">
 										MyPage</i>
 								</a>
+								<!--  Message Modal -->
+								<button type="button" id="message-modal-click"class="btn navbar-btn btn-default"
+							style="width:50px" data-toggle="modal" data-target="#message-modal">
+							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
+								 
 							</c:if>
 						</div>
 
@@ -404,7 +397,9 @@
 			}
 		}
 		
-
+		$('#message-modal-click').click(function(){
+			$ajax
+		})
 		
 		$(function(){
 			// FAVICON
