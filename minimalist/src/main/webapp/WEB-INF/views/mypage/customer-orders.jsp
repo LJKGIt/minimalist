@@ -124,8 +124,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 														</tr>
 														<tr>
 															<td>제품명</td>
-															<td><a href="productDetail.do?product_code=${ myOrder.product_code }"
-																style="color: black;">${ myOrder.productJoin.product_name }</a></td>
+															<td>${ myOrder.productJoin.product_name }</td>
 														</tr>
 														<tr>
 															<td>카테고리</td>

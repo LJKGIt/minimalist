@@ -11,6 +11,8 @@ public interface ProductService {
 	ArrayList<Product> productList(HashMap<String, Object> hashMap);
 	
 	ArrayList<Product> productList();
+	
+	ArrayList<Product> productListAll();
 
 	void productHit(Product product);
 
