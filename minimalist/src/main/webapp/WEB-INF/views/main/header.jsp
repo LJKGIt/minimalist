@@ -285,24 +285,24 @@
 						</ul></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Community <b
+						data-hover="dropdown" data-delay="200">Support<b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
 									<div class="row">
 										<div class="col-sm-3">
-											<h5>공지사항</h5>
+											<h5>Notice</h5>
 											<ul>
-												<li><a href="notice.selectList.do">공지사항</a></li>
-												<li><a href="">할인정보</a></li>
+												<li><a href="notice.selectList.do">Notice</a></li>
+											
 											</ul>
 										</div>
 										<div class="col-sm-3">
-											<h5>질문 답변</h5>
+											<h5>question & answer</h5>
 											<ul>
-												<li><a href="qna.selectFaq.do">FAQ</a></li>
-												<li><a href="qna.selectList.do">1:1 문의</a></li>
+												<li><a href="qna.selectFaq.do">Faq</a></li>
+												<li><a href="qna.selectList.do">1:1 contact</a></li>
 												
 											</ul>
 										</div>
