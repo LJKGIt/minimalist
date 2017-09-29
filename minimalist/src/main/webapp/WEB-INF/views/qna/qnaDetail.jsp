@@ -157,6 +157,7 @@ border-bottom: 2px dashed #ddd;
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
+      
 }
 
 input, button, select, textarea {
@@ -183,6 +184,51 @@ button {
     border-color: #18ba9b;
     background-color: transparent;
 }
+.area1sButton {
+    padding: 10px 0 0;
+    text-align: center;
+    
+}
+
+.pdT30 {
+    padding-top: 30px !important;
+}
+
+.area1sButton a.btnGray, .area1sButton a.btnGreenW, .area1sButton a.btnGreen {
+    display: inline-block;
+    width: 120px;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.area1sButton a.btnGreen, .area1sButton a.btnGray, .area2sButton a.btnGreen, .area1sButton a.btnGray, .area3sButton a.btnGreen, .area3sButton a.btnGray {
+    color: #fff;
+    font-weight: 700;
+}
+.btnGreen, a.btnGreen {
+ 
+    background-color: #4fbfa8;
+  margin:0 10px 5px 0;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 3px;
+}
+
+
+a {
+    color: #666;
+
+}
+.btnGreen, a.btnGreen:hover {
+    color: #ffffff;
+    background-color: #3da892;
+    text-decoration: none;
+}
+thead{
+ font-size: 16px;
+  border-top: 2px solid #888;
+
+}
 </style>
 
 
@@ -197,32 +243,33 @@ button {
         <div id="content">
             <div class="container">
 
-                <div class="col-md-12">
+               <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>공지사항</li>
+                        <li>QUESTION & ANSWER</li>
+                        <li>Detail</li>
                     </ul>
 
                 </div>
 
                 <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
+                   <!-- *** PAGES MENU ***
+_________________________________________________________ -->
+                   <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Pages</h3>
-                        </div>
+                       <div class="panel-heading">
+                           <h3 class="panel-title">QUESTION & ANSWER</h3>
+                       </div>
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="qna.selectFaq.do">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="qna.selectList.do">1:1문의</a>
-                                </li>
+                       <div class="panel-body">
+                           <ul class="nav nav-pills nav-stacked">
+                               <li>
+                                   <a href="qna.selectFaq.do">FAQ</a>
+                               </li>
+                               <li>
+                                   <a href="qna.selectList.do">1:1 CONTACT</a>
+                               </li>
 
                             </ul>
 
@@ -241,96 +288,66 @@ button {
 
 	                <div class="col-md-9">
 					<div class="box" id="contact">
-                              
-            			<div class="row">
+                     <div class="row">
                 	<div class="col-md-10">
                  	<div id="qna_no">${qna.qna_no}</div>
                   
-                 <table class="table table-condensed">
+                 <table class="table table-condensed" style="border-bottom: 2px solid #888;">
                         <thead>
-                            <tr align="center">
-                          
-                           <th style="border-bottom: 3px solid ;" colspan="1"> &nbsp;<strong>${qna.qna_title}</strong></th>
-                           
-                              
-                            </tr>
+                         <tr>
+                      <td colspan="2"><strong>${qna.qna_title}</strong></td>
+                     </tr>
                         </thead>
                         <tbody class="detail_table">
+                            <tr><td>글쓴이 &nbsp;&nbsp;${qna.member_id}</td><td>작성일&nbsp;&nbsp; ${qna.qna_date}</td></tr>
+                           
+                              
                             <tr>
-                                <td colspan="1">작성일&nbsp;&nbsp; ${qna.qna_date}
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan="1">글쓴이 &nbsp;&nbsp;<span>${qna.member_id}</span>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="border-bottom: 3px solid ;">
-                                    <p>${qna.qna_content}</p>
+                                <td colspan="2" >
+                                    <p style="margin: 20px 0 20px 0;">${qna.qna_content}</p>
                        		<img src="/minimalist/resources/img_qna/${qna.img_path}">
                                 </td>
                                 
                             </tr>
                         </tbody></table>
                         
-                     <c:if test="${sessionScope.member.member_id eq 'admin' }">  
+                   <div>
+                   <p><strong>관리자 답변 :</strong><br>
+                   <c:if test="${empty qna.qna_comment}">
+                      <p><font color="gray">관리자의 답변이 완료되지 않았습니다.</font></p>
+                   </c:if>
+                  
+                   <c:if test="${!empty qna.qna_comment}">
+                   <p id="showComment" style="word-break:break-all;">${qna.qna_comment}</p>
+                   
+                   
+                   </c:if>
+                   
+                  
+               </div>
                 	
-                    
-                    	<table class="table table-condensed_b">
-                        <tbody class="answer"><tr>
-                               
-                              <td colspan="1" style="border-top-style:2px dashed #ccc;"><strong>관리자 답변 :</strong> &nbsp;&nbsp;<span id="showComment">${qna.qna_comment}</span> </td></tr>
-                                 <tr><td>  
+                	<div>
+                	
+                	 <c:if test="${sessionScope.member.member_id eq 'admin' }">  
                                 <textarea id="comment" class="form-control col-lg-12"  cols="30" rows="4"></textarea>
                                  <div class="form-group">
-                                 		<button type="button" id="btn">입력</button>
+                                 		<button type="button" id="btn" style=" color: #fff; font-weight: 700; background-color: #4fbfa8;">입력</button>
                                  </div>
-                                   </td></tr>
-                        
-                           
-                    </tbody></table>
-                    </c:if>
-                   
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <td>
+                                 </c:if>
+                	</div>
+                    
+                    	
+                  
+                 
                               
-                                   
-<%-- <<<<<<< HEAD
-                                      
-                                       <a href="javascript:history.back()"><button type="button" id="list" class="btn btn-default">목록</button></a>
-                                     &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">수정</button></a>
-                                     &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button type="button" class="btn btn-default">삭제</button></a>
- --%>
-
-                                      <p style="text-align:center">
-                                       <span>
-                                       <a href="javascript:history.back()"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list" style="border-style: 1px solid #18ba9b;
-                  "><!-- <i class="fa fa-shopping-cart"></i> --> 목록</button></a>
-                                     &nbsp;&nbsp;<a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">수정</button></a>
-                                     &nbsp;&nbsp;<a href="qna.deleteQna.do?qna_no=${qna.qna_no}"><button class="btn btn-md u-btn-outline-teal g-mr-10 g-mb-15" type="button" id="list">삭제</button></a>
-                                  </span>
-                                 </p>
-                               
-                                 
-                                   
-                    
-                                   
-                                    
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
-                    
-               
-       
-
-                       
-  
-				</div>	 
+                                    <div class="area1sButton pdT30">
+                                    <a href="qna.selectList.do" class="btnGreen">목록보기</a>
+                                    <c:if test="${sessionScope.member.member_id eq 'admin'}">
+				 <a href="qna.viewUpdateForm.do?qna_no=${qna.qna_no}" class="btnGreen">수정</a>
+              <a href="qna.deleteQna.do?qna_no=${qna.qna_no}" class="btnGreen">삭제</a>
+                 </c:if>	
+			</div>
+	</div>	 
 
                     </div>
 
@@ -343,18 +360,17 @@ button {
         <!-- /#content -->
 
 		</div>
-</div>
-</div>
+
 		
 		<c:import url="../main/footer.jsp" />
 
 
 
     <!-- /#all -->
+</div>
 
 
-
-
+</div>
 
     
 

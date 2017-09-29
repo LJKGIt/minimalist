@@ -93,7 +93,7 @@ table.type07 td {
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>공지사항</li>
+                        <li>NOTICE</li>
                     </ul>
 
                 </div>
@@ -104,20 +104,15 @@ table.type07 td {
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Pages</h3>
+                            <h3 class="panel-title">NOTICE</h3>
                         </div>
 
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="">공지사항</a>
+                                    <a href="notice.selectList.do">NOTICE</a>
                                 </li>
-                                <li>
-                                    <a href="">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="">문의하기</a>
-                                </li>
+                              
 
                             </ul>
 
