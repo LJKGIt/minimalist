@@ -47,41 +47,45 @@ public class MemberController {
 	@Autowired
 	private MessageService messageService;
 
-
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
-
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response,
+			Model model) {
 		String result = "main/index";
-
+		model.addAttribute("loginError", null);
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
 		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
-		// TODO [lintogi] □ if로 null이 아닌 것을 확인했음에도 NullPointerException를 던지고 그 순서가 절차지향을 무시한다.
+		// TODO [lintogi] □ if로 null이 아닌 것을 확인했음에도 NullPointerException를 던지고 그
+		// 순서가 절차지향을 무시한다.
 		boolean patternBoolean = false;
 		try {
 			// if(p == null)
-			// 	System.out.println("망p");
+			// System.out.println("망p");
 			// if(p.matcher(m.getMember_id()) == null)
-			// 	System.out.println("망m");
+			// System.out.println("망m");
 			if (p != null && p.matcher(m.getMember_id()) != null)
 				patternBoolean = p.matcher(m.getMember_id()).find();
+
+			if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != ""
+					&& memberService.searchMember(m.getMember_id()) != null) {
+				m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(),
+						memberService.searchMember(m.getMember_id()).getSalt()));
+				member = memberService.loginMember(m);
+			}
+
+			if (member != null) {
+				session.setAttribute("member", member);
+				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+					result = "redirect:" + request.getHeader("referer");
+
+				}
+				session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+			} else {
+				model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
+			}
+			System.out.println(model.toString());
 		} catch (NullPointerException e) {
 			// System.out.println("망n");
-		}
-		if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
-			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
-			member = memberService.loginMember(m);
-		}
-
-		if (member != null) {
-			session.setAttribute("member", member);
-			if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
-				result = "redirect:" + request.getHeader("referer");
-
-			}
-			session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
-		} else {
-			model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 		}
 		return result;
 	}
@@ -98,7 +102,8 @@ public class MemberController {
 	}
 
 	@RequestMapping("memberidchk.do")
-	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
@@ -123,7 +128,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
-	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
@@ -131,7 +137,8 @@ public class MemberController {
 		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
 		m.setSalt(salt);
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
+				+ request.getParameter("phone2");
 
 		m.setPhone(phone);
 
@@ -147,13 +154,13 @@ public class MemberController {
 		}
 
 	}
-	
+
 	@RequestMapping("member.delete.do")
-	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
-		if((Member)session.getAttribute("member") != null){
-			if(memberService.memberDelete(m) > 0){
+	public String memberDelete(Member m, HttpSession session, HttpServletRequest request) {
+		if ((Member) session.getAttribute("member") != null) {
+			if (memberService.memberDelete(m) > 0) {
 				System.out.println("탈퇴 완료");
-			}else{
+			} else {
 				System.out.println("회원탈퇴 실패");
 			}
 		}
@@ -178,7 +185,8 @@ public class MemberController {
 	}
 
 	@RequestMapping("member.mypage.do")
-	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model)
+			throws IOException {
 		String result = "main/404";
 		response.setContentType("text/html; charset=utf-8");
 
@@ -204,18 +212,19 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
-		}else{
-			
+		} else {
+
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
-            out.flush(); 
+			out.println(
+					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.flush();
 
 		}
 
 		return result;
 	}
 
-	//	-> PASSWORD CHECK
+	// -> PASSWORD CHECK
 	@RequestMapping("member.passwordCheck.do")
 	public String myPasswordCheck(HttpSession session) {
 		String result = "main/404";
@@ -225,69 +234,77 @@ public class MemberController {
 		return result;
 	}
 
-	//	PASSWORD CHECK -> MEMBER UPDATE VIEW
+	// PASSWORD CHECK -> MEMBER UPDATE VIEW
 	@RequestMapping("member.information.do")
-	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response) throws IOException{
+	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response)
+			throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		String result = "mypage/passwordCheck";
-		Member sessionMember = (Member) session.getAttribute("member"); 
-		if(sessionMember != null){
-			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
+		Member sessionMember = (Member) session.getAttribute("member");
+		if (sessionMember != null) {
+			if (SHA256Util
+					.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt())
+					.equals(sessionMember.getMember_pwd())) {
 				m.setMember_pwd(sessionMember.getMember_pwd());
 				model.addAttribute("updateMember", memberService.loginMember(m));
-				result = "mypage/customer-account"; 
-			}else{
+				result = "mypage/customer-account";
+			} else {
 				model.addAttribute("error", "비밀번호가 틀렸습니다.");
 			}
-		}else{
+		} else {
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
-			out.flush(); 
-	        out.close();
+			out.println(
+					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.flush();
+			out.close();
 		}
 		return result;
 	}
-	
-//	MEMBER UPDATE VIEW -> MEMBER UPDATE
+
+	// MEMBER UPDATE VIEW -> MEMBER UPDATE
 	@RequestMapping("member.memberUpdate.do")
-	public void memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException{
+	public void memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		if((Member) session.getAttribute("member") != null){
-		
-			System.out.println("member.memberUpdate.do : " + m); 
+		if ((Member) session.getAttribute("member") != null) {
+
+			System.out.println("member.memberUpdate.do : " + m);
 			// TODO [yjP] member_id=null 뜨는 이유??
-			String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
-			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+			String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-"
+					+ request.getParameter("phone2");
 			m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 			m.setPhone(phone);
 			m.setEmail(email);
-			
+
 			if (memberService.mupdate(m) > 0) {
-	            out.println("<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
+				out.println(
+						"<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
+			} else {
+				out.println(
+						"<script>alert('회원정보가 수정 실패!!'); location.href = 'redirect:member.passwordCheck.do'</script>");
 			}
-			else {
-	            out.println("<script>alert('회원정보가 수정 실패!!'); location.href = 'redirect:member.passwordCheck.do'</script>");
-			}
-			
-		}else{
-			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+
+		} else {
+			out.println(
+					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 		}
-		out.flush(); 
-        out.close();
+		out.flush();
+		out.close();
 	}
 
-	//	PASSWORD CHANGE POPUP(VIEW)
+	// PASSWORD CHANGE POPUP(VIEW)
 	@RequestMapping("member.passwordView.do")
-	public String passwordView(Model model, HttpSession session){
+	public String passwordView(Model model, HttpSession session) {
 		String result = "main/404";
 		if (((Member) session.getAttribute("member")) != null) {
 			result = "mypage/passwordChange";
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("member.passwordUpdate.do")
 	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
@@ -299,17 +316,18 @@ public class MemberController {
 			m.setMember_id(member_id);
 			m.setMember_pwd(newPassword);
 			int result = memberService.passwordUpdate(m);
-			
-			if(result > 0){
-				
-	            out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
-	            out.flush();
-			}else{
-	            out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
-	            out.flush();
+
+			if (result > 0) {
+
+				out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
+				out.flush();
+			} else {
+				out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
+				out.flush();
 			}
-		}else{
-			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+		} else {
+			out.println(
+					"<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 			out.flush();
 		}
 		out.close();
