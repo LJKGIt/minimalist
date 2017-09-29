@@ -113,4 +113,8 @@
 		ORDER BY PRODUCT_CODE ASC
 	</select>
 	
+	<select id="productListAll" resultType="string">
+		SELECT DISTINCT PRODUCT_NAME FROM PRODUCT <!-- ORDER BY PRODUCT_HIT DESC -->
+	</select>
+	
 </mapper>

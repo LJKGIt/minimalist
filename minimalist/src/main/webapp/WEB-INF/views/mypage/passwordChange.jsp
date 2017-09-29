@@ -51,32 +51,15 @@ hr {
 				</div>
 				
 				<div style="text-align: center;">
-					<button type="submit" class="btn btn-default" onclick="return checkPwd()">확인</button>
+					<button type="submit" class="btn btn-default" id="submit">확인</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
+	var regex = /^[A-Za-z0-9+]{6,16}$/;
 	$(function(){
-		var regex = /^[A-Za-z0-9+]{6,16}$/;
 		
-		function checkPwd() {
-			var password1 = $('#member_pwd').val();
-			var password2 = $('#member_pwd2').val();
-			
-				if (!password1) {
-					$('#checkPwd').html('비밀번호를 입력하세요');
-					$('#member_pwd').focus();
-					return false;
-				} else if (!regex.test(password1)) {
-					$('#checkPwd').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
-					return false;
-				} else if (password1 != password2) {
-					$('#checkPwd').html('비밀번호가 같지 않습니다.');
-					return false;
-				}
-			}
-
 			//TODO [yjP] 비밀번호 확인 후 UPDATE하는 스크립트
 			$('#member_pwd').focusout(function() {
 				var password1 = $('#member_pwd').val();
@@ -112,6 +95,23 @@ hr {
 			});
 
 		})
+		
+	$('#submit').click(function(){
+		var password1 = $('#member_pwd').val();
+		var password2 = $('#member_pwd2').val();
+		
+		if (!password1) {
+			$('#checkPwd').html('비밀번호를 입력하세요');
+			$('#member_pwd').focus();
+			return false;
+		} else if (!regex.test(password1)) {
+			$('#checkPwd').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
+			return false;
+		} else if (password1 != password2) {
+			$('#checkPwd').html('비밀번호가 맞지 않습니다.');
+			return false;
+		}
+	});
 	</script>
 	
 </body>

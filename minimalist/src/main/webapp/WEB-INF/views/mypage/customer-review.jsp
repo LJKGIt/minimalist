@@ -51,11 +51,11 @@
 	                         	<c:forEach var="review" items="${ reviewList }">
 	                         		<tr>
 	                         			<td>${ review.review_date }</td>
-	                         			<td>상품명</td>
-	                         			<td>${ review.review_title }</td>
+	                         			<td><a href="productDetail.do?product_code=${ review.product_code }" style="color: black;">${ review.productJoin.product_name }</a></td>
+	                         			<td><a href="review.selectOne.do?product_code=${ review.product_code }&review_no=${review.review_no}" style="color: black;">${ review.review_title }</a></td>
 	                         			<td>
 		                         			<c:forEach var="starOn" begin="1" end="${review.review_rating}">
-											<img src='/minimalist/resources/img_review/star-on.png'>
+												<img src='/minimalist/resources/img_review/star-on.png'>
 											</c:forEach>
 										</td>
 	                         			<td>

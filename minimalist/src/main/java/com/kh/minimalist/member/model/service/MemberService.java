@@ -18,4 +18,6 @@ public interface MemberService {
 	int mupdate(Member m);
 	
 	int passwordUpdate(Member m);
+
+	int memberDelete(Member m);
 }

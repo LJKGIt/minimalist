@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,13 @@ public class HomeController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String index(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		ArrayList<Product> productList = productService.productList();
 		model.addAttribute("productList", productList);
+		
+//		PRODUCT LIST TO SEARCH
+		session.setAttribute("productListAll", productService.productListAll().toString());
+//		session.setMaxInactiveInterval(-1); //INFINIT
 		return "main/index";
 	}
 	

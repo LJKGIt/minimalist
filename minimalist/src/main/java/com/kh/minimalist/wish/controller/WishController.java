@@ -92,10 +92,10 @@ public class WishController {
 	
 	@RequestMapping("wish.wishlist.do")
 	public String myWishList(HttpSession session, Model model) {
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		Member member = ((Member) session.getAttribute("member"));
 		String result = "main/404";
-		if(member_id != null){
-			model.addAttribute("wishList", wishService.myWish(member_id));
+		if (member != null) {
+			model.addAttribute("wishList", wishService.myWish(member.getMember_id()));
 			result = "mypage/customer-wishlist";
 		}
 		return result;

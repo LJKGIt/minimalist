@@ -33,6 +33,7 @@
 	id="theme-stylesheet">
 <!-- your stylesheet with modifications -->
 <link href="resources/css/custom.css" rel="stylesheet">
+<link href="resources/css/jquery-ui.min.css" rel="stylesheet">
 
 <script src="resources/js/respond.min.js"></script>
 
@@ -47,6 +48,8 @@
 <script src="resources/js/bootstrap-hover-dropdown.js"></script>
 <script src="resources/js/owl.carousel.min.js"></script>
 <script src="resources/js/front.js"></script>
+<script src="resources/js/jquery-ui.js"></script>
+<script src="resources/js/hangul.min.js"></script>
 	
  <title>
        Minimalist
@@ -271,12 +274,13 @@
 									<div class="row">
 										<div class="col-sm-3">
 											<h5>
-												<a href="auction.selectList.do">전체상품</a>
+												AUCTION
 											</h5>
 											<ul>
-												<li><a href="auction.selectList.do?auction_category=의류">의류</a></li>
-												<li><a href="auction.selectList.do?auction_category=잡화">잡화</a></li>
-												<li><a href="auction.selectList.do?auction_category=악세사리">악세사리</a></li>
+												<li><a href="auction.selectList.do">ALL</a></li>
+												<li><a href="auction.selectList.do?auction_category=의류">- CLOTHING</a></li>
+												<li><a href="auction.selectList.do?auction_category=잡화">- BAG</a></li>
+												<li><a href="auction.selectList.do?auction_category=악세사리">- ACCESSORY</a></li>
 											</ul>
 										</div>
 									</div>
@@ -285,24 +289,24 @@
 						</ul></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Community <b
+						data-hover="dropdown" data-delay="200">Support<b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
 									<div class="row">
 										<div class="col-sm-3">
-											<h5>공지사항</h5>
+											<h5>Notice</h5>
 											<ul>
-												<li><a href="notice.selectList.do">공지사항</a></li>
-												<li><a href="">할인정보</a></li>
+												<li><a href="notice.selectList.do">Notice</a></li>
+											
 											</ul>
 										</div>
 										<div class="col-sm-3">
-											<h5>질문 답변</h5>
+											<h5>question & answer</h5>
 											<ul>
-												<li><a href="qna.selectFaq.do">FAQ</a></li>
-												<li><a href="qna.selectList.do">1:1 문의</a></li>
+												<li><a href="qna.selectFaq.do">Faq</a></li>
+												<li><a href="qna.selectList.do">1:1 contact</a></li>
 												
 											</ul>
 										</div>
@@ -361,7 +365,7 @@
 			<div class="collapse clearfix" id="search">
 				<form class="navbar-form" role="search">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search">
+						<input type="text" class="form-control" placeholder="Search" id="searchBox">
 						<span class="input-group-btn">
 
 							<button type="submit" class="btn btn-primary">
@@ -403,28 +407,40 @@
 
 		
 		$(function(){
+			// FAVICON
+			var link = document.createElement('link');
+		    link.type = 'image/x-icon';
+		    link.rel = 'shortcut icon';
+			link.href = 'resources/t9.png';
+			document.getElementsByTagName('head')[0].appendChild(link);
 			
-			  var link = document.createElement('link');
-			    link.type = 'image/x-icon';
-
-			    link.rel = 'shortcut icon';
-
-			    link.href = 'resources/t9.png';
-
-
-			    document.getElementsByTagName('head')[0].appendChild(link);
+			// 초성 TEST
+			var autocomplete_text = $.trim("${ productListAll }").replace(/[\[\] ]/g,"").split(",",-1);
 			
+			var chosungArr = new Array();
+			$.each(autocomplete_text, function(i){
+				var cho = Hangul.disassemble(autocomplete_text[i], true);
+				var chosung = "";
+				$.each(cho, function(j){
+					chosung += cho[j][0];
+				});
+				chosungArr.push(chosung);
+				// chosungArr.put(Hangul.disassemble(autocomplete_text[i]));
+			});
 			
+			console.log(chosungArr);
+			
+			// AUTOCOMOPLETE
+			$("#searchBox").autocomplete({ 
+				source: autocomplete_text,
+				// 한글이 완성되지 않았을 때 버그
+				focus : function(event,ui){
+					return false;
+				}
+
+			});
+
 		});
-		
-		
-			
-			
-	
-
-		
-		
-
 
 		$('#login-click').click(function(){
 			setTimeout(function() {

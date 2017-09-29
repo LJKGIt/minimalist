@@ -147,6 +147,18 @@ public class MemberController {
 		}
 
 	}
+	
+	@RequestMapping("member.delete.do")
+	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
+		if((Member)session.getAttribute("member") != null){
+			if(memberService.memberDelete(m) > 0){
+				System.out.println("탈퇴 완료");
+			}else{
+				System.out.println("회원탈퇴 실패");
+			}
+		}
+		return "main/index";
+	}
 
 	@RequestMapping("register.do")
 	public String register() {
@@ -192,11 +204,11 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			result = "mypage/customer-orders";
-		} else {
-
+		}else{
+			
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>"); //관리자 등급별로 메뉴 제어
-			out.flush();
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+            out.flush(); 
 
 		}
 
@@ -205,76 +217,102 @@ public class MemberController {
 
 	//	-> PASSWORD CHECK
 	@RequestMapping("member.passwordCheck.do")
-	public String myPasswordCheck() {
-		return "mypage/passwordCheck";
-	}
-
-	//	PASSWORD CHECK -> MEMBER UPDATE VIEW
-	@RequestMapping("member.information.do")
-	public String myInfomaion(Member m, HttpSession session, Model model) {
-		String result = "mypage/passwordCheck";
-		if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()).getSalt()).equals(((Member) session.getAttribute("member")).getMember_pwd())) {
-			m.setMember_pwd(((Member) session.getAttribute("member")).getMember_pwd());
-			result = "mypage/customer-account";
-			Member member = memberService.loginMember(m);
-			System.out.println(member);
-			model.addAttribute("member", member);
+	public String myPasswordCheck(HttpSession session) {
+		String result = "main/404";
+		if (((Member) session.getAttribute("member")) != null) {
+			result = "mypage/passwordCheck";
 		}
 		return result;
 	}
 
-	//	MEMBER UPDATE VIEW -> MEMBER UPDATE
-	// TODO [yjP] 멤버 업데이트 하다가 말았음
+	//	PASSWORD CHECK -> MEMBER UPDATE VIEW
+	@RequestMapping("member.information.do")
+	public String myInfomaion(Member m, HttpSession session, Model model, HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=utf-8");
+		String result = "mypage/passwordCheck";
+		Member sessionMember = (Member) session.getAttribute("member"); 
+		if(sessionMember != null){
+			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
+				m.setMember_pwd(sessionMember.getMember_pwd());
+				model.addAttribute("updateMember", memberService.loginMember(m));
+				result = "mypage/customer-account"; 
+			}else{
+				model.addAttribute("error", "비밀번호가 틀렸습니다.");
+			}
+		}else{
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.flush(); 
+	        out.close();
+		}
+		return result;
+	}
+	
+//	MEMBER UPDATE VIEW -> MEMBER UPDATE
 	@RequestMapping("member.memberUpdate.do")
-	public String memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException {
-		String resultPage = "main/404";
+	public void memberUpdate(Member m, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-
-		System.out.println("update : " + m);
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
-		m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
-		m.setPhone(phone);
-		m.setEmail(email);
-		int result = memberService.mupdate(m);
-
-		if (result > 0) {
-			resultPage = "redirect:passwordCheck.do";
-		} else {
-
+		PrintWriter out = response.getWriter();
+		if((Member) session.getAttribute("member") != null){
+		
+			System.out.println("member.memberUpdate.do : " + m); 
+			// TODO [yjP] member_id=null 뜨는 이유??
+			String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+			m.setMember_id(((Member) session.getAttribute("member")).getMember_id());
+			m.setPhone(phone);
+			m.setEmail(email);
+			
+			if (memberService.mupdate(m) > 0) {
+	            out.println("<script>alert('회원정보가 수정되었습니다.'); location.href = \"http://localhost/minimalist/member.passwordCheck.do\";</script>");
+			}
+			else {
+	            out.println("<script>alert('회원정보가 수정 실패!!'); location.href = 'redirect:member.passwordCheck.do'</script>");
+			}
+			
+		}else{
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 		}
-		return resultPage;
+		out.flush(); 
+        out.close();
 	}
 
 	//	PASSWORD CHANGE POPUP(VIEW)
 	@RequestMapping("member.passwordView.do")
-	public String passwordView(Model model, HttpSession session) {
-		model.addAttribute("member", memberService.searchMember(((Member) session.getAttribute("member")).getMember_id()));
-		return "mypage/passwordChange";
+	public String passwordView(Model model, HttpSession session){
+		String result = "main/404";
+		if (((Member) session.getAttribute("member")) != null) {
+			result = "mypage/passwordChange";
+		}
+		return result;
 	}
-
-	//	TODO [yjP] PASSWORD UPDATE
+	
 	@RequestMapping("member.passwordUpdate.do")
 	public void passwordUpdate(Member m, HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
-
-		String memberSalt = ((Member) session.getAttribute("member")).getSalt();
-		String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), memberSalt);
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
-		m.setMember_id(member_id);
-		m.setMember_pwd(newPassword);
-		int result = memberService.passwordUpdate(m);
-
-		if (result > 0) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
-			out.flush();
-		} else {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
+		PrintWriter out = response.getWriter();
+		if (((Member) session.getAttribute("member")) != null) {
+			String memberSalt = ((Member) session.getAttribute("member")).getSalt();
+			String newPassword = SHA256Util.getEncrypt(m.getMember_pwd(), memberSalt);
+			String member_id = ((Member) session.getAttribute("member")).getMember_id();
+			m.setMember_id(member_id);
+			m.setMember_pwd(newPassword);
+			int result = memberService.passwordUpdate(m);
+			
+			if(result > 0){
+				
+	            out.println("<script>alert('비밀번호 변경 완료'); window.close();</script>");
+	            out.flush();
+			}else{
+	            out.println("<script>alert('비밀번호 변경 실패'); location.reload();</script>");
+	            out.flush();
+			}
+		}else{
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
 			out.flush();
 		}
+		out.close();
 	}
 
 	// 회원 검색 페이지로 이동.

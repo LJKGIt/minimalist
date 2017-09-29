@@ -318,10 +318,10 @@ public class ReviewController {
 	@RequestMapping("review.myReview.do")
 	public String myReview(HttpSession session, Model model){
 		String result = "main/404";
-		String member_id = ((Member) session.getAttribute("member")).getMember_id();
+		Member member = (Member) session.getAttribute("member");
 		
-		if(member_id != null){
-			ArrayList<Review> list = reviewService.myReview(member_id);
+		if(member != null){
+			ArrayList<Review> list = reviewService.myReview(member.getMember_id());
 			result = "mypage/customer-review";
 			model.addAttribute("reviewList", list);
 		}

@@ -5,7 +5,18 @@
 <mapper namespace="Review">
 
 	<resultMap id="resultReview" type="Review">
-	
+		<id property="review_no" column="REVIEW_NO"/>
+		<result property="product_code" column="PRODUCT_CODE"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="review_title" column="REVIEW_TITLE"/>
+		<result property="review_content" column="REVIEW_CONTENT"/>
+		<result property="review_rating" column="REVIEW_RATING"/>
+		<result property="image_path" column="IMAGE_PATH"/>
+		<result property="review_date" column="REVIEW_DATE"/>
+		<association property="productJoin"  javaType="Product">
+  			<id property="product_code" column="PRODUCT_CODE" />
+  			<result property="product_name" column="PRODUCT_NAME"/>
+  		</association>
 	</resultMap>
 	
 	
@@ -56,7 +67,10 @@
 	</delete>
 	
 	<!-- MY REVIEW -->
-	<select id="myReview" parameterType="string" resultType="Review">
-		SELECT * FROM REVIEW WHERE MEMBER_ID = #{member_id} ORDER BY REVIEW_DATE DESC
+	<select id="myReview" parameterType="string" resultType="Review" resultMap="resultReview">
+		SELECT *
+		FROM REVIEW
+		JOIN PRODUCT USING (PRODUCT_CODE)
+		WHERE MEMBER_ID = #{member_id} ORDER BY REVIEW_DATE DESC
 	</select>
 </mapper>
