@@ -301,7 +301,7 @@
 										<div class="col-sm-3">
 											<h5>질문 답변</h5>
 											<ul>
-												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
+												<li><a href="qna.selectFaq.do">FAQ</a></li>
 												<li><a href="qna.selectList.do">1:1 문의</a></li>
 												
 											</ul>
