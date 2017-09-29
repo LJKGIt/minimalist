@@ -5,7 +5,13 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+<style type="text/css">
 
+
+</style>
+
+</head>
 
 <body>
 	<c:import url="../main/header.jsp" />
@@ -20,8 +26,35 @@
                         <li><a href="#">Home</a>
                         </li>
                         <li>결제</li>
+                        <li>경매상품 결제</li>
                     </ul>
+                    </div>
                     
+                     <div class="col-md-3">
+                    <!-- *** PAGES MENU ***
+ _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">결제 상품보기</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li>
+                                    <a href="#">경매상품</a>
+                                </li>
+                                <li>
+                                    <a href="qna.selectList.do">대여상품</a>
+                                </li>
+                               
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    </div>
+                          <div class="col-md-9">
                     
                     <!-- 이미지 처리 -->
                     <c:forTokens var="au" items="${auction.image_path}" delims=","  varStatus="index">
@@ -30,9 +63,9 @@
                     </c:if>
                     
                     </c:forTokens>
-
-                   <div class="box">
-                   <h3 align="center">물품 확인</h3>
+						
+          <div class="box">
+                   <h3 align="center">상품 확인</h3>
                    <p align="center"><img src="${img1}"></p>
                         <form action="income.insertIncome.do" method="POST">
                         <table style="margin:auto">
@@ -45,7 +78,7 @@
 							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
 						</table>
 						</form>
-                    </div>
+                    </div> 
                     
                     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
                     <script type="text/javascript">
@@ -483,11 +516,11 @@
             <!-- /.container -->
         </div>
         <!-- /#content -->
-
+</div>
 
         <c:import url="../main/footer.jsp" />
 
-    </div>
+ 
     <!-- /#all -->
 
 
