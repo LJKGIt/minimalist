@@ -107,34 +107,18 @@ position: absolute;
 			<table class="type07">
 			<thead>
 			<tr>
-			<th style="width:10%;">번호</th>
-			<th style="width:15%;">경매종료일</th>
-			<th style="width:12%;">금액</th>
-			<th style="width:12%;">낙찰 ID</th>
-			<th style="width:12%;">결제</th>
-			<th style="width:13%;">쪽지</th>
-	
+			<th>경매코드</th>
+			<th>경매종료일</th>
+			<th>상세보기</th>
 			</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="au" items="${list}">
-
-			<tr><td><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_code}</a></td><td>${au.end_date}</td>
-			<td>${au.bid_price}</td><td>${au.member_id}</td>
-			<td>
-			<c:if test="${au.payment_yn eq 'n' }">
-			미완료
-			</c:if>
-			<c:if test="${au.payment_yn eq 'y' }">
-			결제완료
-			</c:if>
-	
-
-			<td><a href="message.endAuctionInsertMessage.do?member_id=${au.member_id}&auction_code=${au.auction_code}&income=${au.bid_price}
-			&root=${ pageContext.request.contextPath }"><button type="button" style="pont-size:10px;">전송</button></a></td>
-		
+			<tr>
+			<td>${au.auction_code}</td>
+			<td>${au.end_date}</td>
+			<td><a href="auction.selectOneEnd.do?auction_code=${au.auction_code}">상세</a></td>
 			</tr>
-			
 			</c:forEach>
 
    			

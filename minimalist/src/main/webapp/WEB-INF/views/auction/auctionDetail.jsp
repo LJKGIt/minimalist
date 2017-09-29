@@ -11,7 +11,13 @@
 /* 현재 입찰가 update */
 $(document).ready(function(){
 	var auction_code=$('#code').text();
+	var currentPrice=$('#currentPrice').text();
 	
+	if(currentPrice==0){
+		return;
+	}
+	
+	else if(currentPrice!=0){
 	setInterval(function(){
 		$.ajax({
 			url : "auction.reloadPrice.do",
@@ -23,6 +29,7 @@ $(document).ready(function(){
 			}
 		});
 	}, 5000);
+	}
 });
 
 
@@ -30,23 +37,38 @@ $(document).ready(function(){
 $(function(){
 	$('#btn').click(function(){
 		var price=$('#price').val();
-		var currentPrice=$('#currentPrice').text();
-		var code=$('#code').text();
-		var id=$('#id').val();
+		//유저가 입찰하려는 가격
 		if(price==0){
-			alert("가격을 입력해주세요.");
+			//값이 없는 경우.
+			alert('입찰하려는 금액을 입력해주세요.');
 			$('#price').focus();
+			return false;
 		}
-		else if(price<=currentPrice){
-			alert("현재 입찰가격 보다 높은 가격이여야 합니다.");
+		
+		var currentPrice=$('#currentPrice').text();
+		//현재 최고 입찰가
+		if(currentPrice==0){
+			//현재 입찰가가 없는 경우.
+			var currentPrice=$('#startPrice').text();
+			//시작가격을 현재 입찰가로.
+		}
+		
+		var code=$('#code').text();
+		//경매코드
+		var id=$('#id').val();
+		//입찰자 아이디
+	
+		if(price<=currentPrice){
+			//입찰하려는 가격이 현재 입찰가보다 같거나 낮은 경우
+			alert('현재 입찰가보다 높은 가격을 입찰하여야 합니다.');
 			$('#price').focus();
-		}
-		else if(price>currentPrice){
+			return false;
+		}else if(price>currentPrice){
+			//현재 입찰가보다 높은 금액을 입찰한 경우. - 정상인 경우.
 			$.ajax({
 				url : "auction.bid.do",
 				type : "post",
 				data : {price : price, code : code, id : id},
-				//입찰자 정보도 넣어야 함.
 				dataType : "text",
 				success : function(value){
 					if(value==="yes"){
@@ -57,10 +79,32 @@ $(function(){
 					}
 				}
 			});
-		}
-		
+
+		}	
+	});
+	
+	$('#cancelBid').click(function(){
+		var auction_code=$('#code').text();
+		//경매코드
+		var currentPrice=$('#currentPrice').text();
+		//최고 입찰가 - 내 입찰가. (버튼이 최고입찰자만 보이기 때문~)
+		$.ajax({
+			url : "auction.deleteBid.do",
+			type : "post",
+			data : {auction_code : auction_code, bid_price : currentPrice},
+			dataType : "text",
+			success : function(value){
+				if(value==="yes"){
+					alert('입찰이 취소되었습니다.');
+					location.reload();
+				}else {
+					alert('오류. 관리자에게 문의하세요.');
+				}
+			}
+		});
 		
 	});
+	
 });
 
 
@@ -176,12 +220,16 @@ $(function(){
                             <!-- /.ribbon -->
 
                         </div>
+                        
+                        
+                      
                         <div class="col-sm-6">
                             <div class="box">
                             	<span id="code" style="display:none">${auction.auction_code}</span>
                                 <h1 class="text-center">${auction.auction_brand} <br> ${auction.auction_name}</h1>
-                             
-                                <p class="price"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bid_price}</span> 원</font></p>
+                             	<p align="center"><font size=3px>경매 시작가 : <span id="startPrice">${auction.start_price}</span> 원</font></p>    
+                                <p align="center"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bidInfo[0].bid_price}</span> 원</font></p>
+								
 								<p align="center"><font color="red">
 								경매 종료 :<fmt:formatDate value="${auction.end_date}" type="date" pattern="MM월dd일"/></font></p>
                                <c:if test="${sessionScope.member.member_id eq 'admin'}">
@@ -230,10 +278,19 @@ $(function(){
                                                          <font color="red">로그인한 회원만 경매에 참가할 수 있습니다. </font>                          
                             </c:if>
 							<c:if test="${!empty sessionScope.member}">
+							<c:if test="${sessionScope.member.grade < 3 }">
+								<font color="red">회원등급 3레벨 이상만 경매에 참여할 수 있습니다. </font>             
+							</c:if>
+							<c:if test="${sessionScope.member.grade >= 3 }">
                             <blockquote>
                                <input type="hidden" id="id" value="${sessionScope.member.member_id}">
                                <input type="number" id="price"><button type="button" id="btn">입찰하기</button>
                             </blockquote>
+                            	<%-- 최고 입찰자 : ${auction.bidInfo[0].member_id} --%>
+                            <c:if test="${sessionScope.member.member_id eq auction.bidInfo[0].member_id}">
+                            	현재 최고 입찰자입니다. <button type="button" id="cancelBid">입찰 취소</button>
+                            </c:if>
+                            </c:if>
                             </c:if>
                             <hr>
                             <div class="social">

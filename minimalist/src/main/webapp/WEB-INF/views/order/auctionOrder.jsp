@@ -74,7 +74,7 @@
                         	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
                         	
 							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly></td></tr>
-							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${auction.bid_price}" readonly></td></tr>
+							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly></td></tr>
 							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
 						</table>
 						</form>

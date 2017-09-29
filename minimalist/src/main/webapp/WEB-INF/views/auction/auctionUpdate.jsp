@@ -154,7 +154,7 @@ position: absolute;
 <tr><th>물품 사이즈 : </th><td><input type="text" name="auction_size" value="${auction.auction_size}" ></td></tr>
 <tr><th>물품 색상 : </th><td><input type="text" name="auction_color" value="${auction.auction_color}"></td></tr>
 <tr><th>상품 설명 : </th><td><textarea name="auction_descript">${auction.auction_descript}</textarea></td></tr>
-<tr><th>경매시작가격 : </th><td><input type="number" name="bid_price"  value="${auction.bid_price}"></td></tr>
+<tr><th>경매시작가격 : </th><td><input type="number" name="start_price"  value="${auction.start_price}"></td></tr>
 <tr><th>경매시작일 : </th><td><input type="date" name="start_date"  value="${auction.start_date}"></td></tr>
 <tr><th>경매종료일 : </th><td><input type="date" name="end_date" value="${auction.end_date}"></td></tr>
 <tr><th><h5>이미지 1</h5>

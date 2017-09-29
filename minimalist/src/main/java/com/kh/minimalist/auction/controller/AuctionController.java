@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.auction.model.vo.BidInfo;
 import com.kh.minimalist.member.model.vo.Member;
 
 @Controller
@@ -103,7 +104,7 @@ public class AuctionController {
 		auction.setAuction_brand(request.getParameter("auction_brand"));
 		auction.setAuction_color(request.getParameter("auction_color"));
 		auction.setAuction_descript(request.getParameter("auction_descript"));
-		auction.setBid_price(Integer.parseInt(request.getParameter("bid_price")));
+		auction.setStart_price(Integer.parseInt(request.getParameter("start_price")));
 		auction.setAuction_size(request.getParameter("auction_size"));
 		
 		Date start=Date.valueOf(request.getParameter("start_date"));
@@ -233,6 +234,9 @@ public class AuctionController {
 		
 		Auction auction=auctionService.selectOne(auction_code);
 		
+		System.out.println("브랜드 : "+auction.getAuction_brand());
+		System.out.println("물품명 : "+auction.getAuction_name());
+		
 		model.addAttribute("auction", auction);
 		
 		return "auction/auctionDetail";
@@ -242,19 +246,17 @@ public class AuctionController {
 	@RequestMapping(value="auction.bid.do", method=RequestMethod.POST)
 	public void bid(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
-	
-		
-		
 		int price=Integer.parseInt(request.getParameter("price"));
 		String id=request.getParameter("id");
 		int auction_code=Integer.parseInt(request.getParameter("code"));
-		Auction auction=new Auction();
-		auction.setBid_price(price);
-		auction.setAuction_code(auction_code);
-		auction.setMember_id(id);
+		BidInfo bid=new BidInfo();
+		
+		bid.setBid_price(price);
+		bid.setMember_id(id);
+		bid.setAuction_code(auction_code);
 		System.out.println("입찰금액 : "+price);
 		
-		int result=auctionService.bid(auction);
+		int result=auctionService.bid(bid);
 		System.out.println("결과 result : "+result);
 		
 		PrintWriter writer=response.getWriter();
@@ -275,7 +277,6 @@ public class AuctionController {
 	public void reloadPrice(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
-		
 		
 		int price=auctionService.reloadPrice(auction_code);
 		
@@ -420,7 +421,7 @@ public class AuctionController {
 			auction.setAuction_brand(request.getParameter("auction_brand"));
 			auction.setAuction_color(request.getParameter("auction_color"));
 			auction.setAuction_descript(request.getParameter("auction_descript"));
-			auction.setBid_price(Integer.parseInt(request.getParameter("bid_price")));
+			auction.setStart_price(Integer.parseInt(request.getParameter("start_price")));
 			auction.setAuction_size(request.getParameter("auction_size"));
 			
 			Date start=Date.valueOf(request.getParameter("start_date"));
@@ -532,4 +533,52 @@ public class AuctionController {
 			return "mypage/customer-auction";
 		}
 		
+		//입찰 취소~
+		@RequestMapping(value="auction.deleteBid.do", method={RequestMethod.POST, RequestMethod.GET})
+		public void deleteBid(HttpServletRequest request, HttpServletResponse response) throws IOException{
+			
+			int bid_price=Integer.parseInt(request.getParameter("bid_price"));
+			
+			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
+			
+			BidInfo bid=new BidInfo();
+			
+			bid.setBid_price(bid_price);
+			bid.setAuction_code(auction_code);
+			
+			int result=auctionService.deleteBid(bid);
+			
+			PrintWriter writer=response.getWriter();
+			
+			if(result>0){
+				writer.append("yes");
+				
+			}else {
+				writer.append("no");
+			}
+			
+			writer.flush();
+			writer.close();
+	
+		}
+		
+		//종료된 경매의 입찰정보 리스트 확인 - 관리자 열람
+		@RequestMapping(value="auction.selectOneEnd.do", method={RequestMethod.POST, RequestMethod.GET})
+		public String selectOneEnd(HttpServletRequest request, Model model){
+			
+			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
+			
+			Auction auction=auctionService.selectOneEnd(auction_code);
+			
+				String tmp=null;
+			if(auction!=null){
+				model.addAttribute("auction", auction);
+				tmp="manager/viewEndAuctionDetail";
+				
+			}else {
+				tmp="main/404";
+			}
+			
+			return tmp;
+		}
 }
