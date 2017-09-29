@@ -274,13 +274,13 @@
 									<div class="row">
 										<div class="col-sm-3">
 											<h5>
-												경매상품
+												AUCTION
 											</h5>
 											<ul>
-												<li><a href="auction.selectList.do">전체상품</a></li>
-												<li><a href="auction.selectList.do?auction_category=의류">의류</a></li>
-												<li><a href="auction.selectList.do?auction_category=잡화">잡화</a></li>
-												<li><a href="auction.selectList.do?auction_category=악세사리">악세사리</a></li>
+												<li><a href="auction.selectList.do">ALL</a></li>
+												<li><a href="auction.selectList.do?auction_category=의류">- CLOTHING</a></li>
+												<li><a href="auction.selectList.do?auction_category=잡화">- BAG</a></li>
+												<li><a href="auction.selectList.do?auction_category=악세사리">- ACCESSORY</a></li>
 											</ul>
 										</div>
 									</div>

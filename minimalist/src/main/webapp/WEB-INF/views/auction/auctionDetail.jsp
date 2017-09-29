@@ -115,12 +115,12 @@ $(function(){
                                <li class="active">
                                     
                                     <ul>
-                                    	<li class="active"><a href="auction.selectList.do">전체상품</a></li>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">의류</a>
+                                    	<li class="active"><a href="auction.selectList.do">ALL</a></li>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">- CLOTHING</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">잡화</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">- BAG</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">악세사리</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">- ACCESSORY</a>
                                         </li>  
                                     </ul>
                                </li>
