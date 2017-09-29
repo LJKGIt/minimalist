@@ -16,32 +16,32 @@
         <div id="content">
             <div class="container">
 
-                <div class="col-md-12">
+                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>FAQ</li>
+                        <li>QUESTION & ANSWER</li>
                     </ul>
 
                 </div>
 
                 <div class="col-md-3">
-                    <!-- *** PAGES MENU ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
+                   <!-- *** PAGES MENU ***
+_________________________________________________________ -->
+                   <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Pages</h3>
-                        </div>
+                       <div class="panel-heading">
+                           <h3 class="panel-title">QUESTION & ANSWER</h3>
+                       </div>
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="#">자주하는 질문</a>
-                                </li>
-                                <li>
-                                    <a href="qna.selectList.do">1:1문의</a>
-                                </li>
+                       <div class="panel-body">
+                           <ul class="nav nav-pills nav-stacked">
+                               <li>
+                                   <a href="qna.selectFaq.do">FAQ</a>
+                               </li>
+                               <li>
+                                   <a href="qna.selectList.do">1:1 CONTACT</a>
+                               </li>
                                
 
                             </ul>
