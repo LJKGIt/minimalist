@@ -75,19 +75,20 @@ public class MessageController {
 
 	// 경매 낙찰자에 대해 쪽지보내기
 	@RequestMapping(value = "message.endAuctionInsertMessage.do")
-	public String endAuctionInsertMessage(HttpServletRequest request) {
+	public String endAuctionInsertMessage(HttpServletRequest request, Model model) {
 
 		Message m = new Message();
 		
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
-		int income = Integer.parseInt(request.getParameter("income"));
+		int price = Integer.parseInt(request.getParameter("bid_price"));
+		System.out.println("입찰가 : "+price);
 		String member_id = request.getParameter("member_id");
 
 		m.setMember_id(member_id);
 		
 		String title="결제링크";
 		
-		String content="/income.viewOrder.do?auction_code="+auction_code+"&income="+income+"";
+		String content="/income.viewOrder.do?auction_code="+auction_code+"&price="+price+"";
 		
 		m.setMessage_content(content);
 		m.setMessage_title(title);
@@ -95,8 +96,9 @@ public class MessageController {
 		int result = messageService.insertMessage2(m);
 		String tmp = null;
 		if (result > 0) {
-
-			tmp = "redirect:auction.viewAuctionEnd.do";
+			model.addAttribute("price", price);
+			model.addAttribute("auction_code", auction_code);
+			tmp = "redirect:auction.selectOneEnd.do";
 		} else {
 			tmp = "main/404";
 		}

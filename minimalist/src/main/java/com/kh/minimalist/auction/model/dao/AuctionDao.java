@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.auction.model.vo.BidInfo;
 
 @Repository("auctionDao")
 public class AuctionDao {
@@ -64,9 +65,13 @@ public class AuctionDao {
 	}
 	
 	
-	//입찰 메소드 update
-	public int bid(Auction auction){
-		return sqlSession.update("bid", auction);
+	//입찰 메소드 insert
+	public int bid(BidInfo bid){
+		return sqlSession.insert("Auction.bid", bid);
+	}
+	
+	public int deleteBid(BidInfo bid){
+		return sqlSession.delete("Auction.deleteBid", bid);
 	}
 	
 	//가격 새로고침
@@ -124,5 +129,14 @@ public class AuctionDao {
 	public ArrayList<Auction> selectMemberAuction(String member_id) {
 		List<Auction> list = sqlSession.selectList("Auction.selectMemberAuction", member_id);
 		return (ArrayList<Auction>)list;
+	}
+	
+	//종료된 옥션 입찰정보 확인
+	public Auction selectOneEnd(int auction_code){
+		
+		
+		return sqlSession.selectOne("Auction.selectOneEnd", auction_code);
+		
+		
 	}
 }

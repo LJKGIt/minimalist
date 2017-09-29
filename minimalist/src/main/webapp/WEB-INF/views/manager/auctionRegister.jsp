@@ -164,7 +164,7 @@ input {
                 <tr><td><strong>색상</strong></td><td><input type="text"name="auction_color" style="width:98%;"></td></tr>
                 <tr><td><strong>설명</strong></td><td>
                 <textarea name="auction_descript" cols="30" rows="7" placeholder="내용을 입력하세요." style="width:98%;height:280px;"></textarea></td></tr>
-                <tr><td><strong>경매시작가격</strong></td><td><input type="number" name="bid_price"  style="width:98%;"></td></tr>
+                <tr><td><strong>경매시작가격</strong></td><td><input type="number" name="start_price"  style="width:98%;"></td></tr>
                 <tr><td><strong>경매시작일</strong></td><td><input type="date" name="start_date"style="width:98%;"></td></tr>
                 <tr><td><strong>경매종료일</strong></td><td><input type="date" name="end_date" style="width:98%;"></td></tr>
               <tr><td><strong>파일첨부1</strong></td><td><input type="file" name="img1"></td></tr>
