@@ -50,8 +50,9 @@ body {
                             <ul class="nav nav-pills nav-stacked category-menu">
                    
                                 <li class="active">
-                                    <a href="auction.selectList.do">경매중인 상품</a>
+                                    
                                     <ul>
+                                    	<li class="active"><a href="auction.selectList.do">전체상품</a></li>
                                         <li class="active"><a href="auction.selectList.do?auction_category=의류">의류</a>
                                         </li>
                                         <li class="active"><a href="auction.selectList.do?auction_category=잡화">잡화</a>
