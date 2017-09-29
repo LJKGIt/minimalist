@@ -303,7 +303,7 @@
 											</ul>
 										</div>
 										<div class="col-sm-3">
-											<h5>question & answer</h5>
+											<h5>question &#38; answer</h5>
 											<ul>
 												<li><a href="qna.selectFaq.do">Faq</a></li>
 												<li><a href="qna.selectList.do">1:1 contact</a></li>

@@ -2,7 +2,6 @@ package com.kh.minimalist.message.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.kh.minimalist.message.model.vo.Message;
 
