@@ -50,13 +50,14 @@ body {
                             <ul class="nav nav-pills nav-stacked category-menu">
                    
                                 <li class="active">
-                                    <a href="auction.selectList.do">경매중인 상품</a>
+                                    
                                     <ul>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">의류</a>
+                                    	<li class="active"><a href="auction.selectList.do">ALL</a></li>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=의류">- CLOTHING</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">잡화</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=잡화">- BAG</a>
                                         </li>
-                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">악세사리</a>
+                                        <li class="active"><a href="auction.selectList.do?auction_category=악세사리">- ACCESSORY</a>
                                         </li>  
                                     </ul>
                                </li>
@@ -130,7 +131,6 @@ body {
                                 </a>
                                 <div class="text">
                                     <h3><a href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand} <br> ${au.auction_name }</a></h3>
-                                    <p class="price"><font size=3px>현재 입찰가 : <fmt:formatNumber value="${au.bid_price}" type="currency"/></font> </p>
                                     <p align="center"><font color="red">경매 종료 :<fmt:formatDate value="${au.end_date}" type="date" pattern="MM월dd일"/></font> </p>
                                     <p class="buttons">
                                         <a href="auction.selectOne.do?auction_code=${au.auction_code}" class="btn btn-default">View detail</a>

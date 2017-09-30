@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.minimalist.auction.model.dao.AuctionDao;
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.auction.model.vo.BidInfo;
 
 @Service("auctionService")
 public class AuctionServiceImpl implements AuctionService {
@@ -33,11 +34,6 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.selectOne(auction_code);
 	}
 
-	@Override
-	public int bid(Auction auction) {
-		
-		return auctionDao.bid(auction);
-	}
 
 	@Override
 	public int reloadPrice(int auction_code) {
@@ -97,6 +93,26 @@ public class AuctionServiceImpl implements AuctionService {
 	public ArrayList<Auction> selectMemberAuction(String member_id){
 		return auctionDao.selectMemberAuction(member_id);
 	}
+
+	@Override
+	public int bid(BidInfo bid) {
+		
+		return auctionDao.bid(bid);
+	}
+
+	@Override
+	public int deleteBid(BidInfo bid) {
+		
+		return auctionDao.deleteBid(bid);
+	}
+
+	@Override
+	public Auction selectOneEnd(int auction_code) {
+		
+		return auctionDao.selectOneEnd(auction_code);
+	}
+
+	
 	
 	
 }

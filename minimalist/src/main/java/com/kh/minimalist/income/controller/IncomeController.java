@@ -106,9 +106,10 @@ public class IncomeController {
 	public String viewOrder(HttpServletRequest request, Model model) {
 
 		int auction_code = Integer.parseInt(request.getParameter("auction_code"));
+		int price=Integer.parseInt(request.getParameter("price"));
 		Auction auction=auctionService.selectOne(auction_code);
 		model.addAttribute("auction", auction);
-	
+		model.addAttribute("price", price);
 		return "order/auctionOrder";
 	}
 

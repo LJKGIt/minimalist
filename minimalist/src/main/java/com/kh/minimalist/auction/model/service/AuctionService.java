@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.auction.model.vo.BidInfo;
 
 public interface AuctionService {
 
@@ -14,7 +15,7 @@ public interface AuctionService {
 	
 	Auction selectOne(int auctionNo);
 	
-	int bid(Auction auction);
+	int bid(BidInfo bid);
 	
 	int reloadPrice(int auction_code);
 	
@@ -35,4 +36,8 @@ public interface AuctionService {
 	int checkPayment(HashMap<String, Object> map);
 
 	ArrayList<Auction> selectMemberAuction(String member_id);
+	
+	int deleteBid(BidInfo bid);
+	
+	Auction selectOneEnd(int auction_code);
 }

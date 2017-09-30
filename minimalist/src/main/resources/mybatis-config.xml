@@ -15,6 +15,7 @@
 			<typeAlias type="com.kh.minimalist.wish.model.vo.Wish" alias="Wish" />
 			<typeAlias type="com.kh.minimalist.orderinfo.model.vo.OrderInfo" alias="OrderInfo" />
 			<typeAlias type="com.kh.minimalist.auction.model.vo.Auction" alias="Auction" />
+			<typeAlias type="com.kh.minimalist.auction.model.vo.BidInfo" alias="BidInfo" /> 
 			<typeAlias type="com.kh.minimalist.notice.model.vo.Notice" alias="Notice" />
 			<typeAlias type="com.kh.minimalist.qna.model.vo.Qna" alias="Qna" />
 			<typeAlias type="com.kh.minimalist.message.model.vo.Message" alias="Message" />

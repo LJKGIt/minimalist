@@ -7,6 +7,7 @@ DROP TABLE RENTAL_RESERVE CASCADE CONSTRAINTS;
 DROP TABLE WISH CASCADE CONSTRAINTS;
 DROP TABLE MESSAGE CASCADE CONSTRAINTS;
 DROP TABLE AUCTION CASCADE CONSTRAINTS;
+drop table bidinfo cascade constraints;
 DROP TABLE ALERT CASCADE CONSTRAINTS;
 DROP TABLE NOTICE CASCADE CONSTRAINTS;
 DROP TABLE REVIEW CASCADE CONSTRAINTS;
@@ -14,6 +15,7 @@ DROP TABLE QNA CASCADE CONSTRAINTS;
 DROP TABLE PRODUCT_IMAGE CASCADE CONSTRAINTS;
 DROP TABLE INCOME CASCADE CONSTRAINTS;
 DROP TABLE ORDERINFO CASCADE CONSTRAINTS;
+
 
 ------------------------------ 테이블 생성 ------------------------------
 
@@ -181,15 +183,13 @@ CREATE TABLE AUCTION(
     AUCTION_CATEGORY VARCHAR2(20), /* 경매 상품 카테고리 */
     AUCTION_BRAND VARCHAR2(50), /* 경매 상품 브랜드 */
     AUCTION_DESCRIPT VARCHAR2(1000), /* 경매 상품 설명 */
-    MEMBER_ID VARCHAR2(20), /* 회원 아이디 */
-    BID_PRICE NUMBER, /* 입찰가 */
-    START_DATE DATE, /* 시작 가격 */
-    END_DATE DATE, /* 낙찰 가격 */
+    start_price number, /* 시작 가격 */
+    START_DATE DATE, /* 시작 일자 */
+    END_DATE DATE, /* 종료 일자 */
     AUCTION_SIZE VARCHAR2(20), /* 경매 상품 사이즈 */
     AUCTION_COLOR VARCHAR2(15), /* 경매 상품 색상 */
     IMAGE_PATH VARCHAR2(100), /* 경매 상품 이미지 */
-    PAYMENT_YN  CHAR(1) DEFAULT 'n' CONSTRAINT CHK_PAY CHECK (PAYMENT_YN IN('y', 'n')), /* 결제유무 */
-    CONSTRAINT AUCTION_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID)
+    PAYMENT_YN  CHAR(1) DEFAULT 'n' CONSTRAINT CHK_PAY CHECK (PAYMENT_YN IN('y', 'n')) /* 결제유무 */
 );
 
 COMMENT ON COLUMN AUCTION.AUCTION_CODE IS '경매 상품 코드';
@@ -197,14 +197,26 @@ COMMENT ON COLUMN AUCTION.AUCTION_NAME IS '경매 상품 이름';
 COMMENT ON COLUMN AUCTION.AUCTION_CATEGORY IS '경매 상품 카테고리';
 COMMENT ON COLUMN AUCTION.AUCTION_BRAND IS '경매 상품 브랜드';
 COMMENT ON COLUMN AUCTION.AUCTION_DESCRIPT IS '경매 상품 설명';
-COMMENT ON COLUMN AUCTION.MEMBER_ID IS '회원 아이디';
-COMMENT ON COLUMN AUCTION.BID_PRICE IS '입찰가';
-COMMENT ON COLUMN AUCTION.START_DATE IS '시작 가격';
-COMMENT ON COLUMN AUCTION.END_DATE IS '낙찰 가격';
+COMMENT ON COLUMN AUCTION.start_price IS '시작 가격';
+COMMENT ON COLUMN AUCTION.START_DATE IS '시작 일자';
+COMMENT ON COLUMN AUCTION.END_DATE IS '종료 일자';
 COMMENT ON COLUMN AUCTION.AUCTION_SIZE IS '경매 상품 사이즈';
 COMMENT ON COLUMN AUCTION.AUCTION_COLOR IS '경매 상품 색상';
 COMMENT ON COLUMN AUCTION.IMAGE_PATH IS '경매 상품 이미지';
 COMMENT ON COLUMN AUCTION.PAYMENT_YN IS '결제유무';
+
+/* 경매 입찰 정보 */
+create table bidinfo (
+auction_code number,
+member_id varchar2(20),
+bid_price number,
+CONSTRAINT bid_FK1 FOREIGN KEY (auction_CODE) REFERENCES auction (auction_CODE),
+CONSTRAINT  bid_FK2 FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE);
+
+COMMENT ON COLUMN bidinfo.auction_code IS '경매 코드';
+COMMENT ON COLUMN bidinfo.member_id IS '입찰자 아이디';
+COMMENT ON COLUMN bidinfo.bid_price IS '입찰 가격';
+
 
 /* 경매 알림 예약 */
 CREATE TABLE ALERT(
@@ -298,9 +310,9 @@ COMMENT ON COLUMN INCOME.INCOME_DATE IS '수입일';
 -- admin password : qweqwe
 -- usera password : asdasd
 -- userb password : zxczxc
-INSERT INTO MEMBER VALUES('admin', '9c7f18d8b1ec46ec42373a7503ded3622abb792bba368d24cfd005de73b648cf', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE, '010-6482-6959', '69-74', '역삼동','고시원', 0, 0, 'n', 'wlsrb8993@gmail.com', 'e3144b8e5b42fbbe');
-INSERT INTO MEMBER VALUES('usera', '9f482821f08b077d5f4647382642f5b599a4ff19b0232cda531454c07bbee279', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE, '010-1111-1111', '111-11', '가가시 가가구','가가로 11', 0, 0, 'n', 'asdf01@gmail.com', '0c05bcf2fe31be71');
-INSERT INTO MEMBER VALUES('userb', '8a0ac72cb8e93e0fd417998673b5c42295b18bb78672757b0ec95ba61f2df0f7', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE, '010-2222-2222', '222-22', '나나시 나나구','나나로 22', 0, 0, 'n', 'asdf02@gmail.com', '8005688f5fbbf608');
+INSERT INTO MEMBER VALUES('admin', '9c7f18d8b1ec46ec42373a7503ded3622abb792bba368d24cfd005de73b648cf', '관리자', TO_DATE('19891002', 'YYMMDD'), SYSDATE, '010-6482-6959', '69-74', '역삼동','고시원', 0, 9, 'n', 'wlsrb8993@gmail.com', 'e3144b8e5b42fbbe');
+INSERT INTO MEMBER VALUES('usera', '9f482821f08b077d5f4647382642f5b599a4ff19b0232cda531454c07bbee279', '회원1', TO_DATE('19900101', 'YYMMDD'), SYSDATE, '010-1111-1111', '111-11', '가가시 가가구','가가로 11', 0, 3, 'n', 'asdf01@gmail.com', '0c05bcf2fe31be71');
+INSERT INTO MEMBER VALUES('userb', '8a0ac72cb8e93e0fd417998673b5c42295b18bb78672757b0ec95ba61f2df0f7', '관리자', TO_DATE('19900102', 'YYMMDD'), SYSDATE, '010-2222-2222', '222-22', '나나시 나나구','나나로 22', 0, 2, 'n', 'asdf02@gmail.com', '8005688f5fbbf608');
 
 /* OUTER 15 */
 INSERT INTO PRODUCT VALUES(1500000001, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170901', 'RRMMDD'), DEFAULT, DEFAULT);
@@ -418,11 +430,16 @@ INSERT INTO WISH VALUES('usera', 1500000001);
 
 INSERT INTO MESSAGE VALUES(1, 'admin', '안녕', '나는 관리자야', SYSDATE, 'n');
 
-INSERT INTO AUCTION VALUES(1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금', 'admin', '10000', TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(4, '옷(끝)', '의류', '보세', '화려함', 'usera', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
-INSERT INTO AUCTION VALUES(5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또', 'admin', '10000', TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(1, '블라우스', '의류', 'LAP', '실크 소재의 고급 원단', 10000, TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171025', 'YYMMDD'), 's', 'green', 'dress1.jpg,dress2.jpg,dress3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(2, '토드백', '잡화', 'TOMASINI', '고급 가죽으로 만든 가방',  10000, TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171028', 'YYMMDD'), '25x11x19', 'brown', 'bag1.jpg,bag2.jpg,bag3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(3, '비바팔찌', '악세사리', 'studio 61x', '18k 도금',  10000, TO_DATE('20170909', 'YYMMDD'), TO_DATE('20171030', 'YYMMDD'), '21cm', 'pink', 'acc1.jpg,acc2.jpg,acc3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(4, '옷(끝)', '의류', '보세', '화려함',  10000, TO_DATE('20170901', 'YYMMDD'), TO_DATE('20170909', 'YYMMDD'), '끝', '끝', 'end1.jpg,end2.jpg,end3.jpg', DEFAULT);
+INSERT INTO AUCTION VALUES(5, '슬리브셔츠', '의류', 'FLEAMADONNA', '언발라스함이 포인또',  10000, TO_DATE('20170901', 'YYMMDD'), TO_DATE('20171021', 'YYMMDD'), 'm', 'navy', 'top1.jpg,top2.jpg,top3.jpg', DEFAULT);
+
+insert into bidinfo values(4, 'usera', 10000);
+insert into bidinfo values(4, 'userb', 9000);
+insert into bidinfo values(1, 'usera', 12000);
+insert into bidinfo values(1, 'userb', 13000);
 
 INSERT INTO ALERT VALUES('admin', 1500000001, TO_DATE('170901', 'YYMMDD'));
 

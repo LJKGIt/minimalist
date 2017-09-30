@@ -274,12 +274,13 @@
 									<div class="row">
 										<div class="col-sm-3">
 											<h5>
-												<a href="auction.selectList.do">전체상품</a>
+												AUCTION
 											</h5>
 											<ul>
-												<li><a href="auction.selectList.do?auction_category=의류">의류</a></li>
-												<li><a href="auction.selectList.do?auction_category=잡화">잡화</a></li>
-												<li><a href="auction.selectList.do?auction_category=악세사리">악세사리</a></li>
+												<li><a href="auction.selectList.do">ALL</a></li>
+												<li><a href="auction.selectList.do?auction_category=의류">- CLOTHING</a></li>
+												<li><a href="auction.selectList.do?auction_category=잡화">- BAG</a></li>
+												<li><a href="auction.selectList.do?auction_category=악세사리">- ACCESSORY</a></li>
 											</ul>
 										</div>
 									</div>
@@ -288,24 +289,24 @@
 						</ul></li>
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Community <b
+						data-hover="dropdown" data-delay="200">Support<b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="yamm-content">
 									<div class="row">
 										<div class="col-sm-3">
-											<h5>공지사항</h5>
+											<h5>Notice</h5>
 											<ul>
-												<li><a href="notice.selectList.do">공지사항</a></li>
-												<li><a href="">할인정보</a></li>
+												<li><a href="notice.selectList.do">Notice</a></li>
+											
 											</ul>
 										</div>
 										<div class="col-sm-3">
-											<h5>질문 답변</h5>
+											<h5>question & answer</h5>
 											<ul>
-												<li><a href="qna.selectFaq.do">자주하는 질문</a></li>
-												<li><a href="qna.selectList.do">1:1 문의</a></li>
+												<li><a href="qna.selectFaq.do">Faq</a></li>
+												<li><a href="qna.selectList.do">1:1 contact</a></li>
 												
 											</ul>
 										</div>
@@ -452,7 +453,7 @@
 			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
 		})
 </script>
-<c:if test="${ not empty loginError }">
+<c:if test="${! empty loginError}">
 	<script type="text/javascript">
 		$(function(){
 			$('#login-modal').modal();
