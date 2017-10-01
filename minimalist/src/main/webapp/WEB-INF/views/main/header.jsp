@@ -107,8 +107,8 @@
 					<h4 class="modal-title" id="Login" style="margin-left: 30px;">message</h4>
 				</div>
 				<div class="modal-body">
-					<div class="panel-group" id="accordion" style="padding: 2px 10px;">
-					<c:forEach items="${ messageList }" var="list">					
+					<div class="panel-group" id="accordion2" style="padding: 2px 10px;">
+					<%-- <c:forEach items="${ messageList }" var="list">					
 						<div class="panel panel-primary">
 							<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
 								<h4 class="panel-title">
@@ -123,7 +123,7 @@
 								</div>
 							</div>
 						</c:forEach>
-						<!-- panel -->
+						<!-- panel --> --%>
 					</div>
 					<!-- modal -->
 				</div>
@@ -381,7 +381,6 @@
 		function readCheck(num, rchk) {
 			var mNum = num.replace("#msg","");
 			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
-				console.log(mNum);
 				$.ajax({
 					url : "mChkUpdate.do",
 					data : {
@@ -398,7 +397,30 @@
 		}
 		
 		$('#message-modal-click').click(function(){
-			$ajax
+			$.ajax({
+				url : "message.messageListView.do",
+				type : "POST",
+				dataType : "text",
+				success : function(data){
+					//<c:forEach items="${ messageList }" var="list">					
+					//	$('#accordion').append('<div class="panel panel-primary"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">${ list.message_title } </a>')
+					/* <div class="panel panel-primary">
+						<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">
+									${ list.message_title } </a>
+							</h4>
+						</div>
+						<div id="msg${list.message_number}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>${ list.message_content }</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach> */
+					<!-- panel -->
+				}
+			})
 		})
 		
 		$(function(){
