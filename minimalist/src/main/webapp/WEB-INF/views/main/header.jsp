@@ -334,21 +334,21 @@
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
 								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
-								class="hidden-sm"> 관리</span>
+								class="hidden-sm"></span>
 							</a>
 
 						</c:if>
-						<%-- <c:if test="${ sessionScope.member.member_id ne 'admin' }"> --%>
+						 <c:if test="${ sessionScope.member.member_id ne 'admin' }"> 
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
 
 							class="fa fa-user"></i><span class="hidden-sm"></span></a>
-
+						</c:if> 
 						<button type="button" class="btn navbar-btn btn-primary"
 							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
-						<%-- </c:if> --%>
+						
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
 						data-toggle="collapse" data-target="#search">
