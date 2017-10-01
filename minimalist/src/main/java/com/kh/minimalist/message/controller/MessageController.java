@@ -171,4 +171,35 @@ public class MessageController {
 		return "member/messageView";
 	}
 	
+	
+	//경매 결제 취소
+	@RequestMapping(value = "message.cancelOrder.do")
+	public String cancelPay(HttpSession session, HttpServletRequest request){
+		
+		String id=((Member)session.getAttribute("member")).getMember_id();
+		//발신자
+		String auction_code=request.getParameter("auction_code");
+		
+		Message m=new Message();
+		
+		m.setMember_id("admin");
+		m.setMessage_title("경매 결제 취소");
+		
+		String content=id+" 회원이 경매코드 "+auction_code+"에 대해 결제취소 하였습니다.";
+		
+		m.setMessage_content(content);
+		
+		int result=messageService.insertMessage2(m);
+		
+		String tmp=null;
+		if(result>0){
+			tmp="main/index";
+		}else {
+			tmp="main/404";
+		}
+		
+		
+		return tmp;
+	}
+	
 }

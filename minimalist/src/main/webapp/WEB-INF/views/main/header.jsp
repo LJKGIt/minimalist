@@ -337,7 +337,8 @@
 								class="hidden-sm"> 관리</span>
 							</a>
 
-						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
+						</c:if>
+						<%-- <c:if test="${ sessionScope.member.member_id ne 'admin' }"> --%>
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
 
@@ -347,7 +348,7 @@
 							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
-						</c:if>
+						<%-- </c:if> --%>
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
 						data-toggle="collapse" data-target="#search">
