@@ -147,9 +147,13 @@
 	
 	<!-- 종료된 경매의 입찰 정보 확인 -->
 	<select id="selectOneEnd" parameterType="_int" resultType="Auction" resultMap="resultAuction">
-	select * from auction
-	join bidinfo using (auction_code)
-	where auction_code=#{auction_code}
+	select *
+from (select auction_code, end_date, member_id,
+bid_price from auction
+join bidinfo using (auction_code)
+where auction_code=#{auction_code}
+order by bid_price desc)
+where rownum&lt;=5
 	</select>
 	
 	<!-- 종료된 경매 결제 확인 -->

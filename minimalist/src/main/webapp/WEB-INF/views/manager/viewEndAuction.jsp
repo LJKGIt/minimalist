@@ -110,6 +110,7 @@ position: absolute;
 			<th>경매코드</th>
 			<th>경매종료일</th>
 			<th>상세보기</th>
+			<th>결과보기</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -117,7 +118,8 @@ position: absolute;
 			<tr>
 			<td>${au.auction_code}</td>
 			<td>${au.end_date}</td>
-			<td><a href="auction.selectOneEnd.do?auction_code=${au.auction_code}">상세</a></td>
+			<td><a href="auction.selectOne.do?auction_code=${au.auction_code}">상세보기</a></td>
+			<td><a href="auction.selectOneEnd.do?auction_code=${au.auction_code}">결과확인</a></td>
 			</tr>
 			</c:forEach>
 
