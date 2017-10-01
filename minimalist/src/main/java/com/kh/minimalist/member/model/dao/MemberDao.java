@@ -52,4 +52,8 @@ public class MemberDao {
 	public int dormantMember(Member m) {
 		return sqlSession.delete("Member.dormantMember", m);
 	}
+
+	public int chkDormant(String member_id) {
+		return sqlSession.selectOne("Member.chkDormant", member_id);
+	}
 }

@@ -116,7 +116,6 @@
                                 </a>
                                 <div class="text">
                                     <h3><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_name }</a></h3>
-                                     ${ product.product_code }
                                     <p class="price" style="margin:0px 0px 5px 0px;"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                 </div>
                                 <!-- /.text -->

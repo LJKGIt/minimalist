@@ -94,8 +94,8 @@
 			</div>
 		</div>
 	</div>
-<%-- 	
-	<!--  *** Message-Modal *** -->
+
+<!--  *** Message-Modal *** -->
 
 	<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
 		aria-labelledby="Login" aria-hidden="true">
@@ -107,8 +107,8 @@
 					<h4 class="modal-title" id="Login" style="margin-left: 30px;">message</h4>
 				</div>
 				<div class="modal-body">
-					<div class="panel-group" id="accordion" style="padding: 2px 10px;">
-					<c:forEach items="${ messageList }" var="list">					
+					<div class="panel-group" id="accordion2" style="padding: 2px 10px;">
+					<%-- <c:forEach items="${ messageList }" var="list">					
 						<div class="panel panel-primary">
 							<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
 								<h4 class="panel-title">
@@ -116,26 +116,14 @@
 										${ list.message_title } </a>
 								</h4>
 							</div>
-							<c:choose>
-							<c:when test="${list.message_title ne '결제링크' }">
 							<div id="msg${list.message_number}" class="panel-collapse collapse">
 								<div class="panel-body">
 									<p>${ list.message_content }</p>
 									</div>
 								</div>
-								</c:when>
-								
-								<c:when test="${list.message_title eq '결제링크' }">
-								<div id="msg${list.message_number}" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p><a href="${ pageContext.request.contextPath}${list.message_content}">결제</a></p>
-									</div>
-								</div>
-								</c:when>
-								</c:choose>
 							</div>
 						</c:forEach>
-						<!-- panel -->
+						<!-- panel --> --%>
 					</div>
 					<!-- modal -->
 				</div>
@@ -143,7 +131,7 @@
 		</div>
 	</div>
 	
-	<!-- *** Message-Modal End*** --> --%>
+	<!-- *** Message-Modal End*** -->
 	<div class="navbar navbar-default yamm" role="navigation" id="navbar">
 		<div class="container">
 			<div class="navbar-header">
@@ -195,10 +183,15 @@
 										Logout</span> <i class="fa fa-sign-out"> Logout</i>
 								</a>
 								<!-- 마이페이지 연결 -->
-								<a href="member.mypage.do" class="btn btn-default"> <span
+								<a href="member.mypage.do" class="btn btn-default" style="margin-right: 10px;"> <span
 									class="sr-only">My Page</span> <i class="fa fa-user">
 										MyPage</i>
 								</a>
+								<!--  Message Modal -->
+								<button type="button" id="message-modal-click"class="btn navbar-btn btn-default"
+							style="width:50px" data-toggle="modal" data-target="#message-modal">
+							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
+								 
 							</c:if>
 						</div>
 
@@ -303,7 +296,7 @@
 											</ul>
 										</div>
 										<div class="col-sm-3">
-											<h5>question & answer</h5>
+											<h5>question &#38; answer</h5>
 											<ul>
 												<li><a href="qna.selectFaq.do">Faq</a></li>
 												<li><a href="qna.selectList.do">1:1 contact</a></li>
@@ -341,20 +334,21 @@
 						<c:if test="${ sessionScope.member.member_id eq 'admin' }">
 							<a href="notice.viewWriteForm.do" class="btn navbar-btn btn-primary"> <span
 								class="sr-only">Toggle logout</span> <i class="fa fa-cog"></i><span
-								class="hidden-sm"> 관리</span>
+								class="hidden-sm"></span>
 							</a>
 
-						</c:if><c:if test="${ sessionScope.member.member_id ne 'admin' }">
+						</c:if>
+						 <c:if test="${ sessionScope.member.member_id ne 'admin' }"> 
 							<a href="member.mypage.do" class="btn btn-primary navbar-btn"><i
 
 
 							class="fa fa-user"></i><span class="hidden-sm"></span></a>
-
+						</c:if> 
 						<button type="button" class="btn navbar-btn btn-primary"
 							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
-						</c:if>
+						
 					</c:if>
 					<button type="button" class="btn navbar-btn btn-primary"
 						data-toggle="collapse" data-target="#search">
@@ -388,7 +382,6 @@
 		function readCheck(num, rchk) {
 			var mNum = num.replace("#msg","");
 			if ($(rchk).attr("data-sendYn") == 'n'.charAt(0)) {
-				console.log(mNum);
 				$.ajax({
 					url : "mChkUpdate.do",
 					data : {
@@ -404,7 +397,32 @@
 			}
 		}
 		
-
+		$('#message-modal-click').click(function(){
+			$.ajax({
+				url : "message.messageListView.do",
+				type : "POST",
+				dataType : "text",
+				success : function(data){
+					//<c:forEach items="${ messageList }" var="list">					
+					//	$('#accordion').append('<div class="panel panel-primary"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">${ list.message_title } </a>')
+					/* <div class="panel panel-primary">
+						<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">
+									${ list.message_title } </a>
+							</h4>
+						</div>
+						<div id="msg${list.message_number}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>${ list.message_content }</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach> */
+					<!-- panel -->
+				}
+			})
+		})
 		
 		$(function(){
 			// FAVICON

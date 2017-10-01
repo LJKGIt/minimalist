@@ -55,7 +55,9 @@
 								</div>
 								<div class="form-group">
 									<label for="pwd">Password</label> <input type="password"
-										class="form-control" id="member_pwd" name="member_pwd">
+										class="form-control" id="member_pwd" name="member_pwd" onkeypress="caps_lock(event)">
+										<p id="capslock" style="position:relative; border:2px solid #003b83; width:300px; bottom:0px; display:none"> 
+    	&nbsp;<b>CapsLock</b> 키가 눌려있습니다.&nbsp;</p>
 								</div>
 								<div class="form-group">
 									<label for="pwd2">Password Check</label> <input type="password"
@@ -65,10 +67,12 @@
 								<div class="form-group">
 									<label for="name">Name</label> <input type="text"
 										class="form-control" id="member_name" name="member_name" style="width: 50%;">
+										<div id="checkName"></div>
 								</div>
 								<div class="form-group">
 									<label for="birth">Birth</label> <input type="date"
-										class="form-control" id="birth" name="birth" style="width: 50%">
+										class="form-control" id="birth" name="birth" style="width: 50%" max="2016-12-31">
+										<div id="checkBirth"></div>
 								</div>
 								<div class="form-group">
 									<label for="phone">Phone</label><br>
@@ -83,6 +87,7 @@
 										class="form-control" id="phone1" name="phone1" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
 									<input type="tel"
 										class="form-control" id="phone2" name="phone2" maxlength="4" style="width: 20%; display: inline; margin: 0 20px 10px 0">
+										<div id="checkPhone"></div>
 								</div>
 								<!-- ADDRESS -->
 								<div class="form-group">
@@ -108,11 +113,12 @@
 											<option>nate.com</option>
 											<option>iei.or.kr</option>
 										</select>
+										<div id="checkEmail"></div>
 								</div>
 
 
 								<div class="text-center">
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-primary" onclick="return checkAll();">
 										<i class="fa fa-user-md"></i> Register
 									</button>
 								</div>
@@ -210,8 +216,7 @@
 					} else {
 						$('#checkID').text("이미 사용중입니다.").css("color", "red");
 					}
-				} // TODO
-				   //피피티에 파크용쥰 써주
+				} 				   
 			})
 		}
 	});
@@ -257,6 +262,116 @@
     			$('#email_id2').val(emailAdr);
     		}
     })
+    
+    function checkAll(){
+    	var regex = /^[A-Za-z0-9+]{6,16}$/;
+    	var password1 = $('#member_pwd').val();
+    	var password2 = $('#member_pwd2').val();
+    	
+		// ID CHECK
+		if(!$('#member_id').val()){
+			$('#checkID').html('아이디를 입력하세요');
+			$('#member_id').focus();
+			return false;
+		}else{
+			$('#checkID').html('');
+		}
+		// PASSWORD CHECK
+		if(!password1){
+			$('#checkPwd').html('비밀번호를 입력하세요');
+			$('#member_pwd').focus();
+			return false;
+		}else if(!regex.test(password1)){
+			$('#checkPwd').text("6자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
+			return false;
+		}else {
+			$('#checkPwd').html('');
+		}
+		
+		if(!password2){
+			$('#checkPwd').html('비밀번호 확인란을 입력하세요');
+			$('#member_pwd2').focus();
+			return false;
+		}else {
+			$('#checkPwd').html('');
+		}
+		
+		if(password1 != password2){
+			$('#checkPwd').html('비밀번호가 일치하지 않습니다.');
+			$('#member_pwd').focus();
+			return false;
+		}
+		
+		
+		// NAME CHECK
+		if(!$('#member_name').val()){
+			$('#checkName').html('이름을 입력하세요');
+			$('#member_name').focus(); //여기서부터함
+			return false;
+			
+		}else{
+			$('#checkName').html('');
+		}
+		
+		// SERIAL CHECK
+		if(!$('#birth').val()){
+			$('#checkBirth').html('생년월일을 입력하세요');
+			$('#birth').focus();
+			return false;
+		}else{
+			$('#checkBirth').html('');
+		}
+		
+		// PHONE CHECK
+		if(!$('#tel_first').val() && $('#phone1').val() && $('#phone2').val()) {
+			$('#checkPhone').html('전화번호를 입력하세요');
+			$('#phone').focus();
+			//return false;
+		}else{
+			$('#checkPhone').html('');
+		}
+		
+		// ADDRESS CHECK
+		if(!$('#postcode').val()){
+			$('#checkAddress').html('주소를 정확히 입력하세요');
+			$('#postcode').focus();
+			return false;
+		}else{
+			$('#checkAddress').html('');
+		}
+		
+		if(!$('#address').val()){
+			$('#checkAddress').html('주소를 정확히 입력하세요');
+			$('#address').focus();
+			return false;
+		}else{
+			$('#checkAddress').html('');
+		}
+		
+	}// checkAll() close
+    
+	
+	
+	function caps_lock(e) {
+        var keyCode = 0;
+        var shiftKey = false;
+        keyCode = e.keyCode;
+        shiftKey = e.shiftKey;
+        if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+            show_caps_lock();
+            setTimeout("hide_caps_lock()", 3500);
+        } else {
+            hide_caps_lock();
+        }
+    }// caps_lock(e) close
+	function show_caps_lock() {
+	     $("#capslock").show();
+	}
+	
+	function hide_caps_lock() {
+	     $("#capslock").hide();
+	}
 		
 	
 </script>

@@ -510,7 +510,7 @@ public class AuctionController {
 			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("auction_code", auction_code);
-			String message="y";
+			String message=request.getParameter("message");
 			map.put("message", message);
 			
 			int result=auctionService.checkPayment(map);

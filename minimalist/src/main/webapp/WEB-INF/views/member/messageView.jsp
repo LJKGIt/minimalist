@@ -134,7 +134,6 @@ hr {
 				</c:if>
 			</ul>
 		</div>
-	
 		</c:if>
 <script type="text/javascript">
 	function deleteMessage(dbtn) {
@@ -159,6 +158,7 @@ hr {
 		
 	}
 </script>
+</div>
 </body>
 
 </html>

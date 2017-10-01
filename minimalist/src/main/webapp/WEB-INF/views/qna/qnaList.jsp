@@ -72,7 +72,7 @@ position: absolute;
                     <ul class="breadcrumb">
                         <li><a href="#">Home</a>
                         </li>
-                        <li>문의하기</li>
+                        <li>QUESTION &#38; ANSWER</li>
                     </ul>
 
                 </div>
@@ -83,16 +83,16 @@ _________________________________________________________ -->
                    <div class="panel panel-default sidebar-menu">
 
                        <div class="panel-heading">
-                           <h3 class="panel-title">Pages</h3>
+                           <h3 class="panel-title">QUESTION &#38; ANSWER</h3>
                        </div>
 
                        <div class="panel-body">
                            <ul class="nav nav-pills nav-stacked">
                                <li>
-                                   <a href="qna.selectFaq.do">자주하는 질문</a>
+                                   <a href="qna.selectFaq.do">FAQ</a>
                                </li>
                                <li>
-                                   <a href="#">1:1문의</a>
+                                   <a href="qna.selectList.do">1:1 CONTACT</a>
                                </li>
 
                            </ul>
