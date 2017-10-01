@@ -8,6 +8,36 @@
 <!DOCTYPE html>
 
 <html>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
+<script type="text/javascript">
+/* $(function(){
+	//결제 확인 - 되돌리기
+	$('.checkBtn').click(function(){
+		var arr=$(this).val().split(',');
+		var auction_code=arr[0];
+		var message=arr[1];
+		$.ajax({
+			url : "auction.checkPayment.do",
+			type : "get",
+			data : {auction_code : auction_code, message : message},
+			dataType : "text",
+			success : function(value){
+				if(value=='yes'){
+					location.reload();
+				}
+			}
+		});
+	});
+	
+	
+	
+}); */
+
+
+</script>
+
+
+
 <style type="text/css">
 table.type07 {
 
@@ -111,6 +141,7 @@ position: absolute;
 			<th>경매종료일</th>
 			<th>상세보기</th>
 			<th>결과보기</th>
+
 			</tr>
 			</thead>
 			<tbody>
@@ -121,6 +152,8 @@ position: absolute;
 			<td><a href="auction.selectOne.do?auction_code=${au.auction_code}">상세보기</a></td>
 			<td><a href="auction.selectOneEnd.do?auction_code=${au.auction_code}">결과확인</a></td>
 			</tr>
+			
+			
 			</c:forEach>
 
    			

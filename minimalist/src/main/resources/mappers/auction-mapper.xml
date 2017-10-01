@@ -13,6 +13,7 @@
   		<result property="start_date" column="start_date"/>
   		<result property="end_date" column="end_date"/>
   		<result property="auction_size" column="auction_size"/>
+  		<result property="auction_color" column="auction_color"/>
   		<result property="image_path" column="image_path"/>
   		<result property="payment_yn" column="payment_yn"/>
 
