@@ -70,7 +70,7 @@ public class MemberController {
 					result = "redirect:" + request.getHeader("referer");
 
 				}
-				session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+				
 			} else if (member.getDormant_yn() == 'y') {
 				model.addAttribute("loginError", "탈퇴한 회원입니다.");
 			} else {
