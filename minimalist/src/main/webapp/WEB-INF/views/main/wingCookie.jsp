@@ -45,7 +45,7 @@ Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList
 				<button name="${ recent.product_code }" class="btn btn-link btn-xs delCookie"
 					style="display: none; color: black; position: absolute; top: 0; right: 0px; text-decoration: none;"><span class="fa fa-remove "></span></button>
 				<a href="productDetail.do?product_code=${ recent.product_code }">
-					<img src="${ pageContext.request.contextPath }/resources/img_product/${ recent.product_code }_1.jpg"
+					<img src="${ pageContext.request.contextPath }/resources/img_product/${ recent.productImageList[0].product_image_path }"
 					alt="${ recent.product_name }" style="width: 100px;"><br><%--  ${ recent.product_name } --%>
 				</a>
 			</div>
