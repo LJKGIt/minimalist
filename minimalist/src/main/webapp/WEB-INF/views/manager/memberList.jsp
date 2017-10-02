@@ -99,7 +99,7 @@ position: absolute;
     </thead>
     <tbody>
     <c:if test="${empty list}">
-    <p>일치하는 회원이 없습니다.</p>
+   <p align="center">일치하는 회원이 없습니다.</p>
     </c:if>
     <c:if test="${!empty list}">
     	<c:forEach var="member" items="${list}">
