@@ -4,6 +4,7 @@ import com.kh.minimalist.member.model.dao.MemberDao;
 import com.kh.minimalist.member.model.vo.Member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,36 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int dormantMember(Member m) {
 		return memberDao.dormantMember(m);
+	}
+
+	@Override
+	public int memberCount() {
+		return memberDao.memberCount();
+	}
+
+	@Override
+	public ArrayList<Member> memberList(HashMap<String, Integer> map) {
+		return memberDao.memberList(map);
+	}
+
+	@Override
+	public Member memberOne(String member_id) {
+		return memberDao.memberOne(member_id);
+	}
+
+	@Override
+	public int updateGrade(Member m) {
+		return memberDao.updateGrade(m);
+	}
+
+	@Override
+	public int updateDormant(Member m) {
+		return memberDao.updateDorment(m);
+	}
+
+	@Override
+	public ArrayList<Member> searchingMember(String id) {
+		return memberDao.searchingMember(id);
 	}
 	
 }

@@ -53,5 +53,40 @@
     <select id="searchMember" parameterType="string" resultType="Member">
     	SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
     </select>
+    
+    
+    <select id="memberSelectList" parameterType="_int" resultType="Member" resultMap="resultMember">
+    	select *
+		from (select rownum rnum, member_id,
+		member_name, birth, regist_date,
+		phone, address1, address2, point, grade, 
+		dormant_yn, email
+		from
+		(select * from member order by regist_date desc)
+		where rownum&lt;=#{endRow})
+		where rnum&gt;=#{startRow}
+    </select>
+    
+    <select id="memberCount" resultType="_int">
+    	select count(*) from member
+    </select>
+    
+    <select id="memberOne" parameterType="string" resultType="Member" resultMap="resultMember">
+    	select * from member where member_id=#{member_id}
+    </select>
+    
+    <update id="updateGrade" parameterType="Member">
+     update member set grade=#{grade}
+     where member_id=#{member_id}
+    </update>
+    
+    <update id="updateDormant" parameterType="Member">
+    	update member set dormant_yn=#{dormant_yn}
+   		where member_id=#{member_id}
+    </update>
+    
+    <select id="searchingMember" parameterType="string" resultType="Member" resultMap="resultMember">
+    	select * from member where member_id=#{member_id}
+    </select>
 
 </mapper>

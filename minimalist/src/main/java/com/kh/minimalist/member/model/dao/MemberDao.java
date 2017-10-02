@@ -3,6 +3,7 @@ package com.kh.minimalist.member.model.dao;
 import com.kh.minimalist.member.model.vo.Member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -55,5 +56,37 @@ public class MemberDao {
 
 	public int chkDormant(String member_id) {
 		return sqlSession.selectOne("Member.chkDormant", member_id);
+	}
+	
+	public int memberCount(){
+		return sqlSession.selectOne("Member.memberCount");
+	}
+	
+	public ArrayList<Member> memberList(HashMap<String, Integer> map){
+		List<Member> list=null;
+		
+		list=sqlSession.selectList("Member.memberSelectList", map);
+				
+		return (ArrayList<Member>)list;
+	}
+	
+	public Member memberOne(String member_id){
+		return sqlSession.selectOne("Member.memberOne", member_id);
+	}
+	
+	public int updateGrade(Member m){
+		return sqlSession.update("Member.updateGrade", m);
+	}
+	
+	public int updateDorment(Member m){
+		return sqlSession.update("Member.updateDormant", m);
+	}
+	
+	public ArrayList<Member> searchingMember(String id){
+		List<Member> list=null;
+		
+		list=sqlSession.selectList("Member.searchingMember", id);
+		
+		return (ArrayList<Member>)list;
 	}
 }

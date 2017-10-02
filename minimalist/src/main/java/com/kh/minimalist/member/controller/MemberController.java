@@ -355,5 +355,161 @@ public class MemberController {
 		writer.close();
 
 	}
+	
+	//회원 관리 페이지 - 멤버 리스트 보여주기
+	@RequestMapping(value = "member.memberManage.do")
+	public String memberManage(HttpServletRequest request, Model model){
+		
+		int currentPage=1;
+		//현재 페이지
+		
+		if(request.getParameter("page")!=null){
+			//현재 페이지 보정
+				currentPage=Integer.parseInt(request.getParameter("page"));
+		}
+		
+		int countRow=0;
+		//전체 글의 갯수
+		countRow=memberService.memberCount();
+		
+		
+		int countList=10;
+		//페이지당 보여줄 글의 수 
+		int pageList=5;
+		//아래 보여줄 페이지의 수
+		
+		int maxPage=countRow/countList;
+		//총 페이지 수
+		if(countRow%countList>0){
+			maxPage++;
+			//맥스 페이지 보정
+		}
+		
+		
+		
+		int startPage=((currentPage-1)/pageList)*pageList+1;
+		//화면에 보여줄 시작페이지
+		int endPage=startPage+pageList-1;
+		
+		if(endPage>maxPage){
+			//마지막 페이지 보정
+			endPage=maxPage;
+		}
+		
+		int startRow=(currentPage-1)*countList+1;
+		//현재 화면에서 보여줄 글의 시작 rownum
+		int endRow=startRow+countList-1;
+		//현재 화면에서 보여줄 글의 마지막 rownum
+		
+		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		ArrayList<Member> list=memberService.memberList(map);
+		
+		String tmp=null;
+		
+		if(list.size()!=0){
+			model.addAttribute("list", list);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("maxPage", maxPage);
+			tmp="manager/memberList";
+		}else {
+			tmp="main/404";
+		}
+		
+		
+		
+		return tmp;
+	}
+	
+	
+	@RequestMapping(value = "member.searchingMember.do")
+	public String searchingMember(HttpServletRequest request, Model model){
+		
+		String keyword=request.getParameter("keyword");
+		
+		ArrayList<Member> list=memberService.searchingMember(keyword);
 
+			model.addAttribute("list", list);
+		
+		
+		return "manager/memberList";
+	}
+	
+	//member.selectOne.do
+	@RequestMapping(value = "member.selectOne.do")
+	public String selectOneMember(HttpServletRequest request, Model model){
+		
+		String member_id=request.getParameter("member_id");
+		
+		
+		Member m=memberService.memberOne(member_id);
+		
+		String yn=null;
+		if(m.getDormant_yn()=='y'){
+			yn="y";
+		}else {
+			yn="n";
+		}
+		
+		model.addAttribute("yn", yn);
+		model.addAttribute("member", m);
+		
+		
+		
+		return "manager/memberDetail";
+		
+	}
+	
+	//회원 계정 정지 - 계정 풀기
+	@RequestMapping(value = "member.updateDormant.do", method = RequestMethod.GET)
+	public void updateDormant(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		
+		String tmp=request.getParameter("yn");
+		Member m=new Member();
+		
+		m.setMember_id(request.getParameter("id"));
+		m.setDormant_yn(tmp.charAt(0));
+	
+		
+		int result=memberService.updateDormant(m);
+		
+		PrintWriter writer=response.getWriter();
+		if(result>0){
+			writer.append("yes");
+		}else {
+			writer.append("no");
+		}
+		
+		writer.flush();
+		writer.close();
+	}
+	
+	//회원 등급 조정
+	@RequestMapping(value = "member.updateGrade.do", method = RequestMethod.GET)
+	public void updateGrade(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		Member m=new Member();
+		
+		m.setGrade(Integer.parseInt(request.getParameter("grade")));
+		m.setMember_id(request.getParameter("id"));
+		
+		
+		int result=memberService.updateGrade(m);
+		
+		PrintWriter writer=response.getWriter();
+		if(result>0){
+			writer.append("yes");
+		}else {
+			writer.append("no");
+		}
+		
+		writer.flush();
+		writer.close();
+	}
 }
