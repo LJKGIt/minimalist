@@ -446,7 +446,7 @@ public class MemberController {
 		m.setDormant_yn(tmp.charAt(0));
 		System.out.println(m.getDormant_yn());
 		
-		int result=memberService.dormantMember(m);
+		int result=memberService.updateDormant(m);
 		
 		PrintWriter writer=response.getWriter();
 		if(result>0){
