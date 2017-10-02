@@ -81,4 +81,12 @@ public class MemberDao {
 	public int updateDorment(Member m){
 		return sqlSession.update("Member.updateDormant", m);
 	}
+	
+	public ArrayList<Member> searchingMember(String id){
+		List<Member> list=null;
+		
+		list=sqlSession.selectList("Member.searchingMember", id);
+		
+		return (ArrayList<Member>)list;
+	}
 }

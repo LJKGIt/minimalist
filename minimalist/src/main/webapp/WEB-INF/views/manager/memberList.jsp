@@ -2,16 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
-<style>
 
-
-
-</script>
 
 
 <!DOCTYPE html>
 <html>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+
 <style type="text/css">
 table.type07 {
 
@@ -53,7 +50,7 @@ table.type07 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-div.write2{
+.search{
 
 position: absolute;
     right: 80px;
@@ -101,6 +98,10 @@ position: absolute;
     </tr>
     </thead>
     <tbody>
+    <c:if test="${empty list}">
+    <p>일치하는 회원이 없습니다.</p>
+    </c:if>
+    <c:if test="${!empty list}">
     	<c:forEach var="member" items="${list}">
     	<tr>
     	<td> ${member.member_id} </td>
@@ -109,8 +110,16 @@ position: absolute;
     	<td><a href="member.selectOne.do?member_id=${member.member_id}"><button type="button">상세보기</button></a></td>
     	</tr>
     	</c:forEach>
+    	</c:if>
     </tbody>
 </table>
+<div>
+<form action="member.searchingMember.do" method="post">
+<table style="margin:auto">
+<tr><td><input type="text" class="search" name="keyword"><input type="submit" value="검색" class="search"></td></tr>
+</table>
+</form>
+</div>
 
 					 <div class="pages">
 

@@ -81,5 +81,10 @@ public class MemberServiceImpl implements MemberService {
 	public int updateDormant(Member m) {
 		return memberDao.updateDorment(m);
 	}
+
+	@Override
+	public ArrayList<Member> searchingMember(String id) {
+		return memberDao.searchingMember(id);
+	}
 	
 }

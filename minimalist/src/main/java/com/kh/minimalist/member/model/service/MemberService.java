@@ -31,4 +31,6 @@ public interface MemberService {
 	int updateGrade(Member m);
 	
 	int updateDormant(Member m);
+	
+	ArrayList<Member> searchingMember(String id);
 }
