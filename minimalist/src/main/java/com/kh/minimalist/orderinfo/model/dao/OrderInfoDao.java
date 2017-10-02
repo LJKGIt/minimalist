@@ -1,6 +1,7 @@
 package com.kh.minimalist.orderinfo.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,8 +23,8 @@ public class OrderInfoDao {
 		return sqlSession.insert("OrderInfo.orderInfoInsert", orderInfo);
 	}
 
-	public ArrayList<OrderInfo> myOrder(String member_id) {
-		List<OrderInfo> list = sqlSession.selectList("OrderInfo.myOrder", member_id);
+	public ArrayList<OrderInfo> myOrder(HashMap<String, Object> map) {
+		List<OrderInfo> list = sqlSession.selectList("OrderInfo.myOrder", map);
 		return (ArrayList<OrderInfo>)list;
 	}
 

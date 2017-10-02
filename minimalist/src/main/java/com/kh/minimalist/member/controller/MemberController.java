@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -175,15 +176,35 @@ public class MemberController {
 	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String result = "main/404";
+		int orderDay = 7;  // 조회기간
+		String orderKeyword = ""; // 검색어
 		response.setContentType("text/html; charset=utf-8");
 
 		if (((Member) session.getAttribute("member")) != null) {
 			String member_id = ((Member) session.getAttribute("member")).getMember_id();
 
 			// MY ORDER LIST
-			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(member_id);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			// MEMBER_ID 값
+			map.put("member_id", member_id);
+			
+			// ORDERDAY 값(조회기간)
+			if (request.getParameter("orderDay") != null)
+				orderDay = Integer.parseInt(request.getParameter("orderDay"));
+			map.put("orderDay", orderDay);
+			
+			// ORDER KEYWORD 값
+			if (request.getParameter("orderKeyword") != null){
+				orderKeyword = request.getParameter("orderKeyword");
+				map.put("orderKeyword", orderKeyword);
+			}
+			
+			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(map);
 			if (myOrder != null)
 				model.addAttribute("myOrder", myOrder);
+			
+				
 
 			// RECENT VIEW (COOKIE)
 			try {

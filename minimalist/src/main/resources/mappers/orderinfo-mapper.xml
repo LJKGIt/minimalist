@@ -32,12 +32,23 @@
 		INSERT INTO ORDERINFO VALUES((SELECT MAX(ORDERINFO_CODE) FROM ORDERINFO)+1, #{ member_id }, #{ product_code }, SYSDATE)
 	</insert>
 	
-	<select id="myOrder" parameterType="string" resultType="OrderInfo" resultMap="resultOrderInfo">
-		<!-- SELECT * FROM ORDERINFO WHERE MEMBER_ID = #{member_id} ORDER BY ORDERINFO_DATE DESC -->
+	<select id="myOrder" parameterType="hashmap" resultType="OrderInfo" resultMap="resultOrderInfo">
 		SELECT * 
 		FROM ORDERINFO 
 		JOIN PRODUCT USING(PRODUCT_CODE)
-		WHERE MEMBER_ID = #{member_id} ORDER BY ORDERINFO_DATE DESC
+		WHERE MEMBER_ID = #{member_id} 
+		AND ORDERINFO_DATE BETWEEN 
+		<if test="orderDay == -1">
+			(SELECT REGIST_DATE FROM MEMBER WHERE MEMBER_ID = #{member_id})
+		</if>
+		<if test="orderDay != -1">
+			SYSDATE - #{orderDay}
+		</if>
+		AND SYSDATE
+		<if test="orderKeyword != null">
+			AND PRODUCT_NAME LIKE '%'||#{orderKeyword}||'%'
+		</if>
+		ORDER BY ORDERINFO_DATE DESC
 	</select>
 	
 </mapper>

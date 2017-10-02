@@ -1,6 +1,7 @@
 package com.kh.minimalist.orderinfo.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	}
 
 	@Override
-	public ArrayList<OrderInfo> myOrder(String member_id) {
-		return orderInfoDao.myOrder(member_id);
+	public ArrayList<OrderInfo> myOrder(HashMap<String, Object> map) {
+		return orderInfoDao.myOrder(map);
 	}
 	
 	
