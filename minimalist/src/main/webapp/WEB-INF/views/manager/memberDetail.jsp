@@ -36,7 +36,10 @@ $(function(){
 		if(grade == 0){
 			alert('변경하려는 등급을 입력해주세요.');
 			return;
-		}else {
+			}else if(grade < 0 ){
+				alert('음수는 입력할 수 없습니다.');
+				return;
+			} else {
 			$.ajax({
 				url : "member.updateGrade.do",
 				type : "get",
