@@ -5,15 +5,7 @@
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <style>
 
-$(function(){
-	$('#searching').click(function(){
-		var keyword=$('#idid').val(); 
-		 if(keyword==null){
-			alert('아이디를 입력하세요.');
-		} 
-		
-	});
-});
+
 
 </script>
 
@@ -96,20 +88,55 @@ position: absolute;
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">회원 검색</h1>
-
-              	
-             <p align="center">	<input type="text" placeholder="아이디로 검색" id="idid"><button type="button" id="searching">검색</button>
-              	</p>
-             
-             <div id="result"></div> 
-    <!-- <thead>
-   	 
+                      <h1 align="center">회원 목록</h1>
+						
+				<table class="type07" style="margin:auto">
+                       
+    <thead>
+    <tr>
+        <th style="width:150px">회원아이디</th>
+         <th style="width:150px">회원등급</th>
+          <th style="width:150px">휴면여부(y/n)</th>
+        <th style="width:150px">상세보기</th>
+    </tr>
     </thead>
     <tbody>
-    	
-   			
-    </tbody> -->
+    	<c:forEach var="member" items="${list}">
+    	<tr>
+    	<td> ${member.member_id} </td>
+    	<td>${member.grade}</td>
+    	<td>${member.dormant_yn}</td>
+    	<td><a href="member.selectOne.do?member_id=${member.member_id}"><button type="button">상세보기</button></a></td>
+    	</tr>
+    	</c:forEach>
+    </tbody>
+</table>
+
+					 <div class="pages">
+
+                       
+
+                        <ul class="pagination">
+                        	<c:if test="${currentPage ne 1}">
+                        		<li><a href="member.memberManage.do?page=${currentPage-1}">&laquo;</a></li>
+                        	</c:if>
+                        	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
+                        		<c:if test="${page eq currentPage}">                        	
+                        			<li class="active"><a href="#">${page}</a>
+                        		</c:if>
+                        		<c:if test="${page ne currentPage}">
+                        			<li><a href="member.memberManage.do?page=${page}">${page}</a></li>
+                        		</c:if>
+                        	</c:forEach>
+                        	<c:if test="${currentPage ne maxPage}">
+                        		<li><a href="member.memberManage.do?page=${currentPage+1}">&raquo;</a></li>
+                        	</c:if>
+                        </ul>
+
+                        	
+
+                    </div>
+   
 
 
 					

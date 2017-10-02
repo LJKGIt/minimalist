@@ -18,7 +18,7 @@
                         <div class="panel-body">
 
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active">
+                                <!-- <li class="active">
                                     <a href="#"><i class="fa fa-list"></i> My orders</a>
                                 </li>
                                 <li>
@@ -26,12 +26,12 @@
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-user"></i> My account</a>
-                                </li>
+                                </li> -->
                                 <li>
                                 	<a href="notice.viewWriteForm.do">공지사항 등록</a>
                                 </li>
                                 <li>
-                                	<a href="">회원관리</a>
+                                	<a href="member.memberManage.do">회원관리</a>
                                 </li>
                                 <li>
                                 	<a href="member.memberSearchView.do">쪽지</a>
