@@ -30,10 +30,31 @@ $(function(){
 	});
 	});
 	
-	$('gradeBtn').click(function(){
-		if('#gradeInput' == 0){
+	$('#gradeBtn').click(function(){
+		var grade=$('#gradeInput').val();
+		var id=$(this).val();
+		if(grade == 0){
 			alert('변경하려는 등급을 입력해주세요.');
 			return;
+			}else if(grade < 0 ){
+				alert('음수는 입력할 수 없습니다.');
+				return;
+			} else {
+			$.ajax({
+				url : "member.updateGrade.do",
+				type : "get",
+				data : {id : id, grade : grade},
+				dataType : "text",
+				success : function(value){
+					if(value=='yes'){
+						alert("적용되었습니다.");
+						location.reload();
+					}else {
+						alert('실패');
+					}
+				
+			}
+		});
 		}
 	});
 });
@@ -80,7 +101,7 @@ $(function(){
 						<p>이름 : ${member.member_name}</p>
 						<p>가입일 : ${member.regist_date}</p>
 						<p>등급 : ${member.grade}
-						<input type="number" style="width:50px" id="gradeInput"><button type="button" id="gradeBtn">
+						<input type="number" style="width:50px" id="gradeInput"><button type="button" id="gradeBtn" value="${member.member_id}">
 						등급조정
 						</button>
 						</p>
