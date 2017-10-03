@@ -28,10 +28,6 @@ public class HomeController {
 	public String index(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		ArrayList<Product> productList = productService.productList();
 		model.addAttribute("productList", productList);
-		
-//		PRODUCT LIST TO SEARCH
-		session.setAttribute("productListAll", productService.productListAll().toString());
-//		session.setMaxInactiveInterval(-1); //INFINIT
 		return "main/index";
 	}
 	

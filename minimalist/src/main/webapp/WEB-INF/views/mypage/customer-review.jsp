@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        Obaju : e-commerce template
-    </title>
+<script>
+	var menuNum = 3;
+</script>
 </head>
 
 <body>

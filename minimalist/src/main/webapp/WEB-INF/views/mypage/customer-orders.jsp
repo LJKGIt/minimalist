@@ -13,7 +13,9 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
  	 -->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<script>
+	var menuNum = 0;
+</script>
    
 </head>
 <body style="min-width: 360px;">
@@ -203,35 +205,22 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 					</div>
 					<!-- BOX END -->
 				</div>
-				
+				<!-- COOKIE -->
 				<c:import url="../main/wingCookie.jsp"/>
 			</div>
 			<!-- /.container -->
 		</div>
 		<!-- /#content -->
 		<c:import url="../main/footer.jsp" />
-
-
 	</div>
 	<!-- /#all -->
 
-
-
-	<!-- NAV MENU ACTIVE -->
-	<!-- <script>
-		$('#list > li:eq(0)').removeClass('active');
-		$('#list > li:eq(4)').addClass('active');
-	</script> -->
-
 	<script>
 		$(function() {
-			
 			$( "#delivery" ).click(function() {
 			   window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#deliveryNo").val(), "a", "width=700 height=500, left=100, top=100");
 			}); 
 		})
 	</script>
-
-
 </body>
 </html>

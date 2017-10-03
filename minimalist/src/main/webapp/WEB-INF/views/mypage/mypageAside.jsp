@@ -13,8 +13,8 @@
 				<h3 class="panel-title">Customer section</h3>
 			</div>
 			<div class="panel-body">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="member.mypage.do"><i
+				<ul id="asideMenu" class="nav nav-pills nav-stacked">
+					<li><a href="member.mypage.do"><i
 							class="fa fa-tags"></i> 주문내역</a></li>
 					<li><a href="wish.wishlist.do"><i class="fa fa-heart"></i>
 							찜 목록</a></li>
@@ -32,5 +32,11 @@
 		<!-- /.col-md-3 -->
 		<!-- *** CUSTOMER MENU END *** -->
 	</div>
+	
+	<script>
+	$(function(){
+		$('#asideMenu > li:eq('+menuNum+')').addClass('active');
+	})
+	</script>
 </body>
 </html>

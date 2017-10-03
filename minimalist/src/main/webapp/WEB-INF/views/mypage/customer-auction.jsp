@@ -11,7 +11,9 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-   
+<script>
+	var menuNum = 5;
+</script>
 </head>
 <body style="min-width: 360px;">
 
