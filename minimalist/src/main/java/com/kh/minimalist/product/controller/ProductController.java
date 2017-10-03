@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,12 +57,34 @@ public class ProductController {
 		}
 
 		// UPDATE COOKIE
-		if (member_id != null) {
-			try {
+		try {
+			if (member_id != null) {
 				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request, response);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+			}else{
+				new CookieUtils().setCookie("anonymous", String.valueOf(product.getProduct_code()), 365, request, response);
 			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			
+		}
+		
+		// RECENT VIEW (COOKIE)
+		try {
+			List<String> list = null;
+			ArrayList<Product> cookieList = null;
+			if(session.getAttribute("member") != null){
+				list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
+			}else{
+				list = new CookieUtils().getValueList("anonymous", request);
+			}
+			cookieList = new ArrayList<Product>();
+			if (list != null) {
+				for (String product_code : list)
+					cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
+			}
+			model.addAttribute("cookieList", cookieList);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 
 		if (product_return != null) {
@@ -76,7 +99,7 @@ public class ProductController {
 
 	// TODO [lintogi] ■ JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
-	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		String returnResult = "main/404";
 
 		boolean withAjax = false;
@@ -133,6 +156,27 @@ public class ProductController {
 				returnResult = "product/product_list";
 			}
 		}
+		
+		
+		// RECENT VIEW (COOKIE)
+		try {
+			List<String> list = null;
+			ArrayList<Product> cookieList = null;
+			if(session.getAttribute("member") != null){
+				list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
+			}else{
+				list = new CookieUtils().getValueList("anonymous", request);
+			}
+			cookieList = new ArrayList<Product>();
+			if (list != null) {
+				for (String product_code : list)
+					cookieList.add(productService.productDetail(new Product(Integer.parseInt(product_code))));
+			}
+			model.addAttribute("cookieList", cookieList);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		return returnResult;
 	}
 

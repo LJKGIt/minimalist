@@ -25,7 +25,6 @@ import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.commonUtil.SHA256Util;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
-import com.kh.minimalist.message.model.service.MessageService;
 import com.kh.minimalist.orderinfo.model.service.OrderInfoService;
 import com.kh.minimalist.orderinfo.model.vo.OrderInfo;
 import com.kh.minimalist.product.model.service.ProductService;
@@ -45,11 +44,8 @@ public class MemberController {
 	@Autowired
 	private OrderInfoService orderInfoService;
 
-	@Autowired
-	private MessageService messageService;
-
 	@RequestMapping(value = "login.do")
-	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
 		String result = "main/index";
 		model.addAttribute("loginError", null);
 		// SQL injection에 대비해 정규식 표현을 적용합니다.
@@ -67,6 +63,13 @@ public class MemberController {
 
 			if (member != null && member.getDormant_yn() == 'n') {
 				session.setAttribute("member", member);
+				
+				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
+				CookieUtils cu = new CookieUtils();
+				for(String cookie : cu.getValueList("anonymous", request))
+					cu.setCookie(member.getMember_id(), cookie, 365, request, response);
+				
+				
 				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
 					result = "redirect:" + request.getHeader("referer");
 
@@ -188,24 +191,23 @@ public class MemberController {
 			
 			// MEMBER_ID 값
 			map.put("member_id", member_id);
+
+			// ORDER KEYWORD 값
+			if (request.getParameter("orderKeyword") != null){
+				orderKeyword = request.getParameter("orderKeyword");
+				map.put("orderKeyword", orderKeyword);
+				orderDay = -1;
+			}
 			
 			// ORDERDAY 값(조회기간)
 			if (request.getParameter("orderDay") != null)
 				orderDay = Integer.parseInt(request.getParameter("orderDay"));
 			map.put("orderDay", orderDay);
 			
-			// ORDER KEYWORD 값
-			if (request.getParameter("orderKeyword") != null){
-				orderKeyword = request.getParameter("orderKeyword");
-				map.put("orderKeyword", orderKeyword);
-			}
-			
 			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(map);
 			if (myOrder != null)
 				model.addAttribute("myOrder", myOrder);
 			
-				
-
 			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);

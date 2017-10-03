@@ -22,14 +22,14 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 	<div id="all">
 		<div id="content">
 			<div class="container">
-				<div class="col-md-11">
+				<div class="col-md-12">
 					<ul class="breadcrumb">
 						<li><a href="index.do">Home</a></li>
 						<li>주문내역</li>
 					</ul>
 				</div>
 				<c:import url="mypageAside.jsp"/>
-				<div class="col-md-8" id="customer-orders">
+				<div class="col-md-9" id="customer-orders">
 					<div class="box">
 						<h3>주문 / 배송 조회</h3>
 
@@ -58,23 +58,28 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 						<!-- RECENT ORDERS -->
 						<div class="panel panel-default">
 						<div class="panel-heading">
-						<table>
-							<tr>
-								<td rowspan="2" class="col-md-3">조회</td>
-								<td class="col-md-9">
-									<a href="member.mypage.do?orderDay=1" class="btn btn-primary btn-xs">오늘</a>
-									<a href="member.mypage.do?orderDay=7" class="btn btn-primary btn-xs">1주일</a>
-									<a href="member.mypage.do?orderDay=30" class="btn btn-primary btn-xs">1개월</a>
-									<a href="member.mypage.do?orderDay=180" class="btn btn-primary btn-xs">6개월</a>
-									<a href="member.mypage.do?orderDay=365" class="btn btn-primary btn-xs">1년</a>
-									<a href="member.mypage.do?orderDay=-1" class="btn btn-primary btn-xs">전체조회</a>
-									<form action="member.mypage.do" class="form-inline" style="margin-top: 10px;">
-										<input type="text" name="orderKeyword" class="form-control input-sm">
-										<button type="submit" class="btn btn-default btn-sm">검색</button>
-									</form>									
-								</td>
-							</tr>
-						</table>
+						<div class="row" style="margin: 10px;">
+							<a href="member.mypage.do?orderDay=1" class="btn btn-primary btn-xs">오늘</a>
+							<a href="member.mypage.do?orderDay=7" class="btn btn-primary btn-xs">1주일</a>
+							<a href="member.mypage.do?orderDay=30" class="btn btn-primary btn-xs">1개월</a>
+							<a href="member.mypage.do?orderDay=180" class="btn btn-primary btn-xs">6개월</a>
+							<!-- <a href="member.mypage.do?orderDay=365" class="btn btn-primary btn-xs">1년</a> -->
+							<a href="member.mypage.do?orderDay=-1" class="btn btn-primary btn-xs">전체</a>
+						</div>
+						<div class="row" style="margin: 10px;">
+							<form action="member.mypage.do" class="">
+								<div class="input-group">
+									<input type="text" name="orderKeyword" class="form-control input-sm" placeholder="상품명을 검색하세요">
+									<div class="input-group-btn">
+										<button type="submit" class="btn btn-default btn-sm">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</form>						
+						</div>
+									
+																		
 						</div>
 						</div>
 						
@@ -199,29 +204,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 					<!-- BOX END -->
 				</div>
 				
-
-
-				<!-- RECENT VIEW (모바일 구현 X) -->
-				<div class="col-md-1 visible-lg-block visible-md-block"
-					style="margin-left: 480px; left: 50%;"  data-spy="affix" data-offset-top="0">
-					<!-- 893px ~ 1080px 까지는 달라짐 -->
-					<div class="box" style="width: 150px; padding: 10px;">
-						<div class="box"
-							style="padding: 0; text-align: center; margin-bottom: 10px;">
-							최근 본 상품<br>
-							<a href="#">${ cookieList.size() }</a>
-							<br>
-							<c:import url="../main/wingCookie.jsp"></c:import>
-
-						</div>
-						<div class="box goTop"
-							style="padding: 10px; text-align: center; margin: 0">
-							<i class="fa fa-chevron-up"></i> <strong>TOP</strong>
-						</div>
-					</div>
-				</div>
-				<!-- 모바일 구현 X RECENT VIEW END -->
-
+				<c:import url="../main/wingCookie.jsp"/>
 			</div>
 			<!-- /.container -->
 		</div>
@@ -246,71 +229,9 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 			$( "#delivery" ).click(function() {
 			   window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#deliveryNo").val(), "a", "width=700 height=500, left=100, top=100");
 			}); 
-			
-			
-			
-			// GO TOP
-			$('.goTop').click(function() {
-
-				$('body,html').animate({
-					'scrollTop' : 0
-				}, 500)
-			})
-
-			var spotarr = [];
-
-			$('body section').each(function(i, e) {
-				spotarr.push($(e).offset().top)
-			})
-
-			$(window).scroll(function() {
-				var sct = $(window).scrollTop()
-
-				$('body section').each(function(i, e) {
-					bg(sct);
-				})
-
-			})
-
-			$(window).trigger('scroll')
-
-			function bg(x) {
-				if (x > 200) {
-					$('.goTop').css({
-						'opacity' : '1'
-					})
-
-				} else {
-					$('.goTop').css({
-						//yjP - 원래 0이었음
-						'opacity' : '1'
-
-					})
-
-				}
-
-			}
-
-			$('.goTop').on({
-
-				mouseenter : function() {
-
-					$(this).css({
-						'background-color' : '#f0f0f0'
-					})
-				},
-
-				mouseleave : function() {
-
-					$(this).css({
-						'background-color' : '#fff'
-					})
-				}
-			})
-
 		})
 	</script>
 
-<script src="resources/js/slick.js"></script>
+
 </body>
 </html>

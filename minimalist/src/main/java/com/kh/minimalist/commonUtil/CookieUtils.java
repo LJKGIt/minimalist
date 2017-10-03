@@ -37,9 +37,8 @@ public class CookieUtils {
 		String value = "";
 		List<String> list = null;
 
-		// 특정 key의 쿠키값을 ","로 구분하여 String 배열에 담아준다.
-		// ex) 쿠키의 key/value ---> key = "clickItems", value = "211, 223, 303"(상품
-		// 번호)
+		// 특정 key의 쿠키값을 ","로 구분하여 String 배열에 담음
+		// ex) 쿠키의 key/value ---> key = "clickItems", value = "211, 223, 303"(상품번호)
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				if (cookies[i].getName().equals(key)) {
@@ -50,7 +49,7 @@ public class CookieUtils {
 			}
 		}
 
-		// String 배열에 담겼던 값들을 List로 다시 담는다.
+		// String 배열에 담겼던 값들을 List로 다시 담음
 		if (cookieValues != null) {
 			list = new ArrayList<String>(Arrays.asList(cookieValues));
 
@@ -111,7 +110,11 @@ public class CookieUtils {
 	public void deleteCookie(String key, String value, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		value = request.getParameter("del_cookie");
-		key = ((Member) session.getAttribute("member")).getMember_id();
+		if(session.getAttribute("member") != null)
+			key = ((Member) session.getAttribute("member")).getMember_id();
+		else
+			key = "anonymous";
+		
 		List<String> list = getValueList(key, request);
 		if(list == null)
 			System.out.println("가가");
