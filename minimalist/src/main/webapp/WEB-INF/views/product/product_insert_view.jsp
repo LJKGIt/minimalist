@@ -149,7 +149,6 @@
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
-								<% // TODO [lintogi] ■ ORDERINFO 테이블에 사이즈에 대한 컬럼도 넣기. %>
 								<!-- File Button --> 
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>

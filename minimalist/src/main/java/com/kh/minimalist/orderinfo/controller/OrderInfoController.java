@@ -55,16 +55,15 @@ public class OrderInfoController {
 		
 	}
 
-	// TODO [lintogi] ■ JSP 파일을 꾸미기.
-	@RequestMapping(value = "orderView.do", method = RequestMethod.GET)
-	public String orderVeiw(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "orderView.do", method = RequestMethod.POST)
+	public String orderVeiw(Product product, OrderInfo orderInfo, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		String returnResult = "main/404";
-
 		if ((Member) session.getAttribute("member") != null) {
 			Product product_return = productService.productDetail(product);
 			model.addAttribute("product", product_return);
-			returnResult = "order/productOrderView";
+			model.addAttribute("orderInfo", orderInfo);
+			returnResult = "order/product_order_view";
 		}
 
 		return returnResult;

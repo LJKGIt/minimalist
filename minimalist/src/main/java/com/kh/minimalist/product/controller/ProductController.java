@@ -140,7 +140,7 @@ public class ProductController {
 	public String productInsertView(Model model, HttpSession session) {
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
-			returnResult = "product/productInsertView";
+			returnResult = "product/product_insert_view";
 		}
 		return returnResult;
 	}

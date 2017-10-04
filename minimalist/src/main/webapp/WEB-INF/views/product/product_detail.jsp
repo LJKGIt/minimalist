@@ -178,18 +178,43 @@
 									<fmt:formatNumber value="${ product.rent_price }"
 										type="currency" currencySymbol="&#65510; " groupingUsed="true" />
 								</p>
-								<p class="text-center buttons">
-									<a href="orderView.do?product_code=${ product.product_code }"
-										class="btn btn-primary"> <i class="fa fa-shopping-cart"></i>
-										바로대여
-									</a>
-									<c:if test="${ empty wish }">
-										<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Add to wishlist</a>
-									</c:if>
-									<c:if test="${ not empty wish }">
-										<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Remove to wishlist</a>
-									</c:if>
-								</p>
+								<form class="form-horizontal" method="POST" action="orderView.do">
+									<input type="hidden" name="product_code" value="${ product.product_code }">
+									<!-- Select Basic -->
+									<div class="form-group">
+									  <label class="col-md-5 control-label" for="selectbasic">사이즈</label>
+									  <div class="col-md-3">
+									    <select id="i_select_size" name="order_size" class="form-control">
+									    	<c:if test="${ product.product_size33 eq 1}">
+									    		<option value="33">33</option>
+									    	</c:if>
+									    	<c:if test="${ product.product_size44 eq 1 }">
+									    		<option value="44">44</option>
+									    	</c:if>
+									    	<c:if test="${ product.product_size55 eq 1 }">
+									    		<option value="55">55</option>
+									    	</c:if>
+									    	<c:if test="${ product.product_size66 eq 1 }">
+									    		<option value="66">66</option>
+									    	</c:if>
+									    	<c:if test="${ product.product_size77 eq 1 }">
+									    		<option value="77">77</option>
+									    	</c:if>
+									    </select>
+									  </div>
+									</div>
+									<p class="text-center buttons">
+										<button type="submit" class="btn btn-primary"> <i class="fa fa-shopping-cart"></i>
+											바로대여
+										</button>
+										<c:if test="${ empty wish }">
+											<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Add to wishlist</a>
+										</c:if>
+										<c:if test="${ not empty wish }">
+											<a class="btn btn-default" id="i_a_wish"><i class='fa fa-heart' style="color: #ff5757;"></i> Remove to wishlist</a>
+										</c:if>
+									</p>
+								</form>
 							</div>
 							<div class="row" id="thumbs">
 								<div class="col-xs-4">

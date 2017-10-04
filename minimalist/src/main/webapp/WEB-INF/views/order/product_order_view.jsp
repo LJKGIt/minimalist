@@ -80,6 +80,7 @@
                                         <thead>
                                             <tr>
                                                 <th colspan="2">Product</th>
+                                                <th>상품 사이즈</th>
                                                 <th>대여 비용</th>
                                                 <th>대여 기간</th>
                                                 <th>대여 기간</th>
@@ -94,6 +95,7 @@
                                                 </td>
                                                 <td><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_name }</a>
                                                 </td>
+                                                <td>${ orderInfo.order_size }</td>
                                                 <td>${ product.rent_price }</td>
                                                 <td>(대여 기간1)</td>
                                                 <td>(대여 기간2)</td>
@@ -101,7 +103,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="4">결제 금액</th>
+                                                <th colspan="5">결제 금액</th>
                                                 <th>${ product.rent_price }</th>
                                             </tr>
                                         </tfoot>
@@ -170,7 +172,7 @@
 									    			order_reciever_phone : $('#i_text_reciever_phone').val()
 										    		//기타 필요한 데이터가 있으면 추가 전달
 									    		}
-									    	}).done(function(data) {
+								    		}).done(function(data) {
 									    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 									    		if ( data ) {
 									    			// var msg = '결제가 완료되었습니다.';
