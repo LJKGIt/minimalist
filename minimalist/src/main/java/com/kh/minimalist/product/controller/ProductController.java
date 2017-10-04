@@ -36,9 +36,9 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] ■ 예약 기능을 추가하기.
-	// TODO [lintogi] ■ 데이터를 만들기.
-	// TODO [lintogi] ■ 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
+	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
+	// TODO [lintogi] ■ 40 데이터를 만들기.
+	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
@@ -59,21 +59,21 @@ public class ProductController {
 		try {
 			if (member_id != null) {
 				new CookieUtils().setCookie(member_id, String.valueOf(product.getProduct_code()), 365, request, response);
-			}else{
+			} else {
 				new CookieUtils().setCookie("anonymous", String.valueOf(product.getProduct_code()), 365, request, response);
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 		// RECENT VIEW (COOKIE)
 		try {
 			List<String> list = null;
 			ArrayList<Product> cookieList = null;
-			if(session.getAttribute("member") != null){
+			if (session.getAttribute("member") != null) {
 				list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
-			}else{
+			} else {
 				list = new CookieUtils().getValueList("anonymous", request);
 			}
 			cookieList = new ArrayList<Product>();
@@ -96,7 +96,7 @@ public class ProductController {
 
 	}
 
-	// TODO [lintogi] ■ JSON으로 마무리하기.
+	// TODO [lintogi] ■ 00 JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		String returnResult = "main/404";
@@ -115,6 +115,7 @@ public class ProductController {
 			withAjax = true;
 			try {
 				productPage = Integer.parseInt(request.getParameter("productPage"));
+				System.out.println("productPage1 : " + productPage); // TODO
 			} catch (NumberFormatException e) {
 				return "main/404";
 			}
@@ -135,6 +136,9 @@ public class ProductController {
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
+		System.out.println("productPage2 : " + productPage); // TODO
+		System.out.println("startCount : " + startCount); // TODO
+		System.out.println("endCount : " + endCount); // TODO
 		ArrayList<Product> productList = productService.productList(hashMap);
 		if (productList != null && productList.size() != 0) {
 			if (withAjax) {
@@ -155,15 +159,14 @@ public class ProductController {
 				returnResult = "product/product_list";
 			}
 		}
-		
-		
+
 		// RECENT VIEW (COOKIE)
 		try {
 			List<String> list = null;
 			ArrayList<Product> cookieList = null;
-			if(session.getAttribute("member") != null){
+			if (session.getAttribute("member") != null) {
 				list = new CookieUtils().getValueList(((Member) session.getAttribute("member")).getMember_id(), request);
-			}else{
+			} else {
 				list = new CookieUtils().getValueList("anonymous", request);
 			}
 			cookieList = new ArrayList<Product>();
@@ -175,7 +178,7 @@ public class ProductController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
+
 		return returnResult;
 	}
 
@@ -188,9 +191,9 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 이미지 삽입하는 것을 처리하기.
-	// TODO [lintogi] ■ 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면 될 것 같다.
-	// TODO [lintogi] ■ 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다.
+	// TODO [lintogi] ■ 10 이미지 삽입하는 것을 처리하기.
+	// TODO [lintogi] ■ 10 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면 될 것 같다.
+	// TODO [lintogi] ■ 10 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다.
 	@RequestMapping(value = "productInsert.do", method = RequestMethod.POST)
 	public String productInsert(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";
@@ -205,7 +208,7 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 수정 페이지 만들기.
+	// TODO [lintogi] ■ 20 수정 페이지 만들기.
 	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
 	public String productUpdate(Product product, Model model, HttpSession session) {
 		String returnResult = "main/404";

@@ -457,24 +457,23 @@
 								var temp = "";
 								if(productPage == 1){
 									$(this).remove();
+									$.ajax({
+	                                    url: "productList.do", 
+	                                    type: "GET",
+	                                    data: { product_category : '${ product.product_category }', productPage : ++productPage }, 
+	                                    success: function (data) {
+	                                    	alert(data);
+	                                    	// for(var i = 0; i < 9; i++){
+	        								// 	temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
+	        								// }
+	        								// $('#i_div_products').html($('#i_div_products').html()+ temp);
+	                                    }, error: function (data) {
+	                                    	alert("error");
+	                                    }
+	                                }); //ajax
 									++productPage;
 								}
 								
-								for(var i = 0; i < 9; i++){
-									temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
-								}
-								$('#i_div_products').html($('#i_div_products').html()+ temp);
-								
-								//$.ajax({
-                                //    url: "productList.do", 
-                                //    type: "GET",
-                                //    data: { product_category : '${ product.product_category }', productPage : ++productPage }, 
-                                //    success: function (data) {
-                                //    	alert(data);
-                                //    }, error: function (data) {
-                                //    	alert("error");
-                                //    }
-                                //}); //ajax
 							}); //click
 
 							$(document).bind('scroll', '#content', function(){ 
@@ -482,15 +481,13 @@
 									var elem = $('#content');
 									if($(window).scrollTop() >= $('#content').offset().top + $('#content').outerHeight() - window.innerHeight){
 										var temp = "";
-										if(productPage == 1){
-											$(this).remove();
+										if(productPage > 1){
+											for(var i = 0; i < 9; i++){
+												temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
+											}
+											$('#i_div_products').html($('#i_div_products').html()+ temp);
 											++productPage;
 										}
-										for(var i = 0; i < 9; i++){
-											temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
-										}
-										$('#i_div_products').html($('#i_div_products').html()+ temp);
-										
 									}
 								}
 							}); 
