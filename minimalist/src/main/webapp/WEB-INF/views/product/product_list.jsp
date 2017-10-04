@@ -452,6 +452,7 @@
                         
 						<script type="text/javascript">
 							var productPage = 1;
+							var runningBoolean = false;
 							$('#i_a_load_more').on('click', function(){
 								var temp = "";
 								if(productPage == 1){
@@ -474,26 +475,26 @@
 								
 							}); //click
 
-							$(document).bind('scroll', '#content', function(){ 
-								if(productPage > 1){
-									var elem = $('#content');
-									if($(window).scrollTop() >= $('#content').offset().top + $('#content').outerHeight() - window.innerHeight){
-										if(productPage > 1){
-											$.ajax({
-			                                    url: "productList2.do", 
-			                                    type: "GET",
-			                                    data: { product_category : '${ product.product_category }', productPage : productPage + 1 }, 
-			                                    success: function (data) {
-			                                    	var temp = setDivProduct(data);
-			                                    	$('#i_div_products').html($('#i_div_products').html() + temp);
-			                                    	window.setTimeout(function(){
-			    	                                	++productPage;
-			    	                                }, 500);
-			                                    }, error: function (data) {
-			                                    	alert("error");
-			                                    }
-			                                }); //ajax
-										}
+							$(document).bind('scroll', '#content', function(){
+								var elem = $('#content');
+								if($(window).scrollTop() >= $('#content').offset().top + $('#content').outerHeight() - window.innerHeight){
+									if(runningBoolean == false && productPage > 1){
+										runningBoolean = true;
+										$.ajax({
+		                                    url: "productList2.do", 
+		                                    type: "GET",
+		                                    data: { product_category : '${ product.product_category }', productPage : productPage + 1 }, 
+		                                    success: function (data) {
+		                                    	var temp = setDivProduct(data);
+		                                    	$('#i_div_products').html($('#i_div_products').html() + temp);
+		                                    	window.setTimeout(function(){
+		    	                                	++productPage;
+		    	                                	runningBoolean = false;
+		    	                                }, 500);
+		                                    }, error: function (data) {
+		                                    	alert("error");
+		                                    }
+		                                }); //ajax
 									}
 								}
 							}); 

@@ -202,7 +202,7 @@ public class ProductController {
 
 		// productPage에 잘못된 값이 들어왔을 때
 		if ((productPage - 1) * 9 + 1 > totalCount) {
-			productPage = totalCount / 9;
+			return null;
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
