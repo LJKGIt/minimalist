@@ -33,7 +33,6 @@ public class ProductDao {
 	}
 
 	public void productHit(Product product) {
-		System.out.println(product);
 	}
 
 	public int productDelete(Product product) {

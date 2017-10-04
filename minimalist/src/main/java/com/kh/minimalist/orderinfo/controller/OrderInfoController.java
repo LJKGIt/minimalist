@@ -1,5 +1,8 @@
 package com.kh.minimalist.orderinfo.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,23 +30,31 @@ public class OrderInfoController {
 	// TODO [lintogi] □ 재영이 형이 만드신 INSERT ALL에 대해서 제약 조건을 이용해 반환 값이 상황에 따라서 어떻게 반환되는지 실험하기.
 
 	@RequestMapping(value = "orderInfoInsert.do", method = RequestMethod.POST)
-	public String orderInfoInsert(Product product, Model model, HttpServletRequest request, HttpServletResponse response,
+	public void orderInfoInsert(Product product, OrderInfo orderInfo, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		String returnResult = "main/404";
 		int result = 0;
-
+		
 		if ((Member) session.getAttribute("member") != null) {
-			OrderInfo orderInfo = new OrderInfo();
 			orderInfo.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 			orderInfo.setProduct_code(product.getProduct_code());
 			result = orderInfoService.orderInfoInsert(orderInfo);
 		}
-		if (result > 0) {
-			returnResult = "redirect:member.mypage.do";
+		System.out.println("result : " + result); // TODO
+
+		PrintWriter writer = null;
+		try {
+			writer = response.getWriter();
+			if (result > 0)
+				writer.append("true");
+			else
+				writer.append("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			writer.flush();
+			writer.close();
 		}
-
-		return returnResult;
-
+		
 	}
 
 	// TODO [lintogi] ■ JSP 파일을 꾸미기.

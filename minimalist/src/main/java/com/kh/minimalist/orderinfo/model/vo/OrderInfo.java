@@ -15,31 +15,29 @@ public class OrderInfo implements Serializable {
 	private String member_id;
 	private int product_code;
 	private Date orderinfo_date;
-	
+	private String order_reciever_name;
+	private String order_reciever_address;
+	private String order_reciever_phone;
+
 	private Product productJoin;
-
-	public Product getProductJoin() {
-		return productJoin;
-	}
-
-	public void setProductJoin(Product productJoin) {
-		this.productJoin = productJoin;
-	}
 
 	public OrderInfo() {
 	}
 
-	public OrderInfo(int orderinfo_code, String member_id, int product_code, Date orderinfo_date) {
+	public OrderInfo(int orderinfo_code, String member_id, int product_code, Date orderinfo_date, String order_reciever_name, String order_reciever_address, String order_reciever_phone, Product productJoin) {
 		this.orderinfo_code = orderinfo_code;
 		this.member_id = member_id;
 		this.product_code = product_code;
 		this.orderinfo_date = orderinfo_date;
+		this.order_reciever_name = order_reciever_name;
+		this.order_reciever_address = order_reciever_address;
+		this.order_reciever_phone = order_reciever_phone;
+		this.productJoin = productJoin;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderInfo [orderinfo_code=" + orderinfo_code + ", member_id=" + member_id + ", product_code="
-				+ product_code + ", orderinfo_date=" + orderinfo_date + "]";
+		return "OrderInfo [orderinfo_code=" + orderinfo_code + ", member_id=" + member_id + ", product_code=" + product_code + ", orderinfo_date=" + orderinfo_date + ", order_reciever_name=" + order_reciever_name + ", order_reciever_address=" + order_reciever_address + ", order_reciever_phone=" + order_reciever_phone + ", productJoin=" + productJoin + "]";
 	}
 
 	public int getOrderinfo_code() {
@@ -72,6 +70,38 @@ public class OrderInfo implements Serializable {
 
 	public void setOrderinfo_date(Date orderinfo_date) {
 		this.orderinfo_date = orderinfo_date;
+	}
+
+	public String getOrder_reciever_name() {
+		return order_reciever_name;
+	}
+
+	public void setOrder_reciever_name(String order_reciever_name) {
+		this.order_reciever_name = order_reciever_name;
+	}
+
+	public String getOrder_reciever_address() {
+		return order_reciever_address;
+	}
+
+	public void setOrder_reciever_address(String order_reciever_address) {
+		this.order_reciever_address = order_reciever_address;
+	}
+
+	public String getOrder_reciever_phone() {
+		return order_reciever_phone;
+	}
+
+	public void setOrder_reciever_phone(String order_reciever_phone) {
+		this.order_reciever_phone = order_reciever_phone;
+	}
+
+	public Product getProductJoin() {
+		return productJoin;
+	}
+
+	public void setProductJoin(Product productJoin) {
+		this.productJoin = productJoin;
 	}
 
 }

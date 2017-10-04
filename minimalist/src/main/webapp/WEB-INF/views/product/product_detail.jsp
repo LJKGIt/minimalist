@@ -24,10 +24,10 @@
 						<li>${ product.product_name }</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
+				<!-- <div class="col-md-3"> -->
 					<!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
-					<div class="panel panel-default sidebar-menu">
+					<%-- <div class="panel panel-default sidebar-menu">
 						<div class="panel-heading">
 							<h3 class="panel-title">Categories</h3>
 						</div>
@@ -147,8 +147,8 @@
 							src="${ pageContext.request.contextPath }/resources/img/banner.jpg"
 							alt="sales 2014" class="img-responsive"></a>
 					</div>
-				</div>
-				<div class="col-md-9">
+				</div> --%>
+				<div class="col-md-12">
 					<div class="row" id="productMain">
 						<div class="col-sm-6">
 							<div id="mainImage">

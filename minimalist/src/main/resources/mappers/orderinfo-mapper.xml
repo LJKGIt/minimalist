@@ -8,6 +8,9 @@
   		<result property="member_id" column="MEMBER_ID"/>
   		<result property="product_code" column="PRODUCT_CODE"/>
   		<result property="orderinfo_date" column="ORDERINFO_DATE"/>
+  		<result property="order_reciever_name" column="ORDER_RECIEVER_NAME"/>
+  		<result property="order_reciever_address" column="ORDER_RECIEVER_ADDRESS"/>
+  		<result property="order_reciever_phone" column="ORDER_RECIEVER_PHONE"/>
   		<association property="productJoin"  javaType="Product">
   			<id property="product_code" column="PRODUCT_CODE" />
 	  		<result property="product_name" column="PRODUCT_NAME"/>
@@ -29,7 +32,14 @@
 	</resultMap>
 
 	<insert id="orderInfoInsert" parameterType="OrderInfo"> 
-		INSERT INTO ORDERINFO VALUES((SELECT MAX(ORDERINFO_CODE) FROM ORDERINFO)+1, #{ member_id }, #{ product_code }, SYSDATE)
+		INSERT INTO ORDERINFO VALUES(
+			(SELECT MAX(ORDERINFO_CODE) FROM ORDERINFO)+1, 
+			#{ member_id }, 
+			#{ product_code }, 
+			SYSDATE, 
+			#{ order_reciever_name }, 
+			#{ order_reciever_address }, 
+			#{ order_reciever_phone })
 	</insert>
 	
 	<select id="myOrder" parameterType="string" resultType="OrderInfo" resultMap="resultOrderInfo">

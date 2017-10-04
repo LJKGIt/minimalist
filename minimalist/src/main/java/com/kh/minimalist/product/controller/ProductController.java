@@ -193,12 +193,10 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 다중 처리에 오류가 있다.
-	// formData를 넘기던데 어느 form인지 어떻게 알지?
-	// name 값을 바꿔보기.
 	@RequestMapping(value = "productImageUpload.do", method = RequestMethod.POST)
 	public void productImageUpload(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multi) {
 		String returnResult = "false";
+		// String root = multi.getSession().getServletContext().getRealPath("/");
 		String root = request.getSession().getServletContext().getRealPath("/").substring(0, request.getSession().getServletContext().getRealPath("/").indexOf("target"));
 		String path = root + "src\\main\\webapp\\resources\\img_product\\";
 		String newFileName = "";
@@ -209,18 +207,19 @@ public class ProductController {
 		Iterator<String> files = multi.getFileNames();
 		while (files.hasNext()) {
 			String uploadFile = files.next();
-			System.out.println("uploadFile : " + uploadFile);
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
 			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 			newFileName = fileName;
-			System.out.println(path + newFileName);
 			try {
 				mFile.transferTo(new File(path + newFileName));
-				returnResult = "true";
-			} catch (Exception e) {
+			} catch (IllegalStateException e) {
 				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO [lintogi] □ 다중 업로드 시 오류난다. 이유를 알아보자.
+				// e.printStackTrace();
 			}
+			returnResult = "true";
 		}
 		try {
 			response.getWriter().append(returnResult);
