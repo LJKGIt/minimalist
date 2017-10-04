@@ -9,7 +9,7 @@
 
 <body>
 	<%
-		// TODO [lintogi] ■ 브랜드, 색상, 정렬 처리하기.
+		// TODO [lintogi] □ 브랜드, 색상, 정렬 처리하기.
 	%>
 	<c:import url="../main/header.jsp" />
 	<div id="all" style="background: white;">

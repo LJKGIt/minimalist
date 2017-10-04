@@ -19,13 +19,15 @@ public class OrderInfo implements Serializable {
 	private String order_reciever_address;
 	private String order_reciever_phone;
 	private String order_size;
+	private int order_invoice_number;
 
 	private Product productJoin;
 
 	public OrderInfo() {
 	}
 
-	public OrderInfo(int orderinfo_code, String member_id, int product_code, Date orderinfo_date, String order_reciever_name, String order_reciever_address, String order_reciever_phone, String order_size, Product productJoin) {
+	public OrderInfo(int orderinfo_code, String member_id, int product_code, Date orderinfo_date, String order_reciever_name, String order_reciever_address, String order_reciever_phone, String order_size, int order_invoice_number, Product productJoin) {
+		super();
 		this.orderinfo_code = orderinfo_code;
 		this.member_id = member_id;
 		this.product_code = product_code;
@@ -34,12 +36,13 @@ public class OrderInfo implements Serializable {
 		this.order_reciever_address = order_reciever_address;
 		this.order_reciever_phone = order_reciever_phone;
 		this.order_size = order_size;
+		this.order_invoice_number = order_invoice_number;
 		this.productJoin = productJoin;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderInfo [orderinfo_code=" + orderinfo_code + ", member_id=" + member_id + ", product_code=" + product_code + ", orderinfo_date=" + orderinfo_date + ", order_reciever_name=" + order_reciever_name + ", order_reciever_address=" + order_reciever_address + ", order_reciever_phone=" + order_reciever_phone + ", order_size=" + order_size + ", productJoin=" + productJoin + "]";
+		return "OrderInfo [orderinfo_code=" + orderinfo_code + ", member_id=" + member_id + ", product_code=" + product_code + ", orderinfo_date=" + orderinfo_date + ", order_reciever_name=" + order_reciever_name + ", order_reciever_address=" + order_reciever_address + ", order_reciever_phone=" + order_reciever_phone + ", order_size=" + order_size + ", order_invoice_number=" + order_invoice_number + ", productJoin=" + productJoin + "]";
 	}
 
 	public int getOrderinfo_code() {
@@ -104,6 +107,14 @@ public class OrderInfo implements Serializable {
 
 	public void setOrder_size(String order_size) {
 		this.order_size = order_size;
+	}
+
+	public int getOrder_invoice_number() {
+		return order_invoice_number;
+	}
+
+	public void setOrder_invoice_number(int order_invoice_number) {
+		this.order_invoice_number = order_invoice_number;
 	}
 
 	public Product getProductJoin() {

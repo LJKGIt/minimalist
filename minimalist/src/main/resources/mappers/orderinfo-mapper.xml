@@ -11,6 +11,9 @@
   		<result property="order_reciever_name" column="ORDER_RECIEVER_NAME"/>
   		<result property="order_reciever_address" column="ORDER_RECIEVER_ADDRESS"/>
   		<result property="order_reciever_phone" column="ORDER_RECIEVER_PHONE"/>
+  		<result property="order_size" column="ORDER_SIZE"/>
+  		<result property="order_invoice_number" column="ORDER_INVOICE_NUMBER"/>
+
   		<association property="productJoin"  javaType="Product">
   			<id property="product_code" column="PRODUCT_CODE" />
 	  		<result property="product_name" column="PRODUCT_NAME"/>

@@ -61,7 +61,7 @@
 								</div>
 								
 								
-								<% // TODO [lintogi] ■ 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
+								<% // TODO [lintogi] □ 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
 								<!-- Select Basic -->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_select_brand">브랜드</label>
@@ -355,7 +355,7 @@
 												$(this).focus();
 											}
 										});
-										<% // TODO [lintogi] □ 배송 API가 적용되면 ORDERINFO 테이블에 컬럼으로 배송중, 배송완료 등에 대한 컬럼을 만들기. %>
+										
 										// submit 버튼을 클릭 시 비어있는 값을 확인합니다.
 										$('#i_submit').on('click', function(){
 											if($('#i_text_name').val() == ""){
