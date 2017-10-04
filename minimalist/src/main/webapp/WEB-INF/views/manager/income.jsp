@@ -78,6 +78,7 @@ position: absolute;
 
                 </div>
 
+				<input type="hidden" id="i_hidden_aside_active" value="매출 확인">
 				<c:import url="../main/aside_admin.jsp" />
                 <div class="col-md-9">
 

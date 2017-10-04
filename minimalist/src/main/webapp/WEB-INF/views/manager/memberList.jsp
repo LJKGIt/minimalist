@@ -79,6 +79,7 @@ position: absolute;
 
                 </div>
 
+				<input type="hidden" id="i_hidden_aside_active" value="회원관리">
                 <c:import url="../main/aside_admin.jsp" />
 
                 <div class="col-md-9">

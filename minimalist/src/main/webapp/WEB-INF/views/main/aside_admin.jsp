@@ -17,7 +17,7 @@
 
                         <div class="panel-body">
 
-                            <ul class="nav nav-pills nav-stacked">
+                            <ul class="nav nav-pills nav-stacked" id="i_ul_active">
                                 <!-- <li class="active">
                                     <a href="#"><i class="fa fa-list"></i> My orders</a>
                                 </li>
@@ -56,5 +56,16 @@
 
                     <!-- *** CUSTOMER MENU END *** -->
                 </div>
+                <script type="text/javascript">
+                	$(function(){
+                		$('#i_ul_active').children('li').each(function(index, element){
+                			if($(this).children('a').eq(0).text().trim() == $('#i_hidden_aside_active').val().trim()){
+                				$(this).attr('class', 'active');
+                				return false;
+                			}
+                		});
+                		;
+                	});
+                </script>
 </body>
 </html>

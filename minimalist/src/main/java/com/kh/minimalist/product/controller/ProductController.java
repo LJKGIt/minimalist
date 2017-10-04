@@ -36,7 +36,6 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] ■ 관리자 페이지에서 좌측에 까맣게 표시해주는 걸 aside_admin.jsp 내에서 자바스크립트로 처리하기.
 	// TODO [lintogi] ■ 예약 기능을 추가하기.
 	// TODO [lintogi] ■ 데이터를 만들기.
 	// TODO [lintogi] ■ 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
