@@ -33,13 +33,11 @@ public class OrderInfoController {
 	public void orderInfoInsert(Product product, OrderInfo orderInfo, Model model, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		int result = 0;
-		
 		if ((Member) session.getAttribute("member") != null) {
 			orderInfo.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 			orderInfo.setProduct_code(product.getProduct_code());
 			result = orderInfoService.orderInfoInsert(orderInfo);
 		}
-		System.out.println("result : " + result); // TODO
 
 		PrintWriter writer = null;
 		try {

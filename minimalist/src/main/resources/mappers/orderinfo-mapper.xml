@@ -33,7 +33,7 @@
 
 	<insert id="orderInfoInsert" parameterType="OrderInfo"> 
 		INSERT INTO ORDERINFO VALUES(
-			(SELECT MAX(ORDERINFO_CODE) FROM ORDERINFO)+1, 
+			(SELECT NVL(MAX(ORDERINFO_CODE),0) FROM ORDERINFO)+1, 
 			#{ member_id }, 
 			#{ product_code }, 
 			SYSDATE, 
