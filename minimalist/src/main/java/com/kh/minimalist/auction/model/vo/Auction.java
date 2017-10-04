@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.kh.minimalist.product.model.vo.ProductImage;
-
 public class Auction implements Serializable {
 
 	

@@ -127,7 +127,7 @@ border-top: 1px none #888;!important;
 		<span class="tit" ><strong>경매 코드 : ${auction.auction_code}</strong></span>
 		</td><td class="data" style="border-bottom-style: dashed; text-align:right;" >종료일 : ${auction.end_date}</td></tr>
 		
-		<tr><td id="a" colspan="3" style="border-bottom: 2px solid #cccccc;" ><span>
+		<tr><td id="a" colspan="3" style="border-bottom: 2px solid #cccccc;" ></td></tr>
 		<tr><td>입찰 정보 - 상위 입찰자 5명</td></tr>
 		<c:forEach var="au" items="${auction.bidInfo}" varStatus="index">
 			<tr>
@@ -143,7 +143,6 @@ border-top: 1px none #888;!important;
 			</tr>
 		</c:forEach>
 		
-		</span></td></tr>
 		
 		</tbody>
 		
