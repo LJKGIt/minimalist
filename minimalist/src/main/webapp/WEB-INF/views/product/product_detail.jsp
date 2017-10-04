@@ -457,6 +457,7 @@
 					</div>
 				</div>
 				<!-- /.col-md-9 -->
+				<c:import url="../main/wingCookie.jsp"/>
 			</div>
 			<!-- /.container -->
 		</div>

@@ -96,7 +96,6 @@
 										</select>
 								</div>
 								
-								<% // TODO 경매중일 때 탈퇴? %>
 								<div class="form-group" style="margin-bottom: 0;">
 									<label for="pwd">회원 탈퇴</label>
 								</div> 

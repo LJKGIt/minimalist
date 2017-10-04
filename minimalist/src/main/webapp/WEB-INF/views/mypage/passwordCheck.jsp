@@ -4,7 +4,11 @@
 
 <!DOCTYPE html>
 <html>
-
+<head>
+<script>
+	var menuNum = 2;
+</script>
+</head>
 <body>
 	<c:import url="../main/header.jsp" />
 
