@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +26,7 @@ import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
+import com.kh.minimalist.product.model.vo.ProductImage;
 import com.kh.minimalist.wish.model.service.WishService;
 import com.kh.minimalist.wish.model.vo.Wish;
 
@@ -126,12 +128,14 @@ public class ProductController {
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
+
 		startCount = (productPage - 1) * 9 + 1;
 		if (Math.ceil(totalCount / 9.0) == productPage) {
 			endCount = totalCount;
 		} else {
 			endCount = productPage * 9;
 		}
+
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
@@ -155,6 +159,12 @@ public class ProductController {
 				}
 
 			} else {
+				for(Product p : productList){
+					System.out.println("productList : " + p.getProduct_code()); // TODO
+					for(ProductImage pi : p.getProductImageList()){
+						System.out.println("productList : " + pi.getProduct_image_path()); // TODO
+					}
+				}
 				model.addAttribute("productList", productList);
 				returnResult = "product/product_list";
 			}
@@ -180,6 +190,56 @@ public class ProductController {
 		}
 
 		return returnResult;
+	}
+
+	// TODO [lintogi] ■ 00 JSON으로 마무리하기.
+	@RequestMapping(value = "productList2.do", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<Product> productList2(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+
+		int productPage = 1;
+		int totalCount = productService.productTotalCount(product);
+		int startCount = 0;
+		int endCount = 0;
+		// product_category가 null이면 기본 값을 주기.
+		if (product.getProduct_category() == null) {
+			product.setProduct_category("outer");
+		}
+
+		try {
+			productPage = Integer.parseInt(request.getParameter("productPage"));
+			System.out.println("[AJAX] productPage1 : " + productPage); // TODO
+		} catch (NumberFormatException e) {
+			return null;
+		}
+
+		// productPage에 잘못된 값이 들어왔을 때
+		if ((productPage - 1) * 9 + 1 > totalCount) {
+			productPage = totalCount / 9;
+		} else if (productPage < 0) {
+			productPage = 1;
+		}
+
+		startCount = (productPage - 1) * 9 + 1;
+		if (Math.ceil(totalCount / 9.0) == productPage) {
+			endCount = totalCount;
+		} else {
+			endCount = productPage * 9;
+		}
+
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("product", product);
+		hashMap.put("startCount", startCount);
+		hashMap.put("endCount", endCount);
+		System.out.println("[AJAX] productPage2 : " + productPage); // TODO
+		System.out.println("[AJAX] startCount : " + startCount); // TODO
+		System.out.println("[AJAX] endCount : " + endCount); // TODO
+		ArrayList<Product> productList = productService.productList(hashMap);
+
+		for(Product p : productList){
+			System.out.println("[AJAX] productList : " + p.getProduct_code()); // TODO
+		}
+		
+		return productList;
 	}
 
 	@RequestMapping(value = "productInsertView.do", method = RequestMethod.GET)

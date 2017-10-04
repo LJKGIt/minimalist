@@ -221,7 +221,6 @@
 	                                            </a>
 	                                        </div>
 	                                        <div class="back">
-	                                            <%-- <a href="productDetail.do?product_code=${ product.product_code }"> --%>
 	                                            <a href="productDetail.do?product_code=${ product.product_code }">
 	                                                <img src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt="" class="img-responsive">
 	                                            </a>
@@ -235,10 +234,10 @@
 	                                    <h3 style="margin:0px; height:20px; font-weight: normal;"><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_brand }</a></h3>
 	                                    <h3 style="margin:0px;"><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_name }</a></h3>
 	                                    <p class="price" style="margin:0px 0px 5px 0px;"><fmt:formatNumber value="${ product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
-	                                    <%-- <p class="buttons" style="margin:0px 0px 5px 0px;">
+	                                    <!-- <p class="buttons" style="margin:0px 0px 5px 0px;">
 	                                        <a href="productDetail.do?product_code=${ product.product_code }" class="btn btn-default">View detail</a>
 	                                        <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-	                                    </p> --%>
+	                                    </p> -->
 	                                </div>
 	                                <!-- /.text -->
 	                            </div>
@@ -458,20 +457,78 @@
 								if(productPage == 1){
 									$(this).remove();
 									$.ajax({
-	                                    url: "productList.do", 
+	                                    url: "productList2.do", 
 	                                    type: "GET",
-	                                    data: { product_category : '${ product.product_category }', productPage : ++productPage }, 
+	                                    data: { product_category : '${ product.product_category }', productPage : productPage + 1 }, 
 	                                    success: function (data) {
-	                                    	alert(data);
-	                                    	// for(var i = 0; i < 9; i++){
-	        								// 	temp += "<div class='col-md-4 col-sm-6'>" + $('#i_div_products').children('div').html() + "</div>";
-	        								// }
-	        								// $('#i_div_products').html($('#i_div_products').html()+ temp);
+	                                    	var temp = "";
+	                                    	for(var i = 0; i < data.length; i++){
+	                                    		temp += "<div class='col-md-4 col-sm-6'>" + 
+	            	                            "<div class='product' style='border:none;'>" + 
+	            	                                "<div class='flip-container'>" + 
+	            	                                    "<div class='flipper'>" + 
+	            	                                        "<div class='front'>" + 
+	            	                                            "<a href='productDetail.do?product_code=" +
+	            	                                            	data[i].product_code +
+		                                    						"'>" + 
+	            	                                                "<img src='${ pageContext.request.contextPath }/resources/img_product/" + 
+	            	                                                data[i].productImageList[0].product_image_path + 
+	            	                                                "' alt='' class='img-responsive'>" + 
+	            	                                            "</a>" + 
+	            	                                        "</div>" + 
+	            	                                        "<div class='back'>" + 
+	            	                                            "<a href='productDetail.do?product_code=" +
+	            	                                            	data[i].product_code +
+	            	                                            	"'>" + 
+	            	                                                "<img src='${ pageContext.request.contextPath }/resources/img_product/" +
+	            	                                                data[i].productImageList[1].product_image_path + 
+	            	                                                "' alt='' class='img-responsive'>" + 
+	            	                                            "</a>" + 
+	            	                                        "</div>" + 
+	            	                                    "</div>" + 
+	            	                                "</div>" + 
+	            	                                "<a href='productDetail.do?product_code=" +
+	            	                                	data[i].product_code +
+	            	                                	"' class='invisible'>" + 
+	            	                                    "<img src='${ pageContext.request.contextPath }/resources/img_product/" +
+	            	                                    data[i].productImageList[0].product_image_path +
+	            	                                    "' alt='' class='img-responsive'>" + 
+	            	                                "</a>" + 
+	            	                                "<div class='text'>" + 
+	            	                                    "<h3 style='margin:0px; height:20px; font-weight: normal;'><a href='productDetail.do?product_code=" +
+	            	                                    	data[i].product_code +
+	            	                                    "'>" + 
+	            	                                    data[i].product_brand + 
+	            	                                    "</a></h3>" + 
+	            	                                    "<h3 style='margin:0px;'><a href='productDetail.do?product_code=" +
+	            	                                    	data[i].product_code +
+	            	                                    "'>" + 
+	            	                                    data[i].product_name +
+	            	                                    "</a></h3>" + 
+	            	                                    "<p class='price' style='margin:0px 0px 5px 0px;'>" +
+	            	                                		data[i].rent_price +
+	            	                                    "</p>" +
+	            	                                    "<!-- <p class='buttons' style='margin:0px 0px 5px 0px;'>" +
+	        	                                        "<a href='productDetail.do?product_code=" +
+	        	                                       		data[i].product_code +
+	        	                                        	"' class='btn btn-default'>View detail</a>" +
+	        	                                        "<a href='basket.html' class='btn btn-primary'><i class='fa fa-shopping-cart'></i>Add to cart</a>" +
+	        	                                    	"</p> -->" +
+	            	                                "</div>" + 
+		            	                                "<!-- /.text -->" + 
+	            	                            "</div>" + 
+	            	                            "<!-- /.product -->" + 
+	            	                            "</div>";
+	                                    	}
+	                                    	$('#i_div_products').html($('#i_div_products').html() + temp);
+	                                    	window.setTimeout(function(){
+	    	                                	++productPage;
+	    	                                }, 1000);
 	                                    }, error: function (data) {
 	                                    	alert("error");
 	                                    }
 	                                }); //ajax
-									++productPage;
+	                                
 								}
 								
 							}); //click
