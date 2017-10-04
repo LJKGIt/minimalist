@@ -26,7 +26,6 @@ import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.member.model.vo.Member;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
-import com.kh.minimalist.product.model.vo.ProductImage;
 import com.kh.minimalist.wish.model.service.WishService;
 import com.kh.minimalist.wish.model.vo.Wish;
 
@@ -98,7 +97,6 @@ public class ProductController {
 
 	}
 
-	// TODO [lintogi] ■ 00 JSON으로 마무리하기.
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		String returnResult = "main/404";
@@ -108,6 +106,7 @@ public class ProductController {
 		int totalCount = productService.productTotalCount(product);
 		int startCount = 0;
 		int endCount = 0;
+
 		// product_category가 null이면 기본 값을 주기.
 		if (product.getProduct_category() == null) {
 			product.setProduct_category("outer");
@@ -117,7 +116,6 @@ public class ProductController {
 			withAjax = true;
 			try {
 				productPage = Integer.parseInt(request.getParameter("productPage"));
-				System.out.println("productPage1 : " + productPage); // TODO
 			} catch (NumberFormatException e) {
 				return "main/404";
 			}
@@ -140,9 +138,6 @@ public class ProductController {
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
-		System.out.println("productPage2 : " + productPage); // TODO
-		System.out.println("startCount : " + startCount); // TODO
-		System.out.println("endCount : " + endCount); // TODO
 		ArrayList<Product> productList = productService.productList(hashMap);
 		if (productList != null && productList.size() != 0) {
 			if (withAjax) {
@@ -159,12 +154,6 @@ public class ProductController {
 				}
 
 			} else {
-				for(Product p : productList){
-					System.out.println("productList : " + p.getProduct_code()); // TODO
-					for(ProductImage pi : p.getProductImageList()){
-						System.out.println("productList : " + pi.getProduct_image_path()); // TODO
-					}
-				}
 				model.addAttribute("productList", productList);
 				returnResult = "product/product_list";
 			}
@@ -192,7 +181,6 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 00 JSON으로 마무리하기.
 	@RequestMapping(value = "productList2.do", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<Product> productList2(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 
@@ -200,6 +188,7 @@ public class ProductController {
 		int totalCount = productService.productTotalCount(product);
 		int startCount = 0;
 		int endCount = 0;
+
 		// product_category가 null이면 기본 값을 주기.
 		if (product.getProduct_category() == null) {
 			product.setProduct_category("outer");
@@ -207,7 +196,6 @@ public class ProductController {
 
 		try {
 			productPage = Integer.parseInt(request.getParameter("productPage"));
-			System.out.println("[AJAX] productPage1 : " + productPage); // TODO
 		} catch (NumberFormatException e) {
 			return null;
 		}
@@ -230,15 +218,8 @@ public class ProductController {
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
-		System.out.println("[AJAX] productPage2 : " + productPage); // TODO
-		System.out.println("[AJAX] startCount : " + startCount); // TODO
-		System.out.println("[AJAX] endCount : " + endCount); // TODO
 		ArrayList<Product> productList = productService.productList(hashMap);
 
-		for(Product p : productList){
-			System.out.println("[AJAX] productList : " + p.getProduct_code()); // TODO
-		}
-		
 		return productList;
 	}
 
