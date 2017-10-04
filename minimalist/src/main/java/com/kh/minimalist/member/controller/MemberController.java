@@ -407,6 +407,19 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "member.searchingMember.do")
+	public String searchingMember(HttpServletRequest request, Model model){
+		
+		String keyword=request.getParameter("keyword");
+		
+		ArrayList<Member> list=memberService.searchingMember(keyword);
+
+			model.addAttribute("list", list);
+		
+		
+		return "manager/memberList";
+	}
+	
 	//member.selectOne.do
 	@RequestMapping(value = "member.selectOne.do")
 	public String selectOneMember(HttpServletRequest request, Model model){
@@ -438,13 +451,11 @@ public class MemberController {
 		
 		
 		String tmp=request.getParameter("yn");
-		System.out.println("yn 받은값 : "+tmp);
-		System.out.println("아이디 값 : "+request.getParameter("id"));
 		Member m=new Member();
 		
 		m.setMember_id(request.getParameter("id"));
 		m.setDormant_yn(tmp.charAt(0));
-		System.out.println(m.getDormant_yn());
+	
 		
 		int result=memberService.updateDormant(m);
 		

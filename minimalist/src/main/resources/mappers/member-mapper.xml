@@ -84,5 +84,9 @@
     	update member set dormant_yn=#{dormant_yn}
    		where member_id=#{member_id}
     </update>
+    
+    <select id="searchingMember" parameterType="string" resultType="Member" resultMap="resultMember">
+    	select * from member where member_id=#{member_id}
+    </select>
 
 </mapper>
