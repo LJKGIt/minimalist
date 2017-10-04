@@ -48,6 +48,18 @@
 	                         	</tr>
 	                         </thead>
 	                         <tbody>
+	                         	<c:if test="${ empty reviewList }">
+	                         		<tr>
+	                         			<td colspan="5" style="text-align: center;">
+		                         			<br>
+		                         			<br>
+		                         			작성하신 리뷰가 존재하지 않습니다.
+		                         			<br>
+		                         			<br>
+	                         			</td>
+	                         		</tr>
+	                         	</c:if>
+	                         	<c:if test="${ !empty reviewList }">
 	                         	<c:forEach var="review" items="${ reviewList }">
 	                         		<tr>
 	                         			<td>${ review.review_date }</td>
@@ -65,6 +77,7 @@
 	                         			</td>
 	                         		</tr>
 	                         	</c:forEach>
+	                         	</c:if>
 	                         </tbody>
                          	
                          </table>
