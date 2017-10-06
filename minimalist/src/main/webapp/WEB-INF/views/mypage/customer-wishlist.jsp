@@ -35,13 +35,19 @@
                     </ul>
 
                     <div class="box">
-                        <h1>Wish List</h1>
-                        <p class="lead">찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록찜목록</p>
+                        <h3>Wish List</h3>
+                        <h4>마음에 드는 상품을 찜하시면 My Page에서 편리하게 관리하실 수 있습니다.</h4>
                     </div>
 
                     <div class="row products">
                     <c:if test="${ empty wishList }">
-						찜 목록이 없습니다.
+                    <br>
+                    <br>
+                    <div style="text-align: center;">
+						찜 목록이 존재하지 아니합니다.
+					</div>
+					<br> 
+					<br>
 					</c:if>
                     <c:if test="${ !empty wishList }">
 					<c:forEach var="wish" items="${ wishList }">
@@ -65,8 +71,8 @@
                                     <img src="resources/img/product1.jpg" alt="" class="img-responsive">
                                 </a>
                                 <div class="text">
-                                	<h3><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_brand }</a></h3>
-	                                <h3><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_name }</a></h3>
+                                	<h3 style="margin:0px; height:20px; font-weight: normal;"><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_brand }</a></h3>
+	                                <h3 style="margin:0px;"><a href="productDetail.do?product_code=${ wish.product_code }">${ wish.product.product_name }</a></h3>
                                    
                                     <p class="price"><fmt:formatNumber value="${ wish.product.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></p>
                                 </div>
