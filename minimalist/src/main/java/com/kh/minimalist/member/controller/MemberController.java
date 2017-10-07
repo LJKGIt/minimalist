@@ -20,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.commonUtil.SHA256Util;
@@ -97,27 +99,24 @@ public class MemberController {
 	}
 
 	@RequestMapping("memberidchk.do")
-	public void memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	public View memberIdChk(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain; utf-8");
 
 		String member_id = request.getParameter("member_id");
 
-		System.out.println(member_id);
-
 		int result = memberService.memberIdChk(member_id);
-
-		PrintWriter clientOut = response.getWriter();
-
+		
 		// 업데이트 완료 여부 콜백
 		if (result > 0) {
-			clientOut.append("0");
-			clientOut.flush();
+			model.addAttribute("mchk", "이미 사용 중 입니다.");
+			model.addAttribute("flag", 1);
 		} else {
-			clientOut.append("1");
-			clientOut.flush();
+			model.addAttribute("mchk", "사용가능한 아이디 입니다.");
+			model.addAttribute("flag", 0);
 		}
-		clientOut.close();
+		
+		return new MappingJackson2JsonView();
 
 	}
 
