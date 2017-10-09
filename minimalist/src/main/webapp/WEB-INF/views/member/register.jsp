@@ -208,13 +208,13 @@
 					member_id : value
 				},
 				type : "post",
-				dataType : "text",
+				dataType : "json",
 				success : function(data){
-					if(data == 1){
-						$('#checkID').text("사용가능한 아이디입니다.");
+					if(data.flag == 1){
+						$('#checkID').text(data.mchk);
 						$('#member_pwd').focus();
 					} else {
-						$('#checkID').text("이미 사용중입니다.").css("color", "red");
+						$('#checkID').text(data.mchk).css("color", "red");
 					}
 				} 				   
 			})
