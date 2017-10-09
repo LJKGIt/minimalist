@@ -545,7 +545,7 @@
     	                                    data[i].product_name +
     	                                    "</a></h3>" + 
     	                                    "<p class='price' style='margin:0px 0px 5px 0px;'>" +
-    	                                		data[i].rent_price +
+    	                                		"&#65510; " + data[i].rent_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
     	                                    "</p>" +
     	                                    "<!-- <p class='buttons' style='margin:0px 0px 5px 0px;'>" +
 	                                        "<a href='productDetail.do?product_code=" +
