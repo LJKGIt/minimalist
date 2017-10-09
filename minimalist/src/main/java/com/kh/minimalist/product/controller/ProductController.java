@@ -38,7 +38,6 @@ public class ProductController {
 	private WishService wishService;
 
 	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
-	// TODO [lintogi] ■ 40 데이터를 만들기.
 	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -308,15 +307,16 @@ public class ProductController {
 			String uploadFile = files.next();
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
-			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-			newFileName = fileName;
-			try {
-				mFile.transferTo(new File(path + newFileName));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO [lintogi] □ 다중 업로드 시 오류난다. 이유를 알아보자.
-				// e.printStackTrace();
+			if(fileName != null && !fileName.equals("")){
+				// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+				newFileName = fileName;
+				try {
+					mFile.transferTo(new File(path + newFileName));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			returnResult = "true";
 		}
