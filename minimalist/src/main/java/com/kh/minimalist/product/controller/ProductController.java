@@ -39,6 +39,7 @@ public class ProductController {
 
 	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
 	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
+	// TODO [lintogi] □ 마지막에 "System.out.print"를 모두 지우기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";

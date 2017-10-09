@@ -333,9 +333,9 @@ INSERT INTO PRODUCT VALUES(1500000002, '니티드 미니멀 베스트', 'outer',
 INSERT INTO PRODUCT VALUES(1500000003, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170903', 'RRMMDD'), DEFAULT, DEFAULT);
 INSERT INTO PRODUCT VALUES(1500000004, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170904', 'RRMMDD'), DEFAULT, DEFAULT);
 INSERT INTO PRODUCT VALUES(1500000005, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170905', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000006, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170906', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000007, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170907', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000008, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000006, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 823000, 41150, '0', '0', '1', '1', '1', '색상', TO_DATE('170906', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000007, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 654000, 32700, '0', '0', '1', '1', '0', '색상', TO_DATE('170907', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000008, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 502000, 25100, '0', '0', '1', '1', '1', '색상', TO_DATE('170908', 'RRMMDD'), DEFAULT, DEFAULT);
 INSERT INTO PRODUCT VALUES(1500000009, '사파리 벨티드 베스트', 'outer', 'ERIKA CAVALLINI', '임시설명', 728000, 36400, '0', '0', '1', '1', '1', '베이지', TO_DATE('170909', 'RRMMDD'), DEFAULT, DEFAULT);
 INSERT INTO PRODUCT VALUES(1500000010, '스트라이프 숄카라 자켓', 'outer', 'LUCIO VANOTTI', '임시설명', 893000, 44650, '0', '0', '1', '1', '0', '그레이', TO_DATE('170910', 'RRMMDD'), DEFAULT, DEFAULT);
 INSERT INTO PRODUCT VALUES(1500000011, '플라워 집업 봄버', 'outer', 'THE EDITOR', '임시설명', 921000, 46050, '0', '0', '1', '1', '0', '핑크', TO_DATE('170911', 'RRMMDD'), DEFAULT, DEFAULT);
