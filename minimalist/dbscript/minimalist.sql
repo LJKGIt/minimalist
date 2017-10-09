@@ -337,22 +337,22 @@ INSERT INTO PRODUCT VALUES(1500000007, '스트라이프 실키 자켓', 'outer',
 INSERT INTO PRODUCT VALUES(1500000008, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170908', 'RRMMDD'), DEFAULT, DEFAULT);
 
 /* OUTER 15  - ■ 임시 데이터이고 나중에 수정하기*/
-INSERT INTO PRODUCT VALUES(1500000009, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170909', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000010, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170910', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000011, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170911', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000012, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170912', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000013, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170913', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000014, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170914', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000015, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170915', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000016, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170916', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000017, '브리애니 자켓', 'outer', 'JOIE', '임시설명', 790000, 49000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170917', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000018, '니티드 미니멀 베스트', 'outer', 'CHRISTIAN WIJNANTS', '임시설명', 760000, 38000, '0', '1', '1', '0', '0', '라임 엘로우', TO_DATE('170918', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000019, '더블 버튼 라이트 자켓', 'outer', 'ERIKA CAVALLINI', '임시설명', 763000, 38150, '0', '1', '1', '1', '1', '카키', TO_DATE('170919', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000020, '러플 트리밍 코트', 'outer', 'PIECE', '임시설명', 860000, 43000, '0', '0', '1', '1', '0', '블랙', TO_DATE('170920', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000021, '자카드 패브릭 자켓', 'outer', 'JUCCA', '임시설명', 882000, 44100, '0', '0', '1', '1', '1', '베이지', TO_DATE('170921', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000022, '프린티드 코튼 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170922', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000023, '스트라이프 실키 자켓', 'outer', 'JUCCA', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170923', 'RRMMDD'), DEFAULT, DEFAULT);
-INSERT INTO PRODUCT VALUES(1500000024, '더블버튼 자켓', 'outer', 'TRUE NYC', '임시설명', 1, 1, '0', '0', '0', '0', '0', '색상', TO_DATE('170924', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000009, '사파리 벨티드 베스트', 'outer', 'ERIKA CAVALLINI', '임시설명', 728000, 36400, '0', '0', '1', '1', '1', '베이지', TO_DATE('170909', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000010, '스트라이프 숄카라 자켓', 'outer', 'LUCIO VANOTTI', '임시설명', 893000, 44650, '0', '0', '1', '1', '0', '그레이', TO_DATE('170910', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000011, '플라워 집업 봄버', 'outer', 'THE EDITOR', '임시설명', 921000, 46050, '0', '0', '1', '1', '0', '핑크', TO_DATE('170911', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000012, '러스트 프린트 파자마 자켓', 'outer', 'M. MARTIN', '임시설명', 1070000, 53500, '0', '1', '1', '1', '0', '브라운', TO_DATE('170912', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000013, '올오버 패턴 믹스드 자켓', 'outer', 'BITTE KAI RAND', '임시설명', 620000, 31000, '0', '1', '1', '0', '0', '베이지', TO_DATE('170913', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000014, '플리츠 슬리브 데님 자켓', 'outer', 'EDIT', '임시설명', 655000, 32750, '0', '1', '1', '0', '0', '블루', TO_DATE('170914', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000015, '본딩 울 랜덤 헴 코트', 'outer', 'ENFOLD', '임시설명', 1520000, 76000, '0', '1', '1', '0', '0', '그레이', TO_DATE('170915', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000016, '체크 스쿨 자켓', 'outer', 'TRUE NYC', '임시설명', 525000, 26250, '0', '0', '1', '1', '1', '레드', TO_DATE('170916', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000017, '램스킨 라이더 자켓', 'outer', 'LOOKAST', '임시설명', 338000, 16900, '0', '0', '1', '1', '0', '블랙', TO_DATE('170917', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000018, '에스닉 패치워크 자켓', 'outer', 'SWILDENS', '임시설명', 457000, 22850, '0', '0', '1', '1', '1', '멀티', TO_DATE('170918', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000019, '알레아 볼레로 자켓', 'outer', 'MARIE SIXTINE', '임시설명', 238000, 11900, '0', '1', '1', '1', '0', '핑크', TO_DATE('170919', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000020, '글렌 체크 트렌치 코트', 'outer', 'ENFOLD', '임시설명', 1520000, 76000, '0', '1', '1', '1', '0', '그레이', TO_DATE('170920', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000021, '오버사이즈 튜닉 코트', 'outer', 'TARA JARMON', '임시설명', 635000, 31750, '0', '0', '1', '1', '0', '화이트', TO_DATE('170921', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000022, '플리츠 레이어드 베스트', 'outer', 'RE;CODE', '임시설명', 490000, 24500, '0', '0', '1', '1', '0', '그레이', TO_DATE('170922', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000023, '아닐리 원 버튼 자켓', 'outer', 'MARIE SIXTINE', '임시설명', 198000, 9900, '0', '1', '1', '1', '0', '브라운', TO_DATE('170923', 'RRMMDD'), DEFAULT, DEFAULT);
+INSERT INTO PRODUCT VALUES(1500000024, '투 포켓 크롭 자켓', 'outer', 'TARA JARMON', '임시설명', 661000, 33050, '0', '0', '1', '1', '1', '화이트', TO_DATE('170924', 'RRMMDD'), DEFAULT, DEFAULT);
 
 INSERT INTO PRODUCT_IMAGE VALUES(1500000001, '1500000001_1.jpg');
 INSERT INTO PRODUCT_IMAGE VALUES(1500000001, '1500000001_2.jpg');
