@@ -38,7 +38,7 @@
 		INSERT INTO ORDERINFO VALUES(
 			(SELECT NVL(MAX(ORDERINFO_CODE),0) FROM ORDERINFO)+1, 
 			#{ member_id }, 
-			#{ product_code }, 
+			#{ product_code },
 			SYSDATE, 
 			#{ order_reciever_name }, 
 			#{ order_reciever_address }, 
