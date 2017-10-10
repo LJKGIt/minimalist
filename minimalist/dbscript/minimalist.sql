@@ -310,9 +310,9 @@ CREATE TABLE INCOME (
     AUCTION_CODE NUMBER, /* 경매 코드 */
     INCOME NUMBER, /* 수입액 */
     INCOME_DATE DATE, /* 수입일 */
-    RECIEVER_NAME varchar2(30), /*받는이*/
-	RECIEVER_ADDRESS varchar2(400), /*받는 주소*/
-	RECIEVER_PHONE varchar2(20), /*연락처*/
+    RECEIVER_NAME varchar2(30), /*받는이*/
+	RECEIVER_ADDRESS varchar2(400), /*받는 주소*/
+	RECEIVER_PHONE varchar2(20), /*연락처*/
 	ORDER_INVOICE_NUMBER number, /*송장번호*/
     CONSTRAINT INCO_FK2 FOREIGN KEY (AUCTION_CODE) REFERENCES AUCTION (AUCTION_CODE)
 );
