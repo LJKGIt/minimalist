@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.income.model.service.IncomeService;
 import com.kh.minimalist.income.model.vo.Income;
+import com.kh.minimalist.member.model.vo.Member;
 
 @Controller("Income")
 public class IncomeController {
@@ -118,10 +120,13 @@ public class IncomeController {
 
 	// 매출 포함 - 경매
 	@RequestMapping(value = "income.insertIncome.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public void insertIncome(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void insertIncome(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Income inc=new Income();
 	
+		inc.setReceiver_name(((Member) session.getAttribute("member")).getMember_name());
+		inc.setReceiver_address(((Member) session.getAttribute("member")).getAddress1()+""+((Member) session.getAttribute("member")).getAddress2());
+		inc.setReceiver_phone(((Member) session.getAttribute("member")).getPhone());
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int income=Integer.parseInt(request.getParameter("income"));
 		inc.setAuction_code(auction_code);

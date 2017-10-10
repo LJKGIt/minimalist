@@ -70,11 +70,11 @@
                         <form action="income.insertIncome.do" method="POST">
                         <table style="margin:auto">
                         	<tr><th>물품명 : </th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
-                        
-                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
                         	
+                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
 							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly id="auction_code"></td></tr>
 							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly id="income"></td></tr>
+							<tr><th></th><td><font color="red">※배송지는 회원의 주소로 설정됩니다.</font></td></tr>
 							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
 							<tr><th></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}">결제를 하지 않겠습니다.</a></td></tr>
 						</table>
