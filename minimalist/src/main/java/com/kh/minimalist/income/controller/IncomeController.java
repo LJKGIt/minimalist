@@ -1,10 +1,13 @@
 package com.kh.minimalist.income.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -115,7 +118,7 @@ public class IncomeController {
 
 	// 매출 포함 - 경매
 	@RequestMapping(value = "income.insertIncome.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String insertIncome(HttpServletRequest request) {
+	public void insertIncome(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Income inc=new Income();
 	
@@ -128,16 +131,19 @@ public class IncomeController {
 		//매출에 집계.
 		int result=incomeService.insertIncome(inc);
 		
+		PrintWriter writer=response.getWriter();
 		
-		String tmp=null;
+	System.out.println("insert 결과값 : "+result);
 		if(result>0){
-			tmp="main/index";
-			//추가적으로 경매 완료 디비 결제 완료로 수정해야함.
+		
+			writer.append("yes");
 		}else {
-			tmp="main/404";
+			writer.append("no");
 		}
 		
-		return tmp;
+		writer.flush();
+		writer.close();
+		
 	}
 	
 	//매출 기간별 리스트~
