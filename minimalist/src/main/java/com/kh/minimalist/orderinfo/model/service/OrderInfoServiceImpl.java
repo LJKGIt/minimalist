@@ -24,6 +24,11 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	public ArrayList<OrderInfo> myOrder(HashMap<String, Object> map) {
 		return orderInfoDao.myOrder(map);
 	}
+
+	@Override
+	public int myOrderCount(HashMap<String, Object> totalCountMap) {
+		return orderInfoDao.myOrderCount(totalCountMap);
+	}
 	
 	
 	

@@ -71,7 +71,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 						<div class="row" style="margin: 10px;">
 							<form action="member.mypage.do" class="">
 								<div class="input-group">
-									<input type="text" name="orderKeyword" class="form-control input-sm" placeholder="상품명을 검색하세요">
+									<input type="text" name="orderKeyword" class="form-control input-sm" placeholder="상품명을 검색하세요" value="${orderKeyword}">
 									<div class="input-group-btn">
 										<button type="submit" class="btn btn-default btn-sm">
 											<i class="fa fa-search"></i>
@@ -109,16 +109,16 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 									<li><h4><a href="productDetail.do?product_code=${ myOrder.product_code }" style="color: black;">${ myOrder.productJoin.product_name }</a></h4></li>
 									<% //TODO [yjP] SIZE COLUMN 추가 후 INSERT %>
 									<li>size : 55</li>
+									<li><strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
+									<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a></li>
 								</ul>
 							</div>
 							<div class="row" style="margin: 0;">
-								<strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
-								<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a>
+								
 							</div>
 						</div>
 						<!-- RECENT ORDERS END-->
-
-
+						
 						<!-- DETAIL MODAL -->
 						<div class="modal fade" id="detailModal${ status.index }" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel">
@@ -192,15 +192,34 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 											</table>
 											</div>
 										</div>
-
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- DETAIL MODAL END -->
-
 						</c:forEach>
+						</c:if>
+						
+						<!-- PAGING -->
+						<c:if test="${ totalPage ne 0 }">
+						<div class="pages">
+	                        <ul class="pagination">
+	                        	<c:if test="${currentPage ne 1}">
+	                        		<li><a href="member.mypage.do?page=${currentPage - 1}&orderDay=${orderDay}&orderKeyword=${orderKeyword}">&laquo;</a></li>
+	                        	</c:if>
+	                        	<c:forEach var="page" begin="${startPage}" end="${endPage}">      
+	                        		<c:if test="${page eq currentPage}">                        	
+	                        			<li class="active"><a>${page}</a>
+	                        		</c:if>
+	                        		<c:if test="${page ne currentPage}">
+	                        			<li><a href="member.mypage.do?page=${page}&orderDay=${orderDay}&orderKeyword=${orderKeyword}">${page}</a></li>
+	                        		</c:if>
+	                        	</c:forEach>
+	                        	<c:if test="${currentPage ne totalPage}">
+	                        		<li><a href="member.mypage.do?page=${currentPage + 1}&orderDay=${orderDay}&orderKeyword=${orderKeyword}">&raquo;</a></li>
+	                        	</c:if>
+	                        </ul>
+	                    </div>
 						</c:if>
 					</div>
 					<!-- BOX END -->
