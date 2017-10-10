@@ -84,8 +84,6 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								</div>
 							</form>						
 						</div>
-									
-																		
 						</div>
 						</div>
 						
