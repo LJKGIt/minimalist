@@ -43,14 +43,18 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								<div class="col-md-6">·포인트 : ${ member.point } P</div>
 								<div class="col-md-6">·등급 : 
 									<c:if test="${ member.grade eq 0 }">
-										찌꺼기
+										Bronze
 									</c:if>
-									<c:if test="${ member.grade eq 1 }">
-										일반회원
+									<c:if test="${ member.grade > 0 and member.grade <= 2 }">
+										Silver
 									</c:if>
-									<c:if test="${ member.grade eq 2 }">
+									<c:if test="${ member.grade >= 3 and member.grade <= 5 }">
+										Gold
+									</c:if>
+									<c:if test="${ member.grade >= 6 }">
 										VIP
-									</c:if></div>
+									</c:if>
+									</div>
 							</div>
 							
 						</div>
