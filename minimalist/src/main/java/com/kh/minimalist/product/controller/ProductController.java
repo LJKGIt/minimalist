@@ -38,8 +38,8 @@ public class ProductController {
 	private WishService wishService;
 
 	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
-	// TODO [lintogi] ■ 40 데이터를 만들기.
 	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
+	// TODO [lintogi] □ 마지막에 "System.out.print"를 모두 지우기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
@@ -232,17 +232,29 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 10 이미지 삽입하는 것을 처리하기.
-	// TODO [lintogi] ■ 10 이미지를 업로드하면 우선 서버로 올려주고, input[type=hidden]으로 값을 넣어줘서 넘겨주면 될 것 같다.
-	// TODO [lintogi] ■ 10 그리고 PRODUCT 테이블에 삽입하고 PRODUCT_IMAGE 테이블에 삽입해주는 과정을 거친다.
 	@RequestMapping(value = "productInsert.do", method = RequestMethod.POST)
-	public String productInsert(Product product, Model model, HttpSession session) {
+	public String productInsert(Product product, Model model, HttpSession session,  HttpServletRequest request) {
 		String returnResult = "main/404";
-		product.setProduct_code(1500000026);
+
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
-			int result = productService.productInsert(product);
-			if (result > 0) {
-				returnResult = "redirect:productDetail.do?product_code=" + productService.productRecentProductCode(product);
+			int result1 = productService.productInsert(product);
+			if (result1 > 0) {
+				int recentProductCode = productService.productRecentProductCode();
+
+				ArrayList<String> imageNameList = new ArrayList<String>();
+				imageNameList.add(request.getParameter("n_hidden_image1"));
+				imageNameList.add(request.getParameter("n_hidden_image2"));
+				imageNameList.add(request.getParameter("n_hidden_image3"));
+				
+				HashMap<String, Object> imageInsertData = new HashMap<String, Object>();
+				imageInsertData.put("recentProductCode", recentProductCode);
+				imageInsertData.put("imageNameList", imageNameList);
+				
+				int result2 = productService.productImageInsert(imageInsertData);
+				
+				if(result2 > 0){
+					returnResult = "redirect:productDetail.do?product_code=" + recentProductCode;
+				}
 			}
 		}
 
@@ -296,15 +308,16 @@ public class ProductController {
 			String uploadFile = files.next();
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
-			// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-			newFileName = fileName;
-			try {
-				mFile.transferTo(new File(path + newFileName));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO [lintogi] □ 다중 업로드 시 오류난다. 이유를 알아보자.
-				// e.printStackTrace();
+			if(fileName != null && !fileName.equals("")){
+				// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+				newFileName = fileName;
+				try {
+					mFile.transferTo(new File(path + newFileName));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			returnResult = "true";
 		}

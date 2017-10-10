@@ -52,8 +52,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int productRecentProductCode(Product product) {
-		return productDao.productRecentProductCode(product);
+	public int productRecentProductCode() {
+		return productDao.productRecentProductCode();
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<Product> productListAll() {
 		return productDao.productListAll();
+	}
+
+	@Override
+	public int productImageInsert(HashMap<String, Object> imageInsertData) {
+		return productDao.productImageInsert(imageInsertData);
 	}
 
 

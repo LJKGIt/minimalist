@@ -61,23 +61,29 @@
 								  </div>
 								</div>
 								
-								
-								<% // TODO [lintogi] □ 완성될 쯤에 스크립트 확인해서 브랜드 정리하기. %>
 								<!-- Select Basic -->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_select_brand">브랜드</label>
 								  <div class="col-md-8">
 								    <select id="i_select_brand" name="product_brand" class="form-control">
 							      		<option value="" disabled selected>브랜드</option>
-							      		<option value="ACLER">ACLER</option>
-										<option value="AERON">AERON</option>
-										<option value="ANYA HINDMARCH">ANYA HINDMARCH</option>
-										<option value="BALENCIAGA">BALENCIAGA</option>
-										<option value="BAUM UND PFERDGARTEN">BAUM UND PFERDGARTEN</option>
-										<option value="BITTE KAI RAND">BITTE KAI RAND</option>
-										<option value="CACHAREL">CACHAREL</option>
-										<option value="CARON CALLAHAN">CARON CALLAHAN</option>
-										<option value="CHLOE">CHLOE</option>
+							      		<option value="BITTE KAI RAND">BITTE KAI RAND</option>
+										<option value="CHRISTIAN WIJNANTS">CHRISTIAN WIJNANTS</option>
+										<option value="EDIT">EDIT</option>
+										<option value="ENFOLD">ENFOLD</option>
+										<option value="ERIKA CAVALLINI">ERIKA CAVALLINI</option>
+										<option value="JOIE">JOIE</option>
+										<option value="JUCCA">JUCCA</option>
+										<option value="LOOKAST">LOOKAST</option>
+										<option value="LUCIO VANOTTI">LUCIO VANOTTI</option>
+										<option value="M. MARTIN">M. MARTIN</option>
+										<option value="MARIE SIXTINE">MARIE SIXTINE</option>
+										<option value="PIECE">PIECE</option>
+										<option value="RE;CODE">RE;CODE</option>
+										<option value="SWILDENS">SWILDENS</option>
+										<option value="TARA JARMON">TARA JARMON</option>
+										<option value="THE EDITOR">THE EDITOR</option>
+										<option value="TRUE NYC">TRUE NYC</option>
 								    </select>
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -175,7 +181,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image3">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image3" name="filebutton3" class="input-file" type="file">
-								    <input id="i_hidden_hidden_image3" name="n_hidden_image3" type="hidden">
+								    <input id="i_hidden_image3" name="n_hidden_image3" type="hidden">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -288,6 +294,7 @@
 												    success: function (data) {
 												    	if(data == "true"){
 												    		$('#i_img_image1').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    		$('#i_hidden_image1').val(this_image.val().split('\\').reverse()[0])
 												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
@@ -315,6 +322,7 @@
 												    success: function (data) {
 												    	if(data == "true"){
 												    		$('#i_img_image2').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    		$('#i_hidden_image2').val(this_image.val().split('\\').reverse()[0])
 												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
@@ -342,6 +350,7 @@
 												    success: function (data) {
 												    	if(data == "true"){
 												    		$('#i_img_image3').attr('src', '${ pageContext.request.contextPath }/resources/img_product/' + this_image.val().split('\\').reverse()[0]);
+												    		$('#i_hidden_image3').val(this_image.val().split('\\').reverse()[0])
 												    	} else {
 												    		alert("파일 업로드에 실패했습니다.");
 												    	}
@@ -448,7 +457,7 @@
 
 	<script type="text/javascript">
 		$(function(){
-			$('#i_textt_name').focus();
+			$('#i_text_name').focus();
 		});
 	</script>
 

@@ -47,8 +47,8 @@ public class ProductDao {
 		return sqlSession.update("Product.productUpdate", product);
 	}
 
-	public int productRecentProductCode(Product product) {
-		return sqlSession.selectOne("Product.productRecentProductCode", product);
+	public int productRecentProductCode() {
+		return sqlSession.selectOne("Product.productRecentProductCode");
 	}
 
 	public ArrayList<Product> productList() {
@@ -59,6 +59,10 @@ public class ProductDao {
 	public ArrayList<Product> productListAll() {
 		List<Product> list = sqlSession.selectList("Product.productListAll");
 		return (ArrayList<Product>) list;
+	}
+
+	public int productImageInsert(HashMap<String, Object> imageInsertData) {
+		return sqlSession.insert("Product.productImageInsert", imageInsertData);
 	}
 
 }

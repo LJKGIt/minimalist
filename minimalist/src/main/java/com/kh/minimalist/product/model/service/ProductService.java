@@ -24,6 +24,8 @@ public interface ProductService {
 	
 	int productUpdate(Product product);
 
-	int productRecentProductCode(Product product);
+	int productRecentProductCode();
+	
+	int productImageInsert(HashMap<String, Object> imageInsertData);
 
 }
