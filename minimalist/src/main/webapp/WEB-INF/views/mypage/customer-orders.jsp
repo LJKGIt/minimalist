@@ -107,8 +107,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								<ul style="list-style-type: none; margin-left: 65px;">
 									<li><strong>${ myOrder.productJoin.product_brand }</strong></li>
 									<li><h4><a href="productDetail.do?product_code=${ myOrder.product_code }" style="color: black;">${ myOrder.productJoin.product_name }</a></h4></li>
-									<% //TODO [yjP] SIZE COLUMN 추가 후 INSERT %>
-									<li>size : 55</li>
+									<li>size : ${ myOrder.order_size }</li>
 									<li><strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
 									<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a></li>
 								</ul>
@@ -161,7 +160,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 												</tr>
 												<tr>
 													<td>사이즈</td>
-													<td>55</td>
+													<td>${ myOrder.order_size }</td>
 												</tr>
 												<tr>
 													<td>색상</td>

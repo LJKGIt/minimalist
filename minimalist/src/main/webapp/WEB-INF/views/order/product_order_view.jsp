@@ -95,7 +95,7 @@
                                                 </td>
                                                 <td><a href="productDetail.do?product_code=${ product.product_code }">${ product.product_name }</a>
                                                 </td>
-                                                <td>${ orderInfo.order_size }</td>
+                                                <td><input type="text" class="form-control" id="i_text_order_size" value="${ orderInfo.order_size }"></td>
                                                 <td>${ product.rent_price }</td>
                                                 <td>(대여 기간1)</td>
                                                 <td>(대여 기간2)</td>
@@ -169,7 +169,8 @@
 									    			product_code : ${ product.product_code },
 									    			order_reciever_name : $('#i_text_reciever_name').val(),
 									    			order_reciever_address : $('#i_text_reciever_address').val(),
-									    			order_reciever_phone : $('#i_text_reciever_phone').val()
+									    			order_reciever_phone : $('#i_text_reciever_phone').val(),
+									    			order_size : $('#i_text_order_size').val()
 										    		//기타 필요한 데이터가 있으면 추가 전달
 									    		}
 								    		}).done(function(data) {

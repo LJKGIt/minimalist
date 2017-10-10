@@ -42,7 +42,9 @@
 			SYSDATE, 
 			#{ order_reciever_name }, 
 			#{ order_reciever_address }, 
-			#{ order_reciever_phone })
+			#{ order_reciever_phone },
+			#{ order_size },
+			#{ order_invoice_number })
 	</insert>
 	
 	<select id="myOrder" parameterType="hashmap" resultType="OrderInfo" resultMap="resultOrderInfo">
