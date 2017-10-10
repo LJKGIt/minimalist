@@ -45,10 +45,10 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 									<c:if test="${ member.grade eq 0 }">
 										Bronze
 									</c:if>
-									<c:if test="${ member.grade > 0 and member.grade <= 2 }">
+									<c:if test="${ member.grade > 0 && member.grade <= 2 }">
 										Silver
 									</c:if>
-									<c:if test="${ member.grade >= 3 and member.grade <= 5 }">
+									<c:if test="${ member.grade >= 3 && member.grade <= 5 }">
 										Gold
 									</c:if>
 									<c:if test="${ member.grade >= 6 }">
