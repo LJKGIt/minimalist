@@ -460,4 +460,6 @@ INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', N
 INSERT INTO QNA VALUES(1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸', SYSDATE, NULL);
 
 
+insert into income values(4, 0, sysdate, '관리자', '주소없음', '연락처없음', null);
+
 COMMIT;
