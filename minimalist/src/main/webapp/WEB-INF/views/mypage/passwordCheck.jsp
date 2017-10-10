@@ -41,8 +41,8 @@
                                     <div class="form-group">
                                         <label for="member_pwd"> password</label>
                                         <input type="hidden" class="form-control" id="member_id" name="member_id" value="${ member.member_id }">
-                                        <input type="password" class="form-control" id="member_pwd" name="member_pwd" style="width: 40%; margin-right: 10px;">
-                                        <p style="color: red; font-size: 7px; float:right;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
+                                        <input type="password" class="form-control" id="member_pwd" name="member_pwd" style="width: 50%; margin-right: 10px;">
+                                        <p style="color: red; font-size: 8px; margin-top: 5px;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
                                     </div>
                                 </div>
                             </div>
