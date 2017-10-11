@@ -60,7 +60,6 @@ hr {
 	var regex = /^[A-Za-z0-9+]{6,16}$/;
 	$(function(){
 		
-			//TODO [yjP] 비밀번호 확인 후 UPDATE하는 스크립트
 			$('#member_pwd').focusout(function() {
 				var password1 = $('#member_pwd').val();
 				var password2 = $('#member_pwd2').val();

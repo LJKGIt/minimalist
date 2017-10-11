@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.Collections, java.util.List"%>
+<%@page import="java.util.Collections, java.util.List, com.kh.minimalist.product.model.vo.Product"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cookieList" value="${ cookieList }" />
 <%
 @SuppressWarnings("unchecked")
-List<String> reverseList = (List<String>)request.getAttribute("cookieList");
-Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList);%>
+List<Product> reverseList = (List<Product>)request.getAttribute("cookieList");
+Collections.reverse(reverseList); request.setAttribute("cookieList", reverseList);
+/* for( Product co : reverseList )
+	System.out.println(co); */
+%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -526,13 +526,6 @@ public class AuctionController {
 			writer.close();
 		}
 		
-		@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
-		public String selectMemberAuction(HttpSession session, Model model) throws UnsupportedEncodingException{
-			ArrayList<Auction> list = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
-			model.addAttribute("list", list);
-			return "mypage/customer-auction";
-		}
-		
 		//입찰 취소~
 		@RequestMapping(value="auction.deleteBid.do", method={RequestMethod.POST, RequestMethod.GET})
 		public void deleteBid(HttpServletRequest request, HttpServletResponse response) throws IOException{
