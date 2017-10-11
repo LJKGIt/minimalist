@@ -40,6 +40,8 @@
 							<br>
 						</c:if>
 						<c:if test="${ !empty incomeList }">
+						<h3>낙찰된 경매 상품</h3>
+						<br>
 							<c:forEach var="income" items="${ incomeList }" varStatus="status">
 							
 							<div class="well">
@@ -48,13 +50,13 @@
 								</div>
 								<hr style="margin: 5px;">
 								<div class="row" style="margin: 0;">
-									<a href="auction.selectOne.do?auction_code=${ fn:substringBefore(income.auctionJoin.img_path, ',' }"> <img
-										src="${ pageContext.request.contextPath }/resources/img_auction/${ fn:substringBefore(income.auctionJoin.img_path, ',' }"
+									<a href="auction.selectOne.do?auction_code=${ fn:substringBefore(income.auctionJoin.image_path, ',') }"> <img
+										src="${ pageContext.request.contextPath }/resources/img_auction/${ fn:substringBefore(income.auctionJoin.image_path, ',') }"
 										style="margin: 0 10px 10px 0; width: 100px; float: left;" />
 									</a>
 									<ul style="list-style-type: none; margin-left: 65px;">
 										<li><strong>${ income.auctionJoin.auction_brand }</strong></li>
-										<li><h4><a href="productDetail.do?product_code=${ income.auction_code }" style="color: black;">${ income.productJoin.product_name }</a></h4></li>
+										<li><h4><a href="productDetail.do?product_code=${ income.auction_code }" style="color: black;">${ income.auctionJoin.auction_name }</a></h4></li>
 										<li>size : ${ income.auctionJoin.auction_size }</li>
 										<li>
 											<strong><fmt:formatNumber value="${ income.income }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong>
@@ -65,7 +67,7 @@
 								</div>
 								<div class="row" style="margin: 0;">
 									
-								</div>
+								</div> 
 							</div>
 							<!-- RECENT ORDERS END-->
 							

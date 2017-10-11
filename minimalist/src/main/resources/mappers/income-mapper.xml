@@ -79,8 +79,8 @@
 	<select id="selectMemberIncome" resultType="Income" parameterType="String" resultMap="resultIncome">
 		SELECT * 
 		FROM INCOME
-		WHERE RECEIVER_NAME = #{member_id}
 		JOIN AUCTION USING (AUCTION_CODE)
+		WHERE RECEIVER_NAME = #{member_id}
 		ORDER BY INCOME_DATE DESC
 	</select>
 	
