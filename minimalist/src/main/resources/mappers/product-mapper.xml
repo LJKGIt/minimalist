@@ -49,11 +49,13 @@
 			FROM (SELECT * 
 					FROM PRODUCT 
 					WHERE PRODUCT_DELETE = 0 
+					<if test="keyword != null">
 					AND PRODUCT_NAME LIKE '%'||#{keyword}||'%'
+					</if>
 					AND PRODUCT_CATEGORY = #{product.product_category}
-                    AND PRODUCT_BRAND IN (
-                    <foreach collection="prdouctBrandList" item="item" index="index"  open="" separator=", " close="" >
-                    	#{item}
+                    AND (
+                    <foreach collection="prdouctBrandList" item="item" index="index"  open="" separator=" OR " close="" >
+                    	PRODUCT_BRAND LIKE '%'||#{item}||'%'
                     </foreach>
                     )
                     AND RENT_PRICE BETWEEN #{startPrice} AND #{endPrice}

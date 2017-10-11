@@ -124,7 +124,7 @@ public class ProductController {
 		if(request.getParameter("n_text_search") != null){
 			searchString = request.getParameter("n_text_search");
 			model.addAttribute("searchString", searchString);
-			
+
 			String[] searchArrayPre = searchString.split("/");
 			
 			for(int i = 0; i < searchArrayPre.length; i++){
@@ -138,7 +138,7 @@ public class ProductController {
 		if (searchArray[0] != null && !searchArray[0].equals("")) {
 			keyword = searchArray[0];
 		}
-
+		
 		// 기본 값이 없을 때 모든 값을 가져옵니다.
 		ArrayList<String> prdouctBrandList = new ArrayList<String>();
 		if (searchArray[1] != null && !searchArray[1].equals("")) {
