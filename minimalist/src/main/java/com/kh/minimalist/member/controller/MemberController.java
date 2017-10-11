@@ -170,12 +170,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("member.dormant.do")
-	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
+	public String memberDelete(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		if((Member)session.getAttribute("member") != null){
 			if(memberService.dormantMember(m) > 0){
-				System.out.println("탈퇴 완료");
+				response.getWriter().append("<script>alert('탈퇴가 완료되었습니다.')</script>");
 			} else {
-				System.out.println("회원탈퇴 실패");
+				response.getWriter().append("<script>alert('탈퇴중 오류가 발생했습니다.')</script>");
 			}
 		}
 		return "main/index";
