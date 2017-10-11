@@ -130,7 +130,7 @@ public class IncomeController {
 	public void insertIncome(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Income inc=new Income();
-	
+		inc.setRequest(request.getParameter("request"));
 		inc.setMember_id(((Member) session.getAttribute("member")).getMember_id());
 		inc.setReceiver_name(request.getParameter("receiver"));
 		inc.setReceiver_address(request.getParameter("address1")+" "+request.getParameter("address2"));

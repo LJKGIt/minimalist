@@ -7,10 +7,12 @@
 	<resultMap id="resultIncome" type="Income">
 		<result property="auction_code" column="AUCTION_CODE"/>
 		<result property="income" column="INCOME"/>
+		<result property="member_id" column="member_id"/>
 		<result property="income_date" column="INCOME_DATE"/>
 		<result property="receiver_name" column="RECEIVER_NAME"/>
 		<result property="receiver_address" column="RECEIVER_ADDRESS"/>
 		<result property="receiver_phone" column="RECEIVER_PHONE"/>
+		<result property="request" column="request"/>
 		<result property="order_invoice_number" column="ORDER_INVOICE_NUMBER"/>
 		
 		<collection property="auctionJoin" ofType="Auction">
@@ -52,6 +54,7 @@
 	#{receiver_name},
 	#{receiver_address},
 	#{receiver_phone},
+	#{request},
 	null
 	)
 	</insert>
