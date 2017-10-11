@@ -66,7 +66,12 @@ public class ProductDao {
 	}
 
 	public int productImageDelete(Product product) {
-		return sqlSession.insert("Product.productImageDelete", product);
+		return sqlSession.delete("Product.productImageDelete", product);
+	}
+
+	public ArrayList<String> selectBrand() {
+		List<String> list = sqlSession.selectList("Product.selectBrand");
+		return (ArrayList<String>) list;
 	}
 
 

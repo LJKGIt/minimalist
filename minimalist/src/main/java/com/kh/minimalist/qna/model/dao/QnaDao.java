@@ -27,8 +27,6 @@ public class QnaDao {
 		
 		list=sqlSession.selectList("Qna.selectList", map);
 		
-		System.out.println("리스트 사이즈 : "+list.size());
-		
 		return (ArrayList<Qna>)list; 
 	
 	}

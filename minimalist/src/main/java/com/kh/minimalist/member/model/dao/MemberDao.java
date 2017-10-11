@@ -27,7 +27,6 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
-		System.out.println("다오 : " + m);
 		return sqlSession.insert("Member.mInsert", m);
 	}
 	

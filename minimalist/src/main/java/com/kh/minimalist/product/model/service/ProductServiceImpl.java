@@ -76,6 +76,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.productImageDelete(product);
 	}
 
+	@Override
+	public ArrayList<String> selectBrand() {
+		return productDao.selectBrand();
+	}
+
 
 
 

@@ -81,7 +81,6 @@ public class MessageController {
 		
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int price = Integer.parseInt(request.getParameter("bid_price"));
-		System.out.println("입찰가 : "+price);
 		String member_id = request.getParameter("member_id");
 
 		m.setMember_id(member_id);
@@ -154,13 +153,8 @@ public class MessageController {
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		
-		System.out.println("시작 row : "+startRow);
-		System.out.println("마지막 row : "+endRow);
 		ArrayList<Message> list = messageService.selectMessageList(map);
 		
-		System.out.println("현재 페이지 : "+currentPage);
-		System.out.println("맥스 페이지 : "+maxPage);
-		System.out.println("엔드 페이지 : "+endPage);
 		model.addAttribute("messageList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", startPage);

@@ -50,7 +50,6 @@ public class ReviewController {
 	
 		}
 		int countRow=reviewService.countRow(product_code);
-		System.out.println("리뷰 갯수 : "+countRow);
 		//전체 글의 갯수
 		int countList=10;
 		//페이지당 보여줄 글의 수 

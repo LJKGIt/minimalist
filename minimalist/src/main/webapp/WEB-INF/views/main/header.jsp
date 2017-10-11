@@ -200,7 +200,7 @@
 
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Product <b
+						data-hover="dropdown" data-delay="200" onclick="location.href='${ pageContext.request.contextPath }/productList.do?product_category=outer'">Product <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
@@ -401,7 +401,7 @@
 				type : "POST",
 				dataType : "json",
 				success : function(data){
-					console.log(data.messageList);
+					// console.log(data.messageList);
 				}, error : function(){
 					alert("!!!");
 				}
@@ -430,7 +430,7 @@
 				// chosungArr.put(Hangul.disassemble(autocomplete_text[i]));
 			});
 			
-			console.log(chosungArr);
+			// console.log(chosungArr);
 			
 			// AUTOCOMOPLETE
 			$("#searchBox").autocomplete({ 

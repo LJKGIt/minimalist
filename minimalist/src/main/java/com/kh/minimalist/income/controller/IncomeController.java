@@ -50,7 +50,6 @@ public class IncomeController {
 		
 		int totalRow=incomeService.countRow();
 		//전체 행 갯수 파악.
-		System.out.println("행갯수 : "+totalRow);
 		
 		int maxPage=totalRow/countList;
 		//총 페이지 계산
@@ -81,7 +80,6 @@ public class IncomeController {
 		
 		ArrayList<Income> list=incomeService.selectList(map);
 		
-		System.out.println("리스트 사이즈 : "+list.size());
 		
 		
 			//총 매출 집계.
@@ -89,7 +87,6 @@ public class IncomeController {
 			for(Income inc : list){
 				total+=inc.getIncome();
 			}
-			System.out.println("총매출 : "+total);
 			model.addAttribute("totalIncome", total);
 			model.addAttribute("list", list);
 			model.addAttribute("startPage", startPage);
@@ -138,7 +135,6 @@ public class IncomeController {
 		
 		PrintWriter writer=response.getWriter();
 		
-	System.out.println("insert 결과값 : "+result);
 		if(result>0){
 		
 			writer.append("yes");
@@ -161,8 +157,6 @@ public class IncomeController {
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
-		System.out.println(startDate);
-		System.out.println(endDate);
 		
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
@@ -182,7 +176,6 @@ public class IncomeController {
 		
 		int totalRow=incomeService.countRowByDate(map);
 		//전체 행 갯수 파악.
-		System.out.println("행갯수 : "+totalRow);
 		
 		int maxPage=totalRow/countList;
 		//총 페이지 계산
@@ -212,7 +205,6 @@ public class IncomeController {
 		
 		ArrayList<Income> list=incomeService.selectListByDate(map);
 		
-		System.out.println("리스트 사이즈 : "+list.size());
 		
 		
 			//총 매출 집계.
@@ -220,7 +212,6 @@ public class IncomeController {
 			for(Income inc : list){
 				total+=inc.getIncome();
 			}
-			System.out.println("총매출 : "+total);
 			model.addAttribute("totalIncome", total);
 			model.addAttribute("list", list);
 			model.addAttribute("startPage", startPage);

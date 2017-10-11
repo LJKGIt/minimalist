@@ -30,5 +30,7 @@ public interface ProductService {
 
 	int productImageDelete(Product product);
 
+	ArrayList<String> selectBrand();
+
 
 }

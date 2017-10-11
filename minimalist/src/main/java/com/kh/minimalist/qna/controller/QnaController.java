@@ -201,12 +201,6 @@ public class QnaController {
 		qna.setQna_content(content);
 		qna.setMember_id(id);
 		
-		System.out.println("제목 : "+title);
-		System.out.println("내용 : "+content);
-		System.out.println("작성자 : "+id);
-		System.out.println("카테고리 : "+category);
-		System.out.println("파일명 : "+reName);
-		
 		int result=qnaService.writeQna(qna);
 		
 		

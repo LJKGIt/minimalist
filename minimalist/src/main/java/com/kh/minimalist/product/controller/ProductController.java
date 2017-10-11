@@ -126,37 +126,57 @@ public class ProductController {
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
-
+		
 		startCount = (productPage - 1) * 9 + 1;
 		if (Math.ceil(totalCount / 9.0) == productPage) {
 			endCount = totalCount;
 		} else {
 			endCount = productPage * 9;
 		}
-
+		
+		// 기본값을 outer로 줍니다.
+		if(product.getProduct_category() == null){
+			product.setProduct_category("outer");
+		}
+		
+		// 기본 값이 없을 때 모든 값을 뽑아옵니다.
+		ArrayList<String> prdouctBrandList = null;
+		if(product.getProduct_brand() == null){
+			prdouctBrandList = productService.selectBrand();
+			
+		}
+		
+		int startPrice = 0;
+		int endPrice = Integer.MAX_VALUE;
+		try {
+			if(request.getParameter("startPrice") != null)
+				startPrice = Integer.parseInt(request.getParameter("startPrice"));
+			if(request.getParameter("endPrice") != null)
+				endPrice = Integer.parseInt(request.getParameter("endPrice"));
+		} catch (NumberFormatException e) {
+			return "main/404";
+		}
+		
+		// TODO [lintogi] header.jsp에 PRODUCT 링크 집어넣기.
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
+		hashMap.put("startPrice", startPrice);
+		hashMap.put("endPrice", endPrice);
+		hashMap.put("prdouctBrandList", prdouctBrandList);
+		System.out.println("product : " + product); // TODO
+		System.out.println("startCount : " + startCount); // TODO
+		System.out.println("endCount : " + endCount); // TODO
+		System.out.println("startPrice : " + startPrice); // TODO
+		System.out.println("endPrice : " + endPrice); // TODO
+		System.out.println("prdouctBrandList.size() : " + prdouctBrandList.size()); // TODO
+		
 		ArrayList<Product> productList = productService.productList(hashMap);
+		System.out.println("productList.size() : " + productList.size());
 		if (productList != null && productList.size() != 0) {
-			if (withAjax) {
-				PrintWriter writer = null;
-				try {
-					returnResult = null;
-					writer = response.getWriter();
-					writer.append("true");
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					writer.flush();
-					writer.close();
-				}
-
-			} else {
-				model.addAttribute("productList", productList);
-				returnResult = "product/product_list";
-			}
+			model.addAttribute("productList", productList);
+			returnResult = "product/product_list";
 		}
 
 		// RECENT VIEW (COOKIE)
@@ -177,7 +197,6 @@ public class ProductController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-
 		return returnResult;
 	}
 
@@ -214,10 +233,45 @@ public class ProductController {
 			endCount = productPage * 9;
 		}
 
+
+		// 기본값을 outer로 줍니다.
+		if(product.getProduct_category() == null){
+			product.setProduct_category("outer");
+		}
+		
+		// 기본 값이 없을 때 모든 값을 뽑아옵니다.
+		ArrayList<String> prdouctBrandList = null;
+		if(product.getProduct_brand() == null){
+			prdouctBrandList = productService.selectBrand();
+			
+		}
+		
+		int startPrice = 0;
+		int endPrice = Integer.MAX_VALUE;
+		try {
+			if(request.getParameter("startPrice") != null)
+				startPrice = Integer.parseInt(request.getParameter("startPrice"));
+			if(request.getParameter("endPrice") != null)
+				endPrice = Integer.parseInt(request.getParameter("endPrice"));
+		} catch (NumberFormatException e) {
+			return null;
+		}
+		
+		// TODO [lintogi] header.jsp에 PRODUCT 링크 집어넣기.
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
+		hashMap.put("startPrice", startPrice);
+		hashMap.put("endPrice", endPrice);
+		hashMap.put("prdouctBrandList", prdouctBrandList);
+		System.out.println("product : " + product); // TODO
+		System.out.println("startCount : " + startCount); // TODO
+		System.out.println("endCount : " + endCount); // TODO
+		System.out.println("startPrice : " + startPrice); // TODO
+		System.out.println("endPrice : " + endPrice); // TODO
+		System.out.println("prdouctBrandList.size() : " + prdouctBrandList.size()); // TODO
+		
 		ArrayList<Product> productList = productService.productList(hashMap);
 
 		return productList;

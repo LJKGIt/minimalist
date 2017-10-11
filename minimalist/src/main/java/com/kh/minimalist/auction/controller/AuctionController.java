@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.auction.model.vo.BidInfo;
-import com.kh.minimalist.member.model.vo.Member;
 
 @Controller
 public class AuctionController {
@@ -78,7 +76,6 @@ public class AuctionController {
 			reName[i] = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + fileName[i].substring(fileName[i].lastIndexOf(".") + 1);
 
 			fullPath[i]=savePath+"\\"+reName[i];
-			System.out.println("파일저장 경로 : "+fullPath[i]);
 		}
 	
 		try {
@@ -123,7 +120,6 @@ public class AuctionController {
 		}
 		auction.setImage_path(img_path);
 		
-		System.out.println(auction.toString());
 		
 		
 		int result=auctionService.insertAuction(auction);
@@ -148,7 +144,6 @@ public class AuctionController {
 		//전체 검색인 경우.
 		if(request.getParameter("auction_category")!=null){
 			auction_category=request.getParameter("auction_category");
-			System.out.println("카테고리 : "+auction_category);
 		}
 		
 		
@@ -213,7 +208,6 @@ public class AuctionController {
 		}else {
 			list=auctionService.selectList(map);
 		}
-		System.out.println("옥션 갯수 : "+list.size());
 		
 		if(auction_category!=null){
 			model.addAttribute("auction_category", auction_category);
@@ -234,8 +228,6 @@ public class AuctionController {
 		
 		Auction auction=auctionService.selectOne(auction_code);
 		
-		System.out.println("브랜드 : "+auction.getAuction_brand());
-		System.out.println("물품명 : "+auction.getAuction_name());
 		
 		model.addAttribute("auction", auction);
 		
@@ -254,10 +246,8 @@ public class AuctionController {
 		bid.setBid_price(price);
 		bid.setMember_id(id);
 		bid.setAuction_code(auction_code);
-		System.out.println("입찰금액 : "+price);
 		
 		int result=auctionService.bid(bid);
-		System.out.println("결과 result : "+result);
 		
 		PrintWriter writer=response.getWriter();
 		if(result>0){
@@ -279,8 +269,6 @@ public class AuctionController {
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		
 		int price=auctionService.reloadPrice(auction_code);
-		
-		System.out.println("현재 입찰가 : "+price);
 		
 		PrintWriter writer=response.getWriter();
 		if(price>0){
@@ -380,7 +368,6 @@ public class AuctionController {
 					reName[i] = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + fileName[i].substring(fileName[i].lastIndexOf(".") + 1);
 
 					fullPath[i]=savePath+"\\"+reName[i];
-					System.out.println("파일저장 경로 : "+fullPath[i]);
 				}
 			
 				try {
