@@ -98,9 +98,8 @@ position: absolute;
                        
     <thead>
     <tr>
-        <th style="width:150px">매출구분</th>
         <th style="width:200px">매출일자</th>
-        <th style="width:200px">대여/경매코드</th>
+        <th style="width:200px">경매코드</th>
         <th style="width:200px">매출액</th>
    </tr>
    <tbody>
@@ -117,30 +116,16 @@ position: absolute;
    		<!--  forEach -->
    		<c:forEach var="inc" items="${list}">
    		<tr>
-   		<td>
-   		<c:choose>
-   		<c:when test="${!empty inc.auction_code}">
-   		경매
-   		</c:when>
-   		<c:when test="${!empty inc.product_code}">
-   		대여
-   		</c:when>
-   		</c:choose>
    		
-   		</td>
    		<td>
    		${inc.income_date}
    		
    		</td>
    		<td>
-   		<c:choose>
-   		<c:when test="${!empty inc.auction_code}">
+   	
    		<a href="auction.selectOne.do?auction_code=${inc.auction_code}">${inc.auction_code}</a>
-   		</c:when>
-   		<c:when test="${!empty inc.product_code}">
-   		${inc.product_code}
-   		</c:when>
-   		</c:choose>
+   	
+   		
    		</td>
    		<td>
    		${inc.income}

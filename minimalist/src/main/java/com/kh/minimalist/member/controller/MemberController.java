@@ -193,16 +193,17 @@ public class MemberController {
 
 	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+		response.setContentType("text/html; charset=utf-8");
+		
 		String result = "main/404";
+		
 		int orderDay = 7;  // 조회기간
 		String orderKeyword = ""; // 검색어
-		response.setContentType("text/html; charset=utf-8");
-
+		
+		HashMap<String, Object> map = new HashMap<String, Object>(); //
+		
 		if (((Member) session.getAttribute("member")) != null) {
 			String member_id = ((Member) session.getAttribute("member")).getMember_id();
-
-			// MY ORDER LIST
-			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			// MEMBER_ID 값
 			map.put("member_id", member_id);
@@ -219,10 +220,49 @@ public class MemberController {
 				orderDay = Integer.parseInt(request.getParameter("orderDay"));
 			map.put("orderDay", orderDay);
 			
-			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(map);
-			if (myOrder != null)
-				model.addAttribute("myOrder", myOrder);
+			// PAGING
+			int currentPage = 1; // 현재 페이지
+			if(request.getParameter("page") != null){
+				currentPage = Integer.parseInt(request.getParameter("page"));
+			}
+			HashMap<String, Object> totalCountMap = new HashMap<String, Object>();
+			totalCountMap.put("member_id", member_id);
+			totalCountMap.put("orderDay", orderDay);
+			totalCountMap.put("orderKeyword", orderKeyword);
+			int totalListCount = orderInfoService.myOrderCount(totalCountMap); // 총 개수
+			int listPerPage = 5; // 한 화면에 출력될 페이지 수
+			int pageList = 5; // PAGINATION 개수
 			
+			int totalPage = totalListCount / listPerPage; // 마지막 페이지
+			if(totalListCount % listPerPage > 0)
+				totalPage++;
+			
+			if(currentPage > totalPage) // 현재 페이지가 마지막 페이지보다 클 경우
+				currentPage = totalPage;
+			
+			int startPage = ((currentPage - 1) / pageList) * pageList + 1; // 노출되는 시작 페이지
+			int endPage = startPage + pageList - 1; // 노출되는 마지막 페이지
+			if(endPage > totalPage)
+				endPage = totalPage;
+			
+			int startRow = (currentPage - 1) * listPerPage + 1; // 현재 페이지 리스트의 첫 번째 행
+			int endRow = startRow + listPerPage - 1; // 현재 페이지 리스트의 마지막 행
+			
+			// 현재 페이지 리스트의 시작, 마지막 값
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			
+			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(map);
+			if (myOrder != null){
+				model.addAttribute("myOrder", myOrder);
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				model.addAttribute("totalPage", totalPage);
+				model.addAttribute("orderDay", orderDay);
+				model.addAttribute("orderDay", orderDay);
+				model.addAttribute("orderKeyword", orderKeyword);
+			}
 			// RECENT VIEW (COOKIE)
 			try {
 				List<String> list = new CookieUtils().getValueList(member_id, request);

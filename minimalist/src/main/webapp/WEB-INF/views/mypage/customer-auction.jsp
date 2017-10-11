@@ -21,14 +21,14 @@
 	<div id="all">
 		<div id="content">
 			<div class="container">
-				<div class="col-md-11">
+				<div class="col-md-12">
 					<ul class="breadcrumb">
 						<li><a href="index.do">Home</a></li>
 						<li>내 경매</li>
 					</ul>
 				</div>
 				<c:import url="mypageAside.jsp"/>
-				<div class="col-md-8">
+				<div class="col-md-9">
 						<!-- 경매 -->
 						<c:if test="${!empty list}">
 							<c:forEach var="au" items="${list}">
@@ -65,26 +65,24 @@
 
 										</a>
 										<div class="text">
-											<h3>
+											<h3 style="margin: 0;">
 												<a
 													href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand}
 													- ${au.auction_name }</a>
 											</h3>
 											<p class="price">
 												<font size=3px>현재 입찰가 : <fmt:formatNumber
-														value="${au.bid_price}" type="currency" /></font>
+														value="${au.bidInfo.bid_price}" type="currency" /></font>
+											</p>
+											<p class="price">
+												<font size=3px>내 입찰가 : <fmt:formatNumber
+														value="${au.bidInfo[0].bid_price}" type="currency" /></font>
 											</p>
 											<p>
 												<font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매
 													종료 :<fmt:formatDate value="${au.end_date}" type="date"
 														pattern="MM월dd일" />
 												</font>
-											</p>
-											<p class="buttons">
-												<a
-													href="auction.selectOne.do?auction_code=${au.auction_code}"
-													class="btn btn-default">View detail</a>
-
 											</p>
 										</div>
 										<!-- /.text -->

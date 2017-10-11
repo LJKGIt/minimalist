@@ -11,4 +11,5 @@ public interface OrderInfoService {
 	
 	ArrayList<OrderInfo> myOrder(HashMap<String, Object> map);
 	
+	int myOrderCount(HashMap<String, Object> totalCountMap);
 }
