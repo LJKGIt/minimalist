@@ -28,5 +28,9 @@ public class OrderInfoDao {
 		return (ArrayList<OrderInfo>)list;
 	}
 
+	public int myOrderCount(HashMap<String, Object> totalCountMap) {
+		return sqlSession.selectOne("OrderInfo.myOrderCount", totalCountMap);
+	}
+
 
 }

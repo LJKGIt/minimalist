@@ -166,8 +166,8 @@ where rownum&lt;=5
 
 	<!-- 회원별 경매목록 조회 -->
 	<select id="selectMemberAuction" parameterType="string" resultType="Auction">
-		SELECT * FROM AUCTION 
-		join bidinfo using (auction_code)
-		WHERE MEMBER_ID = #{member_id} ORDER BY END_DATE
+		SELECT * FROM AUCTION
+		JOIN BIDINFO USING (AUCTION_CODE)
+		WHERE MEMBER_ID = #{member_id} ORDER BY END_DATE DESC
 	</select>
 </mapper>

@@ -70,11 +70,11 @@
                         <form action="income.insertIncome.do" method="POST">
                         <table style="margin:auto">
                         	<tr><th>물품명 : </th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
-                        
-                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
                         	
-							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly></td></tr>
-							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly></td></tr>
+                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
+							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly id="auction_code"></td></tr>
+							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly id="income"></td></tr>
+							<tr><th></th><td><font color="red">※배송지는 회원의 주소로 설정됩니다.</font></td></tr>
 							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
 							<tr><th></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}">결제를 하지 않겠습니다.</a></td></tr>
 						</table>
@@ -90,7 +90,7 @@
 								var cc = confirm("결제하시겠습니까?");
 								if(cc == true){
 									IMP.request_pay({
-									    pg : 'uplus',
+										pg : 'uplus',
 									    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
 									    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
 									    name : '주문명:결제테스트',
@@ -102,28 +102,30 @@
 									    buyer_postcode : '123-456'
 									}, function(rsp) {
 									    if ( rsp.success ) {
+									    	var auction_code=$('#auction_code').val();
+									    	var income=$('#income').val();
+									    	
 									    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 									    	jQuery.ajax({
-									    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+									    		url: "income.insertIncome.do", //cross-domain error가 발생하지 않도록 주의해주세요
 									    		type: 'POST',
-									    		dataType: 'json',
+									    		dataType: 'text',
 									    		data: {
-										    		imp_uid : rsp.imp_uid
+										    		auction_code : auction_code,
+										    		income : income
 										    		//기타 필요한 데이터가 있으면 추가 전달
-									    		}
-									    	}).done(function(data) {
-									    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-									    		if ( everythings_fine ) {
-									    			var msg = '결제가 완료되었습니다.';
-									    			msg += '\n고유ID : ' + rsp.imp_uid;
-									    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-									    			msg += '\n결제 금액 : ' + rsp.paid_amount;
-									    			msg += '카드 승인번호 : ' + rsp.apply_num;
-									    			
-									    			alert(msg);
-									    		} else {
-									    			//[3] 아직 제대로 결제가 되지 않았습니다.
-									    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+									    		},
+									    		success : function(value){
+									    			if ( value == 'yes' ) {
+										    			
+										    			alert('결제가 완료되었습니다.'); 
+										    			
+										    			location.href='member.mypage.do';
+										    		} else {
+										    			//[3] 아직 제대로 결제가 되지 않았습니다.
+										    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+										    			alert('결제실패');
+										    		}
 									    		}
 									    	});
 									    } else {
