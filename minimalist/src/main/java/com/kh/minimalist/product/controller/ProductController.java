@@ -120,17 +120,17 @@ public class ProductController {
 			}
 		}
 		// productPage에 잘못된 값이 들어왔을 때
-		if ((productPage - 1) * 9 + 1 > totalCount) {
-			productPage = totalCount / 9;
+		if ((productPage - 1) * 12 + 1 > totalCount) {
+			productPage = totalCount / 12;
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
 		
-		startCount = (productPage - 1) * 9 + 1;
-		if (Math.ceil(totalCount / 9.0) == productPage) {
+		startCount = (productPage - 1) * 12 + 1;
+		if (Math.ceil(totalCount / 12.0) == productPage) {
 			endCount = totalCount;
 		} else {
-			endCount = productPage * 9;
+			endCount = productPage * 12;
 		}
 		
 		// 기본값을 outer로 줍니다.
@@ -218,17 +218,17 @@ public class ProductController {
 		}
 
 		// productPage에 잘못된 값이 들어왔을 때
-		if ((productPage - 1) * 9 + 1 > totalCount) {
+		if ((productPage - 1) * 12 + 1 > totalCount) {
 			return null;
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
 
-		startCount = (productPage - 1) * 9 + 1;
-		if (Math.ceil(totalCount / 9.0) == productPage) {
+		startCount = (productPage - 1) * 12 + 1;
+		if (Math.ceil(totalCount / 12.0) == productPage) {
 			endCount = totalCount;
 		} else {
-			endCount = productPage * 9;
+			endCount = productPage * 12;
 		}
 
 

@@ -285,7 +285,7 @@
 
 						</c:if>
 					</div>
-					<div class="row same-height-row">
+					<%-- <div class="row same-height-row">
 						<div class="col-md-3 col-sm-6">
 							<div class="box same-height">
 								<h3>You may also like these products</h3>
@@ -369,8 +369,8 @@
 							</div>
 							<!-- /.product -->
 						</div>
-					</div>
-					<div class="row same-height-row">
+					</div> --%>
+					<%-- <div class="row same-height-row">
 						<div class="col-md-3 col-sm-6">
 							<div class="box same-height">
 								<h3>Products viewed recently</h3>
@@ -454,7 +454,7 @@
 							</div>
 							<!-- /.product -->
 						</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-- /.col-md-9 -->
 				<c:import url="../main/wingCookie.jsp"/>
