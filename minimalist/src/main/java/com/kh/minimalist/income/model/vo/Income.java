@@ -9,9 +9,11 @@ public class Income implements Serializable {
 
 	 
 	private static final long serialVersionUID = -2237224425899823038L;
+	private int income_number;
 	private int auction_code;
 	private int income;
 	private Date income_date;
+	private String member_id;
 	private String receiver_name;
 	private String receiver_address;
 	private String receiver_phone;
@@ -19,19 +21,28 @@ public class Income implements Serializable {
 	private Auction auctionJoin;
 	
 	public Income(){}
+
+
+	public Income(int income_number, int auction_code, int income, Date income_date, String member_id, String receiver_name,
+			String receiver_address, String receiver_phone, int order_invoice_number, Auction auctionJoin) {
+
 	
-	public Income(int auction_code, int income, Date income_date, String receiver_name, String receiver_address,
-			String receiver_phone, int order_invoice_number, Auction auctionJoin) {
-		super();
+
+		this.income_number=income_number;
+
 		this.auction_code = auction_code;
 		this.income = income;
 		this.income_date = income_date;
+		this.member_id = member_id;
 		this.receiver_name = receiver_name;
 		this.receiver_address = receiver_address;
 		this.receiver_phone = receiver_phone;
 		this.order_invoice_number = order_invoice_number;
 		this.auctionJoin = auctionJoin;
 	}
+
+
+
 
 	public int getAuction_code() {
 		return auction_code;
@@ -89,21 +100,48 @@ public class Income implements Serializable {
 		this.order_invoice_number = order_invoice_number;
 	}
 
+
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+
+	public int getIncome_number() {
+		return income_number;
+	}
+
+
+	public void setIncome_number(int income_number) {
+		this.income_number = income_number;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Income [income_number=" + income_number + ", auction_code=" + auction_code + ", income=" + income
+				+ ", income_date=" + income_date + ", member_id=" + member_id + ", receiver_name=" + receiver_name
+				+ ", receiver_address=" + receiver_address + ", receiver_phone=" + receiver_phone
+				+ ", order_invoice_number=" + order_invoice_number + "]";
+	}
+
+	
+
 	public Auction getAuctionJoin() {
 		return auctionJoin;
 	}
+
 
 	public void setAuctionJoin(Auction auctionJoin) {
 		this.auctionJoin = auctionJoin;
 	}
 
-	@Override
-	public String toString() {
-		return "Income [auction_code=" + auction_code + ", income=" + income + ", income_date=" + income_date
-				+ ", receiver_name=" + receiver_name + ", receiver_address=" + receiver_address + ", receiver_phone="
-				+ receiver_phone + ", order_invoice_number=" + order_invoice_number + ", auctionJoin=" + auctionJoin
-				+ "]";
-	}
+	
 
 	
 }

@@ -307,13 +307,16 @@ COMMENT ON COLUMN QNA.IMG_PATH IS '이미지';
 
 /* 경매수입 */
 CREATE TABLE INCOME (
+	income_number number primary key, /* 주문번호 */
     AUCTION_CODE NUMBER, /* 경매 코드 */
     INCOME NUMBER, /* 수입액 */
     INCOME_DATE DATE, /* 수입일 */
+    member_id varchar2(50), /* 결제회원 id */
     RECEIVER_NAME varchar2(30), /*받는이*/
 	RECEIVER_ADDRESS varchar2(400), /*받는 주소*/
 	RECEIVER_PHONE varchar2(20), /*연락처*/
 	ORDER_INVOICE_NUMBER number, /*송장번호*/
+	constraint inco_fk1 foreign key (member_id) references member (member_id),
     CONSTRAINT INCO_FK2 FOREIGN KEY (AUCTION_CODE) REFERENCES AUCTION (AUCTION_CODE)
 );
 
@@ -460,6 +463,6 @@ INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', N
 INSERT INTO QNA VALUES(1, 'admin', '란희백 얼마', '냉무', '상품질문', '비싸', SYSDATE, NULL);
 
 
-insert into income values(4, 0, sysdate, '관리자', '주소없음', '연락처없음', null);
+insert into income values(1, 4, 0, sysdate, 'admin', '관리자', '주소없음', '연락처없음', null);
 
 COMMIT;

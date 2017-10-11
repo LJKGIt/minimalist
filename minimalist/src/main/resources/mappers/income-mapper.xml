@@ -44,9 +44,11 @@
 	<!-- 판매시 insert -->
 	<insert id="insertIncome" parameterType="Income">
 	insert into income values (
+	(select max(income_number) from income)+1,
 	#{auction_code},
 	#{income},
 	sysdate,
+	#{member_id},
 	#{receiver_name},
 	#{receiver_address},
 	#{receiver_phone},
