@@ -49,6 +49,7 @@
 			FROM (SELECT * 
 					FROM PRODUCT 
 					WHERE PRODUCT_DELETE = 0 
+					AND PRODUCT_NAME LIKE '%'||#{keyword}||'%'
 					AND PRODUCT_CATEGORY = #{product.product_category}
                     AND PRODUCT_BRAND IN (
                     <foreach collection="prdouctBrandList" item="item" index="index"  open="" separator=", " close="" >

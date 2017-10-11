@@ -355,17 +355,19 @@
 				</div>
 			</div>
 			<div class="collapse clearfix" id="search">
-				<form class="navbar-form" role="search">
+				<form class="navbar-form" role="search" action="productList.do" method="GET">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="searchBox">
+						<input type="text" class="form-control" placeholder="키워드, 브랜드, 최저 가격, 최고 가격" id="i_text_search" name="n_text_search" value="${ searchString }">
 						<span class="input-group-btn">
-
 							<button type="submit" class="btn btn-primary">
 								<i class="fa fa-search"></i>
 							</button>
-
+							<button type="reset" class="btn btn-primary">
+								<i class="fa fa-remove"></i>
+							</button>
 						</span>
 					</div>
+					<input type="hidden" name="product_category" value="${ product.product_category }">
 				</form>
 			</div>
 			<!--/.nav-collapse -->

@@ -2,7 +2,6 @@ package com.kh.minimalist.product.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +36,6 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
 	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -99,33 +97,18 @@ public class ProductController {
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public String productList(Product product, HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		String returnResult = "main/404";
-
-		boolean withAjax = false;
 		int productPage = 1;
 		int totalCount = productService.productTotalCount(product);
 		int startCount = 0;
 		int endCount = 0;
-
-		// product_category가 null이면 기본 값을 주기.
-		if (product.getProduct_category() == null) {
-			product.setProduct_category("outer");
-		}
-		// AJAX로 접근했는지 확인
-		if (request.getParameter("productPage") != null) {
-			withAjax = true;
-			try {
-				productPage = Integer.parseInt(request.getParameter("productPage"));
-			} catch (NumberFormatException e) {
-				return "main/404";
-			}
-		}
+		
 		// productPage에 잘못된 값이 들어왔을 때
-		if ((productPage - 1) * 12 + 1 > totalCount) {
+		if (productPage != 1 && (productPage - 1) * 12 + 1 > totalCount) {
 			productPage = totalCount / 12;
 		} else if (productPage < 0) {
 			productPage = 1;
 		}
-		
+
 		startCount = (productPage - 1) * 12 + 1;
 		if (Math.ceil(totalCount / 12.0) == productPage) {
 			endCount = totalCount;
@@ -133,45 +116,60 @@ public class ProductController {
 			endCount = productPage * 12;
 		}
 		
-		// 기본값을 outer로 줍니다.
-		if(product.getProduct_category() == null){
+		if (product.getProduct_category() == null || product.getProduct_category().equals("")) {
 			product.setProduct_category("outer");
 		}
 		
-		// 기본 값이 없을 때 모든 값을 뽑아옵니다.
-		ArrayList<String> prdouctBrandList = null;
-		if(product.getProduct_brand() == null){
-			prdouctBrandList = productService.selectBrand();
+		String searchString = null;
+		String[] searchArray = new String[4];
+		if(request.getParameter("n_text_search") != null){
+			searchString = request.getParameter("n_text_search");
+			model.addAttribute("searchString", searchString);
+			
+			String[] searchArrayPre = searchString.split("/");
+			
+			for(int i = 0; i < searchArrayPre.length; i++){
+				searchArray[i] = searchArrayPre[i];
+			}
 		}
 		
+		
+		// keyword를 가져옵니다. (null이어도 괜찮습니다.)
+		String keyword = null;
+		if (searchArray[0] != null && !searchArray[0].equals("")) {
+			keyword = searchArray[0];
+		}
+
+		// 기본 값이 없을 때 모든 값을 가져옵니다.
+		ArrayList<String> prdouctBrandList = new ArrayList<String>();
+		if (searchArray[1] != null && !searchArray[1].equals("")) {
+			prdouctBrandList.add(searchArray[1]);
+		} else {
+			prdouctBrandList = productService.selectBrand();
+		}
+
 		int startPrice = 0;
 		int endPrice = Integer.MAX_VALUE;
 		try {
-			if(request.getParameter("startPrice") != null)
-				startPrice = Integer.parseInt(request.getParameter("startPrice"));
-			if(request.getParameter("endPrice") != null)
-				endPrice = Integer.parseInt(request.getParameter("endPrice"));
+			if (searchArray[2] != null && !searchArray[2].equals(""))
+				startPrice = Integer.parseInt(searchArray[2]);
+			if (searchArray[3] != null && !searchArray[3].equals(""))
+				endPrice = Integer.parseInt(searchArray[3]);
 		} catch (NumberFormatException e) {
 			return "main/404";
 		}
-		
-		// TODO [lintogi] header.jsp에 PRODUCT 링크 집어넣기.
+
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
+		hashMap.put("prdouctBrandList", prdouctBrandList);
 		hashMap.put("startPrice", startPrice);
 		hashMap.put("endPrice", endPrice);
-		hashMap.put("prdouctBrandList", prdouctBrandList);
-		System.out.println("product : " + product); // TODO
-		System.out.println("startCount : " + startCount); // TODO
-		System.out.println("endCount : " + endCount); // TODO
-		System.out.println("startPrice : " + startPrice); // TODO
-		System.out.println("endPrice : " + endPrice); // TODO
-		System.out.println("prdouctBrandList.size() : " + prdouctBrandList.size()); // TODO
+		hashMap.put("keyword", keyword);
 		
 		ArrayList<Product> productList = productService.productList(hashMap);
-		System.out.println("productList.size() : " + productList.size());
+
 		if (productList != null && productList.size() != 0) {
 			model.addAttribute("productList", productList);
 			returnResult = "product/product_list";
@@ -231,45 +229,58 @@ public class ProductController {
 			endCount = productPage * 12;
 		}
 
-
-		// 기본값을 outer로 줍니다.
-		if(product.getProduct_category() == null){
+		// 값을 받아오지 않았을 때 'outer'로 초기화합니다.
+		if (product.getProduct_category() == null) {
 			product.setProduct_category("outer");
 		}
-		
-		// 기본 값이 없을 때 모든 값을 뽑아옵니다.
-		ArrayList<String> prdouctBrandList = null;
-		if(product.getProduct_brand() == null){
-			prdouctBrandList = productService.selectBrand();
+
+		String searchString = null;
+		String[] searchArray = new String[4];
+
+		if(request.getParameter("n_text_search") != null){
+			searchString = request.getParameter("n_text_search");
 			
+			String[] searchArrayPre = searchString.split("/");
+			
+			for(int i = 0; i < searchArrayPre.length; i++){
+				searchArray[i] = searchArrayPre[i];
+			}
 		}
 		
+		// keyword를 가져옵니다. (null이어도 괜찮습니다.)
+		String keyword = null;
+		if (searchArray[0] != null && !searchArray[0].equals("")) {
+			keyword = searchArray[0];
+		}
+
+		// 기본 값이 없을 때 모든 값을 가져옵니다.
+		ArrayList<String> prdouctBrandList = new ArrayList<String>();
+		if (searchArray[1] != null && !searchArray[1].equals("")) {
+			prdouctBrandList.add(searchArray[1]);
+		} else {
+			prdouctBrandList = productService.selectBrand();
+		}
+
 		int startPrice = 0;
 		int endPrice = Integer.MAX_VALUE;
 		try {
-			if(request.getParameter("startPrice") != null)
-				startPrice = Integer.parseInt(request.getParameter("startPrice"));
-			if(request.getParameter("endPrice") != null)
-				endPrice = Integer.parseInt(request.getParameter("endPrice"));
+			if (searchArray[2] != null && !searchArray[2].equals(""))
+				startPrice = Integer.parseInt(searchArray[2]);
+			if (searchArray[3] != null && !searchArray[3].equals(""))
+				endPrice = Integer.parseInt(searchArray[3]);
 		} catch (NumberFormatException e) {
 			return null;
 		}
-		
-		// TODO [lintogi] header.jsp에 PRODUCT 링크 집어넣기.
+
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("product", product);
 		hashMap.put("startCount", startCount);
 		hashMap.put("endCount", endCount);
+		hashMap.put("prdouctBrandList", prdouctBrandList);
 		hashMap.put("startPrice", startPrice);
 		hashMap.put("endPrice", endPrice);
-		hashMap.put("prdouctBrandList", prdouctBrandList);
-		System.out.println("product : " + product); // TODO
-		System.out.println("startCount : " + startCount); // TODO
-		System.out.println("endCount : " + endCount); // TODO
-		System.out.println("startPrice : " + startPrice); // TODO
-		System.out.println("endPrice : " + endPrice); // TODO
-		System.out.println("prdouctBrandList.size() : " + prdouctBrandList.size()); // TODO
-		
+		hashMap.put("keyword", keyword);
+
 		ArrayList<Product> productList = productService.productList(hashMap);
 
 		return productList;
@@ -285,7 +296,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "productInsert.do", method = RequestMethod.POST)
-	public String productInsert(Product product, Model model, HttpSession session,  HttpServletRequest request) {
+	public String productInsert(Product product, Model model, HttpSession session, HttpServletRequest request) {
 		String returnResult = "main/404";
 
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
@@ -297,14 +308,14 @@ public class ProductController {
 				imageNameList.add(request.getParameter("n_hidden_image1"));
 				imageNameList.add(request.getParameter("n_hidden_image2"));
 				imageNameList.add(request.getParameter("n_hidden_image3"));
-				
+
 				HashMap<String, Object> imageInsertData = new HashMap<String, Object>();
 				imageInsertData.put("recentProductCode", recentProductCode);
 				imageInsertData.put("imageNameList", imageNameList);
-				
+
 				int result2 = productService.productImageInsert(imageInsertData);
-				
-				if(result2 > 0){
+
+				if (result2 > 0) {
 					returnResult = "redirect:productDetail.do?product_code=" + recentProductCode;
 				}
 			}
@@ -314,7 +325,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "productUpdateView.do", method = RequestMethod.GET)
-	public String productUpdateView(Product product, Model model, HttpSession session,  HttpServletRequest request) {
+	public String productUpdateView(Product product, Model model, HttpSession session, HttpServletRequest request) {
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			Product productReturn = productService.productDetail(product);
@@ -323,9 +334,9 @@ public class ProductController {
 		}
 		return returnResult;
 	}
-	
+
 	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
-	public String productUpdate(Product product, Model model, HttpSession session,  HttpServletRequest request) {
+	public String productUpdate(Product product, Model model, HttpSession session, HttpServletRequest request) {
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result1 = productService.productUpdate(product);
@@ -334,13 +345,13 @@ public class ProductController {
 				imageNameList.add(request.getParameter("n_hidden_image1"));
 				imageNameList.add(request.getParameter("n_hidden_image2"));
 				imageNameList.add(request.getParameter("n_hidden_image3"));
-				
+
 				HashMap<String, Object> imageInsertData = new HashMap<String, Object>();
 				imageInsertData.put("recentProductCode", product.getProduct_code());
 				imageInsertData.put("imageNameList", imageNameList);
 				productService.productImageDelete(product);
 				int result2 = productService.productImageInsert(imageInsertData);
-				if(result2 > 0){
+				if (result2 > 0) {
 					returnResult = "redirect:productDetail.do?product_code=" + product.getProduct_code();
 				}
 			}
@@ -377,7 +388,7 @@ public class ProductController {
 			String uploadFile = files.next();
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
-			if(fileName != null && !fileName.equals("")){
+			if (fileName != null && !fileName.equals("")) {
 				// newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 				newFileName = fileName;
 				try {
