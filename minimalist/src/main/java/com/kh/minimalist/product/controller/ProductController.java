@@ -143,7 +143,6 @@ public class ProductController {
 		ArrayList<String> prdouctBrandList = null;
 		if(product.getProduct_brand() == null){
 			prdouctBrandList = productService.selectBrand();
-			
 		}
 		
 		int startPrice = 0;

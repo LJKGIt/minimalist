@@ -24,8 +24,23 @@
                         <li>Ladies</li>
                     </ul>
                 </div>
+                
+                <div class="col-md-12">
+	                <form class="navbar-form" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" id="searchBox">
+							<span class="input-group-btn">
+	
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-search"></i>
+								</button>
+	
+							</span>
+						</div>
+					</form>
+				</div>
 
-                <div class="col-md-3">
+                <%-- <div class="col-md-3">
                     <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
                     <!-- <div class="panel panel-default sidebar-menu">
@@ -171,9 +186,9 @@
                             <img src="${ pageContext.request.contextPath }/resources/img/banner.jpg" alt="sales 2014" class="img-responsive">
                         </a>
                     </div>
-                </div>
+                </div> --%>
 
-                <div class="col-md-9">
+                <div class="col-md-11">
                     <!-- <div class="box">
                         <h1>Ladies</h1>
                         <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>

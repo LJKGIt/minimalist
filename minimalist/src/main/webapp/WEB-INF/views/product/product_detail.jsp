@@ -151,7 +151,7 @@
 							<div id="mainImage">
 								<img
 									src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }"
-									alt="" class="img-responsive">
+									alt="" class="img-responsive" style="margin:auto;">
 							</div>
 							<div class="ribbon sale">
 								<div class="theribbon">SALE</div>
