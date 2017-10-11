@@ -21,6 +21,7 @@
 			<result property="auction_code" column="auction_code"/>
 		    <result property="member_id" column="member_id"/>
 		    <result property="bid_price" column="bid_price"/>
+		    <result property="max_bid" column="MAX_BID"/>
 		</collection>
 	</resultMap> 
 	
@@ -165,18 +166,18 @@ where rownum&lt;=5
 	 </update>
 
 	<!-- 회원별 경매목록 조회 -->
-	<select id="selectMemberAuction" parameterType="string" resultType="Auction">
+	<select id="selectMemberAuction" parameterType="string" resultType="Auction" resultMap="resultAuction">
 		SELECT *
-		FROM (SELECT MAX(BID_PRICE) "MAX", AUCTION_CODE "CODE"
+		FROM (SELECT MAX(BID_PRICE) "MAX_BID", AUCTION_CODE
 		      FROM (SELECT *
 		            FROM BIDINFO
 		            WHERE AUCTION_CODE IN (SELECT AUCTION_CODE
 		                                   FROM BIDINFO
 		                                   WHERE MEMBER_ID = #{member_id}))
 		      GROUP BY AUCTION_CODE)
-		JOIN (SELECT AUCTION_CODE "CODE", BID_PRICE "MY", AUCTION_NAME, END_DATE
+		JOIN (SELECT AUCTION_CODE, BID_PRICE, AUCTION_NAME, AUCTION_BRAND, END_DATE, IMAGE_PATH
 		      FROM BIDINFO
 		      JOIN AUCTION USING (AUCTION_CODE)
-		      WHERE MEMBER_ID = #{member_id}) USING (CODE)
+		      WHERE MEMBER_ID = #{member_id}) USING (AUCTION_CODE)
 	</select>
 </mapper>

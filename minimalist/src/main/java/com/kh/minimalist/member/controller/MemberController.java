@@ -395,11 +395,10 @@ public class MemberController {
 	
 	@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
 	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
-		System.out.println("가가");
-		if (((Member) session.getAttribute("member")) != null) {
-			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
-			ArrayList<Income> incomeList = incomeService.selectMemberIncome("관리자"/*((Member) session.getAttribute("member")).getMember_id()*/);
-			System.out.println(incomeList);
+		Member sessionMember = (Member) session.getAttribute("member");
+		if (sessionMember != null) {
+			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(sessionMember.getMember_id());
+			ArrayList<Income> incomeList = incomeService.selectMemberIncome(sessionMember.getMember_id());
 			model.addAttribute("auctionList", auctionList);
 			model.addAttribute("incomeList", incomeList);
 		} else {

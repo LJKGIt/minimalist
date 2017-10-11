@@ -197,13 +197,13 @@
 										</h3>
 										<p class="price">
 											<font size=3px>현재 입찰가 : <fmt:formatNumber
-													value="${au.bidInfo.bid_price}" type="currency" /></font>
+													value="${au.bidInfo[0].max_bid}" type="currency" /></font>
 										</p>
 										<p class="price">
 											<font size=3px>내 입찰가 : <fmt:formatNumber
 													value="${au.bidInfo[0].bid_price}" type="currency" /></font>
 										</p>
-										<p>
+										<p style="text-align : center;">
 											<font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매
 												종료 :<fmt:formatDate value="${au.end_date}" type="date"
 													pattern="MM월dd일" />
