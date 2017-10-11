@@ -188,8 +188,8 @@
 										MyPage</i>
 								</a>
 								<!--  Message Modal -->
-								<button type="button" id="message-modal-click"class="btn navbar-btn btn-default"
-							style="width:50px" data-toggle="modal" data-target="#message-modal">
+								<button type="button" id="message-mb" class="btn navbar-btn btn-default message-click"
+							style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 								 
 							</c:if>
@@ -342,7 +342,7 @@
 
 							class="fa fa-user"></i><span class="hidden-sm"></span></a>
 						</c:if> 
-						<button type="button" class="btn navbar-btn btn-primary"
+						<button type="button" class="btn navbar-btn btn-primary message-click"
 							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
@@ -399,25 +399,11 @@
 			$.ajax({
 				url : "message.messageListView.do",
 				type : "POST",
-				dataType : "text",
+				dataType : "json",	
 				success : function(data){
-					//<c:forEach items="${ messageList }" var="list">					
-					//	$('#accordion').append('<div class="panel panel-primary"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">${ list.message_title } </a>')
-					/* <div class="panel panel-primary">
-						<div class="panel-heading" <c:if test="${ list.check_yn ne 'n'.charAt(0) }"> style="background-color:white; color:#4fbfa8;" </c:if>>
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#msg${ list.message_number }" onclick="readCheck($(this).attr('href'), (this))" data-sendYn="${ list.check_yn }">
-									${ list.message_title } </a>
-							</h4>
-						</div>
-						<div id="msg${list.message_number}" class="panel-collapse collapse">
-							<div class="panel-body">
-								<p>${ list.message_content }</p>
-								</div>
-							</div>
-						</div>
-					</c:forEach> */
-					<!-- panel -->
+					console.log(data.messageList);
+				}, error : function(){
+					alert("!!!");
 				}
 			})
 		})
@@ -464,7 +450,7 @@
 			},475);
 		});
 		
-		$('#message-click').click(function(){
+		$('.message-click').click(function(){
 			var openPop;
 			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
 		})
