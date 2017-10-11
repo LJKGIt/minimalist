@@ -156,7 +156,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image1" name="filebutton1" class="input-file" type="file">
-								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden" value="${ product.productImageList[0].product_image_path }">
+								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden" value="">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -166,7 +166,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image2">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image2" name="filebutton2" class="input-file" type="file">
-								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden" value="${ product.productImageList[1].product_image_path }">
+								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden" value="">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -176,7 +176,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image3">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image3" name="filebutton3" class="input-file" type="file">
-								    <input id="i_hidden_image3" name="n_hidden_image3" type="hidden" value="${ product.productImageList[2].product_image_path }">
+								    <input id="i_hidden_image3" name="n_hidden_image3" type="hidden" value="">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>

@@ -339,7 +339,11 @@ public class ProductController {
 		String returnResult = "main/404";
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result1 = productService.productUpdate(product);
-			if (result1 > 0) {
+			if(result1 > 0)
+				returnResult = "redirect:productDetail.do?product_code=" + product.getProduct_code();
+			
+			if (!request.getParameter("n_hidden_image1").equals("") && !request.getParameter("n_hidden_image2").equals("") && !request.getParameter("n_hidden_image3").equals("")) {
+				
 				ArrayList<String> imageNameList = new ArrayList<String>();
 				imageNameList.add(request.getParameter("n_hidden_image1"));
 				imageNameList.add(request.getParameter("n_hidden_image2"));
@@ -349,10 +353,7 @@ public class ProductController {
 				imageInsertData.put("recentProductCode", product.getProduct_code());
 				imageInsertData.put("imageNameList", imageNameList);
 				productService.productImageDelete(product);
-				int result2 = productService.productImageInsert(imageInsertData);
-				if (result2 > 0) {
-					returnResult = "redirect:productDetail.do?product_code=" + product.getProduct_code();
-				}
+				productService.productImageInsert(imageInsertData);
 			}
 		}
 		return returnResult;
