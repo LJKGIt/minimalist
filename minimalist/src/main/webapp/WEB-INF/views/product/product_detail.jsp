@@ -240,28 +240,23 @@
 					</div>
 					<div class="box" id="details">
 						<p>
-						<h4>Product details</h4>
-						<p>White lace top, woven, has a round neck, short sleeves, has
-							knitted lining attached</p>
+						<h4>Design Comment</h4>
+						<p>${ product.product_descript }</p>
 						<h4>Material &#38; care</h4>
 						<ul>
 							<li>Polyester</li>
 							<li>Machine wash</li>
 						</ul>
 						<h4>Size &#38; Fit</h4>
-						<ul>
-							<li>Regular fit</li>
-							<li>The model (height 5'8" and chest 33") is wearing a size
-								S</li>
-						</ul>
-						<blockquote>
+						<img src="${ pageContext.request.contextPath }/resources/img_product/size_guide.jpg" class="img-responsive">
+						<!-- <blockquote>
 							<p>
 								<em>Define style this season with Armani's new range of
 									trendy tops, crafted with intricate details. Create a chic
 									statement look by teaming this lace number with skinny jeans
 									and pumps.</em>
 							</p>
-						</blockquote>
+						</blockquote> -->
 						<hr>
 						<!-- <div class="social">
                                 <h4>Show it to your friends</h4>
@@ -274,14 +269,14 @@
                             </div> -->
 						<a
 							href="review.selectList.do?product_code=${product.product_code}"
-							class="btn btn-primary">상품후기 목록 보기</a>
+							class="btn btn-primary" style="margin:5px 5px 5px 5px;">상품후기 목록 보기</a>
 						<c:if test="${ member.member_id eq 'admin' }">
 							<a
 								href="productDelete.do?product_code=${product.product_code}"
-								class="btn btn-primary">삭제하기</a>
+								class="btn btn-primary" style="margin:5px 5px 5px 5px;">삭제하기</a>
 							<a
 							href="productUpdateView.do?product_code=${product.product_code}"
-							class="btn btn-primary">수정하기</a>
+							class="btn btn-primary" style="margin:5px 5px 5px 5px;">수정하기</a>
 
 						</c:if>
 					</div>

@@ -48,15 +48,13 @@
 
                             <div class="content">
                                 <div class="row">
-                                	<div class="col-sm-6">
+                                	<div class="col-sm-5">
                                         <div class="form-group">
                                             <label for="firstname">이름</label>
                                             <input type="text" class="form-control" id="i_text_reciever_name" value="${ sessionScope.member.member_name }">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="form-group">
                                             <label for="city">전화번호</label>
                                             <input type="text" class="form-control" id="i_text_reciever_phone" value="${ sessionScope.member.phone }">
