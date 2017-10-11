@@ -188,8 +188,8 @@
 										MyPage</i>
 								</a>
 								<!--  Message Modal -->
-								<button type="button" id="message-modal-click"class="btn navbar-btn btn-default"
-							style="width:50px" data-toggle="modal" data-target="#message-modal">
+								<button type="button" id="message-mb" class="btn navbar-btn btn-default message-click"
+							style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 								 
 							</c:if>
@@ -342,7 +342,7 @@
 
 							class="fa fa-user"></i><span class="hidden-sm"></span></a>
 						</c:if> 
-						<button type="button" class="btn navbar-btn btn-primary"
+						<button type="button" class="btn navbar-btn btn-primary message-click"
 							id="message-click" style="width:50px">
 							<i class="fa fa-envelope"></i><c:if test="${ newMessageCount > 0 }"><span class="label label-danger" style="display:absolute; left:-5px; top:-20px;">${ newMessageCount }</span></c:if></button>
 							
@@ -399,7 +399,7 @@
 			$.ajax({
 				url : "message.messageListView.do",
 				type : "POST",
-				dataType : "json",
+				dataType : "json",	
 				success : function(data){
 					// console.log(data.messageList);
 				}, error : function(){
@@ -450,7 +450,7 @@
 			},475);
 		});
 		
-		$('#message-click').click(function(){
+		$('.message-click').click(function(){
 			var openPop;
 			openPop = window.open("message.messageListView.do", "a", "width=500 height=400, left=100, top=100");	
 		})
