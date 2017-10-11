@@ -357,7 +357,7 @@
 			<div class="collapse clearfix" id="search">
 				<form class="navbar-form" role="search" action="productList.do" method="GET">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="키워드, 브랜드, 최저 가격, 최고 가격" id="i_text_search" name="n_text_search" value="${ searchString }">
+						<input type="search" class="form-control" placeholder="키워드 / 브랜드 / 최저 가격 / 최고 가격" id="i_text_search" name="n_text_search" value="">
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-primary">
 								<i class="fa fa-search"></i>
@@ -369,6 +369,12 @@
 					</div>
 					<input type="hidden" name="product_category" value="${ product.product_category }">
 				</form>
+				<script type="text/javascript">
+					$(function(){
+						var searchString = '${ searchString }';
+						$('#i_text_search').val(searchString);
+					});
+				</script>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
