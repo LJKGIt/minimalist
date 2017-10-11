@@ -44,4 +44,9 @@ public class IncomeServiceImpl implements IncomeService {
 		
 		return incomeDao.selectListByDate(map);
 	}
+
+	@Override
+	public ArrayList<Income> selectMemberIncome(String member_id) {
+		return incomeDao.selectMemberIncome(member_id);
+	}
 }
