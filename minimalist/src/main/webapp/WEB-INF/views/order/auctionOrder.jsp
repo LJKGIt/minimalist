@@ -87,9 +87,8 @@ margin-top:30px;
 							<tr><th>기본주소 &nbsp; </th><td><input type="text" id="address1" value="${address1}" size="40px"></td><td><input type="button"
 									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary"></td></tr>
 							<tr><th>상세주소 &nbsp; </th><td><input type="text" id="address2" value="${address2}"  size="30px"></td></tr>
-							<tr><th>결제가격 &nbsp; </th><td id="income">${price} 원</td></tr>
-							<%-- <tr><th><input type="button" class="btn btn-primary" id="i_submit_order" value="결제하기"></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}"><input type="button" class="btn btn-primary" value="낙찰거부"></a></td></tr>
-							<!-- <tr><th></th><td><font color="red">※낙찰을 거부할 경우 회원 등급 하락 등의 불이익이 있을 수 있습니다.</font></td></tr>						 --> --%>
+							<tr><th>결제가격 &nbsp; </th><td id="income">${price}</td></tr>
+							<tr><th>배송시 요청사항</th><td><input type="text" id="request" size="50px" value="부재시 경비실에 맡겨주세요."></td></tr>
 						</tbody>
 						</table>
 						<div id="btn2" align="center">
@@ -125,6 +124,7 @@ margin-top:30px;
 									    	var address1=$('#address1').val();
 									    	var address2=$('#address2').val();
 									    	var receiver=$('#receiver').val();
+									    	var request=$('#request').val();
 									    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 									    	jQuery.ajax({
 									    		url: "income.insertIncome.do", //cross-domain error가 발생하지 않도록 주의해주세요
@@ -135,7 +135,8 @@ margin-top:30px;
 										    		income : income,
 										    		address1 : address1,
 										    		address2 : address2,
-										    		receiver : receiver
+										    		receiver : receiver,
+										    		request : request
 										    		//기타 필요한 데이터가 있으면 추가 전달
 									    		},
 									    		success : function(value){
