@@ -168,6 +168,7 @@ where rownum&lt;=5
 	<select id="selectMemberAuction" parameterType="string" resultType="Auction">
 		SELECT * FROM AUCTION
 		JOIN BIDINFO USING (AUCTION_CODE)
-		WHERE MEMBER_ID = #{member_id} ORDER BY END_DATE DESC
+		WHERE MEMBER_ID = #{member_id}
+		ORDER BY END_DATE DESC
 	</select>
 </mapper>
