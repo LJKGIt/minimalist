@@ -7,7 +7,13 @@
 
 <head>
 <style type="text/css">
+#pay td{
+padding:10px;
+}
 
+#btn2 {
+margin-top:30px;
+}
 
 </style>
 
@@ -68,18 +74,28 @@
                    <h3 align="center">주문 정보</h3>
                    <p align="center"><img src="${img1}"></p>
                         <form action="income.insertIncome.do" method="POST">
-                        <table style="margin:auto">
-                        	<tr><th>물품명 : </th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
-                        	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
-							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly id="auction_code"></td></tr>
-							<tr><th>받는이 : </th><td><input type="text" id="receiver" value="${name}"></td></tr>
-							<tr><th>기본주소 : </th><td><input type="text" id="address1" value="${address1}"></td><td><input type="button"
+                        <table style="margin:auto" id="pay">
+                        <thead> <tr><th></th><td><font size="5">- 물품정보 -</font></td></tr>
+                        	<tr><th>물품명 &nbsp;</th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
+                        	<tr><th>상세 &nbsp;</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">상세보기</a></td></tr>
+							<tr><th>경매코드  &nbsp;</th><td id="auction_code">${auction.auction_code}</td></tr>
+						
+						</thead>
+						<tbody> 
+							<tr><th></th><td><font size="5">- 배송정보 -</font></td></tr>
+							<tr><th>받는이  &nbsp;</th><td><input type="text" id="receiver" value="${name}" size="10px"></td></tr>
+							<tr><th>기본주소 &nbsp; </th><td><input type="text" id="address1" value="${address1}" size="40px"></td><td><input type="button"
 									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary"></td></tr>
-							<tr><th>상세주소 : </th><td><input type="text" id="address2" value="${address2}"></td></tr>
-							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly id="income"></td></tr>
-							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
-							<tr><th></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}">결제를 하지 않겠습니다.</a></td></tr>
+							<tr><th>상세주소 &nbsp; </th><td><input type="text" id="address2" value="${address2}"  size="30px"></td></tr>
+							<tr><th>결제가격 &nbsp; </th><td id="income">${price} 원</td></tr>
+							<%-- <tr><th><input type="button" class="btn btn-primary" id="i_submit_order" value="결제하기"></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}"><input type="button" class="btn btn-primary" value="낙찰거부"></a></td></tr>
+							<!-- <tr><th></th><td><font color="red">※낙찰을 거부할 경우 회원 등급 하락 등의 불이익이 있을 수 있습니다.</font></td></tr>						 --> --%>
+						</tbody>
 						</table>
+						<div id="btn2" align="center">
+						<input type="button" class="btn btn-primary" id="i_submit_order" value="결제하기"><a href="message.cancelOrder.do?auction_code=${auction.auction_code}">&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" value="낙찰거부"></a>
+						
+						</div>
 						</form>
                     </div> 
                     
@@ -104,8 +120,8 @@
 									    buyer_postcode : '123-456'
 									}, function(rsp) {
 									    if ( rsp.success ) {
-									    	var auction_code=$('#auction_code').val();
-									    	var income=$('#income').val();
+									    	var auction_code=$('#auction_code').text();
+									    	var income=$('#income').text();
 									    	var address1=$('#address1').val();
 									    	var address2=$('#address2').val();
 									    	var receiver=$('#receiver').val();
