@@ -28,4 +28,7 @@ public interface ProductService {
 	
 	int productImageInsert(HashMap<String, Object> imageInsertData);
 
+	int productImageDelete(Product product);
+
+
 }

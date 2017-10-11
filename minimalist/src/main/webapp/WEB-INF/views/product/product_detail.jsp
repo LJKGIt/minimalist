@@ -279,6 +279,9 @@
 							<a
 								href="productDelete.do?product_code=${product.product_code}"
 								class="btn btn-primary">삭제하기</a>
+							<a
+							href="productUpdateView.do?product_code=${product.product_code}"
+							class="btn btn-primary">수정하기</a>
 
 						</c:if>
 					</div>

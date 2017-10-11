@@ -71,6 +71,12 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.productImageInsert(imageInsertData);
 	}
 
+	@Override
+	public int productImageDelete(Product product) {
+		return productDao.productImageDelete(product);
+	}
+
+
 
 
 }

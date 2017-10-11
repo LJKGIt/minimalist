@@ -39,7 +39,7 @@ public class ProductController {
 
 	// TODO [lintogi] ■ 30 검색 기능을 만들기. (사이즈는 슬라이드바를 사용하기.)
 	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
-	// TODO [lintogi] □ 마지막에 "System.out.print"를 모두 지우기.
+	// TODO [lintogi] ■ 마지막에 "System.out.print"를 모두 지우기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";
@@ -49,7 +49,7 @@ public class ProductController {
 		}
 		productService.productHit(product);
 
-		Product product_return = productService.productDetail(product);
+		Product productReturn = productService.productDetail(product);
 
 		Wish wish = null;
 		if (member_id != null) {
@@ -87,8 +87,8 @@ public class ProductController {
 			e.printStackTrace();
 		}
 
-		if (product_return != null) {
-			model.addAttribute("product", product_return);
+		if (productReturn != null) {
+			model.addAttribute("product", productReturn);
 			model.addAttribute("wish", wish);
 			returnResult = "product/product_detail";
 		}
@@ -261,22 +261,38 @@ public class ProductController {
 		return returnResult;
 	}
 
-	// TODO [lintogi] ■ 20 수정 페이지 만들기.
-	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
-	public String productUpdate(Product product, Model model, HttpSession session) {
+	@RequestMapping(value = "productUpdateView.do", method = RequestMethod.GET)
+	public String productUpdateView(Product product, Model model, HttpSession session,  HttpServletRequest request) {
 		String returnResult = "main/404";
-
-		// if (session.getAttribute("member") != null
-		// && ((Member)
-		// session.getAttribute("member")).getMember_id().equals("admin")) {
-		// int result = productService.productUpdate(product);
-		// if (result > 0) {
-		// returnResult = "redirect:productDetail.do?product_code="
-		// + productService.productRecentProductCode(product);
-		// product.getProduct_code();
-		// }
-		// }
-
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+			Product productReturn = productService.productDetail(product);
+			model.addAttribute("product", productReturn);
+			returnResult = "product/product_update_view";
+		}
+		return returnResult;
+	}
+	
+	@RequestMapping(value = "productUpdate.do", method = RequestMethod.POST)
+	public String productUpdate(Product product, Model model, HttpSession session,  HttpServletRequest request) {
+		String returnResult = "main/404";
+		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
+			int result1 = productService.productUpdate(product);
+			if (result1 > 0) {
+				ArrayList<String> imageNameList = new ArrayList<String>();
+				imageNameList.add(request.getParameter("n_hidden_image1"));
+				imageNameList.add(request.getParameter("n_hidden_image2"));
+				imageNameList.add(request.getParameter("n_hidden_image3"));
+				
+				HashMap<String, Object> imageInsertData = new HashMap<String, Object>();
+				imageInsertData.put("recentProductCode", product.getProduct_code());
+				imageInsertData.put("imageNameList", imageNameList);
+				productService.productImageDelete(product);
+				int result2 = productService.productImageInsert(imageInsertData);
+				if(result2 > 0){
+					returnResult = "redirect:productDetail.do?product_code=" + product.getProduct_code();
+				}
+			}
+		}
 		return returnResult;
 	}
 
@@ -286,6 +302,7 @@ public class ProductController {
 		if (session.getAttribute("member") != null && ((Member) session.getAttribute("member")).getMember_id().equals("admin")) {
 			int result = productService.productDelete(product);
 			if (result > 0) {
+				productService.productImageDelete(product);
 				returnResult = "redirect:productList.do";
 			}
 		}

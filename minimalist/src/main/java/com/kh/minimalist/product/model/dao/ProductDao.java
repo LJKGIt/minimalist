@@ -65,4 +65,9 @@ public class ProductDao {
 		return sqlSession.insert("Product.productImageInsert", imageInsertData);
 	}
 
+	public int productImageDelete(Product product) {
+		return sqlSession.insert("Product.productImageDelete", product);
+	}
+
+
 }

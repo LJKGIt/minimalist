@@ -25,21 +25,23 @@
 
                 </div>
 
-				<input type="hidden" id="i_hidden_aside_active" value="대여상품 등록">
-                <c:import url="../main/aside_admin.jsp" />
+				<%-- <input type="hidden" id="i_hidden_aside_active" value="대여상품 등록">
+                <c:import url="../main/aside_admin.jsp" /> --%>
 
-                <div class="col-md-9" id="customer-order">
+                <div class="col-md-12" id="customer-order">
                     <div class="box">
-                    	<form id="i_form_insert" action="productInsert.do" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    	<form id="i_form_insert" action="productUpdate.do" method="POST" class="form-horizontal" enctype="multipart/form-data">
 							<fieldset>
 								<!-- Form Name -->
-								<legend>대여 상품 등록</legend>
+								<legend>대여 상품 수정</legend>
+
+								<input type="hidden" name="product_code" value="${ product.product_code }">
 
 								<!-- Text input-->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_text_name">이름</label>  
 								  <div class="col-md-8">
-								  <input id="i_text_name" name="product_name" type="text" class="form-control input-md">
+								  <input id="i_text_name" name="product_name" type="text" class="form-control input-md" value="${ product.product_name }">
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -49,13 +51,13 @@
 								  <label class="col-md-3 control-label" for="i_select_category">카테고리</label>
 								  <div class="col-md-8">
 								    <select id="i_select_category" name="product_category" class="form-control">
-								    	<option value="" disabled selected>카테고리</option>
-								   		<option value="outer">OUTER</option>
-										<option value="dress">DRESS</option>
-										<option value="top">TOP</option>
-										<option value="bottom">BOTTOM</option>
-										<option value="bag">BAG</option>
-										<option value="accessory">ACCESSORY</option>
+								    	<option value="" disabled>카테고리</option>
+								   		<c:if test="${ product.product_category eq 'outer' }"><option value="outer" selected>OUTER</option></c:if><c:if test="${ product.product_category ne 'outer' }"><option value="outer" selected>OUTER</option></c:if>
+								   		<c:if test="${ product.product_category eq 'dress' }"><option value="dress" selected>DRESS</option></c:if><c:if test="${ product.product_category ne 'dress' }"><option value="dress">DRESS</option></c:if>
+								   		<c:if test="${ product.product_category eq 'top' }"><option value="top" selected>TOP</option></c:if><c:if test="${ product.product_category ne 'top' }"><option value="top">TOP</option></c:if>
+								   		<c:if test="${ product.product_category eq 'bottom' }"><option value="bottom" selected>BOTTOM</option></c:if><c:if test="${ product.product_category ne 'bottom' }"><option value="bottom">BOTTOM</option></c:if>
+								   		<c:if test="${ product.product_category eq 'bag' }"><option value="bag" selected>BAG</option></c:if><c:if test="${ product.product_category ne 'bag' }"><option value="bag">BAG</option></c:if>
+								   		<c:if test="${ product.product_category eq 'accessory' }"><option value="accessory" selected>ACCESSORY</option></c:if><c:if test="${ product.product_category ne 'accessory' }"><option value="accessory">ACCESSORY</option></c:if>
 								    </select>
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -66,24 +68,23 @@
 								  <label class="col-md-3 control-label" for="i_select_brand">브랜드</label>
 								  <div class="col-md-8">
 								    <select id="i_select_brand" name="product_brand" class="form-control">
-							      		<option value="" disabled selected>브랜드</option>
-							      		<option value="BITTE KAI RAND">BITTE KAI RAND</option>
-										<option value="CHRISTIAN WIJNANTS">CHRISTIAN WIJNANTS</option>
-										<option value="EDIT">EDIT</option>
-										<option value="ENFOLD">ENFOLD</option>
-										<option value="ERIKA CAVALLINI">ERIKA CAVALLINI</option>
-										<option value="JOIE">JOIE</option>
-										<option value="JUCCA">JUCCA</option>
-										<option value="LOOKAST">LOOKAST</option>
-										<option value="LUCIO VANOTTI">LUCIO VANOTTI</option>
-										<option value="M. MARTIN">M. MARTIN</option>
-										<option value="MARIE SIXTINE">MARIE SIXTINE</option>
-										<option value="PIECE">PIECE</option>
-										<option value="RE;CODE">RE;CODE</option>
-										<option value="SWILDENS">SWILDENS</option>
-										<option value="TARA JARMON">TARA JARMON</option>
-										<option value="THE EDITOR">THE EDITOR</option>
-										<option value="TRUE NYC">TRUE NYC</option>
+						      			<c:if test="${ product.product_brand eq 'BITTE KAI RAND' }"><option value="BITTE KAI RAND">BITTE KAI RAND</option>		  </c:if><c:if test="${ product.product_brand ne 'BITTE KAI RAND' }"><option value="BITTE KAI RAND">BITTE KAI RAND</option>		  </c:if>
+										<c:if test="${ product.product_brand eq 'CHRISTIAN WIJNANTS' }"><option value="CHRISTIAN WIJNANTS">CHRISTIAN WIJNANTS</option> </c:if><c:if test="${ product.product_brand ne 'CHRISTIAN WIJNANTS' }"><option value="CHRISTIAN WIJNANTS">CHRISTIAN WIJNANTS</option> </c:if>
+										<c:if test="${ product.product_brand eq 'EDIT' }"><option value="EDIT">EDIT</option>                             </c:if><c:if test="${ product.product_brand ne 'EDIT' }"><option value="EDIT">EDIT</option>                             </c:if>
+										<c:if test="${ product.product_brand eq 'ENFOLD' }"><option value="ENFOLD">ENFOLD</option>                         </c:if><c:if test="${ product.product_brand ne 'ENFOLD' }"><option value="ENFOLD">ENFOLD</option>                         </c:if>
+										<c:if test="${ product.product_brand eq 'ERIKA CAVALLINI' }"><option value="ERIKA CAVALLINI">ERIKA CAVALLINI</option>       </c:if><c:if test="${ product.product_brand ne 'ERIKA CAVALLINI' }"><option value="ERIKA CAVALLINI">ERIKA CAVALLINI</option>       </c:if>
+										<c:if test="${ product.product_brand eq 'JOIE' }"><option value="JOIE">JOIE</option>                             </c:if><c:if test="${ product.product_brand ne 'JOIE' }"><option value="JOIE">JOIE</option>                             </c:if>
+										<c:if test="${ product.product_brand eq 'JUCCA' }"><option value="JUCCA">JUCCA</option>                           </c:if><c:if test="${ product.product_brand ne 'JUCCA' }"><option value="JUCCA">JUCCA</option>                           </c:if>
+										<c:if test="${ product.product_brand eq 'LOOKAST' }"><option value="LOOKAST">LOOKAST</option>                       </c:if><c:if test="${ product.product_brand ne 'LOOKAST' }"><option value="LOOKAST">LOOKAST</option>                       </c:if>
+										<c:if test="${ product.product_brand eq 'LUCIO VANOTTI' }"><option value="LUCIO VANOTTI">LUCIO VANOTTI</option>           </c:if><c:if test="${ product.product_brand ne 'LUCIO VANOTTI'}"><option value="LUCIO VANOTTI">LUCIO VANOTTI</option>           </c:if>
+										<c:if test="${ product.product_brand eq 'M. MARTIN' }"><option value="M. MARTIN">M. MARTIN</option>                   </c:if><c:if test="${ product.product_brand ne 'M. MARTIN' }"><option value="M. MARTIN">M. MARTIN</option>                   </c:if>
+										<c:if test="${ product.product_brand eq 'MARIE SIXTINE' }"><option value="MARIE SIXTINE">MARIE SIXTINE</option>           </c:if><c:if test="${ product.product_brand ne 'MARIE SIXTINE' }"><option value="MARIE SIXTINE">MARIE SIXTINE</option>           </c:if>
+										<c:if test="${ product.product_brand eq 'PIECE' }"><option value="PIECE">PIECE</option>                           </c:if><c:if test="${ product.product_brand ne 'PIECE' }"><option value="PIECE">PIECE</option>                           </c:if>
+										<c:if test="${ product.product_brand eq 'RE;CODE' }"><option value="RE;CODE">RE;CODE</option>                       </c:if><c:if test="${ product.product_brand ne 'RE;CODE' }"><option value="RE;CODE">RE;CODE</option>                       </c:if>
+										<c:if test="${ product.product_brand eq 'SWILDENS' }"><option value="SWILDENS">SWILDENS</option>                     </c:if><c:if test="${ product.product_brand ne 'SWILDENS' }"><option value="SWILDENS">SWILDENS</option>                     </c:if>
+										<c:if test="${ product.product_brand eq 'TARA JARMON' }"><option value="TARA JARMON">TARA JARMON</option>               </c:if><c:if test="${ product.product_brand ne 'TARA JARMON' }"><option value="TARA JARMON">TARA JARMON</option>               </c:if>
+										<c:if test="${ product.product_brand eq 'THE EDITOR' }"><option value="THE EDITOR">THE EDITOR</option>                 </c:if><c:if test="${ product.product_brand ne 'THE EDITOR' }"><option value="THE EDITOR">THE EDITOR</option>                 </c:if>
+										<c:if test="${ product.product_brand eq 'TRUE NYC' }"><option value="TRUE NYC">TRUE NYC</option>                     </c:if><c:if test="${ product.product_brand ne 'TRUE NYC' }"><option value="TRUE NYC">TRUE NYC</option>                     </c:if>
 								    </select>
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
@@ -93,7 +94,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_textarea_descript">설명</label>
 								  <div class="col-md-8">
-								    <textarea id="i_textarea_descript" class="form-control" name="product_descript"></textarea>
+								    <textarea id="i_textarea_descript" class="form-control" name="product_descript">${ product.product_descript }</textarea>
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -102,7 +103,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_number_original_price">원가</label>  
 								  <div class="col-md-8">
-								  <input id="i_number_original_price" name="product_original_price" type="number" class="form-control input-md">
+								  <input id="i_number_original_price" name="product_original_price" type="number" class="form-control input-md" value="${ product.product_original_price }">
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -113,7 +114,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_number_rent_price">대여 금액</label>  
 								  <div class="col-md-8">
-								  <input id="i_number_rent_price" name="rent_price" type="number" class="form-control input-md">
+								  <input id="i_number_rent_price" name="rent_price" type="number" class="form-control input-md" value="${ product.rent_price }">
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -123,25 +124,20 @@
 									  <label class="col-md-3 control-label" for="checkboxes">사이즈</label>
 									  <div class="col-md-8">
 									    <label class="checkbox-inline" for="i_checkbox_size_33">
-									      <input id="i_checkbox_size_33" type="checkbox" name="product_size33" value="1">
-									      33
-									    </label>
+									    <c:if test="${ product.product_size33 eq 0 }"><input id="i_checkbox_size_33" type="checkbox" name="product_size33" value="1"></c:if><c:if test="${ product.product_size33 eq 1 }"><input id="i_checkbox_size_33" type="checkbox" name="product_size33" value="1" checked></c:if>
+									    33</label>
 									    <label class="checkbox-inline" for="i_checkbox_size_44">
-									      <input id="i_checkbox_size_44" type="checkbox" name="product_size44" value="1">
-									     44
-									    </label>
+									    <c:if test="${ product.product_size44 eq 0 }"><input id="i_checkbox_size_44" type="checkbox" name="product_size44" value="1"></c:if><c:if test="${ product.product_size44 eq 1 }"><input id="i_checkbox_size_44" type="checkbox" name="product_size44" value="1" checked></c:if>
+									    44</label>
 									    <label class="checkbox-inline" for="i_checkbox_size_55">
-									      <input id="i_checkbox_size_55" type="checkbox" name="product_size55" value="1">
-									     55
-									    </label>
+									    <c:if test="${ product.product_size55 eq 0 }"><input id="i_checkbox_size_55" type="checkbox" name="product_size55" value="1"></c:if><c:if test="${ product.product_size55 eq 1 }"><input id="i_checkbox_size_55" type="checkbox" name="product_size55" value="1" checked></c:if>
+									    55</label>
 									    <label class="checkbox-inline" for="i_checkbox_checkbox_66">
-									      <input id="i_checkbox_size_66" type="checkbox" name="product_size66" value="1">
-									      66
-									    </label>
-									        <label class="checkbox-inline" for="i_checkbox_size_77">
-									      <input id="i_checkbox_size_77" type="checkbox" name="product_size77" value="1">
-									      77
-									    </label>
+									    <c:if test="${ product.product_size66 eq 0 }"><input id="i_checkbox_size_66" type="checkbox" name="product_size66" value="1"></c:if><c:if test="${ product.product_size66 eq 1 }"><input id="i_checkbox_size_66" type="checkbox" name="product_size66" value="1" checked></c:if>
+									    66</label>
+									    <label class="checkbox-inline" for="i_checkbox_size_77">
+									    <c:if test="${ product.product_size77 eq 0 }"><input id="i_checkbox_size_77" type="checkbox" name="product_size77" value="1"></c:if><c:if test="${ product.product_size77 eq 1 }"><input id="i_checkbox_size_77" type="checkbox" name="product_size77" value="1" checked></c:if>
+									    77</label>
 									    <span class="help-block" style="color:red;"></span>
 									  </div>
 									  
@@ -151,7 +147,7 @@
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="i_text_color">색상</label>  
 								  <div class="col-md-8">
-								  <input id="i_text_color" name="product_color" type="text" class="form-control input-md">
+								  <input id="i_text_color" name="product_color" type="text" class="form-control input-md" value="${ product.product_color }">
 								  <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -160,7 +156,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image1">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image1" name="filebutton1" class="input-file" type="file">
-								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden">
+								    <input id="i_hidden_image1" name="n_hidden_image1" type="hidden" value="${ product.productImageList[0].product_image_path }">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -170,7 +166,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image2">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image2" name="filebutton2" class="input-file" type="file">
-								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden">
+								    <input id="i_hidden_image2" name="n_hidden_image2" type="hidden" value="${ product.productImageList[1].product_image_path }">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -180,7 +176,7 @@
 								  <label class="col-md-3 control-label" for="i_file_image3">이미지 파일</label>
 								  <div class="col-md-8">
 								    <input id="i_file_image3" name="filebutton3" class="input-file" type="file">
-								    <input id="i_hidden_image3" name="n_hidden_image3" type="hidden">
+								    <input id="i_hidden_image3" name="n_hidden_image3" type="hidden" value="${ product.productImageList[2].product_image_path }">
 								    <span class="help-block" style="color:red;"></span>
 								  </div>
 								</div>
@@ -188,15 +184,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label"></label>
 									<div class="col-md-8" style="height:65px;">
-										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image1" style="width:100%; height:100%; display:inline-block;" src="" alt=""></div>
-										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image2" style="width:100%; height:100%; display:inline-block;" src="" alt=""></div>
-										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image3" style="width:100%; height:100%; display:inline-block;" src="" alt=""></div>
+										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image1" style="width:100%; height:100%; display:inline-block;" src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[0].product_image_path }" alt=""></div>
+										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image2" style="width:100%; height:100%; display:inline-block;" src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[1].product_image_path }" alt=""></div>
+										<div style="width:65px; height:65px; border:1px solid gray; display:inline-block;"><img id="i_img_image3" style="width:100%; height:100%; display:inline-block;" src="${ pageContext.request.contextPath }/resources/img_product/${ product.productImageList[2].product_image_path }" alt=""></div>
 								  	</div>
 							  	</div>
 
 								<script type="text/javascript">
 									$(function(){
-										
 										// 각각의 요소에 대해 비어있는 값을 확인합니다.
 										$('#i_text_name').on('focusout', function(){
 											if($(this).val() == ""){

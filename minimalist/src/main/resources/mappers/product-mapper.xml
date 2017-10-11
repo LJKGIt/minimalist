@@ -72,9 +72,6 @@
 		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
 		WHERE PRODUCT_CODE = #{product_code}
 	</update>
-	<!-- UPDATE PRODUCT  
-		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
-		WHERE PRODUCT_CODE = #{product_code} -->
 	
 	<update id="productDelete" parameterType="Product">
 		UPDATE PRODUCT  
@@ -90,6 +87,24 @@
 		UPDATE PRODUCT 
 		SET PRODUCT_CODE = #{product_code}
 			, PRODUCT_NAME = #{product_name}
+			, PRODUCT_CATEGORY = #{product_category}
+			, PRODUCT_BRAND = #{product_brand}
+			, PRODUCT_DESCRIPT = #{product_descript}
+			, PRODUCT_ORIGINAL_PRICE = #{product_original_price}
+			, RENT_PRICE = #{rent_price}
+			, PRODUCT_SIZE33 = #{product_size33}
+			, PRODUCT_SIZE44 = #{product_size44}
+			, PRODUCT_SIZE55 = #{product_size55}
+			, PRODUCT_SIZE66 = #{product_size66}
+			, PRODUCT_SIZE77 = #{product_size77}
+			, PRODUCT_COLOR = #{product_color}
+			, RECEIVE_DATE = #{receive_date}
+		WHERE PRODUCT_CODE = #{product_code}
+	</update>
+	
+	<update id="productImageUpdate" parameterType="map">
+		UPDATE PRODUCT 
+		SET PRODUCT_NAME = #{product_name}
 			, PRODUCT_CATEGORY = #{product_category}
 			, PRODUCT_BRAND = #{product_brand}
 			, PRODUCT_DESCRIPT = #{product_descript}
@@ -122,5 +137,9 @@
 		 VALUES(#{recentProductCode}, #{item})
 		</foreach>
 	</insert>
+	
+	<delete id="productImageDelete" parameterType="Product">
+		DELETE FROM PRODUCT_IMAGE WHERE PRODUCT_CODE = #{product_code}
+	</delete>
 
 </mapper>
