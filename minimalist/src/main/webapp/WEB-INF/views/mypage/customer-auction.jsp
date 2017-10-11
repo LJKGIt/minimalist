@@ -60,7 +60,7 @@
 										<li>size : ${ income.auctionJoin.auction_size }</li>
 										<li>
 											<strong><fmt:formatNumber value="${ income.income }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong>
-											<% //TODO [yjP] 배송링크?? %> 
+											<%-- ${income.order_invoice_number} --%> 
 											<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a>
 										</li>
 									</ul>
@@ -91,11 +91,10 @@
 														<td>주문일자</td>
 														<td>${ income.income_date }</td>
 													</tr>
-													<% //TODO [yjP] 주문번호? %>
-													<%-- <tr>
+													<tr>
 														<td>주문번호</td>
-														<td>${ income.orderinfo_code }</td>
-													</tr> --%>
+														<td>${ income.income_number }</td>
+													</tr>
 													<tr>
 														<td>제품코드</td>
 														<td>${ income.auction_code }</td>
