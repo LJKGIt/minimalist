@@ -23,10 +23,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.kh.minimalist.auction.model.service.AuctionService;
+import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.commonUtil.SHA256Util;
+import com.kh.minimalist.income.model.service.IncomeService;
+import com.kh.minimalist.income.model.vo.Income;
 import com.kh.minimalist.member.model.service.MemberService;
 import com.kh.minimalist.member.model.vo.Member;
+import com.kh.minimalist.message.model.service.MessageService;
 import com.kh.minimalist.orderinfo.model.service.OrderInfoService;
 import com.kh.minimalist.orderinfo.model.vo.OrderInfo;
 import com.kh.minimalist.product.model.service.ProductService;
@@ -39,12 +44,18 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	@Autowired
 	private ProductService productService;
 
 	@Autowired
 	private OrderInfoService orderInfoService;
+	
+	@Autowired
+	private AuctionService auctionService; 
 
 	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
@@ -57,29 +68,41 @@ public class MemberController {
 		try {
 			if (p != null && p.matcher(m.getMember_id()) != null)
 				patternBoolean = p.matcher(m.getMember_id()).find();
-
+			System.out.println("0");
 			if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
 				m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 				member = memberService.loginMember(m);
+				System.out.println("0.1");
 			}
-
+			System.out.println("0.2");
+			System.out.println("가가" + member);
 			if (member != null && member.getDormant_yn() == 'n') {
 				session.setAttribute("member", member);
 				
-				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
-				CookieUtils cu = new CookieUtils();
-				for(String cookie : cu.getValueList("anonymous", request))
-					cu.setCookie(member.getMember_id(), cookie, 365, request, response);
 				
+				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
+				
+				System.out.println("1");
+				CookieUtils cu = new CookieUtils();
+				if (cu.getValueList("anonymous", request) != null) {
+					for(String cookie : cu.getValueList("anonymous", request))
+						cu.setCookie(member.getMember_id(), cookie, 365, request, response);
+					System.out.println("2");
+				}
+				System.out.println("3");
 				
 				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
+					System.out.println("4");
+					session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
+					System.out.println(messageService.selectMessageCount(member.getMember_id()));
 					result = "redirect:" + request.getHeader("referer");
-
 				}
-				
-			} else if (member.getDormant_yn() == 'y') {
+				System.out.println("5");
+			} else if (member != null && member.getDormant_yn() == 'y') {
+				System.out.println("6");
 				model.addAttribute("loginError", "탈퇴한 회원입니다.");
-			} else {
+			} else if (member == null) {
+				System.out.println("7");
 				model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 			}
 		} catch (NullPointerException e) {
@@ -367,6 +390,26 @@ public class MemberController {
 		}
 		out.close();
 	}
+	@Autowired
+	IncomeService incomeService;
+	
+	@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
+	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
+		System.out.println("가가");
+		if (((Member) session.getAttribute("member")) != null) {
+			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
+			ArrayList<Income> incomeList = incomeService.selectMemberIncome("관리자"/*((Member) session.getAttribute("member")).getMember_id()*/);
+			System.out.println(incomeList);
+			model.addAttribute("auctionList", auctionList);
+			model.addAttribute("incomeList", incomeList);
+		} else {
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.flush();
+		}
+		return "mypage/customer-auction";
+	}
+	
 
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")

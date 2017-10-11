@@ -3,6 +3,8 @@ package com.kh.minimalist.income.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.kh.minimalist.auction.model.vo.Auction;
+
 public class Income implements Serializable {
 
 	 
@@ -16,14 +18,18 @@ public class Income implements Serializable {
 	private String receiver_address;
 	private String receiver_phone;
 	private int order_invoice_number;
+	private Auction auctionJoin;
 	
 	public Income(){}
 
 
 	public Income(int income_number, int auction_code, int income, Date income_date, String member_id, String receiver_name,
-			String receiver_address, String receiver_phone, int order_invoice_number) {
-		super();
+			String receiver_address, String receiver_phone, int order_invoice_number, Auction auctionJoin) {
+
+	
+
 		this.income_number=income_number;
+
 		this.auction_code = auction_code;
 		this.income = income;
 		this.income_date = income_date;
@@ -32,8 +38,8 @@ public class Income implements Serializable {
 		this.receiver_address = receiver_address;
 		this.receiver_phone = receiver_phone;
 		this.order_invoice_number = order_invoice_number;
+		this.auctionJoin = auctionJoin;
 	}
-
 
 
 
@@ -95,6 +101,7 @@ public class Income implements Serializable {
 	}
 
 
+
 	public String getMember_id() {
 		return member_id;
 	}
@@ -125,6 +132,16 @@ public class Income implements Serializable {
 
 	
 
+	public Auction getAuctionJoin() {
+		return auctionJoin;
+	}
+
+
+	public void setAuctionJoin(Auction auctionJoin) {
+		this.auctionJoin = auctionJoin;
+	}
+
 	
+
 	
 }

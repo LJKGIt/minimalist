@@ -57,4 +57,9 @@ public class IncomeDao {
 		
 		return (ArrayList<Income>)list;
 	}
+
+	public ArrayList<Income> selectMemberIncome(String member_id) {
+		List<Income> list = sqlSession.selectList("Income.selectMemberIncome", member_id);
+		return (ArrayList<Income>) list;
+	}
 }

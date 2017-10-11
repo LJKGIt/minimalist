@@ -43,14 +43,18 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								<div class="col-md-6">·포인트 : ${ member.point } P</div>
 								<div class="col-md-6">·등급 : 
 									<c:if test="${ member.grade eq 0 }">
-										찌꺼기
+										Bronze
 									</c:if>
-									<c:if test="${ member.grade eq 1 }">
-										일반회원
+									<c:if test="${ member.grade > 0 && member.grade <= 2 }">
+										Silver
 									</c:if>
-									<c:if test="${ member.grade eq 2 }">
+									<c:if test="${ member.grade >= 3 && member.grade <= 5 }">
+										Gold
+									</c:if>
+									<c:if test="${ member.grade >= 6 }">
 										VIP
-									</c:if></div>
+									</c:if>
+									</div>
 							</div>
 							
 						</div>
@@ -80,8 +84,6 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 								</div>
 							</form>						
 						</div>
-									
-																		
 						</div>
 						</div>
 						
@@ -93,111 +95,110 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 							<br>
 						</c:if>
 						<c:if test="${ !empty myOrder }">
-						<c:forEach var="myOrder" items="${ myOrder }" varStatus="status">
-						<div class="well">
-							<div class="row" style="margin: 0;">
-								${ myOrder.orderinfo_date } <a href="#" style="float: right;" data-toggle="modal" data-target="#detailModal${ status.index }">주문상세</a>
+							<c:forEach var="myOrder" items="${ myOrder }" varStatus="status">
+							<div class="well">
+								<div class="row" style="margin: 0;">
+									${ myOrder.orderinfo_date } <a href="#" style="float: right;" data-toggle="modal" data-target="#detailModal${ status.index }">주문상세</a>
+								</div>
+								<hr style="margin: 5px;">
+								<div class="row" style="margin: 0;">
+									<a href="productDetail.do?product_code=${ myOrder.product_code }"> <img
+										src="${ pageContext.request.contextPath }/resources/img_product/${ myOrder.productJoin.product_code }_1.jpg"
+										style="margin: 0 10px 10px 0; width: 100px; float: left;" />
+									</a>
+									<ul style="list-style-type: none; margin-left: 65px;">
+										<li><strong>${ myOrder.productJoin.product_brand }</strong></li>
+										<li><h4><a href="productDetail.do?product_code=${ myOrder.product_code }" style="color: black;">${ myOrder.productJoin.product_name }</a></h4></li>
+										<li>size : ${ myOrder.order_size }</li>
+										<li><strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
+										<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a></li>
+									</ul>
+								</div>
+								<div class="row" style="margin: 0;">
+									
+								</div>
 							</div>
-							<hr style="margin: 5px;">
-							<div class="row" style="margin: 0;">
-								<a href="productDetail.do?product_code=${ myOrder.product_code }"> <img
-									src="${ pageContext.request.contextPath }/resources/img_product/${ myOrder.productJoin.product_code }_1.jpg"
-									style="margin: 0 10px 10px 0; width: 100px; float: left;" />
-								</a>
-								<ul style="list-style-type: none; margin-left: 65px;">
-									<li><strong>${ myOrder.productJoin.product_brand }</strong></li>
-									<li><h4><a href="productDetail.do?product_code=${ myOrder.product_code }" style="color: black;">${ myOrder.productJoin.product_name }</a></h4></li>
-									<% //TODO [yjP] SIZE COLUMN 추가 후 INSERT %>
-									<li>size : 55</li>
-									<li><strong><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong> 
-									<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a></li>
-								</ul>
-							</div>
-							<div class="row" style="margin: 0;">
-								
-							</div>
-						</div>
-						<!-- RECENT ORDERS END-->
-						
-						<!-- DETAIL MODAL -->
-						<div class="modal fade" id="detailModal${ status.index }" tabindex="-1"
-							role="dialog" aria-labelledby="myModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h4 class="modal-title" id="myModalLabel">주문상세</h4>
-									</div>
-									<div class="modal-body">
-										<div class="row" style="margin: 0;">
-											<div class="table-responsive">
-											<table class="table table-bordered table-hover" style="float: right;">
-												<tr>
-													<td>주문일자</td>
-													<td>${ myOrder.orderinfo_date }</td>
-												</tr>
-												<tr>
-													<td>주문번호</td>
-													<td>${ myOrder.orderinfo_code }</td>
-												</tr>
-												<tr>
-													<td>제품코드</td>
-													<td>${ myOrder.productJoin.product_code }</td>
-												</tr>
-												<tr>
-													<td>상호명</td>
-													<td>${ myOrder.productJoin.product_brand }</td>
-												</tr>
-												<tr>
-													<td>제품명</td>
-													<td>${ myOrder.productJoin.product_name }</td>
-												</tr>
-												<tr>
-													<td>카테고리</td>
-													<td>${ myOrder.productJoin.product_category }</td>
-												</tr>
-												<tr>
-													<td>사이즈</td>
-													<td>55</td>
-												</tr>
-												<tr>
-													<td>색상</td>
-													<td>${ myOrder.productJoin.product_color }</td>
-												</tr>
-												<tr>
-													<td>배송상태</td>
-													<td>배송 준비중</td>
-												</tr>
-												<tr>
-													<td>송장번호</td>
-													<td>6069503660528</td>
-												</tr>
-												<tr>
-													<td>주문금액</td>
-													<td><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></td>
-												</tr>
-												<tr>
-													<td>할인금액( - )</td>
-													<td><c:set var="discount" value="0" />
-														<fmt:formatNumber value="${ discount }" type="currency"
-															currencySymbol="&#65510; " groupingUsed="true" /></td>
-												</tr>
-												<tr>
-													<td>총 결제금액</td>
-													<td><fmt:formatNumber value="${ myOrder.productJoin.rent_price - discount }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></td>
-												</tr>
-											</table>
+							<!-- RECENT ORDERS END-->
+							
+							<!-- DETAIL MODAL -->
+							<div class="modal fade" id="detailModal${ status.index }" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">주문상세</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row" style="margin: 0;">
+												<div class="table-responsive">
+												<table class="table table-bordered table-hover" style="float: right;">
+													<tr>
+														<td>주문일자</td>
+														<td>${ myOrder.orderinfo_date }</td>
+													</tr>
+													<tr>
+														<td>주문번호</td>
+														<td>${ myOrder.orderinfo_code }</td>
+													</tr>
+													<tr>
+														<td>제품코드</td>
+														<td>${ myOrder.productJoin.product_code }</td>
+													</tr>
+													<tr>
+														<td>상호명</td>
+														<td>${ myOrder.productJoin.product_brand }</td>
+													</tr>
+													<tr>
+														<td>제품명</td>
+														<td>${ myOrder.productJoin.product_name }</td>
+													</tr>
+													<tr>
+														<td>카테고리</td>
+														<td>${ myOrder.productJoin.product_category }</td>
+													</tr>
+													<tr>
+														<td>사이즈</td>
+														<td>${ myOrder.order_size }</td>
+													</tr>
+													<tr>
+														<td>색상</td>
+														<td>${ myOrder.productJoin.product_color }</td>
+													</tr>
+													<tr>
+														<td>배송상태</td>
+														<td>배송 준비중</td>
+													</tr>
+													<tr>
+														<td>송장번호</td>
+														<td>6069503660528</td>
+													</tr>
+													<tr>
+														<td>주문금액</td>
+														<td><fmt:formatNumber value="${ myOrder.productJoin.rent_price }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></td>
+													</tr>
+													<tr>
+														<td>할인금액( - )</td>
+														<td><c:set var="discount" value="0" />
+															<fmt:formatNumber value="${ discount }" type="currency"
+																currencySymbol="&#65510; " groupingUsed="true" /></td>
+													</tr>
+													<tr>
+														<td>총 결제금액</td>
+														<td><fmt:formatNumber value="${ myOrder.productJoin.rent_price - discount }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></td>
+													</tr>
+												</table>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- DETAIL MODAL END -->
-						</c:forEach>
+							<!-- DETAIL MODAL END -->
+							</c:forEach>
 						</c:if>
 						
 						<!-- PAGING -->
