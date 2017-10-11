@@ -36,7 +36,6 @@ public class ProductController {
 	@Autowired
 	private WishService wishService;
 
-	// TODO [lintogi] ■ 50 예약 기능을 추가하기.
 	@RequestMapping(value = "productDetail.do", method = RequestMethod.GET)
 	public String productDetail(Product product, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnResult = "main/404";

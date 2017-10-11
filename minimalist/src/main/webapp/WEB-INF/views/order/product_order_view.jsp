@@ -162,7 +162,6 @@
 									    buyer_postcode : '${ sessionScope.member.post }'
 									}, function(rsp) {
 									    if ( rsp.success ) {
-									    	<% // TODO [litnogi] □ 컨트롤러에서 보안 처리하기. (REST API) %>
 									    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 									    	$.ajax({
 									    		url: "orderInfoInsert.do", //cross-domain error가 발생하지 않도록 주의해주세요
