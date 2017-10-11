@@ -51,11 +51,26 @@
     	bid_price=(select max(bid_price) from bidinfo where auction_code=#{auction_code}))
 	</select>
  
-	<!-- 입찰. -->
+	<!-- 입찰1. -->
 	<insert id="bid" parameterType="BidInfo">
 	 	insert into bidinfo values(#{auction_code}, #{member_id}, #{bid_price})
-	</insert>	
+	</insert>
 	
+	<!-- 해당 경매코드에 대해 특정 회원이 입찰했는지 확인. -->
+	<select id="bidConfirm" resultType="_int" parameterType="BidInfo">
+	 select count(*) from bidinfo
+	 where auction_code=#{auction_code}
+	 and member_id=#{member_id}
+	</select>
+	
+	<!--  입찰2 update -->	
+	<update id="bid2" parameterType="BidInfo">
+		update bidinfo
+		set bid_price=#{bid_price}
+		where auction_code=#{auction_code}
+		and member_id=#{member_id}
+	
+	</update>
 	<!--  입찰 취소 -->
 	<delete id="deleteBid" parameterType="BidInfo">
 		delete from bidinfo where

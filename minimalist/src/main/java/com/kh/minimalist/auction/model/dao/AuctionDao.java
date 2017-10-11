@@ -67,8 +67,21 @@ public class AuctionDao {
 	
 	//입찰 메소드 insert
 	public int bid(BidInfo bid){
-		return sqlSession.insert("Auction.bid", bid);
+		
+		int confirm=0;
+		int result=0;
+		confirm=sqlSession.selectOne("Auction.bidConfirm", bid);
+		
+		
+		if(confirm>0){
+			result=sqlSession.update("Auction.bid2", bid);
+		}else {
+			result=sqlSession.insert("Auction.bid", bid);
+		}
+		
+		return result;
 	}
+
 	
 	public int deleteBid(BidInfo bid){
 		return sqlSession.delete("Auction.deleteBid", bid);
