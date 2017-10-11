@@ -229,7 +229,6 @@ $(function(){
                                 <h1 class="text-center">${auction.auction_brand} <br> ${auction.auction_name}</h1>
                              	<p align="center"><font size=3px>경매 시작가 : <span id="startPrice">${auction.start_price}</span> 원</font></p>    
                                 <p align="center"><font size=3px>현재 입찰가 : <span id="currentPrice">${auction.bidInfo[0].bid_price}</span> 원</font></p>
-								
 								<p align="center"><font color="red">
 								경매 종료 :<fmt:formatDate value="${auction.end_date}" type="date" pattern="MM월dd일"/></font></p>
                                <c:if test="${sessionScope.member.member_id eq 'admin'}">

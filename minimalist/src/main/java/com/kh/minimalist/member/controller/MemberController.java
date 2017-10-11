@@ -173,7 +173,9 @@ public class MemberController {
 	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
 		if((Member)session.getAttribute("member") != null){
 			if(memberService.dormantMember(m) > 0){
+				System.out.println("탈퇴 완료");
 			} else {
+				System.out.println("회원탈퇴 실패");
 			}
 		}
 		return "main/index";

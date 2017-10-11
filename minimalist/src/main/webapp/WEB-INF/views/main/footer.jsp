@@ -9,7 +9,7 @@
 <body>
 	<!-- *** FOOTER ***
  _________________________________________________________ -->
-        <div id="footer" data-animate="fadeInUp">
+        <!-- <div id="footer" data-animate="fadeInUp">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
@@ -40,7 +40,7 @@
                         <hr class="hidden-md hidden-lg hidden-sm">
 
                     </div>
-                    <!-- /.col-md-3 -->
+                    /.col-md-3
 
                     <div class="col-md-3 col-sm-6">
 
@@ -72,7 +72,7 @@
                         <hr class="hidden-md hidden-lg">
 
                     </div>
-                    <!-- /.col-md-3 -->
+                    /.col-md-3
 
                     <div class="col-md-3 col-sm-6">
 
@@ -92,7 +92,7 @@
                         <hr class="hidden-md hidden-lg">
 
                     </div>
-                    <!-- /.col-md-3 -->
+                    /.col-md-3
 
 
 
@@ -114,7 +114,7 @@
 			</span>
 
                             </div>
-                            <!-- /input-group -->
+                            /input-group
                         </form>
 
                         <hr>
@@ -130,14 +130,14 @@
                         </p>
 
                     </div>
-                    <!-- /.col-md-3 -->
+                    /.col-md-3
 
                 </div>
-                <!-- /.row -->
+                /.row
 
             </div>
-            <!-- /.container -->
-        </div>
+            /.container
+        </div> -->
         <!-- /#footer -->
 
         <!-- *** FOOTER END *** -->
@@ -147,7 +147,7 @@
         <div id="copyright">
             <div class="container">
                 <div class="col-md-6">
-                    <p class="pull-left">© 2015 Your name goes here.</p>
+                    <p class="pull-left">© 2017 Your name goes here.</p>
 
                 </div>
                 <div class="col-md-6">
