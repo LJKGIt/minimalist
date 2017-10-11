@@ -166,9 +166,17 @@ where rownum&lt;=5
 
 	<!-- 회원별 경매목록 조회 -->
 	<select id="selectMemberAuction" parameterType="string" resultType="Auction">
-		SELECT * FROM AUCTION
-		JOIN BIDINFO USING (AUCTION_CODE)
-		WHERE MEMBER_ID = #{member_id}
-		ORDER BY END_DATE DESC
+		SELECT *
+		FROM (SELECT MAX(BID_PRICE) "MAX", AUCTION_CODE "CODE"
+		      FROM (SELECT *
+		            FROM BIDINFO
+		            WHERE AUCTION_CODE IN (SELECT AUCTION_CODE
+		                                   FROM BIDINFO
+		                                   WHERE MEMBER_ID = #{member_id}))
+		      GROUP BY AUCTION_CODE)
+		JOIN (SELECT AUCTION_CODE "CODE", BID_PRICE "MY", AUCTION_NAME, END_DATE
+		      FROM BIDINFO
+		      JOIN AUCTION USING (AUCTION_CODE)
+		      WHERE MEMBER_ID = #{member_id}) USING (CODE)
 	</select>
 </mapper>
