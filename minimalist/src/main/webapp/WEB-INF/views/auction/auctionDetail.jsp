@@ -283,7 +283,7 @@ $(function(){
 							<c:if test="${sessionScope.member.grade >= 3 }">
                             <blockquote>
                                <input type="hidden" id="id" value="${sessionScope.member.member_id}">
-                               <input type="number" id="price"><button type="button" id="btn">입찰하기</button>
+                               <input type="number" id="price"><input type="button" class="btn btn-primary" id="btn" value="입찰하기">
                             </blockquote>
                             	<%-- 최고 입찰자 : ${auction.bidInfo[0].member_id} --%>
                             <c:if test="${sessionScope.member.member_id eq auction.bidInfo[0].member_id}">
