@@ -65,16 +65,18 @@
                     </c:forTokens>
 						
           <div class="box">
-                   <h3 align="center">상품 확인</h3>
+                   <h3 align="center">주문 정보</h3>
                    <p align="center"><img src="${img1}"></p>
                         <form action="income.insertIncome.do" method="POST">
                         <table style="margin:auto">
                         	<tr><th>물품명 : </th><td>${auction.auction_brand}  - ${auction.auction_name}</td></tr>
-                        	
                         	<tr><th>상세 :</th><td> <a href="auction.selectOne.do?auction_code=${auction.auction_code}">클릭</a></td></tr>
 							<tr><th>경매코드 : </th><td><input type="text" name="auction_code" value="${ auction.auction_code }" readonly id="auction_code"></td></tr>
+							<tr><th>받는이 : </th><td><input type="text" id="receiver" value="${name}"></td></tr>
+							<tr><th>기본주소 : </th><td><input type="text" id="address1" value="${address1}"></td><td><input type="button"
+									onclick="execDaumPostcode()" value="Post Search" class="btn btn-primary"></td></tr>
+							<tr><th>상세주소 : </th><td><input type="text" id="address2" value="${address2}"></td></tr>
 							<tr><th>결제가격 : </th><td><input type="text" name="income" value="${price}" readonly id="income"></td></tr>
-							<tr><th></th><td><font color="red">※배송지는 회원의 주소로 설정됩니다.</font></td></tr>
 							<tr><th></th><td><input id="i_submit_order" type="submit" value="결제하기"></td></tr>
 							<tr><th></th><td><a href="message.cancelOrder.do?auction_code=${auction.auction_code}">결제를 하지 않겠습니다.</a></td></tr>
 						</table>
@@ -84,7 +86,7 @@
                     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
                     <script type="text/javascript">
 						$(function(){
-							$('input').on('click', function(){
+							$('#i_submit_order').on('click', function(){
 								var IMP = window.IMP; // 생략가능
 								IMP.init('imp72883964'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 								var cc = confirm("결제하시겠습니까?");
@@ -104,7 +106,9 @@
 									    if ( rsp.success ) {
 									    	var auction_code=$('#auction_code').val();
 									    	var income=$('#income').val();
-									    	
+									    	var address1=$('#address1').val();
+									    	var address2=$('#address2').val();
+									    	var receiver=$('#receiver').val();
 									    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 									    	jQuery.ajax({
 									    		url: "income.insertIncome.do", //cross-domain error가 발생하지 않도록 주의해주세요
@@ -112,7 +116,10 @@
 									    		dataType: 'text',
 									    		data: {
 										    		auction_code : auction_code,
-										    		income : income
+										    		income : income,
+										    		address1 : address1,
+										    		address2 : address2,
+										    		receiver : receiver
 										    		//기타 필요한 데이터가 있으면 추가 전달
 									    		},
 									    		success : function(value){
@@ -139,6 +146,50 @@
 								return false;
 							});
 						});
+						</script>
+						<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+						<script>
+						function execDaumPostcode() {
+					        new daum.Postcode({
+					            oncomplete: function(data) {
+					                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					                var fullAddr = ''; // 최종 주소 변수
+					                var extraAddr = ''; // 조합형 주소 변수
+
+					                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					                    fullAddr = data.roadAddress;
+
+					                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+					                    fullAddr = data.jibunAddress;
+					                }
+
+					                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+					                if(data.userSelectedType === 'R'){
+					                    //법정동명이 있을 경우 추가한다.
+					                    if(data.bname !== ''){
+					                        extraAddr += data.bname;
+					                    }
+					                    // 건물명이 있을 경우 추가한다.
+					                    if(data.buildingName !== ''){
+					                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					                    }
+					                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+					                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+					                }
+
+					                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+					                /* document.getElementById('postcode').value = data.zonecode; */
+					                document.getElementById('address1').value = fullAddr;
+									
+					                // 커서를 상세주소 필드로 이동한다.
+					                document.getElementById('address2').focus();
+					            }
+					        }).open();
+					    } // ADDRESS API Close
 						</script>
 						
                     <!-- <div class="box info-bar">

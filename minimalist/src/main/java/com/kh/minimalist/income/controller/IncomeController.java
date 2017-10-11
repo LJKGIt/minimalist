@@ -108,13 +108,20 @@ public class IncomeController {
 
 	// 경매 결제 페이지 이동.
 	@RequestMapping(value = "income.viewOrder.do")
-	public String viewOrder(HttpServletRequest request, Model model) {
-
+	public String viewOrder(HttpSession session, HttpServletRequest request, Model model) {
+		
+		
+		String name=((Member) session.getAttribute("member")).getMember_name();
+		String address1=((Member) session.getAttribute("member")).getAddress1();
+		String address2=((Member) session.getAttribute("member")).getAddress2();
 		int auction_code = Integer.parseInt(request.getParameter("auction_code"));
 		int price=Integer.parseInt(request.getParameter("price"));
 		Auction auction=auctionService.selectOne(auction_code);
 		model.addAttribute("auction", auction);
 		model.addAttribute("price", price);
+		model.addAttribute("name", name);
+		model.addAttribute("address1", address1);
+		model.addAttribute("address2", address2);
 		return "order/auctionOrder";
 	}
 
@@ -124,14 +131,16 @@ public class IncomeController {
 		
 		Income inc=new Income();
 	
-		inc.setReceiver_name(((Member) session.getAttribute("member")).getMember_name());
-		inc.setReceiver_address(((Member) session.getAttribute("member")).getAddress1()+""+((Member) session.getAttribute("member")).getAddress2());
-		inc.setReceiver_phone(((Member) session.getAttribute("member")).getPhone());
+		inc.setMember_id(((Member) session.getAttribute("member")).getMember_id());
+		inc.setReceiver_name(request.getParameter("receiver"));
+		inc.setReceiver_address(request.getParameter("address1")+" "+request.getParameter("address2"));
 		int auction_code=Integer.parseInt(request.getParameter("auction_code"));
 		int income=Integer.parseInt(request.getParameter("income"));
 		inc.setAuction_code(auction_code);
 		inc.setIncome(income);
+		inc.setReceiver_phone(((Member) session.getAttribute("member")).getPhone());
 		
+		System.out.println(inc.toString());
 		
 		//매출에 집계.
 		int result=incomeService.insertIncome(inc);
