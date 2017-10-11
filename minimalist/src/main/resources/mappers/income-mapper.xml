@@ -5,6 +5,27 @@
 <mapper namespace="Income">
 
 	<resultMap id="resultIncome" type="Income">
+		<result property="auction_code" column="AUCTION_CODE"/>
+		<result property="income" column="INCOME"/>
+		<result property="income_date" column="INCOME_DATE"/>
+		<result property="receiver_name" column="RECEIVER_NAME"/>
+		<result property="receiver_address" column="RECEIVER_ADDRESS"/>
+		<result property="receiver_phone" column="RECEIVER_PHONE"/>
+		<result property="order_invoice_number" column="ORDER_INVOICE_NUMBER"/>
+		
+		<collection property="auctionJoin" ofType="Auction">
+			<result property="auction_name" column="auction_name"/>
+	  		<result property="auction_category" column="auction_category"/>
+	  		<result property="auction_brand" column="auction_brand"/>
+	  		<result property="auction_descript" column="auction_descript"/>
+	  		<result property="start_price" column="start_price"/>
+	  		<result property="start_date" column="start_date"/>
+	  		<result property="end_date" column="end_date"/>
+	  		<result property="auction_size" column="auction_size"/>
+	  		<result property="auction_color" column="auction_color"/>
+	  		<result property="image_path" column="image_path"/>
+	  		<result property="payment_yn" column="payment_yn"/>
+		</collection>
 	</resultMap>
 	
 	
@@ -51,6 +72,14 @@
 	 order by income_date desc)
 	where rownum&lt;=#{endRow})
 	where rnum&gt;=#{startRow}
+	</select>
+	
+	<select id="selectMemberIncome" resultType="Income" parameterType="String" resultMap="resultIncome">
+		SELECT * 
+		FROM INCOME
+		WHERE RECEIVER_NAME = #{member_id}
+		JOIN AUCTION USING (AUCTION_CODE)
+		ORDER BY INCOME_DATE DESC
 	</select>
 	
 </mapper>

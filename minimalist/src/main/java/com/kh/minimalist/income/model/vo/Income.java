@@ -3,6 +3,8 @@ package com.kh.minimalist.income.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.kh.minimalist.auction.model.vo.Auction;
+
 public class Income implements Serializable {
 
 	 
@@ -14,13 +16,13 @@ public class Income implements Serializable {
 	private String receiver_address;
 	private String receiver_phone;
 	private int order_invoice_number;
+	private Auction auctionJoin;
 	
 	public Income(){}
-
-	public Income(int auction_code, int income, Date income_date, String receiver_name,
-			String receiver_address, String receiver_phone, int order_invoice_number) {
+	
+	public Income(int auction_code, int income, Date income_date, String receiver_name, String receiver_address,
+			String receiver_phone, int order_invoice_number, Auction auctionJoin) {
 		super();
-
 		this.auction_code = auction_code;
 		this.income = income;
 		this.income_date = income_date;
@@ -28,9 +30,8 @@ public class Income implements Serializable {
 		this.receiver_address = receiver_address;
 		this.receiver_phone = receiver_phone;
 		this.order_invoice_number = order_invoice_number;
+		this.auctionJoin = auctionJoin;
 	}
-
-	
 
 	public int getAuction_code() {
 		return auction_code;
@@ -88,8 +89,21 @@ public class Income implements Serializable {
 		this.order_invoice_number = order_invoice_number;
 	}
 
-	
+	public Auction getAuctionJoin() {
+		return auctionJoin;
+	}
 
-	
+	public void setAuctionJoin(Auction auctionJoin) {
+		this.auctionJoin = auctionJoin;
+	}
+
+	@Override
+	public String toString() {
+		return "Income [auction_code=" + auction_code + ", income=" + income + ", income_date=" + income_date
+				+ ", receiver_name=" + receiver_name + ", receiver_address=" + receiver_address + ", receiver_phone="
+				+ receiver_phone + ", order_invoice_number=" + order_invoice_number + ", auctionJoin=" + auctionJoin
+				+ "]";
+	}
+
 	
 }

@@ -18,4 +18,6 @@ public interface IncomeService {
 	
 	ArrayList<Income> selectListByDate(HashMap<String, Object> map);
 	
+	ArrayList<Income> selectMemberIncome(String member_id);
+	
 }
