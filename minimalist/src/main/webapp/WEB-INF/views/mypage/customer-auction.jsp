@@ -195,16 +195,22 @@
 												href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand}
 												- ${au.auction_name }</a>
 										</h3>
-										<p class="price">
-											<font size=3px>현재 입찰가 : <fmt:formatNumber
-													value="${au.bidInfo[0].max_bid}" type="currency" /></font>
+										<p class="price" style="font-weight: bold;">
+											<font size=3px>
+											<c:if test="${ au.bidInfo[0].max_bid == au.bidInfo[0].bid_price }">
+												현재 최고 입찰자입니다.
+											</c:if>
+											<c:if test="${ au.bidInfo[0].max_bid > au.bidInfo[0].bid_price }">
+												현재 입찰가 : <fmt:formatNumber value="${au.bidInfo[0].max_bid}" type="currency" />
+											</c:if>
+											</font>
 										</p>
 										<p class="price">
 											<font size=3px>내 입찰가 : <fmt:formatNumber
 													value="${au.bidInfo[0].bid_price}" type="currency" /></font>
 										</p>
 										<p style="text-align : center;">
-											<font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매
+											<font color="red">경매
 												종료 :<fmt:formatDate value="${au.end_date}" type="date"
 													pattern="MM월dd일" />
 											</font>
