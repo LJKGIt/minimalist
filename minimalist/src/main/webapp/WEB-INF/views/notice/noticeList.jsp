@@ -54,28 +54,17 @@ table.type07 td {
     border-bottom: 1px solid #ccc; 
      text-align: left;
 }
-/*  .g-my-80 {
-    margin-top: 5.71429rem !important;
-    margin-bottom: 5.71429rem !important;
-}
-
-.g-brd-pink {
-    border-color: #e81c62 !important;
-}
-
-.u-divider-center {
-    text-align: center;
-}
-
-.u-divider {
-    position: relative;
-    border-top-width: 1px;
-}
-
-.u-divider-solid {
-    border-top-style: solid;
-    } */
+ .btn-primary {
+    color: #ffffff;
+    background-color: #4fbfa8;
+    border-color: #41b39c;
  
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #3da892;
+    border-color: #318675;
+}
 </style>
 
 
@@ -133,7 +122,7 @@ table.type07 td {
     			
 
                     <div class="box" id="contact">
-                        <h1>공지사항</h1>
+                        <h1>공지사항</h1><hr>
 						
                  
                  <!--        <div class="u-divider u-divider-solid u-divider-center g-brd-pink w-75 mx-auto g-my-80">
@@ -143,8 +132,8 @@ table.type07 td {
     <thead>
     <tr>
        <th style="width:200px">번호</th>
-        <th style="width:500px">제목</th>
-        <th style="width:300px">작성일</th>
+        <th style="width:600px; ">제목</th>
+        <th style="width:200px">작성일</th>
     </tr>
     </thead>
     <tbody>
@@ -158,7 +147,7 @@ table.type07 td {
     </tr>
    </c:forEach>
    			<c:if test="${sessionScope.member.member_id eq 'admin' }">
-    <div class="write2"><a href="notice.viewWriteForm.do"><button type="button" id="write">글쓰기</button></a></div>	
+    <div class="write2"><a href="notice.viewWriteForm.do"><button type="button" class="btn-primary">글쓰기</button></a></div>	
    			</c:if>	
     </tbody>
 </table>

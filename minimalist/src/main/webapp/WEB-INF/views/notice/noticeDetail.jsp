@@ -57,17 +57,14 @@ border-top: 1px none #888;!important;
 
 .board-view-1s>tbody>tr>td {
   padding: 20px 3px 20px; 
-  
-
-      color: #333;
-    font-size: 15px;
-    line-height: 15px;
+   color: #333;
+   font-size: 15px;
+   white-space:pre;
+    text-align:center;
 }
  
 .board-view-1s>tbody>tr>td.a{
-
-     
-     background: url(http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/bar_dott7x1.gif) repeat-x 0 0;
+background: url(http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/bar_dott7x1.gif) repeat-x 0 0;
     word-break: break-all;
       padding-bottom:10%;
 }
@@ -83,7 +80,8 @@ border-top: 1px none #888;!important;
     display: inline-block;
     color: #333;
     font-size: 20px;
-    line-height: 15px;
+   text-align:left;
+       margin-left: -50px;
 
    
 }
@@ -187,7 +185,7 @@ a {
 		<tr><td colspan="2" style="text-align:left;">
 		<span class="tit" ><strong>${notice.notice_title}</strong></span>
 		</td><td class="data" style="text-align:right;" >${notice.notice_date}</td></tr>
-		<tr><td class="a" colspan="3" style="border-bottom: 2px solid #888;" ><span>${notice.notice_content}</span></td></tr>
+		<tr><td class="a" colspan="3" style="border-bottom: 2px solid #888;" ><p><span>${notice.notice_content}</span></p></td></tr>
 		</tbody>
 </table>
 			<div class="area1sButton pdT30">
