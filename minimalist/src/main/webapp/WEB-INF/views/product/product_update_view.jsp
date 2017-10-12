@@ -18,9 +18,9 @@
                     <ul class="breadcrumb">
                         <li><a href="index.html">Home</a>
                         </li>
-                        <li><a href="#">My orders</a>
+                        <li><a href="#">Product</a>
                         </li>
-                        <li>Order # 1735</li>
+                        <li>Update # ${ product.product_code }</li>
                     </ul>
 
                 </div>

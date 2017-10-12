@@ -200,7 +200,7 @@
 
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200" onclick="location.href='${ pageContext.request.contextPath }/productList.do?product_category=outer'">Product <b
+						data-hover="dropdown" data-delay="200">Product <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
@@ -441,7 +441,7 @@
 			// console.log(chosungArr);
 			
 			// AUTOCOMOPLETE
-			$("#searchBox").autocomplete({ 
+			$("#i_text_search").autocomplete({ 
 				source: autocomplete_text,
 				// 한글이 완성되지 않았을 때 버그
 				focus : function(event,ui){
