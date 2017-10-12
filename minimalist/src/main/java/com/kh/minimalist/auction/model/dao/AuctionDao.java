@@ -69,13 +69,17 @@ public class AuctionDao {
 	public int bid(BidInfo bid){
 		
 		int confirm=0;
+		//해당 경매에 대해 입찰 여부 확인
 		int result=0;
+		
 		confirm=sqlSession.selectOne("Auction.bidConfirm", bid);
 		
 		
 		if(confirm>0){
+			//입찰이 처음인 경우 -  insert
 			result=sqlSession.update("Auction.bid2", bid);
 		}else {
+			//입찰이 처음이 아닌 경우 - update (입찰금액만 수정)
 			result=sqlSession.insert("Auction.bid", bid);
 		}
 		

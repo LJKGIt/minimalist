@@ -397,7 +397,7 @@ public class MemberController {
 	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
 		if (((Member) session.getAttribute("member")) != null) {
 			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
-			ArrayList<Income> incomeList = incomeService.selectMemberIncome("관리자"/*((Member) session.getAttribute("member")).getMember_id()*/);
+			ArrayList<Income> incomeList = incomeService.selectMemberIncome(((Member) session.getAttribute("member")).getMember_id());
 			model.addAttribute("auctionList", auctionList);
 			model.addAttribute("incomeList", incomeList);
 		} else {
