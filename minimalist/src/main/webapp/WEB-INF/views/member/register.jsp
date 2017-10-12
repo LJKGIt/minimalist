@@ -117,7 +117,7 @@
 								</div>
 								
 								<script src='https://www.google.com/recaptcha/api.js'></script>
-								<div class="g-recaptcha" data-sitekey="6LfPMzQUAAAAAG4rEYDb5A8mAjANV9ss31ER-e62"></div>
+								<div class="g-recaptcha" data-sitekey="6LfPMzQUAAAAAG4rEYDb5A8mAjANV9ss31ER-e62" style="margin-bottom:20px;"></div>
 
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary" onclick="return checkAll();">

@@ -44,9 +44,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-
 import com.google.gson.Gson;
 
 @Controller
@@ -147,7 +144,6 @@ public class MemberController {
 		// <recaptcha
 		String secretParameter = "6LfPMzQUAAAAANF_tilr6MpN3zfcQ5jwpVq4shpV";
 		String recap = request.getParameter("g-recaptcha-response");
-		System.out.println("recap : " + recap); //TODO
 		// Send get request to Google reCaptcha server with secret key  
 		URL url;
 		String line, outputString = "";
@@ -159,7 +155,6 @@ public class MemberController {
 			while ((line = reader.readLine()) != null) {
 				outputString += line;
 			}
-			System.out.println(outputString);//TODO
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -172,7 +167,6 @@ public class MemberController {
 		// Verify whether the input from Human or Robot 
 		if (capRes.isSuccess()) {
 			// Input by Human
-			System.out.println("Human"); //TODO
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/plain; utf-8");
 			String salt = SHA256Util.generateSalt();
@@ -195,7 +189,6 @@ public class MemberController {
 			}
 		} else {
 			// Input by Robot
-			System.out.println("Robot"); //TODO
 			return "member/register";
 		}
 	}
