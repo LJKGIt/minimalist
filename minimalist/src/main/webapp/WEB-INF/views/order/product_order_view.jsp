@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="java.util.Date"%>
 
 <!DOCTYPE html>
 <html>
@@ -100,8 +102,12 @@
                                                 </td>
                                                 <td><input type="text" class="form-control" id="i_text_order_size" value="${ orderInfo.order_size }"></td>
                                                 <td>${ product.rent_price }</td>
-                                                <td>(대여 기간1)</td>
-                                                <td>(대여 기간2)</td>
+                                                <jsp:useBean id="now1" class="java.util.Date" />
+                                                <fmt:formatDate value="${now1}" pattern="yyyy-MM-dd" var="now2"/>
+                                                <td>${ now2 }</td>
+                                                <c:set var="now3" value="<%=new Date(new Date().getTime() + 60*60*24*1000*14)%>"/>
+												<fmt:formatDate value="${now3}" pattern="yyyy-MM-dd" var="now4"/>
+                                                <td>${ now4 }</td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
