@@ -211,4 +211,11 @@ where rownum&lt;=5
 		      WHERE MEMBER_ID = #{member_id}
 		      ORDER BY END_DATE DESC) USING (AUCTION_CODE)
 	</select>
+	
+	<!-- 경매 중지 - 악성 유저 잡기 -->
+	<update id="auctionStop" parameterType="_int">
+	update auction
+	set end_date=sysdate-1
+	where auction_code=#{auction_code}
+	</update>
 </mapper>

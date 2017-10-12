@@ -184,4 +184,10 @@ public class AuctionDao {
 		
 		
 	}
+	
+	//경매 중지
+	public int auctionStop(int auction_code){
+		
+		return sqlSession.update("Auction.auctionStop", auction_code);
+	}
 }

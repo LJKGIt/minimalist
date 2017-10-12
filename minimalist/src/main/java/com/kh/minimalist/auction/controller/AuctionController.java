@@ -571,4 +571,23 @@ public class AuctionController {
 			
 			return tmp;
 		}
+		
+		//경매 중지 - 악성 입찰자 잡기
+		@RequestMapping(value="auction.auctionStop.do", method={RequestMethod.POST, RequestMethod.GET})
+		public String auctionStop(HttpServletRequest request){
+			
+			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
+			
+			int result=auctionService.auctionStop(auction_code);
+			
+			
+			String tmp="";
+			if(result>0){
+				tmp="redirect:auction.selectList.do";
+			}else {
+				tmp="main/404";
+			}
+			
+			return tmp;
+		}
 }

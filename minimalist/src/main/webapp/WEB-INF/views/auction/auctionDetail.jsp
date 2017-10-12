@@ -238,6 +238,7 @@ $(function(){
                                <c:if test="${sessionScope.member.member_id eq 'admin'}">
                                <a href="auction.viewUpdateForm.do?auction_code=${auction.auction_code}"><button type="button">수정</button></a>
                                <a href="auction.deleteAuction.do?auction_code=${auction.auction_code}"><button type="button">삭제</button></a>
+                               <a href="auction.auctionStop.do?auction_code=${auction.auction_code}"><button type="button">중지</button></a>
                                </c:if>
 
 
