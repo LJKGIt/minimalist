@@ -211,10 +211,9 @@
 				dataType : "json",
 				success : function(data){
 					if(data.flag == 1){
-						$('#checkID').text(data.mchk);
-						$('#member_pwd').focus();
-					} else {
 						$('#checkID').text(data.mchk).css("color", "red");
+					} else {
+						$('#checkID').text(data.mchk).css("color", "black");
 					}
 				} 				   
 			})

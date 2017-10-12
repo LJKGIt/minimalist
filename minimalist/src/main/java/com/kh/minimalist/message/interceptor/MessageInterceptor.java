@@ -32,6 +32,7 @@ public class MessageInterceptor extends HandlerInterceptorAdapter {
 		
 		if (currMem != null)
 			request.setAttribute("newMessageCount", messageService.selectMessageCount(currMem.getMember_id()));
+		
 		request.setAttribute("productListAll", productService.productListAll().toString());
 		return super.preHandle(request, response, handler);
 	}
