@@ -8,7 +8,7 @@ public class Product implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2222122122222222222L;
+	private static final long serialVersionUID = 5987396132497857945L;
 	private int product_code;
 	private String product_name;
 	private String product_category;

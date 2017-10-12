@@ -61,7 +61,7 @@ public class MemberController {
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
 		String result = "main/index";
 		model.addAttribute("loginError", null);
-		// SQL injection에 대비해 정규식 표현을 적용합니다.
+		// SQL injection에 대비해 정규표현식을 적용합니다.
 		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
 		boolean patternBoolean = false;
