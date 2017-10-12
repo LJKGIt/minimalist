@@ -130,7 +130,7 @@
 		auction_category=#{auction_category},
 		auction_brand=#{auction_brand},
 		auction_descript=#{auction_descript},
-		bid_price=#{bid_price},
+		start_price=#{start_price},
 		start_date=#{start_date},
 		end_date=#{end_date},
 		auction_size=#{auction_size},
