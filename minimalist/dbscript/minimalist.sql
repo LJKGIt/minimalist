@@ -575,6 +575,26 @@ insert into bidinfo values(1, 'userb', 13000);
 INSERT INTO ALERT VALUES('admin', 1500000001, TO_DATE('170901', 'YYMMDD'));
 
 INSERT INTO NOTICE VALUES(1, '공지사항', '대여 및 구매시 적립금을 드려요.', SYSDATE);
+INSERT INTO NOTICE VALUES(2, '대여안내', '마음에 드는 상품은 결재 후에 대여하실 수 있습니다. 
+단, 새로운 상품을 대여하기 전에 기존의 대여품이 있다면 반납 후에 진행해주셔야 합니다.', SYSDATE);
+INSERT INTO NOTICE VALUES(3, '토요일,일요일은 휴무입니다', '안녕하세요*^^*
+매달 토요일,일요일은 휴무입니다.배송업무 및 상담처리가 되지 않으니-이점 양해 부탁드립니다.
+게시판으로 문의 남겨주시면 최대한 빠른처리 도와드리겠습니다.', SYSDATE);
+INSERT INTO NOTICE VALUES(4, '입금확인 공지사항', '주문후 2일 이내로 입금확인이 되지않을시에는,
+자동적으로 취소처리가 됩니다.
+취소가 되셨을경우 자동입금 확인이 어려우니 빠른입금 부탁드립니다.*^^*
+중복주문건이 있으실경우 꼭 말씀해 주셔야 입금완료 처리가 가능합니다.
+또한 입금자명과 결제금액이 다르실경우에도 
+자동확인이 어려우니 상담원분께 꼭 말씀해 주시기 바랍니다.', SYSDATE);
+INSERT INTO NOTICE VALUES(5, '후기 적립금은 안내', '후기 작성해주시면 빠르면 2~3시간 이내 지급되며,
+   늦어질경우 1~2일후 지급됩니다.', SYSDATE);
+INSERT INTO NOTICE VALUES(6, '이벤트안내', '상품별 세일적용.', SYSDATE);
+INSERT INTO NOTICE VALUES(7, '해외배송 안내', ' 주문 결제완료후 1:1게시판에 받으실곳 주소,성함,현지 전화번호를 영문으로 기재해주세요.
+      배송료 측정후 메일로 별도 안내해드리고있습니다.
+      배송료까지 결제 완료된 이후 상품 발송처리 도와드리고있습니다.', SYSDATE);
+INSERT INTO NOTICE VALUES(8, '적립금 사용안내', '회원 가입후 첫번째 주문건에는 적립금 사용이 불가합니다.
+   두번째 주문건부터 사용가능하며 구매금액의 20%만 사용가능합니다.
+   단,세일상품에는 적립금 사용이 불가하오니 참고부탁드려요.', SYSDATE);
 
 INSERT INTO REVIEW VALUES(1, 1500000001, 'admin', '좋네요', '은 뻥', '1', null, SYSDATE);
 INSERT INTO REVIEW VALUES(2, 1500000002, 'admin', '좋네요', '은 뻥', '1', NULL, SYSDATE);
