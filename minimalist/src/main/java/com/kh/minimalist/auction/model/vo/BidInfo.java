@@ -10,13 +10,25 @@ public class BidInfo implements Serializable {
 	private String member_id;
 	private int bid_price;
 	
+//	입찰가
+	private int max_bid;
+	
+	public int getMax_bid() {
+		return max_bid;
+	}
+
+	public void setMax_bid(int max_bid) {
+		this.max_bid = max_bid;
+	}
+
 	public BidInfo(){}
 
-	public BidInfo(int auction_code, String member_id, int bid_price) {
+	public BidInfo(int auction_code, String member_id, int bid_price, int max_bid) {
 		super();
 		this.auction_code = auction_code;
 		this.member_id = member_id;
 		this.bid_price = bid_price;
+		this.max_bid = max_bid;
 	}
 
 	public int getAuction_code() {

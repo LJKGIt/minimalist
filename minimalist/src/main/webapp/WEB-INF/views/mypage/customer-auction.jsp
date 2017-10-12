@@ -40,6 +40,8 @@
 							<br>
 						</c:if>
 						<c:if test="${ !empty incomeList }">
+						<h3>낙찰된 경매 상품</h3>
+						<br>
 							<c:forEach var="income" items="${ incomeList }" varStatus="status">
 							
 							<div class="well">
@@ -48,24 +50,24 @@
 								</div>
 								<hr style="margin: 5px;">
 								<div class="row" style="margin: 0;">
-									<a href="auction.selectOne.do?auction_code=${ fn:substringBefore(income.auctionJoin.img_path, ',' }"> <img
-										src="${ pageContext.request.contextPath }/resources/img_auction/${ fn:substringBefore(income.auctionJoin.img_path, ',' }"
+									<a href="auction.selectOne.do?auction_code=${ fn:substringBefore(income.auctionJoin.image_path, ',') }"> <img
+										src="${ pageContext.request.contextPath }/resources/img_auction/${ fn:substringBefore(income.auctionJoin.image_path, ',') }"
 										style="margin: 0 10px 10px 0; width: 100px; float: left;" />
 									</a>
 									<ul style="list-style-type: none; margin-left: 65px;">
 										<li><strong>${ income.auctionJoin.auction_brand }</strong></li>
-										<li><h4><a href="productDetail.do?product_code=${ income.auction_code }" style="color: black;">${ income.productJoin.product_name }</a></h4></li>
+										<li><h4><a href="productDetail.do?product_code=${ income.auction_code }" style="color: black;">${ income.auctionJoin.auction_name }</a></h4></li>
 										<li>size : ${ income.auctionJoin.auction_size }</li>
 										<li>
 											<strong><fmt:formatNumber value="${ income.income }" type="currency" currencySymbol="&#65510; " groupingUsed="true"/></strong>
-											<% //TODO [yjP] 배송링크?? %> 
+											<%-- ${income.order_invoice_number} --%> 
 											<a id="delivery" class="label label-info" style="float: right;"><input type="hidden" id="deliveryNo" value="6069503660528">배송조회</a>
 										</li>
 									</ul>
 								</div>
 								<div class="row" style="margin: 0;">
 									
-								</div>
+								</div> 
 							</div>
 							<!-- RECENT ORDERS END-->
 							
@@ -89,11 +91,10 @@
 														<td>주문일자</td>
 														<td>${ income.income_date }</td>
 													</tr>
-													<% //TODO [yjP] 주문번호? %>
-													<%-- <tr>
+													<tr>
 														<td>주문번호</td>
-														<td>${ income.orderinfo_code }</td>
-													</tr> --%>
+														<td>${ income.income_number }</td>
+													</tr>
 													<tr>
 														<td>제품코드</td>
 														<td>${ income.auction_code }</td>
@@ -193,16 +194,22 @@
 												href="auction.selectOne.do?auction_code=${au.auction_code}">${au.auction_brand}
 												- ${au.auction_name }</a>
 										</h3>
-										<p class="price">
-											<font size=3px>현재 입찰가 : <fmt:formatNumber
-													value="${au.bidInfo.bid_price}" type="currency" /></font>
+										<p class="price" style="font-weight: bold;">
+											<font size=3px>
+											<c:if test="${ au.bidInfo[0].max_bid == au.bidInfo[0].bid_price }">
+												현재 최고 입찰자입니다.
+											</c:if>
+											<c:if test="${ au.bidInfo[0].max_bid > au.bidInfo[0].bid_price }">
+												현재 입찰가 : <fmt:formatNumber value="${au.bidInfo[0].max_bid}" type="currency" />
+											</c:if>
+											</font>
 										</p>
 										<p class="price">
 											<font size=3px>내 입찰가 : <fmt:formatNumber
 													value="${au.bidInfo[0].bid_price}" type="currency" /></font>
 										</p>
-										<p>
-											<font color="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경매
+										<p style="text-align : center;">
+											<font color="red">경매
 												종료 :<fmt:formatDate value="${au.end_date}" type="date"
 													pattern="MM월dd일" />
 											</font>

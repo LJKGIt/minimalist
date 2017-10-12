@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.auction.model.vo.BidInfo;
-import com.kh.minimalist.member.model.vo.Member;
 
 @Controller
 public class AuctionController {

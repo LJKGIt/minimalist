@@ -73,7 +73,6 @@
 	                         			<td>
 	                         				<a href="review.updateForm.do?review_no=${review.review_no}" class="btn btn-primary btn-sm">수정</a>
 	                         				<a href="review.deleteReview.do?review_no=${review.review_no}&product_code=${review.product_code}" class="btn btn-primary btn-sm">삭제</a>
-	                         				<% //TODO [yjP] 링크가 상품후기쪽으로 가짐 %>
 	                         			</td>
 	                         		</tr>
 	                         	</c:forEach>

@@ -170,12 +170,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("member.dormant.do")
-	public String memberDelete(Member m, HttpSession session, HttpServletRequest request){
+	public String memberDelete(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		if((Member)session.getAttribute("member") != null){
 			if(memberService.dormantMember(m) > 0){
-				System.out.println("탈퇴 완료");
+				response.getWriter().append("<script>alert('탈퇴가 완료되었습니다.')</script>");
 			} else {
-				System.out.println("회원탈퇴 실패");
+				response.getWriter().append("<script>alert('탈퇴중 오류가 발생했습니다.')</script>");
 			}
 		}
 		return "main/index";
@@ -395,11 +395,10 @@ public class MemberController {
 	
 	@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
 	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
-		System.out.println("가가");
-		if (((Member) session.getAttribute("member")) != null) {
-			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
-			ArrayList<Income> incomeList = incomeService.selectMemberIncome("관리자"/*((Member) session.getAttribute("member")).getMember_id()*/);
-			System.out.println(incomeList);
+		Member sessionMember = (Member) session.getAttribute("member");
+		if (sessionMember != null) {
+			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(sessionMember.getMember_id());
+			ArrayList<Income> incomeList = incomeService.selectMemberIncome(sessionMember.getMember_id());
 			model.addAttribute("auctionList", auctionList);
 			model.addAttribute("incomeList", incomeList);
 		} else {
