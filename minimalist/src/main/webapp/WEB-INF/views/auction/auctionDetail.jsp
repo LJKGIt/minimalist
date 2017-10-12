@@ -74,6 +74,10 @@ $(function(){
 					if(value==="yes"){
 						alert('입찰이 완료되었습니다.');
 						location.reload();
+					}else if(value=="downPrice") {
+						alert('회원이 입찰한 가격보다 높게 입찰하여야 합니다.');
+					}else if(value=="lowPrice") {
+						alert('시작 가격보다 높게 입찰하여야 합니다.');
 					}else {
 						alert('입찰 실패. 관리자에게 문의하세요.');
 					}
