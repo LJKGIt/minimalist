@@ -25,6 +25,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
+import com.kh.minimalist.commonUtil.CaptchaResponse;
 import com.kh.minimalist.commonUtil.CookieUtils;
 import com.kh.minimalist.commonUtil.SHA256Util;
 import com.kh.minimalist.income.model.service.IncomeService;
@@ -37,6 +38,17 @@ import com.kh.minimalist.orderinfo.model.vo.OrderInfo;
 import com.kh.minimalist.product.model.service.ProductService;
 import com.kh.minimalist.product.model.vo.Product;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+import com.google.gson.Gson;
+
 @Controller
 public class MemberController {
 
@@ -44,7 +56,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private MessageService messageService;
 
@@ -53,9 +65,9 @@ public class MemberController {
 
 	@Autowired
 	private OrderInfoService orderInfoService;
-	
+
 	@Autowired
-	private AuctionService auctionService; 
+	private AuctionService auctionService;
 
 	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
@@ -74,15 +86,14 @@ public class MemberController {
 			}
 			if (member != null && member.getDormant_yn() == 'n') {
 				session.setAttribute("member", member);
-				
-				
+
 				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
 				CookieUtils cu = new CookieUtils();
 				if (cu.getValueList("anonymous", request) != null) {
-					for(String cookie : cu.getValueList("anonymous", request))
+					for (String cookie : cu.getValueList("anonymous", request))
 						cu.setCookie(member.getMember_id(), cookie, 365, request, response);
 				}
-				
+
 				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
 					session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
 					result = "redirect:" + request.getHeader("referer");
@@ -116,7 +127,7 @@ public class MemberController {
 		String member_id = request.getParameter("member_id");
 
 		int result = memberService.memberIdChk(member_id);
-		
+
 		// 업데이트 완료 여부 콜백
 		if (result > 0) {
 			model.addAttribute("mchk", "이미 사용 중 입니다.");
@@ -125,7 +136,7 @@ public class MemberController {
 			model.addAttribute("mchk", "사용가능한 아이디 입니다.");
 			model.addAttribute("flag", 0);
 		}
-		
+
 		return new MappingJackson2JsonView();
 
 	}
@@ -133,33 +144,66 @@ public class MemberController {
 	@RequestMapping(value = "minsert.do", method = RequestMethod.POST)
 	public String insertNoticeForm(Member m, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/plain; utf-8");
-		String salt = SHA256Util.generateSalt();
-		m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
-		m.setSalt(salt);
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
-
-		m.setPhone(phone);
-
-		m.setEmail(email);
-		int result = memberService.minsert(m);
-
-		if (result > 0) {
-
-			return "redirect:index.do";
-		} else {
-
-			return "main/404";
+		// <recaptcha
+		String secretParameter = "6LfPMzQUAAAAANF_tilr6MpN3zfcQ5jwpVq4shpV";
+		String recap = request.getParameter("g-recaptcha-response");
+		System.out.println("recap : " + recap); //TODO
+		// Send get request to Google reCaptcha server with secret key  
+		URL url;
+		String line, outputString = "";
+		try {
+			url = new URL("https://www.google.com/recaptcha/api/siteverify?secret=" + secretParameter + "&response=" + recap + "&remoteip=" + request.getRemoteAddr());
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			while ((line = reader.readLine()) != null) {
+				outputString += line;
+			}
+			System.out.println(outputString);//TODO
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
+		// Convert response into Object
+		CaptchaResponse capRes = new Gson().fromJson(outputString, CaptchaResponse.class);
+
+		// Verify whether the input from Human or Robot 
+		if (capRes.isSuccess()) {
+			// Input by Human
+			System.out.println("Human"); //TODO
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/plain; utf-8");
+			String salt = SHA256Util.generateSalt();
+			m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), salt));
+			m.setSalt(salt);
+			String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
+
+			m.setPhone(phone);
+
+			m.setEmail(email);
+			int result = memberService.minsert(m);
+
+			if (result > 0) {
+
+				return "redirect:index.do";
+			} else {
+
+				return "main/404";
+			}
+		} else {
+			// Input by Robot
+			System.out.println("Robot"); //TODO
+			return "member/register";
+		}
 	}
-	
+
 	@RequestMapping("member.dormant.do")
-	public String memberDelete(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{
-		if((Member)session.getAttribute("member") != null){
-			if(memberService.dormantMember(m) > 0){
+	public String memberDelete(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if ((Member) session.getAttribute("member") != null) {
+			if (memberService.dormantMember(m) > 0) {
 				response.getWriter().append("<script>alert('탈퇴가 완료되었습니다.')</script>");
 			} else {
 				response.getWriter().append("<script>alert('탈퇴중 오류가 발생했습니다.')</script>");
@@ -188,35 +232,35 @@ public class MemberController {
 	@RequestMapping("member.mypage.do")
 	public String myPageView(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
-		
+
 		String result = "main/404";
-		
-		int orderDay = 7;  // 조회기간
+
+		int orderDay = 7; // 조회기간
 		String orderKeyword = ""; // 검색어
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>(); //
-		
+
 		if (((Member) session.getAttribute("member")) != null) {
 			String member_id = ((Member) session.getAttribute("member")).getMember_id();
-			
+
 			// MEMBER_ID 값
 			map.put("member_id", member_id);
 
 			// ORDER KEYWORD 값
-			if (request.getParameter("orderKeyword") != null){
+			if (request.getParameter("orderKeyword") != null) {
 				orderKeyword = request.getParameter("orderKeyword");
 				map.put("orderKeyword", orderKeyword);
 				orderDay = -1;
 			}
-			
+
 			// ORDERDAY 값(조회기간)
 			if (request.getParameter("orderDay") != null)
 				orderDay = Integer.parseInt(request.getParameter("orderDay"));
 			map.put("orderDay", orderDay);
-			
+
 			// PAGING
 			int currentPage = 1; // 현재 페이지
-			if(request.getParameter("page") != null){
+			if (request.getParameter("page") != null) {
 				currentPage = Integer.parseInt(request.getParameter("page"));
 			}
 			HashMap<String, Object> totalCountMap = new HashMap<String, Object>();
@@ -226,28 +270,28 @@ public class MemberController {
 			int totalListCount = orderInfoService.myOrderCount(totalCountMap); // 총 개수
 			int listPerPage = 5; // 한 화면에 출력될 페이지 수
 			int pageList = 5; // PAGINATION 개수
-			
+
 			int totalPage = totalListCount / listPerPage; // 마지막 페이지
-			if(totalListCount % listPerPage > 0)
+			if (totalListCount % listPerPage > 0)
 				totalPage++;
-			
-			if(currentPage > totalPage) // 현재 페이지가 마지막 페이지보다 클 경우
+
+			if (currentPage > totalPage) // 현재 페이지가 마지막 페이지보다 클 경우
 				currentPage = totalPage;
-			
+
 			int startPage = ((currentPage - 1) / pageList) * pageList + 1; // 노출되는 시작 페이지
 			int endPage = startPage + pageList - 1; // 노출되는 마지막 페이지
-			if(endPage > totalPage)
+			if (endPage > totalPage)
 				endPage = totalPage;
-			
+
 			int startRow = (currentPage - 1) * listPerPage + 1; // 현재 페이지 리스트의 첫 번째 행
 			int endRow = startRow + listPerPage - 1; // 현재 페이지 리스트의 마지막 행
-			
+
 			// 현재 페이지 리스트의 시작, 마지막 값
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
-			
+
 			ArrayList<OrderInfo> myOrder = orderInfoService.myOrder(map);
-			if (myOrder != null){
+			if (myOrder != null) {
 				model.addAttribute("myOrder", myOrder);
 				model.addAttribute("currentPage", currentPage);
 				model.addAttribute("startPage", startPage);
@@ -302,9 +346,9 @@ public class MemberController {
 			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
 				m.setMember_pwd(sessionMember.getMember_pwd());
 				model.addAttribute("updateMember", memberService.loginMember(m));
-				model.addAttribute("telList", new String[]{"010", "011", "016", "017", "018", "019"});
-				result = "mypage/customer-account"; 
-			}else{
+				model.addAttribute("telList", new String[] { "010", "011", "016", "017", "018", "019" });
+				result = "mypage/customer-account";
+			} else {
 				model.addAttribute("error", "비밀번호가 틀렸습니다.");
 			}
 		} else {
@@ -322,9 +366,9 @@ public class MemberController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		if((Member) session.getAttribute("member") != null){
-		
-			String email = request.getParameter("email1") + "@" + request.getParameter("email2") ;
+		if ((Member) session.getAttribute("member") != null) {
+
+			String email = request.getParameter("email1") + "@" + request.getParameter("email2");
 			String phone = request.getParameter("tel_first") + "-" + request.getParameter("phone1") + "-" + request.getParameter("phone2");
 			m.setPhone(phone);
 			m.setEmail(email);
@@ -377,13 +421,14 @@ public class MemberController {
 		}
 		out.close();
 	}
+
 	@Autowired
 	IncomeService incomeService;
-	
-	@RequestMapping(value="auction.selectMemberAuction.do", method={RequestMethod.POST, RequestMethod.GET})
-	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
+
+	@RequestMapping(value = "auction.selectMemberAuction.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException {
 		if (((Member) session.getAttribute("member")) != null) {
-			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
+			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member) session.getAttribute("member")).getMember_id());
 			ArrayList<Income> incomeList = incomeService.selectMemberIncome(((Member) session.getAttribute("member")).getMember_id());
 			model.addAttribute("auctionList", auctionList);
 			model.addAttribute("incomeList", incomeList);
@@ -394,7 +439,6 @@ public class MemberController {
 		}
 		return "mypage/customer-auction";
 	}
-	
 
 	// 회원 검색 페이지로 이동.
 	@RequestMapping("member.memberSearchView.do")
@@ -424,160 +468,147 @@ public class MemberController {
 		writer.close();
 
 	}
-	
+
 	//회원 관리 페이지 - 멤버 리스트 보여주기
 	@RequestMapping(value = "member.memberManage.do")
-	public String memberManage(HttpServletRequest request, Model model){
-		
-		int currentPage=1;
+	public String memberManage(HttpServletRequest request, Model model) {
+
+		int currentPage = 1;
 		//현재 페이지
-		
-		if(request.getParameter("page")!=null){
+
+		if (request.getParameter("page") != null) {
 			//현재 페이지 보정
-				currentPage=Integer.parseInt(request.getParameter("page"));
+			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		
-		int countRow=0;
+
+		int countRow = 0;
 		//전체 글의 갯수
-		countRow=memberService.memberCount();
-		
-		
-		int countList=10;
+		countRow = memberService.memberCount();
+
+		int countList = 10;
 		//페이지당 보여줄 글의 수 
-		int pageList=5;
+		int pageList = 5;
 		//아래 보여줄 페이지의 수
-		
-		int maxPage=countRow/countList;
+
+		int maxPage = countRow / countList;
 		//총 페이지 수
-		if(countRow%countList>0){
+		if (countRow % countList > 0) {
 			maxPage++;
 			//맥스 페이지 보정
 		}
-		
-		
-		
-		int startPage=((currentPage-1)/pageList)*pageList+1;
+
+		int startPage = ((currentPage - 1) / pageList) * pageList + 1;
 		//화면에 보여줄 시작페이지
-		int endPage=startPage+pageList-1;
-		
-		if(endPage>maxPage){
+		int endPage = startPage + pageList - 1;
+
+		if (endPage > maxPage) {
 			//마지막 페이지 보정
-			endPage=maxPage;
+			endPage = maxPage;
 		}
-		
-		int startRow=(currentPage-1)*countList+1;
+
+		int startRow = (currentPage - 1) * countList + 1;
 		//현재 화면에서 보여줄 글의 시작 rownum
-		int endRow=startRow+countList-1;
+		int endRow = startRow + countList - 1;
 		//현재 화면에서 보여줄 글의 마지막 rownum
-		
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
-		
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		
-		ArrayList<Member> list=memberService.memberList(map);
-		
-		String tmp=null;
-		
-		if(list.size()!=0){
+
+		ArrayList<Member> list = memberService.memberList(map);
+
+		String tmp = null;
+
+		if (list.size() != 0) {
 			model.addAttribute("list", list);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("maxPage", maxPage);
-			tmp="manager/memberList";
-		}else {
-			tmp="main/404";
+			tmp = "manager/memberList";
+		} else {
+			tmp = "main/404";
 		}
-		
-		
-		
+
 		return tmp;
 	}
-	
-	
-	@RequestMapping(value = "member.searchingMember.do")
-	public String searchingMember(HttpServletRequest request, Model model){
-		
-		String keyword=request.getParameter("keyword");
-		
-		ArrayList<Member> list=memberService.searchingMember(keyword);
 
-			model.addAttribute("list", list);
-		
-		
+	@RequestMapping(value = "member.searchingMember.do")
+	public String searchingMember(HttpServletRequest request, Model model) {
+
+		String keyword = request.getParameter("keyword");
+
+		ArrayList<Member> list = memberService.searchingMember(keyword);
+
+		model.addAttribute("list", list);
+
 		return "manager/memberList";
 	}
-	
+
 	//member.selectOne.do
 	@RequestMapping(value = "member.selectOne.do")
-	public String selectOneMember(HttpServletRequest request, Model model){
-		
-		String member_id=request.getParameter("member_id");
-		
-		
-		Member m=memberService.memberOne(member_id);
-		
-		String yn=null;
-		if(m.getDormant_yn()=='y'){
-			yn="y";
-		}else {
-			yn="n";
+	public String selectOneMember(HttpServletRequest request, Model model) {
+
+		String member_id = request.getParameter("member_id");
+
+		Member m = memberService.memberOne(member_id);
+
+		String yn = null;
+		if (m.getDormant_yn() == 'y') {
+			yn = "y";
+		} else {
+			yn = "n";
 		}
-		
+
 		model.addAttribute("yn", yn);
 		model.addAttribute("member", m);
-		
-		
-		
+
 		return "manager/memberDetail";
-		
+
 	}
-	
+
 	//회원 계정 정지 - 계정 풀기
 	@RequestMapping(value = "member.updateDormant.do", method = RequestMethod.GET)
-	public void updateDormant(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
-		
-		String tmp=request.getParameter("yn");
-		Member m=new Member();
-		
+	public void updateDormant(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		String tmp = request.getParameter("yn");
+		Member m = new Member();
+
 		m.setMember_id(request.getParameter("id"));
 		m.setDormant_yn(tmp.charAt(0));
-	
-		
-		int result=memberService.updateDormant(m);
-		
-		PrintWriter writer=response.getWriter();
-		if(result>0){
+
+		int result = memberService.updateDormant(m);
+
+		PrintWriter writer = response.getWriter();
+		if (result > 0) {
 			writer.append("yes");
-		}else {
+		} else {
 			writer.append("no");
 		}
-		
+
 		writer.flush();
 		writer.close();
 	}
-	
+
 	//회원 등급 조정
 	@RequestMapping(value = "member.updateGrade.do", method = RequestMethod.GET)
-	public void updateGrade(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
-		Member m=new Member();
-		
+	public void updateGrade(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		Member m = new Member();
+
 		m.setGrade(Integer.parseInt(request.getParameter("grade")));
 		m.setMember_id(request.getParameter("id"));
-		
-		
-		int result=memberService.updateGrade(m);
-		
-		PrintWriter writer=response.getWriter();
-		if(result>0){
+
+		int result = memberService.updateGrade(m);
+
+		PrintWriter writer = response.getWriter();
+		if (result > 0) {
 			writer.append("yes");
-		}else {
+		} else {
 			writer.append("no");
 		}
-		
+
 		writer.flush();
 		writer.close();
 	}
