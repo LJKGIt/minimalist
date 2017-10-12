@@ -48,25 +48,28 @@
 
                             <div class="content">
                                 <div class="row">
-                                	<div class="col-sm-4">
+                                	<div class="col-sm-5">
                                         <div class="form-group">
                                             <label for="firstname">이름</label>
                                             <input type="text" class="form-control" id="i_text_reciever_name" value="${ sessionScope.member.member_name }">
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="company">주소</label>
-                                            <input type="text" class="form-control" id="i_text_reciever_address" value="${ sessionScope.member.address1 } ${ sessionScope.member.address2 }">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <div class="form-group">
                                             <label for="city">전화번호</label>
                                             <input type="text" class="form-control" id="i_text_reciever_phone" value="${ sessionScope.member.phone }">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="company">주소</label>
+                                            <input type="text" class="form-control" id="i_text_reciever_address" value="${ sessionScope.member.address1 } ${ sessionScope.member.address2 }">
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <!-- /.row -->
                             </div>
                             
@@ -159,7 +162,6 @@
 									    buyer_postcode : '${ sessionScope.member.post }'
 									}, function(rsp) {
 									    if ( rsp.success ) {
-									    	<% // TODO [litnogi] □ 컨트롤러에서 보안 처리하기. (REST API) %>
 									    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 									    	$.ajax({
 									    		url: "orderInfoInsert.do", //cross-domain error가 발생하지 않도록 주의해주세요

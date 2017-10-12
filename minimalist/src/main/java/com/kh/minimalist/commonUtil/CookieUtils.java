@@ -116,8 +116,7 @@ public class CookieUtils {
 			key = "anonymous";
 		
 		List<String> list = getValueList(key, request);
-		if(list == null)
-			System.out.println("가가");
+
 		list.remove(value);
 
 		String sumValue = "";

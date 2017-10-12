@@ -200,7 +200,7 @@
 
 					<li class="dropdown yamm-fw"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="200">Product <b
+						data-hover="dropdown" data-delay="200" onclick="location.href='${ pageContext.request.contextPath }/productList.do?product_category=outer'">Product <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
@@ -355,18 +355,26 @@
 				</div>
 			</div>
 			<div class="collapse clearfix" id="search">
-				<form class="navbar-form" role="search">
+				<form class="navbar-form" role="search" action="productList.do" method="GET">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="searchBox">
+						<input type="search" class="form-control" placeholder="이름/브랜드/최저가격/최고가격" id="i_text_search" name="n_text_search" value="">
 						<span class="input-group-btn">
-
 							<button type="submit" class="btn btn-primary">
 								<i class="fa fa-search"></i>
 							</button>
-
+							<button type="reset" class="btn btn-primary">
+								<i class="fa fa-remove"></i>
+							</button>
 						</span>
 					</div>
+					<input type="hidden" name="product_category" value="${ product.product_category }">
 				</form>
+				<script type="text/javascript">
+					$(function(){
+						var searchString = '${ searchString }';
+						$('#i_text_search').val(searchString);
+					});
+				</script>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
@@ -401,7 +409,7 @@
 				type : "POST",
 				dataType : "json",	
 				success : function(data){
-					console.log(data.messageList);
+					// console.log(data.messageList);
 				}, error : function(){
 					alert("!!!");
 				}
@@ -430,7 +438,7 @@
 				// chosungArr.put(Hangul.disassemble(autocomplete_text[i]));
 			});
 			
-			console.log(chosungArr);
+			// console.log(chosungArr);
 			
 			// AUTOCOMOPLETE
 			$("#searchBox").autocomplete({ 

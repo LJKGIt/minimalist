@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE mapper PUBLIC 
-"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Product">
 
 	<resultMap id="resultProduct" type="Product">
@@ -44,16 +43,31 @@
 		ORDER BY PRODUCT_CODE ASC
 	</select>
 
-	<select id="productList" parameterType="map" resultType="Product" resultMap="resultProduct">
+	<select id="productList" parameterType="map" resultType="map" resultMap="resultProduct">
 		SELECT * 
 		FROM(SELECT ROWNUM RNUM, A.* 
 			FROM (SELECT * 
 					FROM PRODUCT 
 					WHERE PRODUCT_DELETE = 0 
+					<if test="keyword != null">
+					AND PRODUCT_NAME LIKE '%'||#{keyword}||'%'
+					</if>
+					AND PRODUCT_CATEGORY = #{product.product_category}
+                    AND (
+                    <foreach collection="prdouctBrandList" item="item" index="index"  open="" separator=" OR " close="" >
+                    	PRODUCT_BRAND LIKE '%'||#{item}||'%'
+                    </foreach>
+                    )
+                    AND RENT_PRICE BETWEEN #{startPrice} AND #{endPrice}
 					ORDER BY RECEIVE_DATE DESC) A) 
 		JOIN PRODUCT_IMAGE B USING(PRODUCT_CODE) 
         WHERE RNUM &#62;= #{ startCount } AND RNUM &#60;= #{ endCount }
         ORDER BY PRODUCT_CODE DESC, PRODUCT_IMAGE_PATH ASC 
+	</select>
+	
+	<select id="selectBrand" resultType="string">
+		SELECT DISTINCT PRODUCT_BRAND 
+		FROM PRODUCT
 	</select>
 	
 	<select id="newProductList" resultType="Product" resultMap="resultProduct">
@@ -72,9 +86,6 @@
 		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
 		WHERE PRODUCT_CODE = #{product_code}
 	</update>
-	<!-- UPDATE PRODUCT  
-		SET PRODUCT_HIT = (SELECT MAX(PRODUCT_HIT)+1 FROM PRODUCT WHERE PRODUCT_CODE = #{product_code}) 
-		WHERE PRODUCT_CODE = #{product_code} -->
 	
 	<update id="productDelete" parameterType="Product">
 		UPDATE PRODUCT  
@@ -90,6 +101,24 @@
 		UPDATE PRODUCT 
 		SET PRODUCT_CODE = #{product_code}
 			, PRODUCT_NAME = #{product_name}
+			, PRODUCT_CATEGORY = #{product_category}
+			, PRODUCT_BRAND = #{product_brand}
+			, PRODUCT_DESCRIPT = #{product_descript}
+			, PRODUCT_ORIGINAL_PRICE = #{product_original_price}
+			, RENT_PRICE = #{rent_price}
+			, PRODUCT_SIZE33 = #{product_size33}
+			, PRODUCT_SIZE44 = #{product_size44}
+			, PRODUCT_SIZE55 = #{product_size55}
+			, PRODUCT_SIZE66 = #{product_size66}
+			, PRODUCT_SIZE77 = #{product_size77}
+			, PRODUCT_COLOR = #{product_color}
+			, RECEIVE_DATE = #{receive_date}
+		WHERE PRODUCT_CODE = #{product_code}
+	</update>
+	
+	<update id="productImageUpdate" parameterType="map">
+		UPDATE PRODUCT 
+		SET PRODUCT_NAME = #{product_name}
 			, PRODUCT_CATEGORY = #{product_category}
 			, PRODUCT_BRAND = #{product_brand}
 			, PRODUCT_DESCRIPT = #{product_descript}
@@ -122,5 +151,9 @@
 		 VALUES(#{recentProductCode}, #{item})
 		</foreach>
 	</insert>
+	
+	<delete id="productImageDelete" parameterType="Product">
+		DELETE FROM PRODUCT_IMAGE WHERE PRODUCT_CODE = #{product_code}
+	</delete>
 
 </mapper>

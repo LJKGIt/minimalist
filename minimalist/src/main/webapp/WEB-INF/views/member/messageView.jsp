@@ -41,7 +41,7 @@ hr {
 		var mNum = gg.attr('data-msgNum');
 		var indexgg = 0;
 		gg.parent().children('tr').each(function(index, item) {
-			console.log(gg.html()==gg.parent().children('tr').eq(index).html());
+			// console.log(gg.html()==gg.parent().children('tr').eq(index).html());
 			if (gg.html()==gg.parent().children('tr').eq(index).html()) {
 				indexgg = index;
 			}
