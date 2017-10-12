@@ -42,7 +42,7 @@
                     <div class="box">
                         <form method="post" action="">
                         <div id="i_div_form1">
-                            <h1>Checkout - Address</h1>
+                            <h1>Checkout</h1>
                             <ul class="nav nav-pills nav-justified">
                                 <li class="active"><a><i class="fa fa-map-marker"></i><br>Address</a>
                                 </li>
