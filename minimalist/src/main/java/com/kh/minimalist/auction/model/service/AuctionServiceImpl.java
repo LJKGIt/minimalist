@@ -112,6 +112,12 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.selectOneEnd(auction_code);
 	}
 
+	@Override
+	public int auctionStop(int auction_code) {
+		
+		return auctionDao.auctionStop(auction_code);
+	}
+
 	
 	
 	

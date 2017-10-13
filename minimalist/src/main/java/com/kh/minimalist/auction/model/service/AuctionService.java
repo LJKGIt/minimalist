@@ -40,4 +40,6 @@ public interface AuctionService {
 	int deleteBid(BidInfo bid);
 	
 	Auction selectOneEnd(int auction_code);
+	
+	int auctionStop(int auction_code);
 }

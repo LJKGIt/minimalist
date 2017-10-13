@@ -72,15 +72,37 @@ public class AuctionDao {
 		//해당 경매에 대해 입찰 여부 확인
 		int result=0;
 		
+		int temp=0;
+		//조건검사
+		int startPrice=0;
+		
 		confirm=sqlSession.selectOne("Auction.bidConfirm", bid);
 		
 		
-		if(confirm>0){
-			//입찰이 처음인 경우 -  insert
-			result=sqlSession.update("Auction.bid2", bid);
-		}else {
+		if(confirm==1){
 			//입찰이 처음이 아닌 경우 - update (입찰금액만 수정)
-			result=sqlSession.insert("Auction.bid", bid);
+			//재입찰의 경우 가격을 낮출 수 없도록.
+			temp=sqlSession.selectOne("Auction.beforeBid", bid);
+			if(temp>=bid.getBid_price()){
+				result=-1;
+				//-1 리턴.
+			}else {
+				result=sqlSession.update("Auction.bid2", bid);
+			}
+			
+		}else if(confirm==0) {
+			//입찰이 처음인 경우 -  insert
+			//첫 가격보다 높게
+			startPrice=sqlSession.selectOne("Auction.startPriceCheck", bid.getAuction_code());
+			
+			if(startPrice>=bid.getBid_price()){
+				result=-2;
+				//-2 리턴
+			}else {
+				result=sqlSession.insert("Auction.bid", bid);
+			}
+			
+			
 		}
 		
 		return result;
@@ -94,7 +116,13 @@ public class AuctionDao {
 	//가격 새로고침
 	public int reloadPrice(int auction_code){
 		
-		return sqlSession.selectOne("Auction.reloadPrice", auction_code);
+		int result=0;
+		if(sqlSession.selectOne("Auction.reloadPrice", auction_code) != null){
+			result=sqlSession.selectOne("Auction.reloadPrice", auction_code);
+		}
+		
+		
+		return result;
 	}
 	
 	
@@ -155,5 +183,11 @@ public class AuctionDao {
 		return sqlSession.selectOne("Auction.selectOneEnd", auction_code);
 		
 		
+	}
+	
+	//경매 중지
+	public int auctionStop(int auction_code){
+		
+		return sqlSession.update("Auction.auctionStop", auction_code);
 	}
 }
