@@ -74,7 +74,7 @@ public class MemberController {
 
 	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
-		String result = "main/index";
+		String result = "redirect:index.do";
 		model.addAttribute("loginError", null);
 
 		// <RSA
@@ -162,7 +162,7 @@ public class MemberController {
 			session.invalidate();
 		}
 
-		return "main/index";
+		return "redirect:index.do";
 	}
 
 	@RequestMapping("memberidchk.do")
@@ -251,7 +251,7 @@ public class MemberController {
 				response.getWriter().append("<script>alert('탈퇴중 오류가 발생했습니다.')</script>");
 			}
 		}
-		return "main/index";
+		return "redirect:index.do";
 	}
 
 	@RequestMapping("register.do")
