@@ -70,7 +70,7 @@
 	
 	<select id="selectListByDate" resultType="Income" parameterType="hashmap" resultMap="resultIncome">
 	select *
-	from (select rownum rnum, product_code, auction_code, income, income_date
+	from (select rownum rnum, auction_code, income, income_date
 	from (select * from income
 	where income_date&gt;=#{startDate}
 	and income_date&lt;=#{endDate}
