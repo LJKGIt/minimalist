@@ -139,11 +139,6 @@
 						</div>
 					</div>
 					<!-- *** MENUS AND FILTERS END *** -->
-					<div class="banner">
-						<a href="#"> <img
-							src="${ pageContext.request.contextPath }/resources/img/banner.jpg"
-							alt="sales 2014" class="img-responsive"></a>
-					</div>
 				</div> --%>
 				<div class="col-md-12">
 					<div class="row" id="productMain">

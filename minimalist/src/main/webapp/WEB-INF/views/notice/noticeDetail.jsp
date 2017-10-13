@@ -171,11 +171,6 @@ a {
                     <!-- *** PAGES MENU END *** -->
 
 
-                    <div class="banner">
-                        <a href="#">
-                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
                 </div>
 
                 <div class="col-md-9">

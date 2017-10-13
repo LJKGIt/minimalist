@@ -183,11 +183,6 @@ $(function(){
 
                     <!-- *** MENUS AND FILTERS END *** -->
 
-                    <div class="banner">
-                        <a href="#">
-                            <img src="/minimalist/resources/img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
                 </div>
                 
                 
