@@ -112,11 +112,16 @@ input {
     padding-bottom: 20px;
     padding-left: 0px;
 }
-.area1sButton {
-    padding: 10px 0 0;
-    text-align: center;
-   align:center;
+.btn-primary {
+    color: #ffffff;
+    background-color: #4fbfa8;
+    border-color: #41b39c;
  
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #3da892;
+    border-color: #318675;
 }
  
 </style>
@@ -173,7 +178,7 @@ input {
                       </tbody>
                       </table>
                       <div>
-                       <input type="submit" value="등록"  class="area1sButton">
+                       <input type="submit" value="등록"  class="btn-primary">
                       </div>
                      
                       </form>

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
+
 table.type07 {
 
     border-collapse: collapse;
@@ -48,13 +49,17 @@ table.type07 td {
 }
 div.write2{
 
-position: absolute;
-    right: 80px;
-   bottom: 100px;
-
+    position: fixed;
+    right: 400px;
+    bottom: 380px;
 
 }
- 
+
+ .btnGreen, a.btnGreen:hover {
+    color: #ffffff;
+    background-color: #3da892;
+    text-decoration: none;
+}
 </style>
 
 
@@ -112,7 +117,7 @@ _________________________________________________________ -->
                 <div class="col-md-9">
 
 
-                    <div class="box" id="contact">
+                    <div class="box" id="contact" style="margin: 0 0 220px;">
                        <h1>1:1문의</h1>
 
                        
@@ -191,7 +196,7 @@ _________________________________________________________ -->
    			
    			
    			</c:choose>	
-   			 <div class="write2"><a href="qna.viewWriteForm.do"><button type="button" id="write">글쓰기</button></a></div>	
+   			 <div class="write2"><a href="qna.viewWriteForm.do"><button type="button" class="btnGreen" >글쓰기</button></a></div>	
    			</c:if>				
     </tbody>
 </table>
@@ -226,6 +231,7 @@ _________________________________________________________ -->
 
                 </div>
                 <!-- /.col-md-9 -->
+             
             </div>
             <!-- /.container -->
         </div>
@@ -236,12 +242,5 @@ _________________________________________________________ -->
 
     </div>
     <!-- /#all -->
-
-
-
-
-    
-
-
 </body>
 </html>

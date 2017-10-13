@@ -109,11 +109,17 @@ input {
     padding-bottom: 20px;
     padding-left: 0px;
 }
-.area1sButton {
-    padding: 10px 0 0;
-    text-align: center;
-   align:center;
+
+ .btn-primary {
+    color: #ffffff;
+    background-color: #4fbfa8;
+    border-color: #41b39c;
  
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #3da892;
+    border-color: #318675;
 }
  
 </style>
@@ -148,20 +154,12 @@ input {
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                	<a href="">공지사항 등록</a>
+                                	<a href="notice.viewWriteForm.do">새로운 공지사항 등록</a>
                                 </li>
                                 <li>
                                 	<a href="qna.selectList.do">1:1문의 답변</a>
                                 </li>
-                                <li>
-                                    <a href="">회원관리</a>
-                                </li>
-                                <li>
-                                    <a href="">대여상품 등록</a>
-                                </li>
-                                <li>
-                                    <a href="auction.viewRegister.do">경매상품 등록</a>
-                                </li>
+                               
 								
 								
                             </ul>
@@ -179,7 +177,7 @@ input {
 
 
                     <div class="box" id="contact">
-                      <h1 align="center">공지사항 등록</h1>
+                      <h1 align="center">공지사항 수정</h1>
 
                <form action="notice.updateNotice.do" method="post">
                       <table class="board-write-1s mgT40">
@@ -190,7 +188,7 @@ input {
 			</colgroup>
 			<tbody>
                      
-                     <tr><td>글 번호 : </td><td><input type="text" name="notice_no" value="${notice.notice_no}" readonly></td></tr>
+                     <tr><td><strong>글 번호 </strong></td><td><input type="text" name="notice_no" value="${notice.notice_no}" readonly></td></tr>
                     <tr><td><strong>제목</strong></td><td><input type="text" name="title" style="width:98%;" value="${notice.notice_title}"></td></tr>
                       <tr><td><strong>내용</strong></td><td><textarea name="content" cols="30" rows="7" style="width:98%;height:280px;">${notice.notice_content}</textarea>
                      
@@ -203,47 +201,19 @@ input {
                       
                       </table>
                       <div>
-                       <input type="submit" value="수정"  class="area1sButton">
+                       <input type="submit" value="수정"  class="btn-primary">
                       </div>
-                     
-                      </form>
-               
-                       
-                       
- <!--    <thead>
-   	 
-    </thead>
-    <tbody>
-    	
-   			
-    </tbody>
- -->
-
-					
-
-                    </div>
-
-
-                </div>
+                     </form>
+   </div>
+  </div>
                 <!-- /.col-md-9 -->
             </div>
             <!-- /.container -->
         </div>
         <!-- /#content -->
-
-		<c:import url="../main/footer.jsp" />
-
-
-    </div>
+        <c:import url="../main/footer.jsp" /> 
+</div>
     <!-- /#all -->
 
-    
-
-
-
-
-    
-
-	<c:import url="../main/footer.jsp" /> 
 </body>
 </html>
