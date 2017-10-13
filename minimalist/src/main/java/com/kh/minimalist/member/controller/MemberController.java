@@ -116,7 +116,7 @@ public class MemberController {
 
 				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
 				CookieUtils cu = new CookieUtils();
-				if (cu.getValueList("anonymous", request) != null) {
+				if (cu.isExist("anonymous", request)) {
 					for (String cookie : cu.getValueList("anonymous", request))
 						cu.setCookie(member.getMember_id(), cookie, 365, request, response);
 				}
@@ -384,7 +384,7 @@ public class MemberController {
 		response.setContentType("text/html; charset=utf-8");
 		String result = "mypage/passwordCheck";
 		Member sessionMember = (Member) session.getAttribute("member");
-		if (sessionMember != null) {
+		if (sessionMember != null && m.getMember_pwd() != null) {
 			if (SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(sessionMember.getMember_id()).getSalt()).equals(sessionMember.getMember_pwd())) {
 				m.setMember_pwd(sessionMember.getMember_pwd());
 				model.addAttribute("updateMember", memberService.loginMember(m));
@@ -393,6 +393,11 @@ public class MemberController {
 			} else {
 				model.addAttribute("error", "비밀번호가 틀렸습니다.");
 			}
+		} else if(sessionMember != null && m.getMember_pwd() == null){
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");
+			out.flush();
+			out.close();
 		} else {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('비정상적 접근입니다.'); location.href = \"http://localhost/minimalist/index.do\";</script>");

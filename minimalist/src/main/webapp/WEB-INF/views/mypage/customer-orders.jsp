@@ -226,7 +226,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 					<!-- BOX END -->
 				</div>
 				<!-- COOKIE -->
-				<c:import url="../main/wingCookie.jsp"/>
+				<%-- <c:import url="../main/wingCookie.jsp"/> --%>
 			</div>
 			<!-- /.container -->
 		</div>
