@@ -19,7 +19,7 @@ $(function(){
 			dataType : "text",
 			success : function(value){
 				if(value=='yes'){
-					alert('답글달기 완');
+					alert('답글달기 완료');
 					$('#showComment').text(comment);
 				}else if(value=='no'){
 					alert('답글달기 실패');
