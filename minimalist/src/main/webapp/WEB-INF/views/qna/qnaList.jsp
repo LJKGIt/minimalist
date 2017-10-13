@@ -144,13 +144,12 @@ _________________________________________________________ -->
     </c:if>
     
       <c:if test="${!empty sessionScope.member}">
-        <p><font color="gray">${sessionScope.member.member_id}님의 문의사항에 빠른 답변 드리도록 노력하겠습니다.</font></p>
+        <p><font color="gray"><font color="blue"><strong>${sessionScope.member.member_id}</strong></font>님의 문의사항에 빠른 답변 드리도록 노력하겠습니다.</font></p>
         <hr>
+  
+  
     <c:choose>
-    
-    
-    
-    <c:when test="${sessionScope.member.member_id eq 'admin'}">
+<c:when test="${sessionScope.member.member_id eq 'admin'}">
     <c:forEach var="qna" items="${list}">
     
     <tr>
