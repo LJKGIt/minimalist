@@ -74,6 +74,10 @@ $(function(){
 					if(value==="yes"){
 						alert('입찰이 완료되었습니다.');
 						location.reload();
+					}else if(value=="downPrice") {
+						alert('회원이 입찰한 가격보다 높게 입찰하여야 합니다.');
+					}else if(value=="lowPrice") {
+						alert('시작 가격보다 높게 입찰하여야 합니다.');
 					}else {
 						alert('입찰 실패. 관리자에게 문의하세요.');
 					}
@@ -234,6 +238,7 @@ $(function(){
                                <c:if test="${sessionScope.member.member_id eq 'admin'}">
                                <a href="auction.viewUpdateForm.do?auction_code=${auction.auction_code}"><button type="button">수정</button></a>
                                <a href="auction.deleteAuction.do?auction_code=${auction.auction_code}"><button type="button">삭제</button></a>
+                               <a href="auction.auctionStop.do?auction_code=${auction.auction_code}"><button type="button">중지</button></a>
                                </c:if>
 
 

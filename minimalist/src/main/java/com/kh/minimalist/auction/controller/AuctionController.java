@@ -251,10 +251,20 @@ public class AuctionController {
 		
 		PrintWriter writer=response.getWriter();
 		if(result>0){
+			//정상 처리
 			writer.append("yes");
 			writer.flush();
+		}else if(result==-1) {
+			//재입찰인데 가격을 낮춘경우.
+			writer.append("downPrice");
+			writer.flush();
+		}else if(result==-2) {
+			//시작 가격보다 낮게 입찰한 경우
+			writer.append("lowPrice");
+			writer.flush();
 		}else {
-			writer.append("no");
+			//그 밖의 모든 경우
+			writer.append("no3");
 			writer.flush();
 		}
 		
@@ -555,6 +565,25 @@ public class AuctionController {
 				model.addAttribute("auction", auction);
 				tmp="manager/viewEndAuctionDetail";
 				
+			}else {
+				tmp="main/404";
+			}
+			
+			return tmp;
+		}
+		
+		//경매 중지 - 악성 입찰자 잡기
+		@RequestMapping(value="auction.auctionStop.do", method={RequestMethod.POST, RequestMethod.GET})
+		public String auctionStop(HttpServletRequest request){
+			
+			int auction_code=Integer.parseInt(request.getParameter("auction_code"));
+			
+			int result=auctionService.auctionStop(auction_code);
+			
+			
+			String tmp="";
+			if(result>0){
+				tmp="redirect:auction.selectList.do";
 			}else {
 				tmp="main/404";
 			}

@@ -68,41 +68,28 @@ public class MemberController {
 		try {
 			if (p != null && p.matcher(m.getMember_id()) != null)
 				patternBoolean = p.matcher(m.getMember_id()).find();
-			System.out.println("0");
 			if (patternBoolean && m.getMember_id() != "" && m.getMember_pwd() != "" && memberService.searchMember(m.getMember_id()) != null) {
 				m.setMember_pwd(SHA256Util.getEncrypt(m.getMember_pwd(), memberService.searchMember(m.getMember_id()).getSalt()));
 				member = memberService.loginMember(m);
-				System.out.println("0.1");
 			}
-			System.out.println("0.2");
-			System.out.println("가가" + member);
 			if (member != null && member.getDormant_yn() == 'n') {
 				session.setAttribute("member", member);
 				
 				
 				// 로그인할 때 비로그인용 쿠키가 존재하면 COOKIE LIST 추가
-				
-				System.out.println("1");
 				CookieUtils cu = new CookieUtils();
 				if (cu.getValueList("anonymous", request) != null) {
 					for(String cookie : cu.getValueList("anonymous", request))
 						cu.setCookie(member.getMember_id(), cookie, 365, request, response);
-					System.out.println("2");
 				}
-				System.out.println("3");
 				
 				if (request.getHeader("referer") != null && !request.getHeader("referer").contains("logout.do")) {
-					System.out.println("4");
 					session.setAttribute("newMessageCount", messageService.selectMessageCount(member.getMember_id()));
-					System.out.println(messageService.selectMessageCount(member.getMember_id()));
 					result = "redirect:" + request.getHeader("referer");
 				}
-				System.out.println("5");
 			} else if (member != null && member.getDormant_yn() == 'y') {
-				System.out.println("6");
 				model.addAttribute("loginError", "탈퇴한 회원입니다.");
 			} else if (member == null) {
-				System.out.println("7");
 				model.addAttribute("loginError", "아이디나 패스워드가 틀렸습니다.");
 			}
 		} catch (NullPointerException e) {
@@ -397,7 +384,7 @@ public class MemberController {
 	public String selectMemberAuction(HttpSession session, Model model, HttpServletResponse response) throws IOException{
 		if (((Member) session.getAttribute("member")) != null) {
 			ArrayList<Auction> auctionList = auctionService.selectMemberAuction(((Member)session.getAttribute("member")).getMember_id());
-			ArrayList<Income> incomeList = incomeService.selectMemberIncome("관리자"/*((Member) session.getAttribute("member")).getMember_id()*/);
+			ArrayList<Income> incomeList = incomeService.selectMemberIncome(((Member) session.getAttribute("member")).getMember_id());
 			model.addAttribute("auctionList", auctionList);
 			model.addAttribute("incomeList", incomeList);
 		} else {

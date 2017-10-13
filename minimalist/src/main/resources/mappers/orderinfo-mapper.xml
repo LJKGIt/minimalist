@@ -8,9 +8,9 @@
   		<result property="member_id" column="MEMBER_ID"/>
   		<result property="product_code" column="PRODUCT_CODE"/>
   		<result property="orderinfo_date" column="ORDERINFO_DATE"/>
-  		<result property="order_reciever_name" column="ORDER_RECIEVER_NAME"/>
-  		<result property="order_reciever_address" column="ORDER_RECIEVER_ADDRESS"/>
-  		<result property="order_reciever_phone" column="ORDER_RECIEVER_PHONE"/>
+  		<result property="order_receiver_name" column="ORDER_RECEIVER_NAME"/>
+  		<result property="order_receiver_address" column="ORDER_RECEIVER_ADDRESS"/>
+  		<result property="order_receiver_phone" column="ORDER_RECEIVER_PHONE"/>
   		<result property="order_size" column="ORDER_SIZE"/>
   		<result property="order_invoice_number" column="ORDER_INVOICE_NUMBER"/>
 
@@ -40,9 +40,9 @@
 			#{ member_id }, 
 			#{ product_code },
 			SYSDATE, 
-			#{ order_reciever_name }, 
-			#{ order_reciever_address }, 
-			#{ order_reciever_phone },
+			#{ order_receiver_name }, 
+			#{ order_receiver_address }, 
+			#{ order_receiver_phone },
 			#{ order_size },
 			#{ order_invoice_number })
 	</insert>

@@ -57,6 +57,14 @@
 	 	insert into bidinfo values(#{auction_code}, #{member_id}, #{bid_price})
 	</insert>
 	
+	<!-- 시작 가격 확인 -->
+	<select id="startPriceCheck" resultType="_int" parameterType="_int">
+	select start_price
+	from auction
+	where auction_code=#{auction_code}
+	
+	</select>
+	
 	<!-- 해당 경매코드에 대해 특정 회원이 입찰했는지 확인. -->
 	<select id="bidConfirm" resultType="_int" parameterType="BidInfo">
 	 select count(*) from bidinfo
@@ -64,6 +72,13 @@
 	 and member_id=#{member_id}
 	</select>
 	
+	<!--  입찰 2 전에 조건처리 필요 -->
+	<select id="beforeBid" parameterType="BidInfo" resultType="_int">
+		select bid_price
+		from bidinfo
+		where auction_code=#{auction_code}
+		and member_id=#{member_id}
+	</select>
 	<!--  입찰2 update -->	
 	<update id="bid2" parameterType="BidInfo">
 		update bidinfo
@@ -130,7 +145,7 @@
 		auction_category=#{auction_category},
 		auction_brand=#{auction_brand},
 		auction_descript=#{auction_descript},
-		bid_price=#{bid_price},
+		start_price=#{start_price},
 		start_date=#{start_date},
 		end_date=#{end_date},
 		auction_size=#{auction_size},
@@ -196,4 +211,11 @@ where rownum&lt;=5
 		      WHERE MEMBER_ID = #{member_id}
 		      ORDER BY END_DATE DESC) USING (AUCTION_CODE)
 	</select>
+	
+	<!-- 경매 중지 - 악성 유저 잡기 -->
+	<update id="auctionStop" parameterType="_int">
+	update auction
+	set end_date=sysdate-1
+	where auction_code=#{auction_code}
+	</update>
 </mapper>
