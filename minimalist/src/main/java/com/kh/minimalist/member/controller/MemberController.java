@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -27,6 +28,8 @@ import com.kh.minimalist.auction.model.service.AuctionService;
 import com.kh.minimalist.auction.model.vo.Auction;
 import com.kh.minimalist.commonUtil.CaptchaResponse;
 import com.kh.minimalist.commonUtil.CookieUtils;
+import com.kh.minimalist.commonUtil.RSA;
+import com.kh.minimalist.commonUtil.RSAUtil;
 import com.kh.minimalist.commonUtil.SHA256Util;
 import com.kh.minimalist.income.model.service.IncomeService;
 import com.kh.minimalist.income.model.vo.Income;
@@ -43,6 +46,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.PrivateKey;
 
 import com.google.gson.Gson;
 
@@ -66,10 +70,36 @@ public class MemberController {
 	@Autowired
 	private AuctionService auctionService;
 
+	RSAUtil rsaUtil = new RSAUtil();
+
 	@RequestMapping(value = "login.do")
 	public String loginCheck(Member m, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
 		String result = "main/index";
 		model.addAttribute("loginError", null);
+
+		// <RSA
+		// 개인키 취득
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
+		if (key == null) {
+			model.addAttribute("loginError", "비정상 적인 접근 입니다.");
+			return result;
+		}
+
+		// session에 저장된 개인키 초기화
+		session.removeAttribute("RSAprivateKey");
+		// 아이디/비밀번호 복호화
+		try {
+			String id = rsaUtil.getDecryptText(key, m.getMember_id());
+			String password = rsaUtil.getDecryptText(key, m.getMember_pwd());
+			// 복호화된 평문을 재설정
+			m.setMember_id(id);
+			m.setMember_pwd(password);
+		} catch (Exception e) {
+			model.addAttribute("loginError", "비정상 적인 접근 입니다.");
+			return result;
+		}
+		// RSA>
+
 		// SQL injection에 대비해 정규표현식을 적용합니다.
 		Pattern p = Pattern.compile("^[A-Za-z0-9_]{4,16}$");
 		Member member = null;
@@ -103,6 +133,25 @@ public class MemberController {
 		} catch (NullPointerException e) {
 		}
 		return result;
+	}
+
+	// 로그인 페이지 진입
+	@RequestMapping(value = "loginTry.do", method = RequestMethod.GET)
+	public @ResponseBody HashMap<String, Object> loginForm(HttpSession session, Model model) {
+		// RSA 키 생성
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
+		if (key != null) { // 기존 key 파기
+			session.removeAttribute("RSAprivateKey");
+		}
+		RSA rsa = rsaUtil.createRSA();
+		session.setAttribute("RSAprivateKey", rsa.getPrivateKey());
+
+		// model.addAttribute("modulus", rsa.getModulus());
+		// model.addAttribute("exponent", rsa.getExponent());
+		HashMap<String, Object> rsaData = new HashMap<String, Object>();
+		rsaData.put("modulus", rsa.getModulus());
+		rsaData.put("exponent", rsa.getExponent());
+		return rsaData;
 	}
 
 	@RequestMapping("logout.do")

@@ -69,7 +69,7 @@
 					<h4 class="modal-title" id="Login">Customer login</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.do" method="post">
+					<form id="loginForm">
 						<div class="form-group">
 							<input type="text" name="member_id" class="form-control"
 								id="id-modal" placeholder="id">
@@ -84,6 +84,62 @@
 							</button>
 						</p>
 					</form>
+					
+					<!-- <RSA -->
+					<!-- 로그인 페이지 대신 모달을 사용하므로 AJAX로 값을 받아옵니다. -->
+					<script type="text/javascript">
+						var modulus = "";
+						var exponent = "";
+						$(function(){
+							$('#login-click').on('click', function(){
+								setTimeout(function() {
+									$('#id-modal').focus()
+								},475);
+								$.ajax({
+									url : "loginTry.do",
+									type : "GET",
+									success : function(data){
+										modulus = data.modulus;
+										exponent = data.exponent;
+									}
+								})
+							});
+						});
+					</script>
+					
+					<!-- 실제 서버로 전송되는 form -->
+					<form action="login.do" method="post" id="hiddenForm">
+				        <input type="hidden" name="member_id" />
+				        <input type="hidden" name="member_pwd" />
+					</form>
+					
+					<!-- javascript lib load -->
+					<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js_rsa/jsbn.js"></script>
+					<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js_rsa/prng4.js"></script>
+					<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js_rsa/rng.js"></script>
+					<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js_rsa/rsa.js"></script>
+					 
+					<!-- 유저 입력 form의 submit event 재정의 -->
+					<script type="text/javascript">
+					    $("#loginForm").submit(function(e) {
+					    	// Server로부터 받은 공개키 입력
+						    var rsa = new RSAKey();
+						    rsa.setPublic(modulus, exponent);
+						    
+					        // 실제 유저 입력 form은 event 취소
+					        // javascript가 작동되지 않는 환경에서는 유저 입력 form이 submit 됨
+					        // -> Server 측에서 검증되므로 로그인 불가
+					        e.preventDefault();
+					 
+					        // 아이디/비밀번호 암호화 후 hidden form으로 submit
+					        var id = $(this).find("#id-modal").val();
+					        var password = $(this).find("#password-modal").val();
+					        $('#hiddenForm').children('input[name=member_id]').val(rsa.encrypt(id)); // 아이디 암호화
+					        $('#hiddenForm').children('input[name=member_pwd]').val(rsa.encrypt(password)); // 비밀번호 암호화
+					        $("#hiddenForm").submit();
+					    });
+					</script>
+					<!-- RSA> -->
 					<p class="text-center text-muted">Not registered yet?</p>
 					<p class="text-center text-muted">
 						<a href="register.do"><strong>Register now</strong></a>! It is
@@ -452,11 +508,6 @@
 
 		});
 
-		$('#login-click').click(function(){
-			setTimeout(function() {
-				$('#id-modal').focus()
-			},475);
-		});
 		
 		$('.message-click').click(function(){
 			var openPop;
