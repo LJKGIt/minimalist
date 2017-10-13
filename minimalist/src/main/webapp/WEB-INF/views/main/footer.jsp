@@ -9,6 +9,7 @@
 <body>
 	<!-- *** FOOTER ***
  _________________________________________________________ -->
+ 		
         <div id="footer" data-animate="fadeInUp">
             <div class="container">
                 <div class="row">
@@ -16,13 +17,13 @@
                         <h4>Pages</h4>
 
                         <ul>
-                            <li><a href="resources/text.jsp">About us</a>
+                            <li><a href="#footer">About us</a>
                             </li>
-                            <li><a href="resources/text.jsp">Terms and conditions</a>
+                            <li><a href="#footer">Terms and conditions</a>
                             </li>
-                            <li><a href="resources/faq.jsp">FAQ</a>
+                            <li><a href="#footer">FAQ</a>
                             </li>
-                            <li><a href="resources/contact.jsp">Contact us</a>
+                            <li><a href="#footer">Contact us</a>
                             </li>
                         </ul>
 
@@ -33,7 +34,7 @@
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                             </li>
-                            <li><a href="resources/register.jsp">Regiter</a>
+                            <li><a href="#footer">Regiter</a>
                             </li>
                         </ul>
 
@@ -49,23 +50,23 @@
                         <h5>Men</h5>
 
                         <ul>
-                            <li><a href="resources/category.jsp">T-shirts</a>
+                            <li><a href="#footer">T-shirts</a>
                             </li>
-                            <li><a href="resources/category.jsp">Shirts</a>
+                            <li><a href="#footer">Shirts</a>
                             </li>
-                            <li><a href="resources/category.jsp">Accessories</a>
+                            <li><a href="#footer">Accessories</a>
                             </li>
                         </ul>
 
                         <h5>Ladies</h5>
                         <ul>
-                            <li><a href="resources/category.jsp">T-shirts</a>
+                            <li><a href="#footer">T-shirts</a>
                             </li>
-                            <li><a href="resources/category.jsp">Skirts</a>
+                            <li><a href="#footer">Skirts</a>
                             </li>
-                            <li><a href="resources/category.jsp">Pants</a>
+                            <li><a href="#footer">Pants</a>
                             </li>
-                            <li><a href="resources/category.jsp">Accessories</a>
+                            <li><a href="#footer">Accessories</a>
                             </li>
                         </ul>
 
@@ -87,7 +88,7 @@
                             <strong>Great Britain</strong>
                         </p>
 
-                        <a href="resources/contact.jsp">Go to contact page</a>
+                        <a href="#footer">Go to contact page</a>
 
                         <hr class="hidden-md hidden-lg">
 
@@ -122,11 +123,11 @@
                         <h4>Stay in touch</h4>
 
                         <p class="social">
-                            <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+                            <a href="#footer" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
+                            <a href="#footer" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
+                            <a href="#footer" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
+                            <a href="#footer" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
+                            <a href="#footer" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
                         </p>
 
                     </div>
