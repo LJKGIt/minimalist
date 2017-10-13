@@ -49,9 +49,9 @@ table.type07 td {
 }
 div.write2{
 
-    position: fixed;
-    right: 400px;
-    bottom: 380px;
+    position: absolute;
+    right: 50px;
+    bottom: 300px;
 
 }
 
